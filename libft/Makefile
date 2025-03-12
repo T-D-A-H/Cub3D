@@ -5,6 +5,14 @@ CFLAGS = -Wall -Wextra -Werror
 RM = rm -f
 AR = ar crs
 
+GREEN := \033[1;32m
+RED := \033[1;31m
+RESET := \033[0m
+YELLOW := \033[33m
+CYAN := \033[36m
+MAGENTA := \033[35m
+BLUE := \033[34m
+
 SRCS_STANDARD = standard/ft_atoi.c standard/ft_isalnum.c standard/ft_isalpha.c standard/ft_isascii.c \
 	standard/ft_isdigit.c standard/ft_isprint.c standard/ft_memcpy.c standard/ft_memmove.c \
 	standard/ft_memset.c standard/ft_strchr.c standard/ft_strlcat.c standard/ft_strlcpy.c \
@@ -29,19 +37,22 @@ all: $(NAME)
 
 $(NAME): $(OBJS_STANDARD)
 	@$(AR) $(NAME) $(OBJS_STANDARD)
+	@echo "[$(GREEN)DONE$(RESET)] Linking complete: [$(MAGENTA)$(NAME)$(RESET)] - Complete!"
 
 standard: $(OBJS_STANDARD)
 	@$(AR) $(NAME) $(OBJS_STANDARD)
 
-
 %.o: %.c
+	@echo "[$(GREEN)DONE$(RESET)] Compiling [$(YELLOW)$<$(RESET)] - File being compiled..."
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	@$(RM) $(OBJS_STANDARD)
+	@echo "[$(RED)DELETED$(RESET)] Object files [$(RED)*.o$(RESET)] - Cleaned!"
 
 fclean: clean
 	@$(RM) $(NAME)
+	@echo "[$(RED)DELETED$(RESET)] Libft file [$(RED)$(NAME)$(RESET)] - Cleaned!"
 
 re: fclean all
 

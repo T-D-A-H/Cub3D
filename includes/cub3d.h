@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:31:47 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/13 12:28:08 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/03/13 13:31:07 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # define ERR_EXTENSION "Error\nExtension doesn't match\n"
 # define ERR_ARGS "Error\nWrong amount of arguments\n"
 # define ERR_EXTENSION_NOFILENAME "Error\nNo filename\n"
+# define ERR_FILE_OPEN "Error\nOpening map file\n"
 
 typedef struct s_cub
 {
@@ -42,5 +43,7 @@ typedef struct s_cub
 int		main(int argc, char **argv);
 //----------------------------------------------UTILS
 int		check_cub_args(int argc, char **argv);
+int		init_struct(t_cub *cubed);
+int		init_map_values(t_cub *cubed, char **argv);
 
 #endif

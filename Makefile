@@ -6,7 +6,7 @@
 #    By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/12 13:05:04 by jaimesan          #+#    #+#              #
-#    Updated: 2025/03/13 12:16:15 by ctommasi         ###   ########.fr        #
+#    Updated: 2025/03/13 12:47:54 by ctommasi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ MAGENTA := \033[35m
 BLUE := \033[34m
 
 # Archivos fuente
-SRCS =	./src/main/main.c ./src/utils/ft_checks.c
+SRCS =	./src/main/main.c ./src/utils/ft_checks.c ./src/utils/init_struct.c ./src/utils/init_map_values.c
 
 # Archivos objeto
 OBJS = $(SRCS:.c=.o)

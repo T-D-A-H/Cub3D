@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:30:46 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/13 12:13:57 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/03/13 12:47:00 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static size_t	is_del(char const *dels, char c)
 	return (0);
 }
 
-static int	ft_word_len(char const *s, char const *dels, size_t start)
+static size_t	ft_word_len(char const *s, char const *dels, size_t start)
 {
 	size_t	len;
 
@@ -46,7 +46,7 @@ static int	ft_word_len(char const *s, char const *dels, size_t start)
 	return (len);
 }
 
-static int	ft_strtoklen(char const *s, char const *dels)
+static size_t	ft_strtoklen(char const *s, char const *dels)
 {
 	size_t		i;
 	size_t		count;

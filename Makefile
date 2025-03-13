@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+         #
+#    By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/12 13:05:04 by jaimesan          #+#    #+#              #
-#    Updated: 2025/03/12 15:19:34 by jaimesan         ###   ########.fr        #
+#    Updated: 2025/03/13 12:16:15 by ctommasi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,13 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror -I ./includes
 HEADERS = -I ./MLX42/include
 RM	= rm -rf
+MAKEFLAGS = --no-print-directory
+
+LIBFT_DIR = ./libft
+LIBFT = $(LIBFT_DIR)/libft.a
+
+MLX_DIR = ./MLX42/build
+MLX = $(MLX_DIR)/libmlx42.a -ldl -lglfw -pthread -lm
 
 GREEN := \033[1;32m
 RED := \033[1;31m
@@ -31,14 +38,6 @@ SRCS =	./src/main/main.c ./src/utils/ft_checks.c
 # Archivos objeto
 OBJS = $(SRCS:.c=.o)
 
-# Directorio de la libft
-LIBFT_DIR = ./libft
-LIBFT = $(LIBFT_DIR)/libft.a
-
-MLX_DIR = ./MLX42/build
-MLX = $(MLX_DIR)/libmlx42.a -ldl -lglfw -pthread -lm
-
-MAKEFLAGS = --no-print-directory
 
 all: libmlx $(NAME)
 
@@ -47,7 +46,7 @@ $(LIBFT):
 
 %.o: %.c
 	@echo "[$(GREEN)DONE$(RESET)] Compiling [$(YELLOW)$<$(RESET)] - File being compiled..."
-	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS)
+	@$(CC) $(CFLAGS) $(HEADERS) -o $@ -c $< 
 
 $(NAME): $(LIBFT) $(OBJS)
 	$(CC) $(OBJS) $(LIBFT) $(MLX) -o $(NAME)

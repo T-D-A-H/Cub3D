@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 16:41:22 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/13 11:19:09 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/03/13 12:01:51 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,6 +189,8 @@ void	ft_lstfree(t_list **stack_x);
 char	*get_next_line(int fd);
 /// @brief Returns a new string of s1 and s2 concatenated and frees s1.
 char	*ft_strjoinf(char *total_chars, char *temp);
+/// @brief Split a string by a set or delimeters into a array of strings.
+char	**ft_strtok(char const *s, char const *dels);
 /// @brief Function to formar a string and write to stdout.
 int		ft_printf(const char *format, ...);
 int		ft_putchar(char c);

@@ -39,9 +39,6 @@ $(NAME): $(OBJS_STANDARD)
 	@$(AR) $(NAME) $(OBJS_STANDARD)
 	@echo "[$(GREEN)DONE$(RESET)] Linking complete: [$(MAGENTA)$(NAME)$(RESET)] - Complete!"
 
-standard: $(OBJS_STANDARD)
-	@$(AR) $(NAME) $(OBJS_STANDARD)
-
 %.o: %.c
 	@echo "[$(GREEN)DONE$(RESET)] Compiling [$(YELLOW)$<$(RESET)] - File being compiled..."
 	@$(CC) $(CFLAGS) -c $< -o $@

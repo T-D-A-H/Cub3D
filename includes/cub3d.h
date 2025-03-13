@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/12 14:24:22 by jaimesan          #+#    #+#             */
-/*   Updated: 2025/03/13 12:17:42 by jaimesan         ###   ########.fr       */
+/*   Created: 2025/03/12 14:31:47 by ctommasi          #+#    #+#             */
+/*   Updated: 2025/03/13 12:19:59 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,18 @@
 # define CUB3D_H
 
 # include <stdio.h>
+# include <stdlib.h>
+# include <fcntl.h>
+# include <string.h>
+# include <unistd.h>
+# include <stdio.h>
+# include <sys/time.h>
+
 # include "../libft/includes/libft.h"
 
-# define ERROR_EXTENSION printf("Error: The file must have a .cub extension\n")
-# define ERROR_FILES printf("Error: ./cub3D  <file.cub>\n")
+# define ERR_EXTENSION "Error\nExtension doesn't match\n"
+# define ERR_ARGS "Error\nWrong amount of arguments\n"
+# define ERR_EXTENSION_NOFILENAME "Error\nNo filename\n"
 
 typedef struct s_cub
 {
@@ -30,10 +38,9 @@ typedef struct s_cub
 	char **map;
 }	t_cub;
 
-// Main
-int main(int argc, char **argv);
-
-// Utils
-int	check_cub_args(int argc, char **argv);
+//----------------------------------------------MAIN
+int		main(int argc, char **argv);
+//----------------------------------------------UTILS
+int		check_cub_args(int argc, char **argv);
 
 #endif

@@ -6,14 +6,14 @@
 #    By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/12 13:05:04 by jaimesan          #+#    #+#              #
-#    Updated: 2025/03/12 13:12:33 by jaimesan         ###   ########.fr        #
+#    Updated: 2025/03/12 15:19:34 by jaimesan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3d
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -I ./includes 
+CFLAGS = -Wall -Wextra -Werror -I ./includes
 HEADERS = -I ./MLX42/include
 RM	= rm -rf
 
@@ -26,7 +26,7 @@ MAGENTA := \033[35m
 BLUE := \033[34m
 
 # Archivos fuente
-SRCS =	main.c
+SRCS =	./src/main/main.c ./src/utils/ft_checks.c
 
 # Archivos objeto
 OBJS = $(SRCS:.c=.o)
@@ -49,8 +49,8 @@ $(LIBFT):
 	@echo "[$(GREEN)DONE$(RESET)] Compiling [$(YELLOW)$<$(RESET)] - File being compiled..."
 	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS)
 
-$(NAME): $(LIBFT)  $(OBJS) 
-	$(CC) $(LIBFT) $(OBJS) $(MLX) -o $(NAME)
+$(NAME): $(LIBFT) $(OBJS)
+	$(CC) $(OBJS) $(LIBFT) $(MLX) -o $(NAME)
 	@echo "[$(GREEN)DONE$(RESET)] Linking complete: [$(MAGENTA)$(NAME)$(RESET)] - Complete!"
 
 libmlx:

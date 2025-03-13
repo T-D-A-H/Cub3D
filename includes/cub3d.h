@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:31:47 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/13 12:19:59 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/03/13 12:28:08 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ typedef struct s_cub
 	char *so_path;
 	char *we_path;
 	char *ea_path;
-	int f_color[3];
-	int c_color[3];
+	int *f_color;
+	int *c_color;
 	char **map;
 }	t_cub;
 

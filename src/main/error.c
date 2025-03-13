@@ -1,27 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/12 13:08:04 by jaimesan          #+#    #+#             */
-/*   Updated: 2025/03/13 19:07:03 by ctommasi         ###   ########.fr       */
+/*   Created: 2025/03/13 19:01:38 by ctommasi          #+#    #+#             */
+/*   Updated: 2025/03/13 19:06:06 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-int	main(int argc, char **argv)
+int	error(t_cub *cubed, size_t exit_code)
 {
-	t_cub	cubed;
-
-	if (check_cub_args(argc, argv))
-		return (1);
-	if (init_struct(&cubed))
-		return (1);
-	if (init_map_variables(&cubed, argv))
-		return (1);
-	return (0);
+	if (cubed->no_path)
+		free(cubed->no_path);
+	if (cubed->so_path)
+		free(cubed->so_path);
+	if (cubed->we_path)
+		free(cubed->we_path);
+	if (cubed->ea_path)
+		free(cubed->ea_path);
+	if (cubed->f_color)
+		free(cubed->f_color);
+	if (cubed->c_color)
+		free(cubed->c_color);
+	if (cubed->map)
+		ft_freearr(cubed->map);
+	return (exit_code);
 }
-

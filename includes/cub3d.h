@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:31:47 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/13 13:31:07 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/03/13 19:07:42 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,23 +27,29 @@
 # define ERR_ARGS "Error\nWrong amount of arguments\n"
 # define ERR_EXTENSION_NOFILENAME "Error\nNo filename\n"
 # define ERR_FILE_OPEN "Error\nOpening map file\n"
+# define ERR_COLOUR_ALPHA "Error\nColours can only contain digits\n"
+# define ERR_DUPLICATES "Error\nDuplicate variables\n"
+# define ERR_MISSING_VARIABLES "Error\nMissing variables\n"
+# define ERR_MISSING_VALUES "Error\nMissing values\n"
+# define ERR_COLOUR_LIMITS "Error\nColours can only be from 0 - 255\n"
 
 typedef struct s_cub
 {
-	char *no_path;
-	char *so_path;
-	char *we_path;
-	char *ea_path;
-	int *f_color;
-	int *c_color;
-	char **map;
+	char	*no_path;
+	char	*so_path;
+	char	*we_path;
+	char	*ea_path;
+	int		*f_color;
+	int		*c_color;
+	char	**map;
 }	t_cub;
 
 //----------------------------------------------MAIN
 int		main(int argc, char **argv);
+int		error(t_cub *cubed, size_t exit_code);
 //----------------------------------------------UTILS
 int		check_cub_args(int argc, char **argv);
 int		init_struct(t_cub *cubed);
-int		init_map_values(t_cub *cubed, char **argv);
+int		init_map_variables(t_cub *cubed, char **argv);
 
 #endif

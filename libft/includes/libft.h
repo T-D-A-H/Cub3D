@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 16:41:22 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/13 12:01:51 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/03/13 14:56:03 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ typedef struct s_list
 }	t_list;
 
 /// @brief Returns 1 if char is A - Z / a - z.
+int		ft_isalpha(int c);
+/// @brief Returns 1 if char is 0 - 9.
 int		ft_isdigit(int c);
 /// @brief Returns 1 if char 0 - 9 / A - Z / a - z.
 int		ft_isalnum(int c);

@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:30:46 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/13 12:47:00 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/03/13 18:35:37 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ char	**ft_strtok(char const *s, char const *dels)
 		return (NULL);
 	while (i < ft_strtoklen(s, dels))
 	{
-		while (is_del(dels, s[j]))
+		while (s[j] && is_del(dels, s[j]))
 			j++;
 		res[i] = malloc((ft_word_len(s, dels, j) + 1) * sizeof(char));
 		if (!res[i])

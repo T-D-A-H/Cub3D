@@ -6,7 +6,7 @@
 #    By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/12 13:05:04 by jaimesan          #+#    #+#              #
-#    Updated: 2025/03/12 15:07:34 by ctommasi         ###   ########.fr        #
+#    Updated: 2025/03/13 12:02:54 by ctommasi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ MAGENTA := \033[35m
 BLUE := \033[34m
 
 # Archivos fuente
-SRCS =	./src/main/main.c ./src/utils/check_extension.c
+SRCS =	./src/main/main.c ./src/utils/ft_checks.c
 
 # Archivos objeto
 OBJS = $(SRCS:.c=.o)
@@ -48,8 +48,8 @@ $(LIBFT):
 	@echo "[$(GREEN)DONE$(RESET)] Compiling [$(YELLOW)$<$(RESET)] - File being compiled..."
 	@$(CC) $(CFLAGS) $(HEADERS) -o $@ -c $< 
 
-$(NAME): $(LIBFT) $(OBJS) 
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MLX) -o $(NAME)
+$(NAME): $(LIBFT) $(OBJS)
+	$(CC) $(OBJS) $(LIBFT) $(MLX) -o $(NAME)
 	@echo "[$(GREEN)DONE$(RESET)] Linking complete: [$(MAGENTA)$(NAME)$(RESET)] - Complete!"
 
 libmlx:

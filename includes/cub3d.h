@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:24:22 by jaimesan          #+#    #+#             */
-/*   Updated: 2025/03/12 15:19:18 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/03/13 11:26:24 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include <stdio.h>
 # include "../libft/includes/libft.h"
 
+# define ERROR_EXTENSION printf("Error: The file must have a .cub extension\n")
+# define ERROR_FILES printf("Error: ./cub3D  <file.cub>\n")
 
 // Main
 int main(int argc, char **argv);

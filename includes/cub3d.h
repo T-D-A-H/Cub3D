@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:31:47 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/13 12:03:09 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/03/13 12:15:50 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@
 
 # include "../libft/includes/libft.h"
 
-# define ERR_EXTENSION "Error: Extension doesn't match\n"
-# define ERR_ARGS "Error: Wrong amount of arguments\n"
-# define ERR_EXTENSION_NOFILENAME "Error: No filename\n"
+# define ERR_EXTENSION "Error\nExtension doesn't match\n"
+# define ERR_ARGS "Error\nWrong amount of arguments\n"
+# define ERR_EXTENSION_NOFILENAME "Error\nNo filename\n"
 
 //----------------------------------------------MAIN
 int		main(int argc, char **argv);
 //----------------------------------------------UTILS
-int		check_extension(char *file);
+int		check_cub_args(int argc, char **argv);
 
 #endif

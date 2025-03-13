@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:30:46 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/13 12:02:02 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/03/13 12:13:57 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ static void	ft_free_all(char **res, size_t i)
 	free(res);
 }
 
-static int	is_del(char const *dels, char c)
+static size_t	is_del(char const *dels, char c)
 {
-	int		i;
+	size_t		i;
 
 	i = 0;
 	while (dels[i])
@@ -36,7 +36,7 @@ static int	is_del(char const *dels, char c)
 	return (0);
 }
 
-static size_t	ft_word_len(char const *s, char const *dels, size_t start)
+static int	ft_word_len(char const *s, char const *dels, size_t start)
 {
 	size_t	len;
 
@@ -48,9 +48,9 @@ static size_t	ft_word_len(char const *s, char const *dels, size_t start)
 
 static int	ft_strtoklen(char const *s, char const *dels)
 {
-	int		i;
-	int		count;
-	int		in_word;
+	size_t		i;
+	size_t		count;
+	size_t		in_word;
 
 	i = 0;
 	in_word = 0;

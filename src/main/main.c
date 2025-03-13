@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:08:04 by jaimesan          #+#    #+#             */
-/*   Updated: 2025/03/13 12:03:01 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/03/13 12:15:29 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,7 @@
 
 int	main(int argc, char **argv)
 {
-	if (argc != 2)
-		return (printf(ERR_ARGS), 1);
-	if (check_extension(argv[1]))
+	if (check_cub_args(argc, argv))
 		return (1);
 	return (0);
 }

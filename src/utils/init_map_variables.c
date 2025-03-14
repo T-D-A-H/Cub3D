@@ -38,29 +38,28 @@ static int	contains_alpha(char *s1, char *s2, char *s3)
 
 static void	init_variable_values(t_cub *cubed, char **map, int i)
 {
-	while (i < ft_arrlen(map))
+	while (++i < ft_arrlen(map))
 	{
-		if (!ft_strcmp(map[i], "F") && map[i + 1] && map[i + 2] && map[i + 3])
+		if (!ft_strcmp(map[i], "F"))
 		{
 			cubed->f_color[0] = ft_atoi(map[i + 1]);
 			cubed->f_color[1] = ft_atoi(map[i + 2]);
 			cubed->f_color[2] = ft_atoi(map[i + 3]);
 		}
-		else if (!ft_strcmp(map[i], "C") && map[i + 1] && map[i + 2] && map[i + 3])
+		else if (!ft_strcmp(map[i], "C"))
 		{
 			cubed->c_color[0] = ft_atoi(map[i + 1]);
 			cubed->c_color[1] = ft_atoi(map[i + 2]);
 			cubed->c_color[2] = ft_atoi(map[i + 3]);
 		}
-		else if (!ft_strcmp(map[i], "NO") && map[i + 1])
+		else if (!ft_strcmp(map[i], "NO"))
 			cubed->no_path = ft_strdup(map[i + 1]);
-		else if (!ft_strcmp(map[i], "SO") && map[i + 1])
+		else if (!ft_strcmp(map[i], "SO"))
 			cubed->so_path = ft_strdup(map[i + 1]);
-		else if (!ft_strcmp(map[i], "WE") && map[i + 1])
+		else if (!ft_strcmp(map[i], "WE"))
 			cubed->we_path = ft_strdup(map[i + 1]);
-		else if (!ft_strcmp(map[i], "EA") && map[i + 1])
+		else if (!ft_strcmp(map[i], "EA"))
 			cubed->ea_path = ft_strdup(map[i + 1]);
-		i++;
 	}
 }
 
@@ -111,8 +110,8 @@ static int	init_map_variables_check(t_cub *cubed, char **map)
 		return (1);
 	cubed->c_color = malloc(sizeof(int) * 3);
 	if (!cubed->c_color)
-		return (1);
-	init_variable_values(cubed, map, 0);
+		return (free(cubed->f_color), 1);
+	init_variable_values(cubed, map, -1);
 	return (0);
 }
 
@@ -135,11 +134,11 @@ int	init_map_variables(t_cub *cubed, char **argv)
 		temp = ft_strjoinf(temp, line);
 		free(line);
 	}
-	free(line);
+	close(fd);
 	map = ft_strtok(temp, "\n\r\t ,");
 	if (!map)
-		return (free(temp), close(fd), 1);
+		return (free(temp), 1);
 	if (init_map_variables_check(cubed, map))
-		return (ft_freearr(map), free(temp), close(fd), 1);
-	return (ft_freearr(map), free(temp), close(fd), 0);
+		return (ft_freearr(map), free(temp), 1);
+	return (ft_freearr(map), free(temp), 0);
 }

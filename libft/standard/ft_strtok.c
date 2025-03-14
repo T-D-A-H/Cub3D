@@ -81,12 +81,14 @@ char	**ft_strtok(char const *s, char const *dels)
 	size_t	j;
 	size_t	k;
 
-	i = 0;
+	i = -1;
 	j = 0;
+	if (ft_strtoklen(s, dels) == 0)
+		return (NULL);
 	res = malloc((ft_strtoklen(s, dels) + 1) * sizeof(char *));
 	if (!res)
 		return (NULL);
-	while (i < ft_strtoklen(s, dels))
+	while (++i < ft_strtoklen(s, dels))
 	{
 		while (s[j] && is_del(dels, s[j]))
 			j++;
@@ -97,8 +99,6 @@ char	**ft_strtok(char const *s, char const *dels)
 		while (s[j] && !is_del(dels, s[j]))
 			res[i][k++] = s[j++];
 		res[i][k] = '\0';
-		i++;
 	}
-	res[i] = NULL;
-	return (res);
+	return (res[i] = NULL, res);
 }

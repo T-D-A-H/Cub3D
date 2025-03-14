@@ -24,7 +24,7 @@ int	check_cub_args(int argc, char **argv)
 	if (len < 5)
 		return (ERR_EXTENSION_NOFILENAME, 1);
 	if (argv[ft_strlen(argv[1]) - 4] && ft_strcmp(&argv[1][len - 4], ext) != 0)
-		return (ERR_EXTENSION, -1);
+		return (ERR_EXTENSION, 1);
 	if (!argv[1][ft_strlen(argv[1]) - 5]
 		|| argv[1][ft_strlen(argv[1]) - 5] == '/')
 		return (ERR_EXTENSION_NOFILENAME, 1);

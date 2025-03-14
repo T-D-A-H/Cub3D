@@ -12,7 +12,7 @@
 
 #include "../includes/libft.h"
 
-long	ft_atoi(const char *str)
+int	ft_atoi(const char *str)
 {
 	long	res;
 	int		minus;
@@ -30,6 +30,10 @@ long	ft_atoi(const char *str)
 	while (*str >= '0' && *str <= '9')
 	{
 		res = res * 10 + *str - '0';
+		if ((res * minus) < -2147483648)
+			return (-2147483648);
+		if ((res * minus) > 2147483647)
+			return (2147483647);
 		str++;
 	}
 	return (res * minus);

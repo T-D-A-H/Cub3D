@@ -99,7 +99,7 @@ char	*ft_strnstr(const char *big, const char *little, size_t len);
 char	*ft_strstr(char *str, char *to_find);
 /// @brief Converts the initial portion of the string pointed to 
 /// @brief by nptr to long.
-long	ft_atoi(const char *nptr);
+int		ft_atoi(const char *nptr);
 /// @brief Allocates memory and sets it to 0 for an array of nmemb elements 
 /// @brief of size bytes each and returns a pointer to the  allocated  memory.
 void	*ft_calloc(size_t nmemb, size_t size);

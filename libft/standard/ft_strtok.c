@@ -60,15 +60,12 @@ static size_t	ft_strtoklen(char const *s, char const *dels)
 	while (s[i])
 	{
 		if (is_del(dels, s[i]))
-		{
-			if (!in_word)
-			{
-				in_word = 1;
-				count++;
-			}
-		}
-		else
 			in_word = 0;
+		else if (!in_word)
+		{
+			in_word = 1;
+			count++;
+		}
 		i++;
 	}
 	return (count);

@@ -46,7 +46,7 @@ typedef struct s_cub
 
 //----------------------------------------------MAIN
 int		main(int argc, char **argv);
-void		error(t_cub *cubed);
+void	error(t_cub *cubed);
 //----------------------------------------------UTILS
 int		check_cub_args(int argc, char **argv);
 void		init_struct(t_cub *cubed);

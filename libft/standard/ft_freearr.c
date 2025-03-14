@@ -17,7 +17,7 @@ void	ft_freearr(char **array)
 	int	i;
 
 	i = 0;
-	if (!array || !*array)
+	if (!array)
 		return ;
 	while (array[i])
 	{

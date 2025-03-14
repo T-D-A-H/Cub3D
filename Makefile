@@ -33,7 +33,8 @@ MAGENTA := \033[35m
 BLUE := \033[34m
 
 # Archivos fuente
-SRCS =	./src/main/main.c ./src/utils/ft_checks.c ./src/utils/init_struct.c ./src/utils/init_map_variables.c
+SRCS =	./src/main/main.c ./src/utils/ft_checks.c ./src/utils/init_struct.c ./src/utils/init_map_variables.c \
+		./src/main/error.c
 
 # Archivos objeto
 OBJS = $(SRCS:.c=.o)

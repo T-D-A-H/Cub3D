@@ -15,23 +15,27 @@
 static int	contains_alpha(char *s1, char *s2, char *s3)
 {
 	int		i;
-	int		nb1;
-	int		nb2;
-	int		nb3;
 
-	nb1 = ft_atoi(s1);
-	nb2 = ft_atoi(s2);
-	nb3 = ft_atoi(s3);
-	i = 0;
-	if (nb1 < 0 || nb1 < 0 || nb2 < 0 || nb2 > 255 || nb3 > 255 || nb3 > 255)
+	if (ft_atoi(s1) < 0 || ft_atoi(s2) < 0 || ft_atoi(s3) < 0
+		|| ft_atoi(s1) > 255 || ft_atoi(s2) > 255 || ft_atoi(s3) > 255)
 		return (ERR_COLOUR_LIMITS, 1);
-	while (i < 3)
+	i = -1;
+	while (s1[++i])
 	{
-		if ((s1[i] && s1[i] != '\0' && !ft_isdigit(s1[i]))
-			|| (s2[i] && s2[i] != '\0' && !ft_isdigit(s2[i]))
-			|| (s3[i] && s3[i] != '\0' && !ft_isdigit(s3[i])))
-			return (ERR_COLOUR_ALPHA, 1);
-		i++;
+		if (!ft_isdigit(s1[i]))
+			return (ERR_COLOUR_ALPHA, 1);	
+	}
+	i = -1;
+	while (s2[++i])
+	{
+		if (!ft_isdigit(s2[i]))
+			return (ERR_COLOUR_ALPHA, 1);	
+	}
+	i = -1;
+	while (s3[++i])
+	{
+		if (!ft_isdigit(s3[i]))
+			return (ERR_COLOUR_ALPHA, 1);	
 	}
 	return (0);
 }
@@ -106,11 +110,9 @@ static int	init_map_variables_check(t_cub *cubed, char **map)
 	if (check_dupe_or_missing("C", map, 1))
 		return (1);
 	cubed->f_color = malloc(sizeof(int) * 3);
-	if (!cubed->f_color)
-		return (1);
 	cubed->c_color = malloc(sizeof(int) * 3);
-	if (!cubed->c_color)
-		return (free(cubed->f_color), 1);
+	if (!cubed->c_color || !cubed->f_color)
+		return (1);
 	init_variable_values(cubed, map, -1);
 	return (0);
 }

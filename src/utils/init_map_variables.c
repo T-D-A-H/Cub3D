@@ -27,8 +27,9 @@ static int	contains_alpha(char *s1, char *s2, char *s3)
 		return (ERR_COLOUR_LIMITS, 1);
 	while (i < 3)
 	{
-		if ((s1[i] && !ft_isdigit(s1[i])) || (s2[i] && !ft_isdigit(s2[i]))
-			|| (s3[i] && !ft_isdigit(s3[i])))
+		if ((s1[i] && s1[i] != '\0' && !ft_isdigit(s1[i]))
+			|| (s2[i] && s2[i] != '\0' && !ft_isdigit(s2[i]))
+			|| (s3[i] && s3[i] != '\0' && !ft_isdigit(s3[i])))
 			return (ERR_COLOUR_ALPHA, 1);
 		i++;
 	}
@@ -39,25 +40,25 @@ static void	init_variable_values(t_cub *cubed, char **map, int i)
 {
 	while (i < ft_arrlen(map))
 	{
-		if (!ft_strcmp(map[i], "F"))
+		if (!ft_strcmp(map[i], "F") && map[i + 1] && map[i + 2] && map[i + 3])
 		{
 			cubed->f_color[0] = ft_atoi(map[i + 1]);
 			cubed->f_color[1] = ft_atoi(map[i + 2]);
 			cubed->f_color[2] = ft_atoi(map[i + 3]);
 		}
-		else if (!ft_strcmp(map[i], "C"))
+		else if (!ft_strcmp(map[i], "C") && map[i + 1] && map[i + 2] && map[i + 3])
 		{
 			cubed->c_color[0] = ft_atoi(map[i + 1]);
 			cubed->c_color[1] = ft_atoi(map[i + 2]);
 			cubed->c_color[2] = ft_atoi(map[i + 3]);
 		}
-		else if (!ft_strcmp(map[i], "NO"))
+		else if (!ft_strcmp(map[i], "NO") && map[i + 1])
 			cubed->no_path = ft_strdup(map[i + 1]);
-		else if (!ft_strcmp(map[i], "SO"))
+		else if (!ft_strcmp(map[i], "SO") && map[i + 1])
 			cubed->so_path = ft_strdup(map[i + 1]);
-		else if (!ft_strcmp(map[i], "WE"))
+		else if (!ft_strcmp(map[i], "WE") && map[i + 1])
 			cubed->we_path = ft_strdup(map[i + 1]);
-		else if (!ft_strcmp(map[i], "EA"))
+		else if (!ft_strcmp(map[i], "EA") && map[i + 1])
 			cubed->ea_path = ft_strdup(map[i + 1]);
 		i++;
 	}
@@ -105,6 +106,12 @@ static int	init_map_variables_check(t_cub *cubed, char **map)
 		return (1);
 	if (check_dupe_or_missing("C", map, 1))
 		return (1);
+	cubed->f_color = malloc(sizeof(int) * 3);
+	if (!cubed->f_color)
+		return (1);
+	cubed->c_color = malloc(sizeof(int) * 3);
+	if (!cubed->c_color)
+		return (1);
 	init_variable_values(cubed, map, 0);
 	return (0);
 }
@@ -128,6 +135,7 @@ int	init_map_variables(t_cub *cubed, char **argv)
 		temp = ft_strjoinf(temp, line);
 		free(line);
 	}
+	free(line);
 	map = ft_strtok(temp, "\n\r\t ,");
 	if (!map)
 		return (free(temp), close(fd), 1);

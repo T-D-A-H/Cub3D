@@ -18,8 +18,7 @@ int	main(int argc, char **argv)
 
 	if (check_cub_args(argc, argv))
 		return (1);
-	if (init_struct(&cubed))
-		return (1);
+	init_struct(&cubed);
 	if (init_map_variables(&cubed, argv))
 		return (1);
 	return (0);

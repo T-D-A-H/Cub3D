@@ -46,10 +46,10 @@ typedef struct s_cub
 
 //----------------------------------------------MAIN
 int		main(int argc, char **argv);
-int		error(t_cub *cubed, size_t exit_code);
+void		error(t_cub *cubed);
 //----------------------------------------------UTILS
 int		check_cub_args(int argc, char **argv);
-int		init_struct(t_cub *cubed);
+void		init_struct(t_cub *cubed);
 int		init_map_variables(t_cub *cubed, char **argv);
 
 #endif

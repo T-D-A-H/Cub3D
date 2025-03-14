@@ -71,7 +71,7 @@ static size_t	ft_strtoklen(char const *s, char const *dels)
 			in_word = 0;
 		i++;
 	}
-	return (count + !in_word);
+	return (count);
 }
 
 char	**ft_strtok(char const *s, char const *dels)

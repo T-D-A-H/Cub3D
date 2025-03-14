@@ -12,7 +12,7 @@
 
 #include "../../includes/cub3d.h"
 
-int	error(t_cub *cubed, size_t exit_code)
+void	error(t_cub *cubed)
 {
 	if (cubed->no_path)
 		free(cubed->no_path);
@@ -28,5 +28,4 @@ int	error(t_cub *cubed, size_t exit_code)
 		free(cubed->c_color);
 	if (cubed->map)
 		ft_freearr(cubed->map);
-	return (exit_code);
 }

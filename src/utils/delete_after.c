@@ -1,26 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   delete_after.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/12 13:08:04 by jaimesan          #+#    #+#             */
-/*   Updated: 2025/03/13 19:07:03 by ctommasi         ###   ########.fr       */
+/*   Created: 2025/03/13 19:01:38 by ctommasi          #+#    #+#             */
+/*   Updated: 2025/03/13 19:06:06 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-int	main(int argc, char **argv)
+void	print_where_not_walled(char **map, int y, int x)
 {
-	t_cub	cubed;
+	int		i;
+	int		j;
 
-	if (check_cub_args(argc, argv))
-		return (1);
-	init_struct(&cubed);
-	read_map_file(&cubed, argv);
-	init_variables(&cubed);
-	init_map(&cubed);
-	return (error(&cubed, NO_ERROR), 0);
+	i = 0;
+	while (map[i])
+	{
+		if (i != y)
+			printf("\033[1;32m%s\033[0m\n", map[i]);
+		else
+		{
+			j = 0;
+			while (map[i][j])
+			{
+				if (j != x)
+					printf("\033[1;32m%c\033[0m", map[i][j]);
+				else
+					printf("\033[1;31m%c\033[0m", map[i][j]);
+				j++;
+			}
+			printf("\n");
+		}
+		i++;
+	}
 }

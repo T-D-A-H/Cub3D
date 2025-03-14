@@ -12,8 +12,9 @@
 
 #include "../../includes/cub3d.h"
 
-void	error(t_cub *cubed)
+void	error(t_cub *cubed, char *debug_msg)
 {
+	printf(debug_msg);
 	if (cubed->no_path)
 		free(cubed->no_path);
 	if (cubed->so_path)
@@ -28,4 +29,10 @@ void	error(t_cub *cubed)
 		free(cubed->c_color);
 	if (cubed->map)
 		ft_freearr(cubed->map);
+	if (cubed->premap)
+		free(cubed->premap);
+	if (!debug_msg[0])
+		exit(0);
+	else
+		exit(1);
 }

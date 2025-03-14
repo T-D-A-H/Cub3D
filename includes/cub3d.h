@@ -23,15 +23,15 @@
 
 # include "../libft/includes/libft.h"
 
-# define ERR_EXTENSION "Error\nExtension doesn't match\n"
-# define ERR_ARGS "Error\nWrong amount of arguments\n"
-# define ERR_EXTENSION_NOFILENAME "Error\nNo filename\n"
-# define ERR_FILE_OPEN "Error\nOpening map file\n"
-# define ERR_COLOUR_ALPHA "Error\nColours can only contain digits\n"
-# define ERR_DUPLICATES "Error\nDuplicate variables\n"
-# define ERR_MISSING_VARIABLES "Error\nMissing variables\n"
-# define ERR_MISSING_VALUES "Error\nMissing values\n"
-# define ERR_COLOUR_LIMITS "Error\nColours can only be from 0 - 255\n"
+# define ERR_EXTENSION printf("Error\nExtension doesn't match\n")
+# define ERR_ARGS printf("Error\nWrong amount of arguments\n")
+# define ERR_EXTENSION_NOFILENAME printf("Error\nNo filename\n")
+# define ERR_FILE_OPEN printf("Error\nOpening map file\n")
+# define ERR_COLOUR_ALPHA printf("Error\nColours can only contain digits\n")
+# define ERR_DUPLICATES printf("Error\nDuplicate variables\n")
+# define ERR_MISSING_VARIABLES printf("Error\nMissing variables\n")
+# define ERR_MISSING_VALUES printf("Error\nMissing values\n")
+# define ERR_COLOUR_LIMITS printf("Error\nColours can only be from 0 - 255\n")
 
 typedef struct s_cub
 {

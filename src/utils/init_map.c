@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:08:04 by jaimesan          #+#    #+#             */
-/*   Updated: 2025/03/17 15:07:19 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/03/17 16:39:01 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,3 +54,5 @@ void	init_map(t_cub *cubed)
 	}
 	ft_freearr(map);
 }
+
+

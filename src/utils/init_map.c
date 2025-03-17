@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:08:04 by jaimesan          #+#    #+#             */
-/*   Updated: 2025/03/13 19:07:03 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/03/17 12:59:25 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,8 @@ void	init_map(t_cub *cubed)
 		{
 			if (map[y][x] == '0' && is_map_del(map, y, x))
 			{
-				printf(ERR_MAP_NOT_WALLED);
-				//print_where_not_walled(map, y, x);
-				error(cubed, "!");
+				print_where_not_walled(map, y, x);
+				error(cubed, ERR_MAP_NOT_WALLED);
 			}
 			x++;
 		}

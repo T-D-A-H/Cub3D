@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:31:47 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/13 19:07:42 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/03/17 12:57:57 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	error(t_cub *cubed, char *debug_msg);
 int		check_cub_args(int argc, char **argv);
 void	init_struct(t_cub *cubed);
 void	read_map_file(t_cub *cubed, char **argv);
+char	*replace_tabs_with_spaces(t_cub *cubed);
 void	init_variables(t_cub *cubed);
 void	init_map(t_cub *cubed);
 //----------------------------------------------DELETE_AFTER

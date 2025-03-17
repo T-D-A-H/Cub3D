@@ -98,7 +98,7 @@ void	init_variables(t_cub *cubed)
 {
 	char	**map;
 
-	map = ft_strtok(cubed->premap, "\n\r\t ,");
+	map = ft_strtok(cubed->premap, "\n ,");
 	if (!map)
 		error(cubed, ERR_MAP);
 	check_dupe_or_missing(cubed, "NO", map, 0);

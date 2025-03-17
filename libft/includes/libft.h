@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 16:41:22 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/13 14:56:03 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/03/17 12:43:45 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,6 +193,8 @@ char	*get_next_line(int fd);
 char	*ft_strjoinf(char *total_chars, char *temp);
 /// @brief Split a string by a set or delimeters into a array of strings.
 char	**ft_strtok(char const *s, char const *dels);
+/// @brief Returns the count of the characters found in s
+size_t	ft_strcountchr(const char *s, int c);
 /// @brief Function to formar a string and write to stdout.
 int		ft_printf(const char *format, ...);
 int		ft_putchar(char c);

@@ -80,18 +80,18 @@ static void	check_dupe_or_missing(t_cub *cubed, char *del, char **map, int mode)
 		{
 			n++;
 			if (!mode && n == 1 && !map[i + 1])
-				error(cubed, ERR_MISSING_VALUES);
+				return (ft_freearr(map), error(cubed, ERR_MISSING_VALUES));
 			if (mode && n == 1 && (!map[i + 1] || !map[i + 2] || !map[i + 3]))
-				error(cubed, ERR_MISSING_VALUES);
+				return (ft_freearr(map), error(cubed, ERR_MISSING_VALUES));
 			if (mode && contains_alpha(map[i + 1], map[i + 2], map[i + 3]))
-				error(cubed, ERR_COLOURS);
+				return (ft_freearr(map), error(cubed, ERR_COLOURS));
 			if (n > 1)
-				error(cubed, ERR_DUPLICATES);
+				return (ft_freearr(map), error(cubed, ERR_DUPLICATES));
 		}
 		i++;
 	}
 	if (!n)
-		error(cubed, ERR_MISSING_VARIABLES);
+		return (ft_freearr(map), error(cubed, ERR_MISSING_VARIABLES));
 }
 
 void	init_variables(t_cub *cubed)
@@ -108,4 +108,5 @@ void	init_variables(t_cub *cubed)
 	check_dupe_or_missing(cubed, "F", map, 1);
 	check_dupe_or_missing(cubed, "C", map, 1);
 	init_variable_values(cubed, map, -1);
+	ft_freearr(map);
 }

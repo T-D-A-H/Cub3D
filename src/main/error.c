@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 19:01:38 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/13 19:06:06 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/03/17 11:01:20 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	error(t_cub *cubed, char *debug_msg)
 {
-	printf(debug_msg);
+	printf("%s\n", debug_msg);
 	if (cubed->no_path)
 		free(cubed->no_path);
 	if (cubed->so_path)

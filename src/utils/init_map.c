@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:08:04 by jaimesan          #+#    #+#             */
-/*   Updated: 2025/03/13 19:07:03 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/03/17 11:06:36 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,13 @@ int	is_map_del(char **map, int y, int x)
 void	init_map(t_cub *cubed)
 {
 	char	**map;
-	int		y;
-	int		x;
+/* 	int		y;
+	int		x; */
 
 	map = ft_strtok(cubed->premap, "\n");
-	if (!map)
+	for (int i = 0; map[i] != 0; i++)
+		printf("%s", map[i]);
+/* 	if (!map)
 		error(cubed, ERR_MAP);
 	y = 0;
 	while (map[y])
@@ -53,5 +55,5 @@ void	init_map(t_cub *cubed)
 			x++;
 		}
 		y++;
-	}
+	} */
 }

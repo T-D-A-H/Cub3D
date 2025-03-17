@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:31:47 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/17 15:07:02 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/03/17 17:14:25 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ void	init_variables(t_cub *cubed);
 void	init_map(t_cub *cubed);
 int		check_invalid_chars(char **map);
 int		check_void_lines(const char *premap);
+int		check_cero(char **map, int *y, int *x, int *max_x);
+int		is_map_del(char **map, int y, int x);
 //----------------------------------------------DELETE_AFTER
 void	print_where_not_walled(char **map, int y, int x);
 #endif

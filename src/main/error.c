@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 19:01:38 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/17 15:07:46 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/03/17 15:31:32 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ void	error(t_cub *cubed, char *debug_msg)
 		free(cubed->f_color);
 	if (cubed->c_color)
 		free(cubed->c_color);
-	if (cubed->map)
-		ft_freearr(cubed->map);
+/* 	if (cubed->map)
+		ft_freearr(cubed->map); */
 	if (cubed->premap)
 		free(cubed->premap);
 	if (!debug_msg[0])

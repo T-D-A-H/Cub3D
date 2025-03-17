@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 14:55:30 by jaimesan          #+#    #+#             */
-/*   Updated: 2025/03/17 14:56:02 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/03/17 17:10:11 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,24 @@ int	check_invalid_chars(char **map)
 			j++;
 		}
 		i++;
+	}
+	return (0);
+}
+
+int check_cero(char **map, int *y, int *x, int *max_x)
+{
+	while (map[*y])
+	{
+		*x = 0;
+		while (map[*y][*x])
+		{
+			if (map[*y][*x] == '0' && is_map_del(map, *y, *x))
+				return (ft_freearr(map), 1);
+			(*x)++;
+		}
+		if (*x > *max_x)
+			(*max_x) = *x;
+		(*y)++;
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:31:47 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/17 11:00:38 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/03/17 15:03:33 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,18 @@
 
 # include "../libft/includes/libft.h"
 
-# define ERR_EXTENSION "Error Extension doesn't match\n"
-# define ERR_ARGS "Error Wrong amount of arguments\n"
-# define ERR_EXTENSION_NOFILENAME "Error No filename\n"
-# define ERR_FILE_OPEN "Error Opening map file\n"
-# define ERR_COLOURS "Error Colours can only contain digits (0 - 255)\n"
-# define ERR_DUPLICATES "Error Duplicate variables\n"
-# define ERR_MISSING_VARIABLES "Error Missing variables\n"
-# define ERR_MISSING_VALUES "Error Missing values\n"
-# define ERR_MALLOC "Error Malloc\n"
-# define ERR_MAP "Error Getting Map\n"
-# define ERR_MAP_NOT_WALLED "Error Map not walled\n"
+# define ERR_EXTENSION "Error\nExtension doesn't match\n"
+# define ERR_ARGS "Error\nWrong amount of arguments\n"
+# define ERR_EXTENSION_NOFILENAME "Error\nNo filename\n"
+# define ERR_FILE_OPEN "Error\nOpening map file\n"
+# define ERR_COLOURS "Error\nColours can only contain digits (0 - 255)\n"
+# define ERR_DUPLICATES "Error\nDuplicate variables\n"
+# define ERR_MISSING_VARIABLES "Error\nMissing variables\n"
+# define ERR_MISSING_VALUES "Error\nMissing values\n"
+# define ERR_MALLOC "Error\nMalloc\n"
+# define ERR_MAP "Error\nGetting Map\n"
+# define ERR_MAP_NOT_WALLED "Error\nMap not walled\n"
+# define ERR_MAP_INVALID_CHARS "Error\nInvalid chars\n"
 # define NO_ERROR ""
 
 typedef struct s_cub
@@ -57,6 +58,8 @@ void	init_struct(t_cub *cubed);
 void	read_map_file(t_cub *cubed, char **argv);
 void	init_variables(t_cub *cubed);
 void	init_map(t_cub *cubed);
+int		check_invalid_chars(char **map);
+int		check_void_lines(const char *premap);
 //----------------------------------------------DELETE_AFTER
 void	print_where_not_walled(char **map, int y, int x);
 #endif

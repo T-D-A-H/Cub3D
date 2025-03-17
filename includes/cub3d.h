@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:31:47 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/17 12:57:57 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/03/17 15:07:02 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@
 # define ERR_MALLOC "Error\nMalloc\n"
 # define ERR_MAP "Error\nGetting Map\n"
 # define ERR_MAP_NOT_WALLED "Error\nMap not walled\n"
+# define ERR_MAP_INVALID_CHARS "Error\nInvalid chars\n"
 # define NO_ERROR ""
 
 typedef struct s_cub
@@ -58,6 +59,8 @@ void	read_map_file(t_cub *cubed, char **argv);
 char	*replace_tabs_with_spaces(t_cub *cubed);
 void	init_variables(t_cub *cubed);
 void	init_map(t_cub *cubed);
+int		check_invalid_chars(char **map);
+int		check_void_lines(const char *premap);
 //----------------------------------------------DELETE_AFTER
 void	print_where_not_walled(char **map, int y, int x);
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   delete_after.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 19:01:38 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/13 19:06:06 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/03/17 11:38:14 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	print_where_not_walled(char **map, int y, int x)
 	int		i;
 	int		j;
 
-	i = 0;
+	i = 6;
 	while (map[i])
 	{
 		if (i != y)

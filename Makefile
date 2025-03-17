@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+         #
+#    By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/12 13:05:04 by jaimesan          #+#    #+#              #
-#    Updated: 2025/03/17 14:56:38 by jaimesan         ###   ########.fr        #
+#    Updated: 2025/03/17 15:40:05 by ctommasi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,9 +33,9 @@ MAGENTA := \033[35m
 BLUE := \033[34m
 
 # Archivos fuente
-SRCS =	./src/main/main.c ./src/utils/ft_checks.c ./src/utils/init_struct.c ./src/utils/init_variables.c \
-		./src/main/error.c ./src/utils/init_map.c ./src/utils/delete_after.c ./src/utils/ft_check_lines.c
-
+SRCS =	./src/main/main.c ./src/utils/check_args.c ./src/utils/init_struct.c ./src/utils/init_variables.c \
+		./src/main/error.c ./src/utils/init_map.c ./src/utils/delete_after.c ./src/utils/ft_check_lines.c \
+		./src/utils/init_window.c
 # Archivos objeto
 OBJS = $(SRCS:.c=.o)
 

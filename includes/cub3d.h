@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:31:47 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/17 15:07:02 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/03/17 15:30:03 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <sys/time.h>
 
 # include "../libft/includes/libft.h"
+# include "../MLX42/include/MLX42/MLX42.h"
 
 # define ERR_EXTENSION "Error\nExtension doesn't match\n"
 # define ERR_ARGS "Error\nWrong amount of arguments\n"
@@ -35,10 +36,16 @@
 # define ERR_MAP "Error\nGetting Map\n"
 # define ERR_MAP_NOT_WALLED "Error\nMap not walled\n"
 # define ERR_MAP_INVALID_CHARS "Error\nInvalid chars\n"
+# define ERR_MLX_INIT "Error\nInitialising MLX\n"
 # define NO_ERROR ""
+
+# define WINDOW_NAME "CUB3D"
+# define WINDOW_W 1600
+# define WINDOW_H 1200
 
 typedef struct s_cub
 {
+	mlx_t	*mlx_ptr;
 	char	*no_path;
 	char	*so_path;
 	char	*we_path;
@@ -61,6 +68,8 @@ void	init_variables(t_cub *cubed);
 void	init_map(t_cub *cubed);
 int		check_invalid_chars(char **map);
 int		check_void_lines(const char *premap);
+void	init_window(t_cub *cubed);
 //----------------------------------------------DELETE_AFTER
 void	print_where_not_walled(char **map, int y, int x);
+
 #endif

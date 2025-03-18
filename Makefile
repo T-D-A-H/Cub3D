@@ -6,7 +6,7 @@
 #    By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/12 13:05:04 by jaimesan          #+#    #+#              #
-#    Updated: 2025/03/18 13:17:53 by ctommasi         ###   ########.fr        #
+#    Updated: 2025/03/18 13:22:35 by ctommasi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,14 +58,14 @@ $(NAME): $(LIBFT) $(OBJS)
 	@echo "[$(GREEN)DONE$(RESET)] Linking complete: [$(MAGENTA)$(NAME)$(RESET)] - Complete!"
 
 clean:
+	@$(MAKE) -C $(MLX_DIR) clean
 	$(MAKE) clean -C $(LIBFT_DIR)
-	$(MAKE) -C $(MLX_DIR) clean
 	$(RM) $(OBJS)
 	@echo "[$(RED)DELETED$(RESET)] Object files [$(RED)*.o$(RESET)] - Cleaned!"
 
 fclean:
+	@$(MAKE) -C $(MLX_DIR) clean
 	$(MAKE) fclean -C $(LIBFT_DIR)
-	$(MAKE) -C $(MLX_DIR) clean
 	$(RM) $(OBJS) $(NAME)
 	@echo "[$(RED)DELETED$(RESET)] Cub3D file [$(RED)$(NAME)$(RESET)] - Cleaned!"
 

@@ -6,23 +6,18 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:08:04 by jaimesan          #+#    #+#             */
-/*   Updated: 2025/03/18 13:16:26 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/03/18 17:15:49 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void print_map(t_cub *cubed)
-{
-	for (int i = 0; cubed->map[i]; i++)
-		printf("%s\n", cubed->map[i]);
-	printf("Eje X del pj: %d\n", cubed->pj_x);
-	printf("Eje Y del pj: %d\n", cubed->pj_y);
-}
-
 int	main(int argc, char **argv)
 {
 	t_cub	cubed;
+	t_data	game;
+	
+	(void)argc; (void)argv;
 
 	if (check_cub_args(argc, argv))
 		return (1);
@@ -30,6 +25,6 @@ int	main(int argc, char **argv)
 	read_map_file(&cubed, argv);
 	init_variables(&cubed);
 	init_map(&cubed);
-	// init_window(&cubed);
-	return (error(&cubed, NO_ERROR), 0);
+	// init_window(&cubed, &game);
+	return (0);
 }

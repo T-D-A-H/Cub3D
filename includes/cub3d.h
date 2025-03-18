@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:31:47 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/18 13:10:15 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/03/18 17:08:06 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,12 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <sys/time.h>
+# include <stdbool.h>
+# include <math.h>
 
 # include "../libft/includes/libft.h"
 # include "../minilibx-linux/mlx.h"
+# include "../minilibx-linux/mlx_int.h"
 
 # define ERR_EXTENSION "Error\nExtension doesn't match\n"
 # define ERR_ARGS "Error\nWrong amount of arguments\n"
@@ -41,13 +44,20 @@
 # define NO_ERROR ""
 
 # define WINDOW_NAME "CUB3D"
-# define WINDOW_W 1600
-# define WINDOW_H 1200
+# define WIDTH 1280
+# define HEIGHT 705
+# define W 119
+# define A 97
+# define S 115
+# define D 100
+# define ESC 27
+# define PI 3.1419265359
+# define BLOCK 64
+# define LEFT 65361
+# define RIGHT 65363
 
 typedef struct s_cub
 {
-	void	*mlx_ptr;
-	void	*window;
 	char	*no_path;
 	char	*so_path;
 	char	*we_path;
@@ -60,6 +70,37 @@ typedef struct s_cub
 	int		pj_x;
 }	t_cub;
 
+typedef struct s_player
+{
+	float	x;
+	float	y;
+	float angle;
+	
+	bool	key_up;
+	bool	key_down;
+	bool	key_left;
+	bool	key_right;
+
+	
+	bool	left_rotate;
+	bool	right_rotate;
+}	t_player;
+
+typedef struct s_data
+{
+	void	*mlx_ptr;
+	void	*window;
+	void	*img;
+	char	**map;
+	char	*data;
+	int		bpp;
+	int		size_line;
+	int		endian;
+	t_player player;
+}	t_data;
+
+
+
 //----------------------------------------------MAIN
 int		main(int argc, char **argv);
 void	error(t_cub *cubed, char *debug_msg);
@@ -68,7 +109,7 @@ void	init_struct(t_cub *cubed);
 void	read_map_file(t_cub *cubed, char **argv);
 void	init_variables(t_cub *cubed);
 void	init_map(t_cub *cubed);
-void	init_window(t_cub *cubed);
+void	init_window(t_cub *cubed, t_data *game);
 //----------------------------------------------UTILS
 int		check_cub_args(int argc, char **argv);
 int		is_map_del(char **map, int y, int x);

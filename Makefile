@@ -6,7 +6,7 @@
 #    By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/12 13:05:04 by jaimesan          #+#    #+#              #
-#    Updated: 2025/03/18 13:22:35 by ctommasi         ###   ########.fr        #
+#    Updated: 2025/03/18 17:09:14 by ctommasi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ LIBFT_DIR = ./libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
 MLX_DIR = minilibx-linux/
-MLX = $(MLX_DIR)/libmlx.a -lXext -lX11 -lm
+MLX = $(MLX_DIR)/libmlx.a -lXext -lX11 -lm -lz
 
 GREEN := \033[1;32m
 RED := \033[1;31m
@@ -41,7 +41,7 @@ SRCS =	./src/main/main.c ./src/main/error.c \
 # Archivos objeto
 OBJS = $(SRCS:.c=.o)
 
-all: $(MLX) $(NAME) $(LIBFT)
+all: $(NAME) $(LIBFT)
 
 $(LIBFT):
 	$(MAKE) -C $(LIBFT_DIR)
@@ -53,7 +53,7 @@ $(MLX):
 	@echo "[$(GREEN)DONE$(RESET)] Compiling [$(YELLOW)$<$(RESET)] - File being compiled..."
 	@$(CC) $(CFLAGS) $(HEADERS) -o $@ -c $< 
 
-$(NAME): $(LIBFT) $(OBJS)
+$(NAME): $(LIBFT) $(MLX) $(OBJS)
 	$(CC) $(OBJS) $(LIBFT) $(MLX) -o $(NAME)
 	@echo "[$(GREEN)DONE$(RESET)] Linking complete: [$(MAGENTA)$(NAME)$(RESET)] - Complete!"
 

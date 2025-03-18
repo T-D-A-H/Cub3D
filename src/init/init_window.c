@@ -6,14 +6,10 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 15:29:12 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/18 13:08:37 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/03/18 15:36:18 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void	init_window(t_cub *cubed)
-{
-	(void)cubed;
-	return ;
-}
+

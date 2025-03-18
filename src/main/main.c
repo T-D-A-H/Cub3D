@@ -6,11 +6,19 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:08:04 by jaimesan          #+#    #+#             */
-/*   Updated: 2025/03/18 10:32:56 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/03/18 10:51:59 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+
+void print_map(t_cub *cubed)
+{
+	for (int i = 0; cubed->map[i]; i++)
+		printf("%s\n", cubed->map[i]);
+	printf("Eje X del pj: %d\n", cubed->pj_x);
+	printf("Eje Y del pj: %d\n", cubed->pj_y);
+}
 
 int	main(int argc, char **argv)
 {
@@ -22,7 +30,6 @@ int	main(int argc, char **argv)
 	read_map_file(&cubed, argv);
 	init_variables(&cubed);
 	init_map(&cubed);
-/* 	for (int i = 0; cubed.map[i]; i++)
-		printf("%s\n", cubed.map[i]); */
+	print_map(&cubed);
 	return (error(&cubed, NO_ERROR), 0);
 }

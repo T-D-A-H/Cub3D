@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 14:55:30 by jaimesan          #+#    #+#             */
-/*   Updated: 2025/03/18 10:32:01 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/03/18 11:36:16 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,24 +70,25 @@ int	check_void_lines(const char *premap)
 	return (0);
 }
 
-int	check_invalid_chars(char **map)
+int	check_invalid_chars(char **map, t_cub *cubed)
 {
 	int	i;
 	int	j;
 
 	i = 6;
-	j = 0;
 	while (map[i])
 	{
 		j = 0;
 		while (map[i][j])
 		{
-			if (map[i][j] != '1' && map[i][j] != '0'
-			&& map[i][j] != '\n' && map[i][j] != ' '
-			&& map[i][j] != 'N')
+			if (map[i][j] == 'N')
 			{
-				return (1);
+				cubed->pj_y = i -6;
+				cubed->pj_x = j;
 			}
+			else if (map[i][j] != '1' && map[i][j] != '0'
+			&& map[i][j] != '\n' && map[i][j] != ' ')
+				return (1);
 			j++;
 		}
 		i++;
@@ -102,7 +103,8 @@ int	check_cero(char **map, int *y, int *x, int *max_x)
 		*x = 0;
 		while (map[*y][*x])
 		{
-			if (map[*y][*x] == '0' && is_map_del(map, *y, *x))
+			if ((map[*y][*x] == '0' || map[*y][*x] == 'N')
+				&& is_map_del(map, *y, *x))
 				return (ft_freearr(map), 1);
 			(*x)++;
 		}

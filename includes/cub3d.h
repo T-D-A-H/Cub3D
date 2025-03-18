@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:31:47 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/18 10:32:16 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/03/18 11:24:04 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 # define ERR_MAP "Error\nGetting Map\n"
 # define ERR_MAP_NOT_WALLED "Error\nMap not walled\n"
 # define ERR_MAP_INVALID_CHARS "Error\nInvalid chars\n"
+# define ERR_PJ_NOT_EXIST "Error\nPj does not exit\n"
 # define NO_ERROR ""
 
 typedef struct s_cub
@@ -47,6 +48,8 @@ typedef struct s_cub
 	int		*c_color;
 	char	*premap;
 	char	**map;
+	int		pj_y;
+	int		pj_x;
 }	t_cub;
 
 //----------------------------------------------MAIN
@@ -59,7 +62,7 @@ void	read_map_file(t_cub *cubed, char **argv);
 char	*replace_tabs_with_spaces(t_cub *cubed);
 void	init_variables(t_cub *cubed);
 void	init_map(t_cub *cubed);
-int		check_invalid_chars(char **map);
+int		check_invalid_chars(char **map, t_cub *cubed);
 int		check_void_lines(const char *premap);
 int		check_cero(char **map, int *y, int *x, int *max_x);
 int		is_map_del(char **map, int y, int x);

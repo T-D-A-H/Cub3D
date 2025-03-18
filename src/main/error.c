@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 19:01:38 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/18 12:12:20 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/03/18 12:16:22 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,10 @@ void	error(t_cub *cubed, char *debug_msg)
 		ft_freearr(cubed->map);
 	if (cubed->premap)
 		free(cubed->premap);
-	mlx_close_window(cubed->mlx_ptr);
-	mlx_terminate(cubed->mlx_ptr);
+	if (cubed->mlx_ptr)
+		mlx_close_window(cubed->mlx_ptr);
+	if (cubed->mlx_ptr)
+		mlx_terminate(cubed->mlx_ptr);
 	if (!debug_msg[0])
 		exit(0);
 	else

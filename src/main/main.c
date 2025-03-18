@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:08:04 by jaimesan          #+#    #+#             */
-/*   Updated: 2025/03/18 12:13:24 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/03/18 12:16:07 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,6 @@ int	main(int argc, char **argv)
 	read_map_file(&cubed, argv);
 	init_variables(&cubed);
 	init_map(&cubed);
-	init_window(&cubed);
-	return (0);
+	// init_window(&cubed);
+	return (error(&cubed, NO_ERROR), 0);
 }

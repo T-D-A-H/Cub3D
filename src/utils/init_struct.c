@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:25:27 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/18 10:56:07 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/03/18 12:16:48 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	init_struct(t_cub *cubed)
 {
+	cubed->mlx_ptr = NULL;
 	cubed->no_path = NULL;
 	cubed->so_path = NULL;
 	cubed->we_path = NULL;

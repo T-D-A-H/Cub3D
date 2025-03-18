@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:31:47 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/18 12:13:06 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/03/18 12:50:56 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,18 +62,18 @@ typedef struct s_cub
 //----------------------------------------------MAIN
 int		main(int argc, char **argv);
 void	error(t_cub *cubed, char *debug_msg);
-//----------------------------------------------UTILS
-int		check_cub_args(int argc, char **argv);
+//----------------------------------------------INIT
 void	init_struct(t_cub *cubed);
 void	read_map_file(t_cub *cubed, char **argv);
-char	*replace_tabs_with_spaces(t_cub *cubed);
 void	init_variables(t_cub *cubed);
 void	init_map(t_cub *cubed);
-int		check_invalid_chars(char **map, t_cub *cubed);
-int		check_void_lines(const char *premap);
 void	init_window(t_cub *cubed);
-int		check_cero(char **map, int *y, int *x, int *max_x);
+//----------------------------------------------UTILS
+int		check_cub_args(int argc, char **argv);
 int		is_map_del(char **map, int y, int x);
+int		is_map_char(char c, int mode);
+int		only_one(char *linea);
+int		check_void(const char *premap, int i);
 int		save_map(t_cub *cubed, char **temp_map, size_t y, size_t x);
 //----------------------------------------------DELETE_AFTER
 void	print_where_not_walled(char **map, int y, int x);

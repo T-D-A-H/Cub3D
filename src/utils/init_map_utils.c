@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_map.c                                         :+:      :+:    :+:   */
+/*   init_map_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/12 13:08:04 by jaimesan          #+#    #+#             */
-/*   Updated: 2025/03/18 12:13:49 by ctommasi         ###   ########.fr       */
+/*   Created: 2025/03/18 12:29:43 by ctommasi          #+#    #+#             */
+/*   Updated: 2025/03/18 12:52:45 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,29 +29,46 @@ int	is_map_del(char **map, int y, int x)
 	return (0);
 }
 
-void	init_map(t_cub *cubed)
+int	is_map_char(char c, int mode)
 {
-	char	**map;
-	int		y;
-	int		x;
-	int		max_x;
-
-	max_x = 0;
-	if (check_void_lines(cubed->premap))
-		return (error(cubed, ERR_MAP_NOT_WALLED));
-	map = ft_strtok(cubed->premap, "\n");
-	if (check_invalid_chars(map, cubed))
-		return (ft_freearr(map), error(cubed, ERR_MAP_INVALID_CHARS));
-	if (!map)
-		error(cubed, ERR_MAP);
-	y = 6;
-	if (check_cero(map, &y, &x, &max_x) == 1)
-		return (error(cubed, ERR_MAP_NOT_WALLED));
-	if (save_map(cubed, map, y, max_x) == 1)
-		return (ft_freearr(map), error(cubed, ERR_MALLOC));
-	if (cubed->pj_x == 0 && cubed->pj_y == 0)
-		return (ft_freearr(map), error(cubed, ERR_PJ_NOT_EXIST));
-	return (ft_freearr(map));
+	if (!mode)
+	{
+		if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
+			return (1);
+	}
+	else
+	{
+		if (c != '1' && c != '0' && c != '\n' && c != ' ')
+			return (1);
+	}
+	return (0);
 }
 
+int	only_one(char *linea)
+{
+	while (*linea)
+	{
+		if (*linea != '1' && *linea != ' ')
+		{
+			return (0);
+		}
+		linea++;
+	}
+	return (1);
+}
 
+int	check_void(const char *premap, int i)
+{
+	while (premap[i] && premap[i + 1])
+	{
+		if (premap[i] == '\n' && premap[i + 1] == '\n')
+		{
+			if (ft_strchr(&premap[i], '1') || ft_strchr(&premap[i], '0'))
+				return (1);
+			else
+				return (0);
+		}
+		i++;
+	}
+	return (0);
+}

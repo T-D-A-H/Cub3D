@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:25:27 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/18 12:16:48 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/03/18 12:52:57 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,29 +31,7 @@ void	init_struct(t_cub *cubed)
 		error(cubed, ERR_MALLOC);
 }
 
-void	read_map_file(t_cub *cubed, char **argv)
-{
-	char	*line;
-	int		fd;
-
-	fd = open(argv[1], O_RDONLY);
-	if (fd < 0)
-		error(cubed, ERR_FILE_OPEN);
-	cubed->premap = ft_strdup("");
-	while (1)
-	{
-		line = get_next_line(fd);
-		if (!line)
-			break ;
-		cubed->premap = ft_strjoinf(cubed->premap, line);
-		free(line);
-	}
-	close(fd);
-	if (ft_strchr(cubed->premap, '\t'))
-		cubed->premap = replace_tabs_with_spaces(cubed);
-}
-
-char	*replace_tabs_with_spaces(t_cub *cubed)
+static char	*replace_tabs_with_spaces(t_cub *cubed)
 {
 	size_t	i;
 	int		j;
@@ -80,4 +58,26 @@ char	*replace_tabs_with_spaces(t_cub *cubed)
 	}
 	premap_replaced[j] = '\0';
 	return (free(cubed->premap), premap_replaced);
+}
+
+void	read_map_file(t_cub *cubed, char **argv)
+{
+	char	*line;
+	int		fd;
+
+	fd = open(argv[1], O_RDONLY);
+	if (fd < 0)
+		error(cubed, ERR_FILE_OPEN);
+	cubed->premap = ft_strdup("");
+	while (1)
+	{
+		line = get_next_line(fd);
+		if (!line)
+			break ;
+		cubed->premap = ft_strjoinf(cubed->premap, line);
+		free(line);
+	}
+	close(fd);
+	if (ft_strchr(cubed->premap, '\t'))
+		cubed->premap = replace_tabs_with_spaces(cubed);
 }

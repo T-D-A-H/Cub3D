@@ -6,7 +6,7 @@
 #    By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/12 13:05:04 by jaimesan          #+#    #+#              #
-#    Updated: 2025/03/18 12:13:43 by ctommasi         ###   ########.fr        #
+#    Updated: 2025/03/18 12:50:42 by ctommasi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,10 +33,11 @@ MAGENTA := \033[35m
 BLUE := \033[34m
 
 # Archivos fuente
-SRCS =	./src/main/main.c ./src/utils/check_args.c ./src/utils/init_struct.c ./src/utils/init_variables.c \
-		./src/main/error.c ./src/utils/init_map.c ./src/utils/delete_after.c ./src/utils/ft_check_lines.c \
-		./src/utils/save_map.c \
-		./src/utils/init_window.c
+SRCS =	./src/main/main.c ./src/main/error.c \
+		./src/init/init_struct.c ./src/init/init_variables.c ./src/init/init_map.c ./src/init/init_window.c \
+		./src/utils/check_args.c  ./src/utils/init_map_utils.c  ./src/utils/save_map.c \
+		./src/utils/delete_after.c \
+		
 # Archivos objeto
 OBJS = $(SRCS:.c=.o)
 

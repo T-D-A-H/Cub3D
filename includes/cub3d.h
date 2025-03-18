@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:31:47 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/18 13:10:15 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/03/18 16:20:46 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <sys/time.h>
+# include <stdbool.h>
+#include <math.h>
 
 # include "../libft/includes/libft.h"
 # include "../minilibx-linux/mlx.h"
@@ -41,23 +43,63 @@
 # define NO_ERROR ""
 
 # define WINDOW_NAME "CUB3D"
-# define WINDOW_W 1600
-# define WINDOW_H 1200
+# define WINDOW_W 1920
+# define WINDOW_H 1080
+
+# define W 119
+# define A 97
+# define S 115
+# define D 100
+
+# define PI 3.141592653589
+
+#define FOV 60 
+
+typedef struct s_player
+{
+	float	player_x;
+	float	player_y;
+
+	float	player_angle;
+	float	move_speed;
+	float	rotation_speed;
+
+	bool key_up;
+	bool key_down;
+	bool key_left;
+	bool key_right;
+
+}	t_player;
+
+typedef struct s_game
+{
+	void	*mlx;
+	void	*win;
+	void	*img;
+
+	char	*data;
+	int		bpp;
+	int		size_line;
+	int		endian;
+}	t_game;
 
 typedef struct s_cub
 {
-	void	*mlx_ptr;
-	void	*window;
-	char	*no_path;
-	char	*so_path;
-	char	*we_path;
-	char	*ea_path;
-	int		*f_color;
-	int		*c_color;
-	char	*premap;
-	char	**map;
-	int		pj_y;
-	int		pj_x;
+	void		*mlx_ptr;
+	void		*window;
+	char		*no_path;
+	char		*so_path;
+	char		*we_path;
+	char		*ea_path;
+	int			*f_color;
+	int			*c_color;
+	char		*premap;
+	char		**map;
+	int			pj_y;
+	int			pj_x;
+	char		*textures[4];
+	t_game		*game;
+	t_player	*player;
 }	t_cub;
 
 //----------------------------------------------MAIN

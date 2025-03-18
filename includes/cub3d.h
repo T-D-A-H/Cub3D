@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:31:47 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/18 17:08:06 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/03/18 17:18:13 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # include <sys/time.h>
 # include <stdbool.h>
 # include <math.h>
+# include <stdbool.h>
+#include <math.h>
 
 # include "../libft/includes/libft.h"
 # include "../minilibx-linux/mlx.h"
@@ -44,30 +46,63 @@
 # define NO_ERROR ""
 
 # define WINDOW_NAME "CUB3D"
-# define WIDTH 1280
-# define HEIGHT 705
+# define WINDOW_W 1920
+# define WINDOW_H 1080
+
 # define W 119
 # define A 97
 # define S 115
 # define D 100
-# define ESC 27
-# define PI 3.1419265359
-# define BLOCK 64
-# define LEFT 65361
-# define RIGHT 65363
+
+# define PI 3.141592653589
+
+#define FOV 60 
+
+typedef struct s_player
+{
+	float	player_x;
+	float	player_y;
+
+	float	player_angle;
+	float	move_speed;
+	float	rotation_speed;
+
+	bool key_up;
+	bool key_down;
+	bool key_left;
+	bool key_right;
+
+}	t_player;
+
+typedef struct s_game
+{
+	void	*mlx;
+	void	*win;
+	void	*img;
+
+	char	*data;
+	int		bpp;
+	int		size_line;
+	int		endian;
+}	t_game;
 
 typedef struct s_cub
 {
-	char	*no_path;
-	char	*so_path;
-	char	*we_path;
-	char	*ea_path;
-	int		*f_color;
-	int		*c_color;
-	char	*premap;
-	char	**map;
-	int		pj_y;
-	int		pj_x;
+	void		*mlx_ptr;
+	void		*window;
+	char		*no_path;
+	char		*so_path;
+	char		*we_path;
+	char		*ea_path;
+	int			*f_color;
+	int			*c_color;
+	char		*premap;
+	char		**map;
+	int			pj_y;
+	int			pj_x;
+	char		*textures[4];
+	t_game		*game;
+	t_player	*player;
 }	t_cub;
 
 typedef struct s_player

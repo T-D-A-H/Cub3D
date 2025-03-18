@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:08:04 by jaimesan          #+#    #+#             */
-/*   Updated: 2025/03/18 17:15:49 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/03/18 17:18:24 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,18 @@
 
 int	main(int argc, char **argv)
 {
-	t_cub	cubed;
-	t_data	game;
-	
-	(void)argc; (void)argv;
+	t_cub		cubed;
+	t_game		game;
+	t_player	player;
 
+	cubed.game = &game;
+	cubed.player = &player;
 	if (check_cub_args(argc, argv))
 		return (1);
 	init_struct(&cubed);
 	read_map_file(&cubed, argv);
 	init_variables(&cubed);
 	init_map(&cubed);
-	// init_window(&cubed, &game);
-	return (0);
+	init_window(&cubed);
+	return (error(&cubed, NO_ERROR), 0);
 }

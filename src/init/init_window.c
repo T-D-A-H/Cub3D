@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 15:29:12 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/18 16:19:31 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/03/18 16:25:51 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,8 +129,6 @@ void init_window(t_cub *cubed)
 	init_game(cubed);
 	mlx_hook(cubed->game->win, 2, 1L<<0, key_press, cubed);
 	mlx_hook(cubed->game->win, 3, 1L<<1, key_release, cubed);
-	/* printf("Posición inicial: %f, %f\n", cubed->player->player_x, cubed->player->player_y); */
-/* 	draw_square(WINDOW_W / 2, WINDOW_H / 2, 5, 0x00FF00, cubed); */
 	mlx_loop_hook(cubed->game->mlx, draw_loop, cubed);
     mlx_loop(cubed->game->mlx);
 }

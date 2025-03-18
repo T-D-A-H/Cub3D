@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:31:47 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/18 17:18:13 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/03/18 17:20:57 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,6 @@ typedef struct s_game
 
 typedef struct s_cub
 {
-	void		*mlx_ptr;
-	void		*window;
 	char		*no_path;
 	char		*so_path;
 	char		*we_path;
@@ -105,37 +103,6 @@ typedef struct s_cub
 	t_player	*player;
 }	t_cub;
 
-typedef struct s_player
-{
-	float	x;
-	float	y;
-	float angle;
-	
-	bool	key_up;
-	bool	key_down;
-	bool	key_left;
-	bool	key_right;
-
-	
-	bool	left_rotate;
-	bool	right_rotate;
-}	t_player;
-
-typedef struct s_data
-{
-	void	*mlx_ptr;
-	void	*window;
-	void	*img;
-	char	**map;
-	char	*data;
-	int		bpp;
-	int		size_line;
-	int		endian;
-	t_player player;
-}	t_data;
-
-
-
 //----------------------------------------------MAIN
 int		main(int argc, char **argv);
 void	error(t_cub *cubed, char *debug_msg);
@@ -144,7 +111,7 @@ void	init_struct(t_cub *cubed);
 void	read_map_file(t_cub *cubed, char **argv);
 void	init_variables(t_cub *cubed);
 void	init_map(t_cub *cubed);
-void	init_window(t_cub *cubed, t_data *game);
+void	init_window(t_cub *cubed);
 //----------------------------------------------UTILS
 int		check_cub_args(int argc, char **argv);
 int		is_map_del(char **map, int y, int x);

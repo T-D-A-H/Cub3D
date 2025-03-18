@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 19:01:38 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/18 17:21:51 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/03/18 18:15:19 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,17 +133,17 @@ void	print_where_not_walled(char **map, int y, int x)
 // 	game->data[index + 2] = ((color >> 16) & 0xFF);
 // }
 
-// static void draw_square(int x, int y, int size, int color, t_data *game)
-// {
-// 	for (int i = 0; i < size; i++)
-// 		put_pixel(x + i, y, color, game);
-// 	for (int i = 0; i < size; i++)
-// 		put_pixel(x, y + i, color, game);
-// 	for (int i = 0; i < size; i++)
-// 		put_pixel(x + size, y + i, color, game);
-// 	for (int i = 0; i < size; i++)
-// 		put_pixel(x + i, y + size, color, game);
-// }
+// // static void draw_square(int x, int y, int size, int color, t_data *game)
+// // {
+// // 	for (int i = 0; i < size; i++)
+// // 		put_pixel(x + i, y, color, game);
+// // 	for (int i = 0; i < size; i++)
+// // 		put_pixel(x, y + i, color, game);
+// // 	for (int i = 0; i < size; i++)
+// // 		put_pixel(x + size, y + i, color, game);
+// // 	for (int i = 0; i < size; i++)
+// // 		put_pixel(x + i, y + size, color, game);
+// // }
 
 // static void	init_game(t_cub *cubed, t_data *game)
 // {
@@ -167,15 +167,15 @@ void	print_where_not_walled(char **map, int y, int x)
 // 	}
 // }
 
-// static void draw_map(t_data *game)
-// {
-// 	char **map = game->map;
-// 	int color = 0x0000FF;
-// 	for (int y = 0; map[y]; y++)
-// 		for (int x = 0; map[y][x]; x++)
-// 			if (map[y][x] == '1')
-// 				draw_square(x * BLOCK, y * BLOCK, BLOCK, color, game);
-// }
+// // static void draw_map(t_data *game)
+// // {
+// // 	char **map = game->map;
+// // 	int color = 0x0000FF;
+// // 	for (int y = 0; map[y]; y++)
+// // 		for (int x = 0; map[y][x]; x++)
+// // 			if (map[y][x] == '1')
+// // 				draw_square(x * BLOCK, y * BLOCK, BLOCK, color, game);
+// // }
 
 // static bool	touch(float px, float py, t_data *game)
 // {

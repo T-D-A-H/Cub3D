@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:31:47 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/18 17:20:57 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/03/18 18:40:19 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@
 # define ERR_PJ_NOT_EXIST "Error\nPj does not exit\n"
 # define NO_ERROR ""
 
-# define WINDOW_NAME "CUB3D"
-# define WINDOW_W 1920
-# define WINDOW_H 1080
+# define W_NAME "CUB3D"
+# define WIDTH 1920
+# define HEIGHT 1080
 
 # define W 119
 # define A 97
@@ -58,14 +58,12 @@
 
 #define FOV 60 
 
+# define MOVE_AMOUNT 0.03
+
 typedef struct s_player
 {
-	float	player_x;
-	float	player_y;
-
-	float	player_angle;
-	float	move_speed;
-	float	rotation_speed;
+	float	p_x;
+	float	p_y;
 
 	bool key_up;
 	bool key_down;
@@ -119,6 +117,10 @@ int		is_map_char(char c, int mode);
 int		only_one(char *linea);
 int		check_void(const char *premap, int i);
 int		save_map(t_cub *cubed, char **temp_map, size_t y, size_t x);
+int		on_keyrelease(int keydata, t_player *player);
+int		on_keypress(int keydata, t_player *player);
+int		update_player(t_cub *cubed);
+void	draw_player(float x, float y, int colour, t_game *game);
 //----------------------------------------------DELETE_AFTER
 void	print_where_not_walled(char **map, int y, int x);
 

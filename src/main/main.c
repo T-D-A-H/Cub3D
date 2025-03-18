@@ -6,11 +6,19 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:08:04 by jaimesan          #+#    #+#             */
-/*   Updated: 2025/03/17 17:13:22 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/03/18 12:13:24 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+
+void print_map(t_cub *cubed)
+{
+	for (int i = 0; cubed->map[i]; i++)
+		printf("%s\n", cubed->map[i]);
+	printf("Eje X del pj: %d\n", cubed->pj_x);
+	printf("Eje Y del pj: %d\n", cubed->pj_y);
+}
 
 int	main(int argc, char **argv)
 {

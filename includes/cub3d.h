@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:31:47 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/17 15:30:03 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/03/18 12:13:06 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@
 # define ERR_MAP_NOT_WALLED "Error\nMap not walled\n"
 # define ERR_MAP_INVALID_CHARS "Error\nInvalid chars\n"
 # define ERR_MLX_INIT "Error\nInitialising MLX\n"
+# define ERR_PJ_NOT_EXIST "Error\nPj does not exit\n"
 # define NO_ERROR ""
 
 # define WINDOW_NAME "CUB3D"
@@ -54,6 +55,8 @@ typedef struct s_cub
 	int		*c_color;
 	char	*premap;
 	char	**map;
+	int		pj_y;
+	int		pj_x;
 }	t_cub;
 
 //----------------------------------------------MAIN
@@ -66,9 +69,12 @@ void	read_map_file(t_cub *cubed, char **argv);
 char	*replace_tabs_with_spaces(t_cub *cubed);
 void	init_variables(t_cub *cubed);
 void	init_map(t_cub *cubed);
-int		check_invalid_chars(char **map);
+int		check_invalid_chars(char **map, t_cub *cubed);
 int		check_void_lines(const char *premap);
 void	init_window(t_cub *cubed);
+int		check_cero(char **map, int *y, int *x, int *max_x);
+int		is_map_del(char **map, int y, int x);
+int		save_map(t_cub *cubed, char **temp_map, size_t y, size_t x);
 //----------------------------------------------DELETE_AFTER
 void	print_where_not_walled(char **map, int y, int x);
 

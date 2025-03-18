@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:08:04 by jaimesan          #+#    #+#             */
-/*   Updated: 2025/03/18 13:16:26 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/03/18 14:16:35 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,6 @@ int	main(int argc, char **argv)
 	read_map_file(&cubed, argv);
 	init_variables(&cubed);
 	init_map(&cubed);
-	// init_window(&cubed);
+	init_window(&cubed);
 	return (error(&cubed, NO_ERROR), 0);
 }

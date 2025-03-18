@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:08:04 by jaimesan          #+#    #+#             */
-/*   Updated: 2025/03/17 17:14:04 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/03/18 10:32:05 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,43 +24,6 @@ int	is_map_del(char **map, int y, int x)
 		return (1);
 	if (map[y + 1][x] == '\n' || map[y][x + 1] == '\n')
 		return (1);
-	return (0);
-}
-
-int save_map(t_cub *cubed, char **temp_map, size_t y, size_t x)
-{
-	size_t i;
-	size_t j;
-	size_t temp_len;
-
-	i = 6;
-	cubed->map = (char **)malloc(sizeof(char *) * (y - 6 + 1));
-	if (!cubed->map)
-		return (1);
-	while (i < y)
-	{
-		j = 0;
-		temp_len = ft_strlen(temp_map[i]);
-		cubed->map[i - 6] = (char *)malloc((x + 1) * sizeof(char));
-		if (!cubed->map[i - 6])
-		{
-			while (i - 6 > 0)
-				free(cubed->map[--i - 6]);
-			free(cubed->map);
-			return (1);
-		}
-		while (j < x)
-		{
-			if (j < temp_len)
-				cubed->map[i - 6][j] = temp_map[i][j]; 
-			else
-				cubed->map[i - 6][j] = ' ';
-			j++;
-		}
-		cubed->map[i - 6][j] = '\0';
-		i++;
-	}
-	cubed->map[i - 6] = NULL;
 	return (0);
 }
 

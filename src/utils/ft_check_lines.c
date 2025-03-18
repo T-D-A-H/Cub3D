@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 14:55:30 by jaimesan          #+#    #+#             */
-/*   Updated: 2025/03/17 17:10:11 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/03/18 10:32:01 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int	check_invalid_chars(char **map)
 	return (0);
 }
 
-int check_cero(char **map, int *y, int *x, int *max_x)
+int	check_cero(char **map, int *y, int *x, int *max_x)
 {
 	while (map[*y])
 	{

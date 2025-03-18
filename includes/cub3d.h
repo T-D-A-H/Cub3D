@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:31:47 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/18 12:50:56 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/03/18 13:10:15 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <sys/time.h>
 
 # include "../libft/includes/libft.h"
-# include "../MLX42/include/MLX42/MLX42.h"
+# include "../minilibx-linux/mlx.h"
 
 # define ERR_EXTENSION "Error\nExtension doesn't match\n"
 # define ERR_ARGS "Error\nWrong amount of arguments\n"
@@ -46,7 +46,8 @@
 
 typedef struct s_cub
 {
-	mlx_t	*mlx_ptr;
+	void	*mlx_ptr;
+	void	*window;
 	char	*no_path;
 	char	*so_path;
 	char	*we_path;

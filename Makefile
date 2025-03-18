@@ -6,7 +6,7 @@
 #    By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/12 13:05:04 by jaimesan          #+#    #+#              #
-#    Updated: 2025/03/18 12:50:42 by ctommasi         ###   ########.fr        #
+#    Updated: 2025/03/18 13:17:53 by ctommasi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,8 +21,8 @@ MAKEFLAGS = --no-print-directory
 LIBFT_DIR = ./libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
-MLX_DIR = ./MLX42/build
-MLX = $(MLX_DIR)/libmlx42.a -ldl -lglfw -pthread -lm
+MLX_DIR = minilibx-linux/
+MLX = $(MLX_DIR)/libmlx.a -lXext -lX11 -lm
 
 GREEN := \033[1;32m
 RED := \033[1;31m
@@ -41,11 +41,13 @@ SRCS =	./src/main/main.c ./src/main/error.c \
 # Archivos objeto
 OBJS = $(SRCS:.c=.o)
 
-
-all: libmlx $(NAME)
+all: $(MLX) $(NAME) $(LIBFT)
 
 $(LIBFT):
 	$(MAKE) -C $(LIBFT_DIR)
+
+$(MLX):
+	@make -sC $(MLX_DIR)
 
 %.o: %.c
 	@echo "[$(GREEN)DONE$(RESET)] Compiling [$(YELLOW)$<$(RESET)] - File being compiled..."
@@ -55,18 +57,15 @@ $(NAME): $(LIBFT) $(OBJS)
 	$(CC) $(OBJS) $(LIBFT) $(MLX) -o $(NAME)
 	@echo "[$(GREEN)DONE$(RESET)] Linking complete: [$(MAGENTA)$(NAME)$(RESET)] - Complete!"
 
-libmlx:
-	@cmake ./MLX42 -B ./MLX42/build && make -C ./MLX42/build -j4
-
 clean:
 	$(MAKE) clean -C $(LIBFT_DIR)
-	$(MAKE) clean -C $(MLX_DIR)
+	$(MAKE) -C $(MLX_DIR) clean
 	$(RM) $(OBJS)
 	@echo "[$(RED)DELETED$(RESET)] Object files [$(RED)*.o$(RESET)] - Cleaned!"
 
 fclean:
 	$(MAKE) fclean -C $(LIBFT_DIR)
-	$(MAKE) clean -C $(MLX_DIR)
+	$(MAKE) -C $(MLX_DIR) clean
 	$(RM) $(OBJS) $(NAME)
 	@echo "[$(RED)DELETED$(RESET)] Cub3D file [$(RED)$(NAME)$(RESET)] - Cleaned!"
 

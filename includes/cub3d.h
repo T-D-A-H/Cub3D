@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:31:47 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/19 15:23:12 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/03/19 17:54:49 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,11 @@
 # define D 100
 
 # define BLOCK_SIZE 64
-# define PLAYER_SIZE 50
+# define PLAYER_SIZE 32
 # define MOVE_AMOUNT 5
 # define MOVE_SPEED 0.03
 
-# define PI 3.141592653589
+# define PI 3.1415926535
 
 #define FOV 60 
 
@@ -68,6 +68,9 @@ typedef struct s_player
 {
 	float	p_x;
 	float	p_y;
+	float	p_d_x;
+	float	p_d_y;
+	float	p_angle;
 
 	bool key_up;
 	bool key_down;
@@ -112,10 +115,18 @@ void	read_map_file(t_cub *cubed, char **argv);
 void	init_variables(t_cub *cubed);
 void	init_map(t_cub *cubed);
 void	init_window(t_cub *cubed);
-//----------------------------------------------GAME
+//----------------------------------------------GAME-player
+int		update_player(void *param);
+int		move_player(t_player *player);
 int 	on_keyrelease(int keydata, t_player *player);
 int 	on_keypress(int keydata, t_player *player);
-int		update_player(void *param);
+//----------------------------------------------GAME-draw
+void 	clear_screen(t_cub *cubed);
+void 	draw_map(t_cub *cubed);
+void 	draw_empty_square(int x, int y, int size, int color, t_cub *cubed);
+void	put_pixel(int x, int y, int colour, t_cub *cubed);
+void 	draw_full_square(t_cub *cubed, int x, int y, int colour);
+void	draw_line(t_cub *cubed, int start_x, int start_y);
 //----------------------------------------------UTILS
 int		check_cub_args(int argc, char **argv);
 int		is_map_del(char **map, int y, int x);

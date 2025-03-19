@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   keypress.c                                         :+:      :+:    :+:   */
+/*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 18:16:23 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/19 15:23:22 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/03/19 18:12:40 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
 
 int on_keypress(int keydata, t_player *player)
 {
@@ -39,86 +38,36 @@ int on_keyrelease(int keydata, t_player *player)
 	return (0);
 }
 
-static int	move_player(t_player *player)
+int	move_player(t_player *player)
 {
 	if (player->key_up)
 	{
-		player->p_y -= MOVE_AMOUNT;
+		player->p_x += player->p_d_x;
+		player->p_y += player->p_d_y;
 	}
 	if (player->key_down)
 	{
-		player->p_y += MOVE_AMOUNT;
+		player->p_x -= player->p_d_x;
+		player->p_y -= player->p_d_y;
 	}
 	if (player->key_left)
 	{
-		player->p_x -= MOVE_AMOUNT;
+		player->p_angle -= 0.1;
+		if (player->p_angle < 0)
+			player->p_angle += 2 * PI;
+		player->p_d_x = cos(player->p_angle) * 5;
+		player->p_d_y = sin(player->p_angle) * 5;
+		
 	}
 	if (player->key_right)
 	{
-		player->p_x += MOVE_AMOUNT;
+		player->p_angle += 0.1;
+		if (player->p_angle > 2 * PI)
+			player->p_angle -= 2 * PI;
+		player->p_d_x = cos(player->p_angle) * 5;
+		player->p_d_y = sin(player->p_angle) * 5;
 	}
 	return (0);
-}
-
-static void	put_pixel(int x, int y, int colour, t_cub *cubed)
-{
-	int	index;
-	
-	if (y >= HEIGHT || x >= WIDTH || x < 0 || y < 0)
-		return ;
-	index = y * cubed->game->size_line + x * cubed->game->bpp / 8;
-	cubed->game->data[index] = colour & 0xFF;
-	cubed->game->data[index + 1] = ((colour >> 8) & 0xFF);
-	cubed->game->data[index + 2] = ((colour >> 16) & 0xFF);
-}
-
-static void draw_square(int x, int y, int size, int color, t_cub *cubed)
-{
-	int	i;
-
-	i = -1;
-	while (++i < size)
-		put_pixel(x + i, y, color, cubed);
-	i = -1;
-	while (++i < size)
-		put_pixel(x, y + i, color, cubed);
-	i = -1;
-	while (++i < size)
-		put_pixel(x + size, y + i, color, cubed);
-	i = -1;
-	while (++i < size)
-		put_pixel(x + i, y + size, color, cubed);
-}
-
-static void draw_map(int colour, t_cub *cubed)
-{
-	int	y;
-	int	x;
-	
-	y = -1;
-	while (cubed->map[++y])
-	{
-		x = -1;
-		while (cubed->map[y][++x])
-		{
-			if (cubed->map[y][x] == '1')
-				draw_square(x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE, colour, cubed);
-		}
-	}
-}
-
-static void clear_screen(t_cub *cubed)
-{
-	int	y;
-	int	x;
-
-	y = -1;
-	while (++y < HEIGHT)
-	{
-		x = -1;
-		while (++x < WIDTH)
-			put_pixel(x, y, 0, cubed);
-	}
 }
 
 int	update_player(void *param)
@@ -127,8 +76,9 @@ int	update_player(void *param)
 
 	cubed = (t_cub *)param;
 	clear_screen(cubed);
-	draw_map(0x0000FF, cubed);
-	draw_square(cubed->player->p_x, cubed->player->p_y, 25, 0x00FF00, cubed);
+	draw_map(cubed);
+	draw_empty_square(cubed->player->p_x, cubed->player->p_y, PLAYER_SIZE, 0xFFFF00, cubed);
+	draw_line(cubed, cubed->player->p_x, cubed->player->p_y);
 	move_player(cubed->player);
 	mlx_put_image_to_window(cubed->game->mlx, cubed->game->win, cubed->game->img, 0, 0);
 	return (0);

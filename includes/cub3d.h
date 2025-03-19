@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:31:47 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/18 18:40:19 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/03/19 15:23:12 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,19 +46,23 @@
 # define NO_ERROR ""
 
 # define W_NAME "CUB3D"
-# define WIDTH 1920
-# define HEIGHT 1080
+# define WIDTH 1923
+# define HEIGHT 1095
 
 # define W 119
 # define A 97
 # define S 115
 # define D 100
 
+# define BLOCK_SIZE 64
+# define PLAYER_SIZE 50
+# define MOVE_AMOUNT 5
+# define MOVE_SPEED 0.03
+
 # define PI 3.141592653589
 
 #define FOV 60 
 
-# define MOVE_AMOUNT 0.03
 
 typedef struct s_player
 {
@@ -69,7 +73,6 @@ typedef struct s_player
 	bool key_down;
 	bool key_left;
 	bool key_right;
-
 }	t_player;
 
 typedef struct s_game
@@ -77,7 +80,6 @@ typedef struct s_game
 	void	*mlx;
 	void	*win;
 	void	*img;
-
 	char	*data;
 	int		bpp;
 	int		size_line;
@@ -90,8 +92,8 @@ typedef struct s_cub
 	char		*so_path;
 	char		*we_path;
 	char		*ea_path;
-	int			*f_color;
-	int			*c_color;
+	int			f_color[3];
+	int			c_color[3];
 	char		*premap;
 	char		**map;
 	int			pj_y;
@@ -110,6 +112,10 @@ void	read_map_file(t_cub *cubed, char **argv);
 void	init_variables(t_cub *cubed);
 void	init_map(t_cub *cubed);
 void	init_window(t_cub *cubed);
+//----------------------------------------------GAME
+int 	on_keyrelease(int keydata, t_player *player);
+int 	on_keypress(int keydata, t_player *player);
+int		update_player(void *param);
 //----------------------------------------------UTILS
 int		check_cub_args(int argc, char **argv);
 int		is_map_del(char **map, int y, int x);
@@ -117,10 +123,6 @@ int		is_map_char(char c, int mode);
 int		only_one(char *linea);
 int		check_void(const char *premap, int i);
 int		save_map(t_cub *cubed, char **temp_map, size_t y, size_t x);
-int		on_keyrelease(int keydata, t_player *player);
-int		on_keypress(int keydata, t_player *player);
-int		update_player(t_cub *cubed);
-void	draw_player(float x, float y, int colour, t_game *game);
 //----------------------------------------------DELETE_AFTER
 void	print_where_not_walled(char **map, int y, int x);
 

@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:25:27 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/18 14:35:58 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/03/19 11:22:57 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,10 @@ void	init_struct(t_cub *cubed)
 	cubed->so_path = NULL;
 	cubed->we_path = NULL;
 	cubed->ea_path = NULL;
-	cubed->pj_x = 0;
-	cubed->pj_y = 0;
+	cubed->pj_x = -1;
+	cubed->pj_y = -1;
 	cubed->map = NULL;
 	cubed->premap = NULL;
-	cubed->f_color = malloc(sizeof(int) * 3);
-	if (!cubed->f_color)
-		error(cubed, ERR_MALLOC);
-	cubed->c_color = malloc(sizeof(int) * 3);
-	if (!cubed->c_color)
-		error(cubed, ERR_MALLOC);
 }
 
 static char	*replace_tabs_with_spaces(t_cub *cubed)

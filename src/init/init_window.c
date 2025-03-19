@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 15:29:12 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/18 18:41:19 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/03/19 15:23:17 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static void init_player(t_player *player, int start_x, int start_y, char **map)
 {
-	player->p_x = (start_x * WIDTH) / ft_strlen(map[0]);
-	player->p_y = (start_y * HEIGHT) / ft_arrlen(map);
+	player->p_x = (float)((start_x * WIDTH) / ft_strlen(map[0]));
+	player->p_y = (float)((start_y * HEIGHT) / ft_arrlen(map));
 	player->key_up = false;
 	player->key_down = false;
 	player->key_left = false;
@@ -35,8 +35,8 @@ void init_window(t_cub *cubed)
 {
 	init_player(cubed->player, cubed->pj_x, cubed->pj_y, cubed->map);
 	init_game(cubed->game);
-	mlx_hook(cubed->game->win, 2, 1L<<0, on_keypress, &cubed->player);
-	mlx_hook(cubed->game->win, 3, 1L<<1, on_keyrelease, &cubed->player);
-	mlx_loop_hook(cubed->game->mlx, update_player, &cubed->player);
+	mlx_hook(cubed->game->win, 2, 1L<<0, on_keypress, cubed->player);
+	mlx_hook(cubed->game->win, 3, 1L<<1, on_keyrelease,  cubed->player);
+	mlx_loop_hook(cubed->game->mlx, update_player, cubed);
     mlx_loop(cubed->game->mlx);
 }

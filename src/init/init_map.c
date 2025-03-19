@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:08:04 by jaimesan          #+#    #+#             */
-/*   Updated: 2025/03/18 12:52:14 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/03/19 11:28:44 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static int	check_invalid_chars(char **map, t_cub *cubed)
 				return (1);
 		}
 	}
-	if (count > 1)
+	if (count > 1 || !count)
 		return (1);
 	return (0);
 }

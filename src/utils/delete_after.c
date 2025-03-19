@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 19:01:38 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/18 18:15:19 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/03/19 12:42:32 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,39 +51,6 @@ void	print_where_not_walled(char **map, int y, int x)
 // 	player->angle = PI / 2;
 // }
 
-// static int key_press(int keycode, t_player *player)
-// {
-// 	if (keycode == W)
-// 		player->key_up = true;
-// 	if (keycode == S)
-// 		player->key_down = true;
-// 	if (keycode == A)
-// 		player->key_left = true;
-// 	if (keycode == D)
-// 		player->key_right = true;
-// 	if (keycode == LEFT)
-// 		player->left_rotate = true;
-// 	if (keycode == RIGHT)
-// 		player->right_rotate = true;
-// 	return (0);
-// }
-
-// static int key_release(int keycode, t_player *player)
-// {
-// 	if (keycode == W)
-// 		player->key_up = false;
-// 	if (keycode == S)
-// 		player->key_down = false;
-// 	if (keycode == A)
-// 		player->key_left = false;
-// 	if (keycode == D)
-// 		player->key_right = false;
-// 	if (keycode == LEFT)
-// 		player->left_rotate = false;
-// 	if (keycode == RIGHT)
-// 		player->right_rotate = false;
-// 	return (0);
-// }
 
 // static void move_player(t_player *player)
 // {
@@ -133,28 +100,18 @@ void	print_where_not_walled(char **map, int y, int x)
 // 	game->data[index + 2] = ((color >> 16) & 0xFF);
 // }
 
-// // static void draw_square(int x, int y, int size, int color, t_data *game)
-// // {
-// // 	for (int i = 0; i < size; i++)
-// // 		put_pixel(x + i, y, color, game);
-// // 	for (int i = 0; i < size; i++)
-// // 		put_pixel(x, y + i, color, game);
-// // 	for (int i = 0; i < size; i++)
-// // 		put_pixel(x + size, y + i, color, game);
-// // 	for (int i = 0; i < size; i++)
-// // 		put_pixel(x + i, y + size, color, game);
-// // }
-
-// static void	init_game(t_cub *cubed, t_data *game)
+// static void draw_square(int x, int y, int size, int color, t_data *game)
 // {
-// 	init_player(&game->player);
-// 	game->map = cubed->map;
-// 	game->mlx_ptr = mlx_init();
-// 	game->window = mlx_new_window(game->mlx_ptr, WIDTH, HEIGHT, WINDOW_NAME);
-// 	game->img = mlx_new_image(game->mlx_ptr, WIDTH, HEIGHT);
-// 	game->data = mlx_get_data_addr(game->img, &game->bpp, &game->size_line, &game->endian);
-// 	mlx_put_image_to_window(game->mlx_ptr, game->window, game->img, 0, 0);
+// 	for (int i = 0; i < size; i++)
+// 		put_pixel(x + i, y, color, game);
+// 	for (int i = 0; i < size; i++)
+// 		put_pixel(x, y + i, color, game);
+// 	for (int i = 0; i < size; i++)
+// 		put_pixel(x + size, y + i, color, game);
+// 	for (int i = 0; i < size; i++)
+// 		put_pixel(x + i, y + size, color, game);
 // }
+
 
 // static void clear_image(t_data *game)
 // {
@@ -167,38 +124,18 @@ void	print_where_not_walled(char **map, int y, int x)
 // 	}
 // }
 
-// // static void draw_map(t_data *game)
-// // {
-// // 	char **map = game->map;
-// // 	int color = 0x0000FF;
-// // 	for (int y = 0; map[y]; y++)
-// // 		for (int x = 0; map[y][x]; x++)
-// // 			if (map[y][x] == '1')
-// // 				draw_square(x * BLOCK, y * BLOCK, BLOCK, color, game);
-// // }
-
-// static bool	touch(float px, float py, t_data *game)
+// static void draw_map(t_data *game)
 // {
-// 	int x = px / BLOCK;
-// 	int y = py / BLOCK;
-// 	if (game->map[y][x] == '1')
-// 		return true;
-// 	return false;
+// 	char **map = game->map;
+// 	int color = 0x0000FF;
+// 	for (int y = 0; map[y]; y++)
+// 		for (int x = 0; map[y][x]; x++)
+// 			if (map[y][x] == '1')
+// 				draw_square(x * BLOCK, y * BLOCK, BLOCK, color, game);
 // }
 
-// static float distance(float x, float y)
-// {
-// 	return (sqrt((x * x) + (y * y)));
-// }
 
-// static float fixed_dist(float x1, float y1, float x2, float y2, t_data *game)
-// {
-// 	float delta_x = x2 - x1;
-// 	float delta_y = y2 - y1;
-// 	float angle = atan2(delta_y, delta_x) - game->player.angle;
-// 	float fixed_dist = distance(delta_x, delta_y) * cos(angle);
-// 	return (fixed_dist);
-// }
+
 
 // static void draw_line(t_player *player, t_data *game, float start_x, int i)
 // {
@@ -209,7 +146,7 @@ void	print_where_not_walled(char **map, int y, int x)
 
 // 	while (!touch(ray_x, ray_y, game))
 // 	{
-		// put_pixel(ray_x, ray_y, 0xFF00000, game);
+// 		put_pixel(ray_x, ray_y, 0xFF00000, game);
 // 		ray_x += cos_angle;
 // 		ray_y += sin_angle;
 // 	}
@@ -231,8 +168,8 @@ void	print_where_not_walled(char **map, int y, int x)
 // 	t_player *player = &game->player;
 // 	move_player(player);
 // 	clear_image(game);
-	// draw_square(player->x, player->y, 10, 0x00FF00, game);
-	// draw_map(game);
+// 	draw_square(player->x, player->y, 10, 0x00FF00, game);
+// 	draw_map(game);
 
 // 	float fraction = PI / 3 / WIDTH;
 // 	float	start_x = player->angle - PI / 6;
@@ -248,7 +185,7 @@ void	print_where_not_walled(char **map, int y, int x)
 	
 // }
 
-// void	init_window(t_cub *cubed, t_data *game)
+// void	init_winredow(t_cub *cubed, t_data *game)
 // {
 // 	init_game(cubed, game);
 // 	mlx_hook(game->window, 2, 1L<<0, key_press, &game->player);

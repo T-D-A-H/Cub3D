@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 19:01:38 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/18 13:15:46 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/03/19 11:18:43 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,6 @@ void	error(t_cub *cubed, char *debug_msg)
 		free(cubed->we_path);
 	if (cubed->ea_path)
 		free(cubed->ea_path);
-	if (cubed->f_color)
-		free(cubed->f_color);
-	if (cubed->c_color)
-		free(cubed->c_color);
 	if (cubed->map)
 		ft_freearr(cubed->map);
 	if (cubed->premap)

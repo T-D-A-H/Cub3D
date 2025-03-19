@@ -6,7 +6,7 @@
 #    By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/12 13:05:04 by jaimesan          #+#    #+#              #
-#    Updated: 2025/03/18 18:17:36 by ctommasi         ###   ########.fr        #
+#    Updated: 2025/03/19 11:36:29 by ctommasi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,8 @@ BLUE := \033[34m
 SRCS =	./src/main/main.c ./src/main/error.c \
 		./src/init/init_struct.c ./src/init/init_variables.c ./src/init/init_map.c ./src/init/init_window.c \
 		./src/utils/check_args.c  ./src/utils/init_map_utils.c  ./src/utils/save_map.c \
-		./src/utils/delete_after.c ./src/utils/keypress.c \
+		./src/game/keypress.c \
+		./src/utils/delete_after.c 
 		
 # Archivos objeto
 OBJS = $(SRCS:.c=.o)

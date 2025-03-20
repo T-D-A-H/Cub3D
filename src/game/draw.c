@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 15:25:02 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/20 11:43:38 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/03/20 12:01:06 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	put_pixel(int x, int y, int colour, t_cub *cubed)
 {
 	int	index;
-	
+
 	if (y >= HEIGHT || x >= WIDTH || x < 0 || y < 0)
 		return ;
 	index = y * cubed->game->size_line + x * cubed->game->bpp / 8;
@@ -24,7 +24,7 @@ void	put_pixel(int x, int y, int colour, t_cub *cubed)
 	cubed->game->data[index + 2] = ((colour >> 16) & 0xFF);
 }
 
-void draw_empty_square(int x, int y, int size, int color, t_cub *cubed)
+void	draw_empty_square(int x, int y, int size, int color, t_cub *cubed)
 {
 	int	i;
 
@@ -42,7 +42,7 @@ void draw_empty_square(int x, int y, int size, int color, t_cub *cubed)
 		put_pixel(x + i, y + size, color, cubed);
 }
 
-void draw_full_square(t_cub *cubed, int x, int y, int colour)
+void	draw_full_square(t_cub *cubed, int x, int y, int colour)
 {
 	int	i;
 	int	j;
@@ -56,11 +56,11 @@ void draw_full_square(t_cub *cubed, int x, int y, int colour)
 	}
 }
 
-void draw_map(t_cub *cubed)
+void	draw_map(t_cub *cubed)
 {
 	int	y;
 	int	x;
-	
+
 	y = -1;
 	while (cubed->map[++y])
 	{
@@ -70,12 +70,13 @@ void draw_map(t_cub *cubed)
 			if (cubed->map[y][x] == '1')
 				draw_full_square(cubed, x, y, PURPLE);
 			else if (cubed->map[y][x] == '0')
-				draw_empty_square(x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE, BLUE, cubed);
+				draw_empty_square(x * BLOCK_SIZE, y * BLOCK_SIZE,
+					BLOCK_SIZE, BLUE, cubed);
 		}
 	}
 }
 
-void clear_screen(t_cub *cubed)
+void	clear_screen(t_cub *cubed)
 {
 	int	y;
 	int	x;

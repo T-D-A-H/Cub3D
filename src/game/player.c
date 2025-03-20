@@ -6,13 +6,13 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 18:16:23 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/20 11:44:04 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/03/20 11:59:31 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-int on_keypress(int keydata, t_player *player)
+int	on_keypress(int keydata, t_player *player)
 {
 	if (keydata == W)
 		player->key_up = true;
@@ -25,7 +25,7 @@ int on_keypress(int keydata, t_player *player)
 	return (0);
 }
 
-int on_keyrelease(int keydata, t_player *player)
+int	on_keyrelease(int keydata, t_player *player)
 {
 	if (keydata == W)
 		player->key_up = false;
@@ -57,7 +57,6 @@ int	move_player(t_player *player)
 			player->p_angle += 2 * PI;
 		player->p_d_x = cos(player->p_angle) * 5;
 		player->p_d_y = sin(player->p_angle) * 5;
-		
 	}
 	if (player->key_right)
 	{
@@ -77,9 +76,11 @@ int	update_player(void *param)
 	cubed = (t_cub *)param;
 	clear_screen(cubed);
 	draw_map(cubed);
-	draw_empty_square(cubed->player->p_x, cubed->player->p_y, PLAYER_SIZE, YELLOW, cubed);
+	draw_empty_square(cubed->player->p_x, cubed->player->p_y,
+		PLAYER_SIZE, YELLOW, cubed);
 	draw_line(cubed, cubed->player->p_x, cubed->player->p_y);
 	move_player(cubed->player);
-	mlx_put_image_to_window(cubed->game->mlx, cubed->game->win, cubed->game->img, 0, 0);
+	mlx_put_image_to_window(cubed->game->mlx, cubed->game->win,
+		cubed->game->img, 0, 0);
 	return (0);
 }

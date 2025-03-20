@@ -22,8 +22,6 @@
 # include <sys/time.h>
 # include <stdbool.h>
 # include <math.h>
-# include <stdbool.h>
-#include <math.h>
 
 # include "../libft/includes/libft.h"
 # include "../minilibx-linux/mlx.h"
@@ -42,14 +40,14 @@
 # define ERR_MAP_NOT_WALLED "Error\nMap not walled\n"
 # define ERR_MAP_INVALID_CHARS "Error\nInvalid chars\n"
 # define ERR_MLX_INIT "Error\nInitialising MLX\n"
-# define ERR_PJ_NOT_EXIST "Error\nPj does not exit\n"
+# define ERR_PJ_NOT_EXIST "Error\nPlayer does not exist\n"
 # define NO_ERROR ""
 
 # define W_NAME "CUB3D"
-# define WIDTH 1923
-# define HEIGHT 1095
+# define WIDTH 1200
+# define HEIGHT 800
+# define BLOCK 64
 
-# define BLOCK_SIZE 64
 # define PLAYER_SIZE 32
 # define MOVE_AMOUNT 5
 # define MOVE_SPEED 0.03
@@ -68,11 +66,11 @@
 
 typedef struct s_player
 {
-	float	p_x;
-	float	p_y;
-	float	p_d_x;
-	float	p_d_y;
-	float	p_angle;
+	float	x;
+	float	y;
+	float	dx;
+	float	dy;
+	float	angle;
 
 	bool key_up;
 	bool key_down;
@@ -119,7 +117,7 @@ void	init_variables(t_cub *cubed);
 void	init_map(t_cub *cubed);
 void	init_window(t_cub *cubed);
 //----------------------------------------------GAME-player
-int		update_player(void *param);
+int		game_loop(void *param);
 int		move_player(t_player *player);
 int 	on_keyrelease(int keydata, t_player *player);
 int 	on_keypress(int keydata, t_player *player);
@@ -130,7 +128,7 @@ void 	draw_empty_square(int x, int y, int size, int color, t_cub *cubed);
 void	put_pixel(int x, int y, int colour, t_cub *cubed);
 void 	draw_full_square(t_cub *cubed, int x, int y, int colour);
 void	draw_line(t_cub *cubed, int start_x, int start_y);
-void	drawRays3D(t_cub *cubed);
+void	draw_loop(t_cub *cubed, t_player *player);
 //----------------------------------------------UTILS
 int		check_cub_args(int argc, char **argv);
 int		is_map_del(char **map, int y, int x);

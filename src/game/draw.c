@@ -48,11 +48,11 @@ void	draw_full_square(t_cub *cubed, int x, int y, int colour)
 	int	j;
 
 	i = -1;
-	while (++i < BLOCK_SIZE - 1)
+	while (++i < BLOCK - 2)
 	{
 		j = -1;
-		while (++j < BLOCK_SIZE - 1)
-			put_pixel(x * BLOCK_SIZE + j, y * BLOCK_SIZE + i, colour, cubed);
+		while (++j < BLOCK - 2)
+			put_pixel(x * BLOCK + j, y * BLOCK + i, colour, cubed);
 	}
 }
 
@@ -70,8 +70,8 @@ void	draw_map(t_cub *cubed)
 			if (cubed->map[y][x] == '1')
 				draw_full_square(cubed, x, y, PURPLE);
 			else if (cubed->map[y][x] == '0')
-				draw_empty_square(x * BLOCK_SIZE, y * BLOCK_SIZE,
-					BLOCK_SIZE, BLUE, cubed);
+				draw_empty_square(x * BLOCK, y * BLOCK,
+					BLOCK, BLUE, cubed);
 		}
 	}
 }
@@ -103,8 +103,8 @@ void	draw_line(t_cub *cubed, int start_x, int start_y)
 	start_y += 16;
 	while (++i < 10)
 	{
-		new_x = start_x + cubed->player->p_d_x * i;
-		new_y = start_y + cubed->player->p_d_y * i;
+		new_x = start_x + cubed->player->dx * i;
+		new_y = start_y + cubed->player->dy * i;
 		j = -2;
 		while (++j <= 4)
 		{
@@ -117,81 +117,50 @@ void	draw_line(t_cub *cubed, int start_x, int start_y)
 	}
 }
 
-void draw_linex(t_cub *cubed, int s_x, int s_y, int e_x, int e_y)
+static bool wall_not_reached(float px, float py, t_cub *cubed)
 {
-	for (int k = 0; k < 4; k++)
-		for (int i = s_y - PLAYER_SIZE; i < s_y; i++)
-			for (int j = s_x + PLAYER_SIZE; j < s_x * 2; j++)
-				put_pixel(j + k, i + k, GREEN, cubed);
-			
+	int	x;
+	int	y;
+
+	x = px / BLOCK;
+	y = py / BLOCK;
+	if (cubed->map[y][x] == '1')
+		return (true);
+	return (false);
 }
 
-void	drawRays3D(t_cub *cubed)
+static void cast_rays(t_cub *cubed, t_player *player, float start_x)
 {
-	// CONVERT PIXEL POS TO GRID POS
-	int	map_x = (int)(cubed->player->p_x / BLOCK_SIZE);
-	int	map_y = (int)(cubed->player->p_y / BLOCK_SIZE);
+	float	ray_x;
+	float	ray_y;
+	float	cos_angle;
+	float	sin_angle;
 
-	float side_distance_x;
-	float side_distance_y;
-	
-	// FIND THE FIRST GRID INTERSECTION
-	float	delta_dx = fabs(BLOCK_SIZE / cubed->player->p_d_x);
-	float	delta_dy = fabs(BLOCK_SIZE / cubed->player->p_d_y);
-
-	int step_x;
-	int step_y;
-
-	if (cubed->player->p_d_x < 0)
+	ray_x = player->x + 16;
+	ray_y = player->y + 16;
+	cos_angle = cos(start_x);
+	sin_angle = sin(start_x);
+	while (!wall_not_reached(ray_x, ray_y, cubed))
 	{
-		step_x = -1;
-		side_distance_x = (cubed->player->p_x - (map_x * BLOCK_SIZE)) * delta_dx;
+		put_pixel(ray_x, ray_y, GREEN, cubed);
+		ray_x += cos_angle;
+		ray_y += sin_angle;
 	}
-	else
-	{
-		step_x = 1;
-		side_distance_x = ((map_x + 1) - (cubed->player->p_x / BLOCK_SIZE)) * delta_dx;
-	}
-	if (cubed->player->p_d_y < 0)
-	{
-		step_y = -1;
-		side_distance_y = (cubed->player->p_y - (map_y * BLOCK_SIZE)) * delta_dy;
-	}
-	else
-	{
-		step_y = 1;
-		side_distance_y = ((map_y + 1) - (cubed->player->p_y / BLOCK_SIZE)) * delta_dy;
-	}
+}
 
-	int hit = 0;
-	int side;
+void	draw_loop(t_cub *cubed, t_player *player)
+{
+	float	fraction;
+	float	start_x;
+	int		i;
 
-	while (!hit)
+	fraction = PI / 3 / WIDTH;
+	start_x = player->angle - PI / 6;
+	i = 0;
+	while (i < WIDTH)
 	{
-		if (side_distance_x < side_distance_y)
-		{
-			side_distance_x += delta_dx;
-			map_x += step_x;
-			side = 0;
-		}
-		else
-		{
-			side_distance_y += delta_dy;
-			map_y += step_y;
-			side = 1;
-		}
-		if (cubed->map[map_y][map_x] == '1')
-			hit = 1;
+		cast_rays(cubed, player, start_x);
+		start_x += fraction;
+		i++;
 	}
-	float hit_x = cubed->player->p_x;
-	float hit_y = cubed->player->p_y;
-	
-	if (side == 0)
-		hit_x += (side_distance_x - delta_dx) * cubed->player->p_d_x;
-	else
-		hit_y += (side_distance_y - delta_dx) * cubed->player->p_d_y;
-	
-	
-	draw_linex(cubed, cubed->player->p_x, cubed->player->p_y, hit_x, hit_y);
-
 }

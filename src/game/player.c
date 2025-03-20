@@ -42,45 +42,44 @@ int	move_player(t_player *player)
 {
 	if (player->key_up)
 	{
-		player->p_x += player->p_d_x;
-		player->p_y += player->p_d_y;
+		player->x += player->dx;
+		player->y += player->dy;
 	}
 	if (player->key_down)
 	{
-		player->p_x -= player->p_d_x;
-		player->p_y -= player->p_d_y;
+		player->x -= player->dx;
+		player->y -= player->dy;
 	}
 	if (player->key_left)
 	{
-		player->p_angle -= 0.1;
-		if (player->p_angle < 0)
-			player->p_angle += 2 * PI;
-		player->p_d_x = cos(player->p_angle) * 5;
-		player->p_d_y = sin(player->p_angle) * 5;
+		player->angle -= 0.1;
+		if (player->angle < 0)
+			player->angle += 2 * PI;
+		player->dx = cos(player->angle) * 5;
+		player->dy = sin(player->angle) * 5;
 	}
 	if (player->key_right)
 	{
-		player->p_angle += 0.1;
-		if (player->p_angle > 2 * PI)
-			player->p_angle -= 2 * PI;
-		player->p_d_x = cos(player->p_angle) * 5;
-		player->p_d_y = sin(player->p_angle) * 5;
+		player->angle += 0.1;
+		if (player->angle > 2 * PI)
+			player->angle -= 2 * PI;
+		player->dx = cos(player->angle) * 5;
+		player->dy = sin(player->angle) * 5;
 	}
 	return (0);
 }
 
-int	update_player(void *param)
+int	game_loop(void *param)
 {
 	t_cub	*cubed;
 
 	cubed = (t_cub *)param;
 	clear_screen(cubed);
 	draw_map(cubed);
-	draw_empty_square(cubed->player->p_x, cubed->player->p_y,
+	draw_empty_square(cubed->player->x, cubed->player->y,
 		PLAYER_SIZE, YELLOW, cubed);
-	draw_line(cubed, cubed->player->p_x, cubed->player->p_y);
-	drawRays3D(cubed);
 	move_player(cubed->player);
+	draw_loop(cubed, cubed->player);
 	mlx_put_image_to_window(cubed->game->mlx, cubed->game->win,
 		cubed->game->img, 0, 0);
 	return (0);

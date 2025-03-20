@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 12:29:43 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/20 12:03:34 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/03/20 16:29:13 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,12 +76,27 @@ int	check_void(const char *premap, int i)
 float	get_player_direction(char c)
 {
 	if (c == 'N')
-		return (3 * PI / 2);
+		return (PI / 2);
+	if (c == 'S')
+		return ((3 * PI) / 2);
+	if (c == 'W')
+		return (PI);
+	if (c == 'E')
+		return (2 * PI);
+	return (0);
+}
+
+/*
+float	get_player_direction(char c)
+{
+	if (c == 'N')
+		return ((3 * PI) / 2);
 	if (c == 'S')
 		return (PI / 2);
 	if (c == 'W')
 		return (PI);
 	if (c == 'E')
-		return (PI * 2);
+		return (2 * PI);
 	return (0);
 }
+*/

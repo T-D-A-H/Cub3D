@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 18:16:23 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/20 11:59:31 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/03/20 16:40:31 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ int	update_player(void *param)
 	draw_empty_square(cubed->player->p_x, cubed->player->p_y,
 		PLAYER_SIZE, YELLOW, cubed);
 	draw_line(cubed, cubed->player->p_x, cubed->player->p_y);
+	drawRays3D(cubed);
 	move_player(cubed->player);
 	mlx_put_image_to_window(cubed->game->mlx, cubed->game->win,
 		cubed->game->img, 0, 0);

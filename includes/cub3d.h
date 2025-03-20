@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:31:47 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/20 11:50:41 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/03/20 16:40:15 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,11 @@
 # define HEIGHT 1095
 
 # define BLOCK_SIZE 64
-# define PLAYER_SIZE 30
+# define PLAYER_SIZE 32
 # define MOVE_AMOUNT 5
 # define MOVE_SPEED 0.03
 # define PI 3.1415926535
-#define FOV 60 
+# define FOV 60 
 
 # define YELLOW 0xFFFF00
 # define GREEN 0x00FF00
@@ -130,6 +130,7 @@ void 	draw_empty_square(int x, int y, int size, int color, t_cub *cubed);
 void	put_pixel(int x, int y, int colour, t_cub *cubed);
 void 	draw_full_square(t_cub *cubed, int x, int y, int colour);
 void	draw_line(t_cub *cubed, int start_x, int start_y);
+void	drawRays3D(t_cub *cubed);
 //----------------------------------------------UTILS
 int		check_cub_args(int argc, char **argv);
 int		is_map_del(char **map, int y, int x);

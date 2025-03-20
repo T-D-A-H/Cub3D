@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 15:25:02 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/20 12:01:06 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/03/20 18:24:16 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	draw_map(t_cub *cubed)
 	}
 }
 
-void	clear_screen(t_cub *cubed)
+void clear_screen(t_cub *cubed)
 {
 	int	y;
 	int	x;
@@ -115,4 +115,83 @@ void	draw_line(t_cub *cubed, int start_x, int start_y)
 			}
 		}
 	}
+}
+
+void draw_linex(t_cub *cubed, int s_x, int s_y, int e_x, int e_y)
+{
+	for (int k = 0; k < 4; k++)
+		for (int i = s_y - PLAYER_SIZE; i < s_y; i++)
+			for (int j = s_x + PLAYER_SIZE; j < s_x * 2; j++)
+				put_pixel(j + k, i + k, GREEN, cubed);
+			
+}
+
+void	drawRays3D(t_cub *cubed)
+{
+	// CONVERT PIXEL POS TO GRID POS
+	int	map_x = (int)(cubed->player->p_x / BLOCK_SIZE);
+	int	map_y = (int)(cubed->player->p_y / BLOCK_SIZE);
+
+	float side_distance_x;
+	float side_distance_y;
+	
+	// FIND THE FIRST GRID INTERSECTION
+	float	delta_dx = fabs(BLOCK_SIZE / cubed->player->p_d_x);
+	float	delta_dy = fabs(BLOCK_SIZE / cubed->player->p_d_y);
+
+	int step_x;
+	int step_y;
+
+	if (cubed->player->p_d_x < 0)
+	{
+		step_x = -1;
+		side_distance_x = (cubed->player->p_x - (map_x * BLOCK_SIZE)) * delta_dx;
+	}
+	else
+	{
+		step_x = 1;
+		side_distance_x = ((map_x + 1) - (cubed->player->p_x / BLOCK_SIZE)) * delta_dx;
+	}
+	if (cubed->player->p_d_y < 0)
+	{
+		step_y = -1;
+		side_distance_y = (cubed->player->p_y - (map_y * BLOCK_SIZE)) * delta_dy;
+	}
+	else
+	{
+		step_y = 1;
+		side_distance_y = ((map_y + 1) - (cubed->player->p_y / BLOCK_SIZE)) * delta_dy;
+	}
+
+	int hit = 0;
+	int side;
+
+	while (!hit)
+	{
+		if (side_distance_x < side_distance_y)
+		{
+			side_distance_x += delta_dx;
+			map_x += step_x;
+			side = 0;
+		}
+		else
+		{
+			side_distance_y += delta_dy;
+			map_y += step_y;
+			side = 1;
+		}
+		if (cubed->map[map_y][map_x] == '1')
+			hit = 1;
+	}
+	float hit_x = cubed->player->p_x;
+	float hit_y = cubed->player->p_y;
+	
+	if (side == 0)
+		hit_x += (side_distance_x - delta_dx) * cubed->player->p_d_x;
+	else
+		hit_y += (side_distance_y - delta_dx) * cubed->player->p_d_y;
+	
+	
+	draw_linex(cubed, cubed->player->p_x, cubed->player->p_y, hit_x, hit_y);
+
 }

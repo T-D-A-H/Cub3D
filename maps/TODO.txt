@@ -1,13 +1,9 @@
-C 225,100,0
-        11N11111111111111111111
+// get_player_direction, visualmente enseña donde
+// es el N, S, W, E pero no son valores correctos
 
-SI se pone un 0 o  una  N en esa posicion o en las anteriores,
-no funciona el check de los espacios porque encima de esa N esta
-el 0 del color y asi con todos os que esten debajo.
+// N = PI / 2
+// S = 3 * PI / 2
+// W = PI
+// S = 0 || 2 * PI
 
-// Areglado he puesto en la funcion is_map_del, que si y == 6 que haga return 1,
-ya que si entra en esa funcion es porque es un 0 o una N, y como en
-y = 6 siempre tiene que ser todo 1, si entra ahi es porque en y = 6 
-hay un 0 o una N.
-
-//Tambien he arreglado que exista la posicion del jugador osea N y si no hay error
+// Crear los rayos saliendo del jugador

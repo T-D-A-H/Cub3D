@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:08:04 by jaimesan          #+#    #+#             */
-/*   Updated: 2025/03/19 11:28:44 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/03/20 11:53:14 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ static int	check_invalid_chars(char **map, t_cub *cubed)
 				count++;
 				cubed->pj_y = i - 6;
 				cubed->pj_x = j;
+				cubed->start_direction = get_player_direction(map[i][j]);
 			}
 			else if (is_map_char(map[i][j], 1))
 				return (1);

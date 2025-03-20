@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:31:47 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/19 17:54:49 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/03/20 11:50:41 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,20 +49,22 @@
 # define WIDTH 1923
 # define HEIGHT 1095
 
+# define BLOCK_SIZE 64
+# define PLAYER_SIZE 30
+# define MOVE_AMOUNT 5
+# define MOVE_SPEED 0.03
+# define PI 3.1415926535
+#define FOV 60 
+
+# define YELLOW 0xFFFF00
+# define GREEN 0x00FF00
+# define BLUE 0x0000FF
+# define PURPLE 0xA400A4
+
 # define W 119
 # define A 97
 # define S 115
 # define D 100
-
-# define BLOCK_SIZE 64
-# define PLAYER_SIZE 32
-# define MOVE_AMOUNT 5
-# define MOVE_SPEED 0.03
-
-# define PI 3.1415926535
-
-#define FOV 60 
-
 
 typedef struct s_player
 {
@@ -101,6 +103,7 @@ typedef struct s_cub
 	char		**map;
 	int			pj_y;
 	int			pj_x;
+	float		start_direction;
 	char		*textures[4];
 	t_game		*game;
 	t_player	*player;
@@ -134,6 +137,7 @@ int		is_map_char(char c, int mode);
 int		only_one(char *linea);
 int		check_void(const char *premap, int i);
 int		save_map(t_cub *cubed, char **temp_map, size_t y, size_t x);
+float	get_player_direction(char c);
 //----------------------------------------------DELETE_AFTER
 void	print_where_not_walled(char **map, int y, int x);
 

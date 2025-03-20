@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 15:25:02 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/19 18:11:20 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/03/20 11:43:38 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,9 @@ void draw_map(t_cub *cubed)
 		while (cubed->map[y][++x])
 		{
 			if (cubed->map[y][x] == '1')
-				draw_full_square(cubed, x, y, 0xA400A4);
+				draw_full_square(cubed, x, y, PURPLE);
 			else if (cubed->map[y][x] == '0')
-				draw_empty_square(x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE, 0x0000FF, cubed);
+				draw_empty_square(x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE, BLUE, cubed);
 		}
 	}
 }
@@ -97,7 +97,7 @@ void	draw_line(t_cub *cubed, int start_x, int start_y)
 	int	new_x;
 	int	new_y;
 
-	i = -1;
+	i = 3;
 	start_x += 16;
 	start_y += 16;
 	while (++i < 10)
@@ -110,7 +110,7 @@ void	draw_line(t_cub *cubed, int start_x, int start_y)
 			k = -2;
 			while (++k <= 4)
 			{
-				put_pixel(new_x + k, new_y + j, 0x00FF00, cubed);
+				put_pixel(new_x + k, new_y + j, GREEN, cubed);
 			}
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 18:16:23 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/19 18:12:40 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/03/20 11:44:04 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	update_player(void *param)
 	cubed = (t_cub *)param;
 	clear_screen(cubed);
 	draw_map(cubed);
-	draw_empty_square(cubed->player->p_x, cubed->player->p_y, PLAYER_SIZE, 0xFFFF00, cubed);
+	draw_empty_square(cubed->player->p_x, cubed->player->p_y, PLAYER_SIZE, YELLOW, cubed);
 	draw_line(cubed, cubed->player->p_x, cubed->player->p_y);
 	move_player(cubed->player);
 	mlx_put_image_to_window(cubed->game->mlx, cubed->game->win, cubed->game->img, 0, 0);

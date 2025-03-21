@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 18:16:23 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/20 16:40:31 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/03/21 16:53:16 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int	move_player(t_player *player)
 	{
 		player->x -= player->dx;
 		player->y -= player->dy;
+		
 	}
 	if (player->key_left)
 	{
@@ -66,6 +67,8 @@ int	move_player(t_player *player)
 		player->dx = cos(player->angle) * 5;
 		player->dy = sin(player->angle) * 5;
 	}
+	player->mx = (int)(player->x / BLOCK);
+	player->my = (int)(player->y / BLOCK);
 	return (0);
 }
 

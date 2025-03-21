@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 15:25:02 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/21 13:11:13 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/03/21 17:23:08 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,71 +90,65 @@ void clear_screen(t_cub *cubed)
 	}
 }
 
-void	draw_line(t_cub *cubed, int start_x, int start_y)
-{
-	int	i;
-	int	j;
-	int	k;
-	int	new_x;
-	int	new_y;
 
-	i = 3;
-	start_x += 16;
-	start_y += 16;
-	while (++i < 10)
+void draw_line(t_cub *cubed, int x0, int y0, int x1, int y1, int color)
+{
+	int dx = abs(x1 - x0);
+	int dy = abs(y1 - y0);
+	int sx = (x0 < x1) ? 1 : -1;
+	int sy = (y0 < y1) ? 1 : -1;
+	int err = dx - dy;
+
+	while (x0 != x1 || y0 != y1)
 	{
-		new_x = start_x + cubed->player->dx * i;
-		new_y = start_y + cubed->player->dy * i;
-		j = -2;
-		while (++j <= 4)
+		put_pixel(x0, y0, color, cubed);
+		int e2 = 2 * err;
+		if (e2 > -dy)
 		{
-			k = -2;
-			while (++k <= 4)
-			{
-				put_pixel(new_x + k, new_y + j, GREEN, cubed);
-			}
+			err -= dy;
+			x0 += sx;
+		}
+		if (e2 < dx)
+		{
+			err += dx;
+			y0 += sy;
 		}
 	}
 }
 
-
 void	draw_loop(t_cub *cubed, t_player *player)
 {
-	// which box of the map were in
-	int	mapX = (int)(BLOCK / player->x);
-	int	mapY = (int)(BLOCK / player->y);
-
 	// length of ray from current position
 	double	sideDistX;
 	double	sideDistY;
 
 	// length of ray from one X or Y side next to X or Y side
-	double	deltaDistX = fabs(BLOCK / player->dx);
-	double	deltaDistY = fabs(BLOCK / player->dy);
+	double deltaDistX = fabs(1 / player->dx);
+	double deltaDistY = fabs(1 / player->dy);
 
-	// what direction to step in
+
 	int	stepX;
 	int	stepY;
 
 	if (player->dx < 0)
 	{
 		stepX = -1;
-		sideDistX = ((player->x * BLOCK) - mapX) * deltaDistX;
+		sideDistX = ((player->x / BLOCK) - player->mx) * deltaDistX;
 	}
 	else
 	{
 		stepX = 1;
-		sideDistX = (mapX + 1.0 - (player->x / BLOCK)) * deltaDistX;
+		sideDistX = (player->mx + 1.0 - (player->x / BLOCK)) * deltaDistX;
 	}
 	if (player->dy < 0)
 	{
 		stepY = -1;
-		sideDistY = ((player->y * BLOCK) - mapY) * deltaDistY;
+		sideDistY = ((player->y / BLOCK) - player->my) * deltaDistY;
 	}
 	else
 	{
 		stepY = 1;
-		sideDistY = (mapY + 1.0 - (player->y / BLOCK)) * deltaDistY;
+		sideDistY = (player->my + 1.0 - (player->y / BLOCK)) * deltaDistY;
 	}
 	
 	// did we hit a wall?
@@ -168,38 +162,26 @@ void	draw_loop(t_cub *cubed, t_player *player)
 		if (sideDistX < sideDistY)
 		{
 			sideDistX += deltaDistX;
-			mapX += stepX;
+			player->mx += stepX;
 			side = 0;
 		}
 		else
 		{
 			sideDistY += deltaDistY;
-			mapY += stepY;
+			player->my += stepY;
 			side = 1;
 		}
-		if (cubed->map[mapY][mapX] == '1')
+
+		if (stepY == -1 && cubed->map[player->my - 1][player->mx] == '1') 
+			hit = 1;
+		else if (stepX == -1 && cubed->map[player->my][player->mx - 1] == '1') 
+			hit = 1;
+		else if (stepY == 1 && cubed->map[player->my][player->mx] == '1') 
+			hit = 1;
+		else if (stepX == 1 && cubed->map[player->my][player->mx] == '1') 
 			hit = 1;
 	}
 
-	// distance from player to wall hit
-	double perpWallDist;
-
-	if (side == 0)
-		perpWallDist = (sideDistX - deltaDistX);
-	else
-		perpWallDist = (sideDistY - deltaDistY);
-	
-	// height of line
-	int	lineHeight = (int)(HEIGHT / perpWallDist);
-
-	int	drawStart = -lineHeight / 2 + HEIGHT / 2;
-	if (drawStart < 0)
-		drawStart = 0;
-	
-	int	drawEnd = lineHeight / 2 + HEIGHT / 2;
-	if (drawEnd >= HEIGHT)
-		drawEnd = HEIGHT - 1;
-	
-	draw_line(cubed, player->x, player->y);
-	draw_line(cubed, drawStart, drawEnd);
+	// Draw a line from player to the hit point
+	draw_line(cubed, player->x + 16, player->y + 16, player->mx * BLOCK, player->my * BLOCK, GREEN);
 }

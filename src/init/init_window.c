@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 15:29:12 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/20 16:40:38 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/03/21 16:44:55 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 
 static void	init_player(t_player *player, int s_x, int s_y, t_cub *cubed)
 {
-	player->x = (float)((s_x * WIDTH) / ft_strlen(cubed->map[0]));
-	player->y = (float)((s_y * HEIGHT) / ft_arrlen(cubed->map));
+	player->x = (double)((s_x * WIDTH) / ft_strlen(cubed->map[0]));
+	player->y = (double)((s_y * HEIGHT) / ft_arrlen(cubed->map));
+	player->mx = (int)(player->x / BLOCK);
+	player->my = (int)(player->y / BLOCK);
 	player->angle = cubed->start_direction;
 	player->dx = cos(player->angle) * 5;
 	player->dy = sin(player->angle) * 5;

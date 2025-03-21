@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:31:47 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/21 13:06:07 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/03/21 16:55:09 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,13 @@
 
 typedef struct s_player
 {
-	float	x;
-	float	y;
-	float	dx;
-	float	dy;
-	float	angle;
+	double	x;
+	double	y;
+	int		mx;
+	int		my;
+	double	dx;
+	double	dy;
+	double	angle;
 
 	bool key_up;
 	bool key_down;
@@ -127,7 +129,6 @@ void 	draw_map(t_cub *cubed);
 void 	draw_empty_square(int x, int y, int size, int color, t_cub *cubed);
 void	put_pixel(int x, int y, int colour, t_cub *cubed);
 void 	draw_full_square(t_cub *cubed, int x, int y, int colour);
-void	draw_line(t_cub *cubed, int start_x, int start_y);
 void	draw_loop(t_cub *cubed, t_player *player);
 //----------------------------------------------UTILS
 int		check_cub_args(int argc, char **argv);

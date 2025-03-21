@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:31:47 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/20 16:40:15 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/03/21 13:06:07 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@
 # define NO_ERROR ""
 
 # define W_NAME "CUB3D"
-# define WIDTH 1200
-# define HEIGHT 800
+# define WIDTH 2048
+# define HEIGHT 1024
 # define BLOCK 64
 
 # define PLAYER_SIZE 32

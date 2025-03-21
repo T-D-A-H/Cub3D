@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 15:25:02 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/20 18:24:16 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/03/21 13:11:13 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,50 +117,89 @@ void	draw_line(t_cub *cubed, int start_x, int start_y)
 	}
 }
 
-static bool wall_not_reached(float px, float py, t_cub *cubed)
-{
-	int	x;
-	int	y;
-
-	x = px / BLOCK;
-	y = py / BLOCK;
-	if (cubed->map[y][x] == '1')
-		return (true);
-	return (false);
-}
-
-static void cast_rays(t_cub *cubed, t_player *player, float start_x)
-{
-	float	ray_x;
-	float	ray_y;
-	float	cos_angle;
-	float	sin_angle;
-
-	ray_x = player->x + 16;
-	ray_y = player->y + 16;
-	cos_angle = cos(start_x);
-	sin_angle = sin(start_x);
-	while (!wall_not_reached(ray_x, ray_y, cubed))
-	{
-		put_pixel(ray_x, ray_y, GREEN, cubed);
-		ray_x += cos_angle;
-		ray_y += sin_angle;
-	}
-}
 
 void	draw_loop(t_cub *cubed, t_player *player)
 {
-	float	fraction;
-	float	start_x;
-	int		i;
+	// which box of the map were in
+	int	mapX = (int)(BLOCK / player->x);
+	int	mapY = (int)(BLOCK / player->y);
 
-	fraction = PI / 3 / WIDTH;
-	start_x = player->angle - PI / 6;
-	i = 0;
-	while (i < WIDTH)
+	// length of ray from current position
+	double	sideDistX;
+	double	sideDistY;
+
+	// length of ray from one X or Y side next to X or Y side
+	double	deltaDistX = fabs(BLOCK / player->dx);
+	double	deltaDistY = fabs(BLOCK / player->dy);
+
+	// what direction to step in
+	int	stepX;
+	int	stepY;
+
+	if (player->dx < 0)
 	{
-		cast_rays(cubed, player, start_x);
-		start_x += fraction;
-		i++;
+		stepX = -1;
+		sideDistX = ((player->x * BLOCK) - mapX) * deltaDistX;
 	}
+	else
+	{
+		stepX = 1;
+		sideDistX = (mapX + 1.0 - (player->x / BLOCK)) * deltaDistX;
+	}
+	if (player->dy < 0)
+	{
+		stepY = -1;
+		sideDistY = ((player->y * BLOCK) - mapY) * deltaDistY;
+	}
+	else
+	{
+		stepY = 1;
+		sideDistY = (mapY + 1.0 - (player->y / BLOCK)) * deltaDistY;
+	}
+	
+	// did we hit a wall?
+	int hit = 0;
+	
+	// was it a NS or EW wall hit?
+	int side;
+
+	while (hit == 0)
+	{
+		if (sideDistX < sideDistY)
+		{
+			sideDistX += deltaDistX;
+			mapX += stepX;
+			side = 0;
+		}
+		else
+		{
+			sideDistY += deltaDistY;
+			mapY += stepY;
+			side = 1;
+		}
+		if (cubed->map[mapY][mapX] == '1')
+			hit = 1;
+	}
+
+	// distance from player to wall hit
+	double perpWallDist;
+
+	if (side == 0)
+		perpWallDist = (sideDistX - deltaDistX);
+	else
+		perpWallDist = (sideDistY - deltaDistY);
+	
+	// height of line
+	int	lineHeight = (int)(HEIGHT / perpWallDist);
+
+	int	drawStart = -lineHeight / 2 + HEIGHT / 2;
+	if (drawStart < 0)
+		drawStart = 0;
+	
+	int	drawEnd = lineHeight / 2 + HEIGHT / 2;
+	if (drawEnd >= HEIGHT)
+		drawEnd = HEIGHT - 1;
+	
+	draw_line(cubed, player->x, player->y);
+	draw_line(cubed, drawStart, drawEnd);
 }

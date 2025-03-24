@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 18:16:23 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/21 16:53:16 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/03/24 18:12:43 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,19 +38,10 @@ int	on_keyrelease(int keydata, t_player *player)
 	return (0);
 }
 
-int	move_player(t_player *player)
+int	move_player(t_player *player, t_cub *cubed)
 {
-	if (player->key_up)
-	{
-		player->x += player->dx;
-		player->y += player->dy;
-	}
-	if (player->key_down)
-	{
-		player->x -= player->dx;
-		player->y -= player->dy;
-		
-	}
+	player->mx = (int)(player->x / BLOCK);
+	player->my = (int)(player->y / BLOCK);
 	if (player->key_left)
 	{
 		player->angle -= 0.1;
@@ -67,6 +58,23 @@ int	move_player(t_player *player)
 		player->dx = cos(player->angle) * 5;
 		player->dy = sin(player->angle) * 5;
 	}
+	if (player->key_up)
+	{
+		if (cubed->map[(int)(player->my + player->dy /  4.2)][player->mx] == '1'
+			|| cubed->map[player->my][(int)(player->mx + player->dx / 4.2)] == '1')
+			return (0);
+		player->x += player->dx;
+		player->y += player->dy;
+		
+	}
+	if (player->key_down)
+	{
+		if (cubed->map[(int)(player->my - player->dy / 4.2)][player->mx] == '1'
+			|| cubed->map[player->my][(int)(player->mx - player->dx / 4.2)] == '1')
+			return (0);
+		player->x -= player->dx;
+		player->y -= player->dy;	
+	}
 	player->mx = (int)(player->x / BLOCK);
 	player->my = (int)(player->y / BLOCK);
 	return (0);
@@ -78,10 +86,10 @@ int	game_loop(void *param)
 
 	cubed = (t_cub *)param;
 	clear_screen(cubed);
-	draw_map(cubed);
-	draw_empty_square(cubed->player->x, cubed->player->y,
-		PLAYER_SIZE, YELLOW, cubed);
-	move_player(cubed->player);
+	// draw_map(cubed);
+	// draw_empty_square(cubed->player->x, cubed->player->y,
+	// 	PLAYER_SIZE, YELLOW, cubed);
+	move_player(cubed->player, cubed);
 	draw_loop(cubed, cubed->player);
 	mlx_put_image_to_window(cubed->game->mlx, cubed->game->win,
 		cubed->game->img, 0, 0);

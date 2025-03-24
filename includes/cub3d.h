@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:31:47 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/21 16:55:09 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/03/24 18:08:51 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ void	init_map(t_cub *cubed);
 void	init_window(t_cub *cubed);
 //----------------------------------------------GAME-player
 int		game_loop(void *param);
-int		move_player(t_player *player);
+int		move_player(t_player *player, t_cub *cubed);
 int 	on_keyrelease(int keydata, t_player *player);
 int 	on_keypress(int keydata, t_player *player);
 //----------------------------------------------GAME-draw
@@ -130,6 +130,7 @@ void 	draw_empty_square(int x, int y, int size, int color, t_cub *cubed);
 void	put_pixel(int x, int y, int colour, t_cub *cubed);
 void 	draw_full_square(t_cub *cubed, int x, int y, int colour);
 void	draw_loop(t_cub *cubed, t_player *player);
+void 	draw_3dmap(t_cub *cubed, int drawStart, int drawEnd, int x, int side);
 //----------------------------------------------UTILS
 int		check_cub_args(int argc, char **argv);
 int		is_map_del(char **map, int y, int x);

@@ -6,7 +6,7 @@
 #    By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/12 13:05:04 by jaimesan          #+#    #+#              #
-#    Updated: 2025/03/19 15:35:28 by ctommasi         ###   ########.fr        #
+#    Updated: 2025/03/25 15:28:16 by ctommasi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ BLUE := \033[34m
 SRCS =	./src/main/main.c ./src/main/error.c \
 		./src/init/init_struct.c ./src/init/init_variables.c ./src/init/init_map.c ./src/init/init_window.c \
 		./src/utils/check_args.c  ./src/utils/init_map_utils.c  ./src/utils/save_map.c \
-		./src/game/player.c ./src/game/draw.c \
+		./src/game/keypress.c ./src/game/draw.c ./src/game/game_loop.c ./src/game/minimap.c \
 		./src/utils/delete_after.c 
 		
 # Archivos objeto

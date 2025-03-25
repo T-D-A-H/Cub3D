@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:08:04 by jaimesan          #+#    #+#             */
-/*   Updated: 2025/03/19 11:31:33 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/03/25 15:31:04 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,11 @@ int	main(int argc, char **argv)
 	t_cub		cubed;
 	t_game		game;
 	t_player	player;
+	t_loop		loop;
 
 	cubed.game = &game;
 	cubed.player = &player;
+	cubed.loop = &loop;
 	if (check_cub_args(argc, argv))
 		return (1);
 	init_struct(&cubed);

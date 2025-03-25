@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:31:47 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/25 13:06:04 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/03/25 17:46:53 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,31 @@
 # define A 97
 # define S 115
 # define D 100
+# define LEFT 65361
+# define RIGHT 65363
+
+typedef struct s_loop
+{
+	double	fov;
+	double	ray_angle;
+	double	rayDirX;
+	double	rayDirY;
+	double	sideDistX;
+	double	sideDistY;
+	int		mapX;
+	int		mapY;
+	double	deltaDistX;
+	double	deltaDistY;
+	int		stepX;
+	int		stepY;
+	int		hit;
+	int		side;
+	double	perpWallDist;
+	int		lineHeight;
+	int		drawStart;
+	int		drawEnd;
+}	t_loop;
+
 
 typedef struct s_player
 {
@@ -74,8 +99,10 @@ typedef struct s_player
 	double	dy;
 	double	angle;
 
-	bool key_up;
-	bool key_down;
+	bool key_w;
+	bool key_s;
+	bool key_a;
+	bool key_d;
 	bool key_left;
 	bool key_right;
 }	t_player;
@@ -107,6 +134,7 @@ typedef struct s_cub
 	char		*textures[4];
 	t_game		*game;
 	t_player	*player;
+	t_loop		*loop;
 }	t_cub;
 
 //----------------------------------------------MAIN
@@ -118,19 +146,23 @@ void	read_map_file(t_cub *cubed, char **argv);
 void	init_variables(t_cub *cubed);
 void	init_map(t_cub *cubed);
 void	init_window(t_cub *cubed);
-//----------------------------------------------GAME-player
-int		game_loop(void *param);
-int		move_player(t_player *player, t_cub *cubed);
-int 	on_keyrelease(int keydata, t_player *player);
-int 	on_keypress(int keydata, t_player *player);
+void	init_loop(t_loop *loop);
 //----------------------------------------------GAME-draw
-void 	clear_screen(t_cub *cubed);
-void 	draw_map(t_cub *cubed);
-void 	draw_empty_square(int x, int y, int size, int color, t_cub *cubed);
 void	put_pixel(int x, int y, int colour, t_cub *cubed);
-void 	draw_full_square(t_cub *cubed, int x, int y, int colour);
+void 	clear_screen(t_cub *cubed);
 void	draw_loop(t_cub *cubed, t_player *player);
 void 	draw_3dmap(t_cub *cubed, int drawStart, int drawEnd, int x, int side);
+//----------------------------------------------GAME-keypress
+void	rotate_player(t_player *player);
+void	strafe_player(t_player *player);
+int		on_keypress(int keydata, t_player *player);
+int		on_keyrelease(int keydata, t_player *player);
+int		move_player(t_player *player);
+//----------------------------------------------GAME-minimap
+void 	draw_map(t_cub *cubed);
+void 	draw_full_square(t_cub *cubed, int x, int y, int colour);
+void 	draw_empty_square(int x, int y, int size, int color, t_cub *cubed);
+void	draw_rays(t_cub *cubed, int x0, int y0, int x1, int y1, int color);
 //----------------------------------------------UTILS
 int		check_cub_args(int argc, char **argv);
 int		is_map_del(char **map, int y, int x);

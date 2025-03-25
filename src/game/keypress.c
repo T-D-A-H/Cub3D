@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   player.c                                           :+:      :+:    :+:   */
+/*   keypress.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/18 18:16:23 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/25 13:22:40 by ctommasi         ###   ########.fr       */
+/*   Created: 2025/03/25 14:57:47 by ctommasi          #+#    #+#             */
+/*   Updated: 2025/03/25 17:44:53 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,16 @@
 int	on_keypress(int keydata, t_player *player)
 {
 	if (keydata == W)
-		player->key_up = true;
+		player->key_w = true;
 	if (keydata == S)
-		player->key_down = true;
+		player->key_s = true;
 	if (keydata == A)
-		player->key_left = true;
+		player->key_a = true;
 	if (keydata == D)
+		player->key_d = true;
+	if (keydata == LEFT)
+		player->key_left = true;
+	if (keydata == RIGHT)
 		player->key_right = true;
 	return (0);
 }
@@ -28,17 +32,21 @@ int	on_keypress(int keydata, t_player *player)
 int	on_keyrelease(int keydata, t_player *player)
 {
 	if (keydata == W)
-		player->key_up = false;
+		player->key_w = false;
 	if (keydata == S)
-		player->key_down = false;
+		player->key_s = false;
 	if (keydata == A)
-		player->key_left = false;
+		player->key_a = false;
 	if (keydata == D)
+		player->key_d = false;
+	if (keydata == LEFT)
+		player->key_left = false;
+	if (keydata == RIGHT)
 		player->key_right = false;
 	return (0);
 }
 
-int	move_player(t_player *player, t_cub *cubed)
+void	rotate_player(t_player *player)
 {
 	if (player->key_left)
 	{
@@ -47,8 +55,6 @@ int	move_player(t_player *player, t_cub *cubed)
 			player->angle += 2 * PI;
 		player->dx = cos(player->angle) * 5;
 		player->dy = sin(player->angle) * 5;
-		player->mx = (int)(player->x / BLOCK);
-		player->my = (int)(player->y / BLOCK);
 	}
 	if (player->key_right)
 	{
@@ -57,45 +63,41 @@ int	move_player(t_player *player, t_cub *cubed)
 			player->angle -= 2 * PI;
 		player->dx = cos(player->angle) * 5;
 		player->dy = sin(player->angle) * 5;
-		player->mx = (int)(player->x / BLOCK);
-		player->my = (int)(player->y / BLOCK);
 	}
-	if (player->key_up)
-	{
-		if (cubed->map[(int)(player->my + player->dy /  4.2)][player->mx] == '1'
-			|| cubed->map[player->my][(int)(player->mx + player->dx / 4.2)] == '1')
-			return (0);
-		player->x += player->dx;
-		player->y += player->dy;
-		player->mx = (int)(player->x / BLOCK);
-		player->my = (int)(player->y / BLOCK);
-		
-	}
-	if (player->key_down)
-	{
-		if (cubed->map[(int)(player->my - player->dy / 4.2)][player->mx] == '1'
-			|| cubed->map[player->my][(int)(player->mx - player->dx / 4.2)] == '1')
-			return (0);
-		player->x -= player->dx;
-		player->y -= player->dy;
-			player->mx = (int)(player->x / BLOCK);
-			player->my = (int)(player->y / BLOCK);	
-	}
-	return (0);
 }
 
-int	game_loop(void *param)
+void	strafe_player(t_player *player)
 {
-	t_cub	*cubed;
+	if (player->key_w)
+	{
+		player->x += player->dx;
+		player->y += player->dy;
+		
+	}
+	if (player->key_s)
+	{
+		player->x -= player->dx;
+		player->y -= player->dy;
 
-	cubed = (t_cub *)param;
-	clear_screen(cubed);
-	draw_map(cubed);
-	draw_empty_square(cubed->player->x, cubed->player->y,
-		PLAYER_SIZE, YELLOW, cubed);
-	move_player(cubed->player, cubed);
-	draw_loop(cubed, cubed->player);
-	mlx_put_image_to_window(cubed->game->mlx, cubed->game->win,
-		cubed->game->img, 0, 0);
+	}
+	if (player->key_a)
+	{
+		player->x += sin(player->angle) * 5;
+		player->y -= cos(player->angle) * 5;
+	}
+	if (player->key_d)
+	{
+		player->x -= sin(player->angle) * 5;
+		player->y += cos(player->angle) * 5;
+	}
+}
+
+
+int	move_player(t_player *player)
+{
+	rotate_player(player);
+	strafe_player(player);
+	player->mx = (int)(player->x / BLOCK);
+	player->my = (int)(player->y / BLOCK);
 	return (0);
 }

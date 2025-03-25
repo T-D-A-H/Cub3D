@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 15:25:02 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/24 18:14:21 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/03/25 13:37:41 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,7 +157,7 @@ void	draw_loop(t_cub *cubed, t_player *player)
 		else
 		{
 			stepX = 1;
-			sideDistX = (mapX + 1.0 - (player->x / BLOCK)) * deltaDistX;
+			sideDistX = ((mapX + 1.0) - (player->x / BLOCK)) * deltaDistX;
 		}
 		if (rayDirY < 0)
 		{
@@ -167,7 +167,7 @@ void	draw_loop(t_cub *cubed, t_player *player)
 		else
 		{
 			stepY = 1;
-			sideDistY = (mapY + 1.0 - (player->y / BLOCK)) * deltaDistY;
+			sideDistY = ((mapY + 1.0) - (player->y / BLOCK)) * deltaDistY;
 		}
 		
 		// did we hit a wall?
@@ -189,15 +189,18 @@ void	draw_loop(t_cub *cubed, t_player *player)
 				sideDistY += deltaDistY;
 				mapY += stepY;
 				side = 1;
+
 			}
-			if (mapY < 0 || mapX < 0 || mapY >= HEIGHT / 64 || mapX >= WIDTH / 64)
-    			break;
-			else if (cubed->map[mapY][mapX] == '1')
+			if (mapY < 0 || mapX < 0 || mapY >= HEIGHT / BLOCK || mapX >= WIDTH / BLOCK)
+    			break ;
+			if (cubed->map[mapY][mapX] == '1')
 				hit = 1;
-			else if (cubed->map[mapY][mapX - 1] == '1')
-				hit = 1;
-			else if (cubed->map[mapY - 1][mapX] == '1')
-				hit = 1;
+			// else if (cubed->map[mapY - 1][mapX - 1] == '1')
+			// 	hit = 1;
+			// else if (cubed->map[mapY][mapX - 1] == '1')
+			// 	hit = 1;
+			// else if (cubed->map[mapY - 1][mapX] == '1')
+			// 	hit = 1;
 
 		}
 		double perpWallDist;
@@ -215,7 +218,7 @@ void	draw_loop(t_cub *cubed, t_player *player)
 			drawEnd = HEIGHT - 1;
 		
 		// Draw a line from player to the hit point
-		//draw_rays(cubed, player->x + 16, player->y + 16, mapX * BLOCK, mapY * BLOCK, GREEN);
-		draw_3dmap(cubed, drawStart, drawEnd, x, side);
+		draw_rays(cubed, player->x + 16, player->y + 16, mapX * BLOCK, mapY * BLOCK, GREEN);
+		//draw_3dmap(cubed, drawStart, drawEnd, x, side);
 		}
 }

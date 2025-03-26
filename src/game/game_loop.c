@@ -6,49 +6,32 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 15:02:24 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/25 17:47:38 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/03/26 11:29:21 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void clear_screen(t_cub *cubed)
+void	raycasting(t_cub *cubed, t_player *player, t_loop *loop)
 {
-	int	y;
 	int	x;
 
-	y = -1;
-	while (++y < HEIGHT)
-	{
-		x = -1;
-		while (++x < WIDTH)
-			put_pixel(x, y, 0, cubed);
-	}
-}
-void	draw_loop(t_cub *cubed, t_player *player)
-{
-	t_loop *loop;
-
-	loop = cubed->loop;
-	loop->fov = PI / 3 / WIDTH;
-	for (int x = 0; x < WIDTH; x++)
+	x = -1;
+	init_loop(cubed->loop);
+	while (++x < WIDTH)
 	{
 		// Compute the current ray angle
 		loop->ray_angle = player->angle - (PI / 6) + (x * loop->fov);
 		loop->rayDirX = cos(loop->ray_angle);
 		loop->rayDirY = sin(loop->ray_angle);
-
 		// length of ray from current position
 		loop->mapX = player->mx;
 		loop->mapY = player->my;
-		
 		// length of ray from one X or Y side next to X or Y side
 		loop->deltaDistX = fabs(1 / loop->rayDirX);
 		loop->deltaDistY = fabs(1 / loop->rayDirY);
-	
-		// hit
 		loop->hit = 0;
-		
+
 		if (loop->rayDirX < 0)
 		{
 			loop->stepX = -1;
@@ -107,9 +90,11 @@ void	draw_loop(t_cub *cubed, t_player *player)
 			loop->drawEnd = HEIGHT - 1;
 		
 		// Draw a line from player to the hit point
-		draw_rays(cubed, player->x + 16, player->y + 16, loop->mapX * BLOCK, loop->mapY * BLOCK, GREEN);
-		//draw_3dmap(cubed, loop->drawStart,  loop->drawEnd, x,  loop->side);
-		}
+		//draw_rays(cubed, player->x + 16, player->y + 16, loop->mapX * BLOCK, loop->mapY * BLOCK, GREEN);
+		draw_3dmap(cubed, loop->drawStart,  loop->drawEnd, x,  loop->side);
+		
+	}
+	
 }
 
 int	game_loop(void *param)
@@ -122,7 +107,7 @@ int	game_loop(void *param)
 	// draw_empty_square(cubed->player->x, cubed->player->y,
 	// 	PLAYER_SIZE, YELLOW, cubed);
 	move_player(cubed->player);
-	draw_loop(cubed, cubed->player);
+	raycasting(cubed, cubed->player, cubed->loop);
 	mlx_put_image_to_window(cubed->game->mlx, cubed->game->win,
 		cubed->game->img, 0, 0);
 	return (0);

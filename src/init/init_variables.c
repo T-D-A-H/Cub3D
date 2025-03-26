@@ -18,15 +18,15 @@ static void	init_variable_values(t_cub *cubed, char **map, int i)
 	{
 		if (!ft_strcmp(map[i], "F"))
 		{
-			cubed->f_color[0] = ft_atoi(map[i + 1]);
-			cubed->f_color[1] = ft_atoi(map[i + 2]);
-			cubed->f_color[2] = ft_atoi(map[i + 3]);
+			cubed->f_color += ft_atoi(map[i + 1]) << 16;
+			cubed->f_color += ft_atoi(map[i + 2]) << 8;
+			cubed->f_color += ft_atoi(map[i + 3]);
 		}
 		else if (!ft_strcmp(map[i], "C"))
 		{
-			cubed->c_color[0] = ft_atoi(map[i + 1]);
-			cubed->c_color[1] = ft_atoi(map[i + 2]);
-			cubed->c_color[2] = ft_atoi(map[i + 3]);
+			cubed->c_color += ft_atoi(map[i + 1]) << 16;
+			cubed->c_color += ft_atoi(map[i + 2]) << 8;
+			cubed->c_color += ft_atoi(map[i + 3]);
 		}
 		else if (!ft_strcmp(map[i], "NO"))
 			cubed->no_path = ft_strdup(map[i + 1]);

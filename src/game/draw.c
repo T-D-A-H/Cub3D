@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 15:03:36 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/25 16:10:30 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/03/26 10:46:45 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,36 +24,44 @@ void	put_pixel(int x, int y, int colour, t_cub *cubed)
 	cubed->game->data[index + 2] = ((colour >> 16) & 0xFF);
 }
 
-
-void draw_3dmap(t_cub *cubed, int drawStart, int drawEnd, int x, int side)
+void	clear_screen(t_cub *cubed)
 {
-	// CAMBIAR FUNCIONAMIENTO PARA PINTAR CARAS CORRECTAS
-	// CAMBIAR PARA IMPRIMIR TEXTURAS
-	// PILLAR VALORES DE TECHO Y SUELO
-	int color = PURPLE;
-	int colorf = 0;
-	int colorc = 0;
-	colorf += cubed->f_color[0] * (256 * 256);
-	colorf += cubed->f_color[1] * (256);
-	colorf += cubed->f_color[2];
-	colorc += cubed->c_color[0] * (256 * 256);
-	colorc += cubed->c_color[1] * (256);
-	colorc += cubed->c_color[2];
-	for (int y = 0; y <= drawStart; y++)
-  	{
-  	    if (y >= 0 && y < HEIGHT)
-  	        put_pixel(x, y, colorc, cubed);
-  	}
-	for (int y = drawStart; y <= drawEnd; y++)
-  	{
-		if (side == 1)
+	int	y;
+	int	x;
+
+	y = -1;
+	while (++y < HEIGHT)
+	{
+		x = -1;
+		while (++x < WIDTH)
+			put_pixel(x, y, 0, cubed);
+	}
+}
+
+void	draw_3dmap(t_cub *cubed, int draw_start, int draw_end, int x, int side)
+{
+	int	color;
+	int	y;
+
+	color = PURPLE;
+	y = -1;
+	while (++y <= draw_start)
+	{
+  		if (y >= 0 && y < HEIGHT)
+  			put_pixel(x, y, cubed->c_color, cubed);
+	}
+	y = draw_start - 1;
+	while (++y <= draw_end)
+	{
+  		if (side == 1)
 			color = 0x690067;
-  	    if (y >= 0 && y < HEIGHT)
-  	        put_pixel(x, y, color, cubed);
-  	}
-	for (int y = drawEnd ; y <= WIDTH; y++)
-  	{			
-  	        put_pixel(x, y, colorf, cubed);
-  	}
+  		if (y >= 0 && y < HEIGHT)
+  			put_pixel(x, y, color, cubed);
+	}
+	y = draw_end - 1;
+	while (++y <= WIDTH)
+	{
+		put_pixel(x, y, cubed->f_color, cubed);
+	}
 }
 

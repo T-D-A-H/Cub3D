@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 15:29:12 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/25 17:41:21 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/03/26 10:54:41 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	init_loop(t_loop *loop)
 {
-	loop->fov = 0;
+	loop->fov = PI / 3 / WIDTH;
 	loop->ray_angle = 0;
 	loop->rayDirX = 0;
 	loop->rayDirY = 0;
@@ -34,7 +34,7 @@ void	init_loop(t_loop *loop)
 	loop->drawEnd = 0;
 }
 
-static void	init_player(t_player *player, int s_x, int s_y, t_cub *cubed)
+void	init_player(t_player *player, int s_x, int s_y, t_cub *cubed)
 {
 	player->x = (double)((s_x * WIDTH) / ft_strlen(cubed->map[0]));
 	player->y = (double)((s_y * HEIGHT) / ft_arrlen(cubed->map));
@@ -51,7 +51,7 @@ static void	init_player(t_player *player, int s_x, int s_y, t_cub *cubed)
 	player->key_right = false;
 }
 
-static void	init_game(t_game *game)
+void	init_game(t_game *game)
 {
 	game->mlx = mlx_init();
 	game->win = mlx_new_window(game->mlx, WIDTH, HEIGHT, W_NAME);
@@ -65,7 +65,6 @@ void	init_window(t_cub *cubed)
 {
 	init_player(cubed->player, cubed->pj_x, cubed->pj_y, cubed);
 	init_game(cubed->game);
-	init_loop(cubed->loop);
 	mlx_hook(cubed->game->win, 2, 1L << 0, on_keypress, cubed->player);
 	mlx_hook(cubed->game->win, 3, 1L << 1, on_keyrelease, cubed->player);
 	mlx_loop_hook(cubed->game->mlx, game_loop, cubed);

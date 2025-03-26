@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:31:47 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/26 12:52:29 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/03/26 17:02:19 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ typedef struct s_loop
 	int		lineHeight;
 	int		drawStart;
 	int		drawEnd;
+	int		texX;
 }	t_loop;
 
 
@@ -117,6 +118,17 @@ typedef struct s_game
 	int		endian;
 }	t_game;
 
+typedef struct s_texture
+{
+    void    *img;
+    int		*data;
+    int     width;
+    int     height;
+	int		bpp;
+	int		size_line;
+	int		endian;
+} t_texture;
+
 typedef struct s_cub
 {
 	char		*no_path;
@@ -130,7 +142,7 @@ typedef struct s_cub
 	int			pj_y;
 	int			pj_x;
 	float		start_direction;
-	char		*textures[4];
+	t_texture		*textures[4];
 	t_game		*game;
 	t_player	*player;
 	t_loop		*loop;
@@ -147,7 +159,7 @@ void	init_map(t_cub *cubed);
 void	init_window(t_cub *cubed);
 void	init_loop(t_loop *loop);
 void	init_player(t_player *player, int s_x, int s_y, t_cub *cubed);
-void	init_game(t_game *game);
+void	init_game(t_game *game, t_cub *cubed);
 //----------------------------------------------GAME-game_loop
 int		game_loop(void *param);
 void	raycasting(t_cub *cubed, t_player *player, t_loop *loop);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 15:03:36 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/26 10:46:45 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/03/26 15:30:12 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	draw_3dmap(t_cub *cubed, int draw_start, int draw_end, int x, int side)
 	{
   		if (side == 1)
 			color = 0x690067;
+		
   		if (y >= 0 && y < HEIGHT)
   			put_pixel(x, y, color, cubed);
 	}

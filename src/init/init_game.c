@@ -1,16 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_window.c                                      :+:      :+:    :+:   */
+/*   init_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 15:29:12 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/26 10:54:41 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/03/26 12:52:34 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+
+int	game_loop(void *param)
+{
+	t_cub	*cubed;
+
+	cubed = (t_cub *)param;
+	clear_screen(cubed);
+	// draw_map(cubed);
+	// draw_empty_square(cubed->player->x, cubed->player->y,
+	// 	PLAYER_SIZE, YELLOW, cubed);
+	move_player(cubed->player);
+	raycasting(cubed, cubed->player, cubed->loop);
+	mlx_put_image_to_window(cubed->game->mlx, cubed->game->win,
+		cubed->game->img, 0, 0);
+	return (0);
+}
 
 void	init_loop(t_loop *loop)
 {

@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:31:47 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/26 11:08:07 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/03/26 12:52:29 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@
 # define MOVE_AMOUNT 5
 # define MOVE_SPEED 0.03
 # define PI 3.1415926535
-# define FOV 60 
 
 # define YELLOW 0xFFFF00
 # define GREEN 0x00FF00
@@ -150,8 +149,10 @@ void	init_loop(t_loop *loop);
 void	init_player(t_player *player, int s_x, int s_y, t_cub *cubed);
 void	init_game(t_game *game);
 //----------------------------------------------GAME-game_loop
-int	game_loop(void *param);
+int		game_loop(void *param);
 void	raycasting(t_cub *cubed, t_player *player, t_loop *loop);
+void	get_raycast_hits(t_cub *cubed, t_loop *loop);
+void	get_raycast_steps(t_player *player, t_loop *loop);
 //----------------------------------------------GAME-draw
 void	put_pixel(int x, int y, int colour, t_cub *cubed);
 void 	clear_screen(t_cub *cubed);

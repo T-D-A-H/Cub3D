@@ -6,51 +6,11 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 15:02:24 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/27 17:02:42 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/03/27 17:06:35 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
-void draw_ceiling_and_floor(t_cub *cub, t_loop *loop, int x)
-{
-	int y;
-	double distToFloor, distToCeiling;
-	double floorX, floorY, ceilingX, ceilingY;
-	int textureX, textureY, floorColor, ceilingColor;
-
-	// Dibuja el techo
-	y = 0;
-	while (y < loop->drawStart)
-	{
-		distToCeiling = HEIGHT / (2.0 * y - HEIGHT);
-		ceilingX = cub->player->x + distToCeiling * loop->rayDirX;
-		ceilingY = cub->player->y + distToCeiling * loop->rayDirY;
-
-		textureX = (int)(ceilingX * cub->textures[3]->width) % cub->textures[3]->width;
-		textureY = (int)(ceilingY * cub->textures[3]->height) % cub->textures[3]->height;
-
-		ceilingColor = cub->textures[3]->data[textureY * cub->textures[3]->width + textureX];
-		put_pixel(x, y, ceilingColor, cub);
-		y++;
-	}
-
-	// Dibuja el suelo
-	y = loop->drawEnd;
-	while (y < HEIGHT)
-	{
-		distToFloor = HEIGHT / (2.0 * y - HEIGHT);
-		floorX = cub->player->x + distToFloor * loop->rayDirX;
-		floorY = cub->player->y + distToFloor * loop->rayDirY;
-
-		textureX = (int)(floorX * cub->textures[2]->width) % cub->textures[2]->width;
-		textureY = (int)(floorY * cub->textures[2]->height) % cub->textures[2]->height;
-
-		floorColor = cub->textures[2]->data[textureY * cub->textures[2]->width + textureX];
-		put_pixel(x, y, floorColor, cub);
-		y++;
-	}
-}
 
 void	pos_wall_text(t_cub *cub, t_loop *loop, t_draw *draw)
 {

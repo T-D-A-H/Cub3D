@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 15:04:20 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/25 17:30:18 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/03/27 16:19:20 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,21 @@ void	draw_map(t_cub *cubed)
 
 void draw_rays(t_cub *cubed, int x0, int y0, int x1, int y1, int color)
 {
-	int dx = abs(x1 - x0);
-	int dy = abs(y1 - y0);
-	int sx = (x0 < x1) ? 1 : -1;
-	int sy = (y0 < y1) ? 1 : -1;
-	int err = dx - dy;
+	int dx;
+	int dy;
+	int sx;
+	int sy;
+	int err;
 
+	dx = abs(x1 - x0);
+	dy = abs(y1 - y0);
+	sx = -1;
+	sy = -1;
+	err = dx - dy;
+	if (x0 < x1)
+		sx = 1;
+	if (y0 < y1)
+		sy = 1;
 	while (x0 != x1 || y0 != y1)
 	{
 		put_pixel(x0, y0, color, cubed);

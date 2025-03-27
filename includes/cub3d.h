@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:31:47 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/26 17:02:19 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/03/27 17:00:25 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@
 # define ERR_MAP_INVALID_CHARS "Error\nInvalid chars\n"
 # define ERR_MLX_INIT "Error\nInitialising MLX\n"
 # define ERR_PJ_NOT_EXIST "Error\nPlayer does not exist\n"
+# define ERR_LOAD_TEXTUE "Error\nLoading texture\n"
 # define NO_ERROR ""
 
 # define W_NAME "CUB3D"
@@ -88,6 +89,16 @@ typedef struct s_loop
 	int		texX;
 }	t_loop;
 
+typedef struct s_draw
+{
+    int		color;
+    int		texture_x;
+	int		texi;
+    double	wallx;
+	double	step;
+	double	texpos;
+	int		texy;
+}	t_draw;
 
 typedef struct s_player
 {
@@ -160,21 +171,30 @@ void	init_window(t_cub *cubed);
 void	init_loop(t_loop *loop);
 void	init_player(t_player *player, int s_x, int s_y, t_cub *cubed);
 void	init_game(t_game *game, t_cub *cubed);
-//----------------------------------------------GAME-game_loop
 int		game_loop(void *param);
-void	raycasting(t_cub *cubed, t_player *player, t_loop *loop);
+//----------------------------------------------GAME-textures
+void	load_all_textures(t_cub *cub);
+void	load_texture(t_cub *cub, char *path, int index);
+//----------------------------------------------GAME-raycasting
+void	init_start_end(t_loop *loop);
+void	init_ray(t_player *player, t_loop *loop, int x);
 void	get_raycast_hits(t_cub *cubed, t_loop *loop);
 void	get_raycast_steps(t_player *player, t_loop *loop);
+//----------------------------------------------GAME-raycasting
+void	raycasting(t_cub *cubed, t_player *player, t_loop *loop);
 //----------------------------------------------GAME-draw
 void	put_pixel(int x, int y, int colour, t_cub *cubed);
 void 	clear_screen(t_cub *cubed);
-void	draw_3dmap(t_cub *cubed, int draw_start, int draw_end, int x, int side);
-//----------------------------------------------GAME-keypress
+void	draw_3dmap(t_cub *cubed, int draw_start, int draw_end, int x);
+//----------------------------------------------GAME-move_player
+int		can_move(t_cub *cubed, double next_x, double next_y);
 void	rotate_player(t_player *player);
-void	strafe_player(t_player *player);
+int		move_player(t_player *player, t_cub *cub);
+void	key_player(t_player *player, double *next_x, double *next_y);
+void	strafe_player(t_player *player, t_cub *cubed);
+//----------------------------------------------GAME-keypress
 int		on_keypress(int keydata, t_player *player);
 int		on_keyrelease(int keydata, t_player *player);
-int		move_player(t_player *player);
 //----------------------------------------------GAME-minimap
 void 	draw_map(t_cub *cubed);
 void 	draw_full_square(t_cub *cubed, int x, int y, int colour);

@@ -6,27 +6,11 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 15:29:12 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/26 16:34:27 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/03/27 16:20:19 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
-int	game_loop(void *param)
-{
-	t_cub	*cubed;
-
-	cubed = (t_cub *)param;
-	clear_screen(cubed);
-	// draw_map(cubed);
-	// draw_empty_square(cubed->player->x, cubed->player->y,
-	// 	PLAYER_SIZE, YELLOW, cubed);
-	move_player(cubed->player);
-	raycasting(cubed, cubed->player, cubed->loop);
-	mlx_put_image_to_window(cubed->game->mlx, cubed->game->win,
-		cubed->game->img, 0, 0);
-	return (0);
-}
 
 void	init_loop(t_loop *loop)
 {
@@ -66,36 +50,21 @@ void	init_player(t_player *player, int s_x, int s_y, t_cub *cubed)
 	player->key_left = false;
 	player->key_right = false;
 }
-void    load_texture(t_cub *cub, char *path, int index)
-{
-	cub->textures[index]->img = mlx_xpm_file_to_image(cub->game->mlx, path, 
-										&cub->textures[index]->width, 
-										&cub->textures[index]->height);
-	if (cub->textures[index]->img == NULL) {
-		printf("Error al cargar textura %d\n", index);
-		exit(1);
-	}
-    cub->textures[index]->data = (int *)mlx_get_data_addr(cub->textures[index]->img, 
-                                        &cub->textures[index]->bpp, &cub->textures[index]->size_line, &cub->textures[index]->endian);
-	printf("Textura %d cargada correctamente. Dimensiones: %dx%d\n", 
-           index, cub->textures[index]->width, cub->textures[index]->height);
-}
 
-void    load_all_textures(t_cub *cub)
+int	game_loop(void *param)
 {
-	for (int i = 0; i < 4; i++)
-    {
-        cub->textures[i] = malloc(sizeof(t_texture));
-        if (!cub->textures[i])
-        {
-            printf("Error: No se pudo asignar memoria para la textura %d\n", i);
-            exit(1);
-        }
-    }
-    load_texture(cub, cub->no_path, 0);
-    load_texture(cub, cub->so_path, 1);
-    load_texture(cub, cub->ea_path, 2);
-    load_texture(cub, cub->we_path, 3);
+	t_cub	*cubed;
+
+	cubed = (t_cub *)param;
+	clear_screen(cubed);
+	move_player(cubed->player, cubed);
+	raycasting(cubed, cubed->player, cubed->loop);
+/* 	draw_map(cubed);
+	draw_empty_square(cubed->player->x, cubed->player->y,
+		PLAYER_SIZE, YELLOW, cubed); */
+	mlx_put_image_to_window(cubed->game->mlx, cubed->game->win,
+		cubed->game->img, 0, 0);
+	return (0);
 }
 
 void	init_game(t_game *game, t_cub *cubed)

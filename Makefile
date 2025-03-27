@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+         #
+#    By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/12 13:05:04 by jaimesan          #+#    #+#              #
-#    Updated: 2025/03/26 12:46:58 by ctommasi         ###   ########.fr        #
+#    Updated: 2025/03/27 16:30:51 by jaimesan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,8 @@ SRCS =	./src/main/main.c ./src/main/error.c \
 		./src/init/init_struct.c ./src/init/init_variables.c ./src/init/init_map.c ./src/init/init_game.c \
 		./src/utils/check_args.c  ./src/utils/init_map_utils.c  ./src/utils/save_map.c \
 		./src/game/keypress.c ./src/game/draw.c ./src/game/raycasting.c ./src/game/minimap.c \
-		./src/utils/delete_after.c 
+		./src/utils/delete_after.c ./src/game/textures.c ./src/game/move_player.c \
+		./src/game/raycasting_calcs.c
 		
 # Archivos objeto
 OBJS = $(SRCS:.c=.o)
@@ -51,11 +52,13 @@ $(MLX):
 	@make -sC $(MLX_DIR)
 
 %.o: %.c
-	@echo "[$(GREEN)DONE$(RESET)] Compiling [$(YELLOW)$<$(RESET)] - File being compiled..."
+	@echo -n "\r                                                                            \r"
+	@echo -n " [$(GREEN)DONE$(RESET)] Compiling [$(YELLOW)$<$(RESET)]\r"
 	@$(CC) $(CFLAGS) $(HEADERS) -o $@ -c $< 
 
 $(NAME): $(LIBFT) $(MLX) $(OBJS)
 	$(CC) $(OBJS) $(LIBFT) $(MLX) -o $(NAME)
+	@echo -n "\r                                                                            \r"
 	@echo "[$(GREEN)DONE$(RESET)] Linking complete: [$(MAGENTA)$(NAME)$(RESET)] - Complete!"
 
 clean:

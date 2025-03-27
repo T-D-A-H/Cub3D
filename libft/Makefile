@@ -40,7 +40,8 @@ $(NAME): $(OBJS_STANDARD)
 	@echo "[$(GREEN)DONE$(RESET)] Linking complete: [$(MAGENTA)$(NAME)$(RESET)] - Complete!"
 
 %.o: %.c
-	@echo "[$(GREEN)DONE$(RESET)] Compiling [$(YELLOW)$<$(RESET)] - File being compiled..."
+	@echo -n "\r                                                                 \r"
+	@echo -n " [$(GREEN)DONE$(RESET)] Compiling [$(YELLOW)$<$(RESET)] \r"
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:

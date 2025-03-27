@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 15:03:36 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/26 15:30:12 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/03/27 15:58:51 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	clear_screen(t_cub *cubed)
 	}
 }
 
-void	draw_3dmap(t_cub *cubed, int draw_start, int draw_end, int x, int side)
+void	draw_3dmap(t_cub *cubed, int draw_start, int draw_end, int x)
 {
 	int	color;
 	int	y;
@@ -47,17 +47,8 @@ void	draw_3dmap(t_cub *cubed, int draw_start, int draw_end, int x, int side)
 	y = -1;
 	while (++y <= draw_start)
 	{
-  		if (y >= 0 && y < HEIGHT)
-  			put_pixel(x, y, cubed->c_color, cubed);
-	}
-	y = draw_start - 1;
-	while (++y <= draw_end)
-	{
-  		if (side == 1)
-			color = 0x690067;
-		
-  		if (y >= 0 && y < HEIGHT)
-  			put_pixel(x, y, color, cubed);
+		if (y >= 0 && y < HEIGHT)
+			put_pixel(x, y, cubed->c_color, cubed);
 	}
 	y = draw_end - 1;
 	while (++y <= WIDTH)
@@ -65,4 +56,3 @@ void	draw_3dmap(t_cub *cubed, int draw_start, int draw_end, int x, int side)
 		put_pixel(x, y, cubed->f_color, cubed);
 	}
 }
-

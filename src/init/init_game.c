@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 15:29:12 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/27 16:20:19 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/03/28 12:40:13 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ void	init_loop(t_loop *loop)
 
 void	init_player(t_player *player, int s_x, int s_y, t_cub *cubed)
 {
-	player->x = (double)((s_x * WIDTH) / ft_strlen(cubed->map[0]));
-	player->y = (double)((s_y * HEIGHT) / ft_arrlen(cubed->map));
+	player->x = (double)((s_x * BLOCK));
+	player->y = (double)((s_y * BLOCK));
 	player->mx = (int)(player->x / BLOCK);
 	player->my = (int)(player->y / BLOCK);
 	player->angle = cubed->start_direction;
@@ -60,8 +60,8 @@ int	game_loop(void *param)
 	move_player(cubed->player, cubed);
 	raycasting(cubed, cubed->player, cubed->loop);
 /* 	draw_map(cubed);
-	draw_empty_square(cubed->player->x, cubed->player->y,
-		PLAYER_SIZE, YELLOW, cubed); */
+	draw_empty_square((int)cubed->player->x / 4, (int)cubed->player->y / 4,
+		8, YELLOW, cubed); */
 	mlx_put_image_to_window(cubed->game->mlx, cubed->game->win,
 		cubed->game->img, 0, 0);
 	return (0);

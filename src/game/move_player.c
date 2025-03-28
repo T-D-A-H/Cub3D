@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 16:05:38 by jaimesan          #+#    #+#             */
-/*   Updated: 2025/03/27 16:10:50 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/03/28 11:19:16 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	can_move(t_cub *cubed, double next_x, double next_y)
 
 	mapx = (int)(next_x / BLOCK);
 	mapy = (int)(next_y / BLOCK);
-	if (mapx < 0 || mapy < 0 || mapx >= WIDTH || mapy >= HEIGHT)
+	if (mapx < 0 || mapy < 0 || mapx >= (int)ft_strlen(cubed->map[0]) || mapy >= ft_arrlen(cubed->map))
 		return (0);
 	if (cubed->map[mapy][mapx] == '1')
 		return (0);
@@ -75,13 +75,14 @@ void	strafe_player(t_player *player, t_cub *cubed)
 	double	next_x;
 	double	next_y;
 
-	next_x = player->x;
-	next_y = player->y;
+	next_x = player->x ;
+	next_y = player->y ;
 	key_player(player, &next_x, &next_y);
 	if (can_move(cubed, next_x, player->y))
 		player->x = next_x;
 	if (can_move(cubed, player->x, next_y))
 		player->y = next_y;
+	(void)cubed;
 }
 
 int	move_player(t_player *player, t_cub *cub)

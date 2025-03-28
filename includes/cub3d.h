@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:31:47 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/27 17:00:25 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/03/28 12:22:32 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@
 # define WIDTH 2048
 # define HEIGHT 1024
 # define BLOCK 64
+# define MAP 16
 
 # define PLAYER_SIZE 32
 # define MOVE_AMOUNT 5
@@ -58,6 +59,7 @@
 # define GREEN 0x00FF00
 # define BLUE 0x0000FF
 # define PURPLE 0xA400A4
+# define GREY 0x8a9597
 
 # define W 119
 # define A 97

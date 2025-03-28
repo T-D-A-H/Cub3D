@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 15:04:20 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/27 16:19:20 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/03/28 12:31:22 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,11 @@ void	draw_full_square(t_cub *cubed, int x, int y, int colour)
 	int	j;
 
 	i = -1;
-	while (++i < BLOCK - 2)
+	while (++i < MAP - 2)
 	{
 		j = -1;
-		while (++j < BLOCK - 2)
-			put_pixel(x * BLOCK + j, y * BLOCK + i, colour, cubed);
+		while (++j < MAP - 2)
+			put_pixel(x * MAP + j, y * MAP + i, colour, cubed);
 	}
 }
 
@@ -56,9 +56,9 @@ void	draw_map(t_cub *cubed)
 		while (cubed->map[y][++x])
 		{
 			if (cubed->map[y][x] == '1')
-				draw_full_square(cubed, x, y, PURPLE);
-			else if (cubed->map[y][x] == '0')
-				draw_empty_square(x * BLOCK, y * BLOCK, BLOCK, BLUE, cubed);
+				draw_full_square(cubed, x, y, BLUE);
+			else if (cubed->map[y][x] == '0' || cubed->map[y][x] == 'N' )
+				draw_full_square(cubed, x, y, GREY);
 		}
 	}
 }

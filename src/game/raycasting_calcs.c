@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 16:27:17 by jaimesan          #+#    #+#             */
-/*   Updated: 2025/03/27 16:32:19 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/03/28 13:06:23 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,29 @@
 
 void	get_raycast_steps(t_player *player, t_loop *loop)
 {
-	if (loop->rayDirX < 0)
+	if (loop->raydir_x < 0)
 	{
-		loop->stepX = -1;
-		loop->sideDistX = ((player->x / BLOCK) - loop->mapX) * loop->deltaDistX;
+		loop->step_x = -1;
+		loop->sidedist_x = ((player->x / BLOCK) - loop->map_x)
+			* loop->deltadist_x;
 	}
 	else
 	{
-		loop->stepX = 1;
-		loop->sideDistX = ((loop->mapX + 1.0) - (player->x / BLOCK))
-			* loop->deltaDistX;
+		loop->step_x = 1;
+		loop->sidedist_x = ((loop->map_x + 1.0) - (player->x / BLOCK))
+			* loop->deltadist_x;
 	}
-	if (loop->rayDirY < 0)
+	if (loop->raydir_y < 0)
 	{
-		loop->stepY = -1;
-		loop->sideDistY = ((player->y / BLOCK) - loop->mapY) * loop->deltaDistY;
+		loop->step_y = -1;
+		loop->sidedist_y = ((player->y / BLOCK) - loop->map_y)
+			* loop->deltadist_y;
 	}
 	else
 	{
-		loop->stepY = 1;
-		loop->sideDistY = ((loop->mapY + 1.0) - (player->y / BLOCK))
-			* loop->deltaDistY;
+		loop->step_y = 1;
+		loop->sidedist_y = ((loop->map_y + 1.0) - (player->y / BLOCK))
+			* loop->deltadist_y;
 	}
 }
 
@@ -43,23 +45,23 @@ void	get_raycast_hits(t_cub *cubed, t_loop *loop)
 	loop->hit = 0;
 	while (loop->hit == 0)
 	{
-		if (loop->sideDistX < loop->sideDistY)
+		if (loop->sidedist_x < loop->sidedist_y)
 		{
-			loop->sideDistX += loop->deltaDistX;
-			loop->mapX += loop->stepX;
+			loop->sidedist_x += loop->deltadist_x;
+			loop->map_x += loop->step_x;
 			loop->side = 0;
 		}
 		else
 		{
-			loop->sideDistY += loop->deltaDistY;
-			loop->mapY += loop->stepY;
+			loop->sidedist_y += loop->deltadist_y;
+			loop->map_y += loop->step_y;
 			loop->side = 1;
 		}
-		if (loop->mapY < 0 || loop->mapX < 0
-			|| loop->mapY >= HEIGHT / BLOCK || loop->mapX >= WIDTH / BLOCK)
+		if (loop->map_y < 0 || loop->map_x < 0
+			|| loop->map_y >= HEIGHT / BLOCK || loop->map_x >= WIDTH / BLOCK)
 			break ;
-		else if (cubed->map[loop->mapY][loop->mapX] == '1' ||
-			cubed->map[loop->mapY][loop->mapX] == ' ')
+		else if (cubed->map[loop->map_y][loop->map_x] == '1' ||
+			cubed->map[loop->map_y][loop->map_x] == ' ')
 			loop->hit = 1;
 	}
 }
@@ -67,25 +69,25 @@ void	get_raycast_hits(t_cub *cubed, t_loop *loop)
 void	init_ray(t_player *player, t_loop *loop, int x)
 {
 	loop->ray_angle = player->angle - (PI / 6) + (x * loop->fov);
-	loop->rayDirX = cos(loop->ray_angle);
-	loop->rayDirY = sin(loop->ray_angle);
-	loop->deltaDistX = fabs(1 / loop->rayDirX);
-	loop->deltaDistY = fabs(1 / loop->rayDirY);
-	loop->mapX = player->mx;
-	loop->mapY = player->my;
+	loop->raydir_x = cos(loop->ray_angle);
+	loop->raydir_y = sin(loop->ray_angle);
+	loop->deltadist_x = fabs(1 / loop->raydir_x);
+	loop->deltadist_y = fabs(1 / loop->raydir_y);
+	loop->map_x = player->mx;
+	loop->map_y = player->my;
 }
 
 void	init_start_end(t_loop *loop)
 {
 	if (loop->side == 0)
-		loop->perpWallDist = (loop->sideDistX - loop->deltaDistX);
+		loop->perpwalldist = (loop->sidedist_x - loop->deltadist_x);
 	else
-		loop->perpWallDist = (loop->sideDistY - loop->deltaDistY);
-	loop->lineHeight = (int)(HEIGHT / loop->perpWallDist);
-	loop->drawStart = -loop->lineHeight / 2 + HEIGHT / 2;
-	if (loop->drawStart < 0)
-		loop->drawStart = 0;
-	loop->drawEnd = loop->lineHeight / 2 + HEIGHT / 2;
-	if (loop->drawEnd >= HEIGHT)
-		loop->drawEnd = HEIGHT - 1;
+		loop->perpwalldist = (loop->sidedist_y - loop->deltadist_y);
+	loop->line_height = (int)(HEIGHT / loop->perpwalldist);
+	loop->drawstart = -loop->line_height / 2 + HEIGHT / 2;
+	if (loop->drawstart < 0)
+		loop->drawstart = 0;
+	loop->drawend = loop->line_height / 2 + HEIGHT / 2;
+	if (loop->drawend >= HEIGHT)
+		loop->drawend = HEIGHT - 1;
 }

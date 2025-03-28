@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 15:02:24 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/28 12:39:41 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/03/28 13:05:45 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,22 @@
 void	pos_wall_text(t_cub *cub, t_loop *loop, t_draw *draw)
 {
 	if (loop->side == 0)
-		draw->wallx = cub->player->y / BLOCK + loop->perpWallDist
-			* loop->rayDirY;
+		draw->wallx = cub->player->y / BLOCK + loop->perpwalldist
+			* loop->raydir_y;
 	else
-		draw->wallx = cub->player->x / BLOCK + loop->perpWallDist
-			* loop->rayDirX;
+		draw->wallx = cub->player->x / BLOCK + loop->perpwalldist
+			* loop->raydir_x;
 	draw->wallx -= floor(draw->wallx);
 	if (loop->side == 0)
 	{
-		if (loop->rayDirX > 0)
+		if (loop->raydir_x > 0)
 			draw->texi = 3;
 		else
 			draw->texi = 2;
 	}
 	else
 	{
-		if (loop->rayDirY > 0)
+		if (loop->raydir_y > 0)
 			draw->texi = 1;
 		else
 			draw->texi = 0;
@@ -41,13 +41,13 @@ void	coor_textures(t_cub *cub, t_loop *loop, t_draw *draw)
 {
 	draw->texture_x = (int)(draw->wallx
 			* (double)cub->textures[draw->texi]->width);
-	if (loop->side == 0 && loop->rayDirX > 0)
-		loop->texX = cub->textures[draw->texi]->width - loop->texX - 1;
-	if (loop->side == 1 && loop->rayDirY < 0)
-		loop->texX = cub->textures[draw->texi]->width - loop->texX - 1;
+	if (loop->side == 0 && loop->raydir_x > 0)
+		loop->texx = cub->textures[draw->texi]->width - loop->texx - 1;
+	if (loop->side == 1 && loop->raydir_y < 0)
+		loop->texx = cub->textures[draw->texi]->width - loop->texx - 1;
 	draw->step = 1.0 * cub->textures[draw->texi]->width
-		/ loop->lineHeight;
-	draw->texpos = (loop->drawStart - HEIGHT / 2 + loop->lineHeight / 2)
+		/ loop->line_height;
+	draw->texpos = (loop->drawstart - HEIGHT / 2 + loop->line_height / 2)
 		* draw->step;
 }
 
@@ -55,8 +55,8 @@ void	print_walls(t_cub *cub, t_loop *loop, t_draw *draw, int x)
 {
 	int	y;
 
-	y = loop->drawStart - 1;
-	while (++y < loop->drawEnd)
+	y = loop->drawstart - 1;
+	while (++y < loop->drawend)
 	{
 		draw->texy = (int)draw->texpos
 			% (cub->textures[draw->texi]->height);
@@ -95,7 +95,7 @@ void	raycasting(t_cub *cubed, t_player *player, t_loop *loop)
 		get_raycast_hits(cubed, loop);
 		init_start_end(loop);
 		draw_wall_with_texture(cubed, loop, x);
-		draw_3dmap(cubed, loop->drawStart, loop->drawEnd, x);
-		/* draw_rays(cubed, player->x  / 4, player->y  / 4, loop->mapX * MAP, loop->mapY * MAP, GREEN); */
+		draw_3dmap(cubed, loop->drawstart, loop->drawend, x);
+/* 		draw_rays(cubed, player->x  / 4, player->y  / 4, loop); */
 	}
 }

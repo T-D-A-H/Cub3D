@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:31:47 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/28 12:22:32 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/03/28 13:09:11 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,36 +67,48 @@
 # define D 100
 # define LEFT 65361
 # define RIGHT 65363
+# define ESC 65307
+
+typedef struct s_mini
+{
+	int	dx;
+	int	dy;
+	int	sx;
+	int	sy;
+	int	err;
+	int e2;
+}	t_mini;
+
 
 typedef struct s_loop
 {
 	double	fov;
 	double	ray_angle;
-	double	rayDirX;
-	double	rayDirY;
-	double	sideDistX;
-	double	sideDistY;
-	int		mapX;
-	int		mapY;
-	double	deltaDistX;
-	double	deltaDistY;
-	int		stepX;
-	int		stepY;
+	double	raydir_x;
+	double	raydir_y;
+	double	sidedist_x;
+	double	sidedist_y;
+	int		map_x;
+	int		map_y;
+	double	deltadist_x;
+	double	deltadist_y;
+	int		step_x;
+	int		step_y;
 	int		hit;
 	int		side;
-	double	perpWallDist;
-	int		lineHeight;
-	int		drawStart;
-	int		drawEnd;
-	int		texX;
+	double	perpwalldist;
+	int		line_height;
+	int		drawstart;
+	int		drawend;
+	int		texx;
 }	t_loop;
 
 typedef struct s_draw
 {
-    int		color;
-    int		texture_x;
+	int		color;
+	int		texture_x;
 	int		texi;
-    double	wallx;
+	double	wallx;
 	double	step;
 	double	texpos;
 	int		texy;
@@ -112,12 +124,12 @@ typedef struct s_player
 	double	dy;
 	double	angle;
 
-	bool key_w;
-	bool key_s;
-	bool key_a;
-	bool key_d;
-	bool key_left;
-	bool key_right;
+	bool	key_w;
+	bool	key_s;
+	bool	key_a;
+	bool	key_d;
+	bool	key_left;
+	bool	key_right;
 }	t_player;
 
 typedef struct s_game
@@ -133,14 +145,14 @@ typedef struct s_game
 
 typedef struct s_texture
 {
-    void    *img;
-    int		*data;
-    int     width;
-    int     height;
+	void	*img;
+	int		*data;
+	int		width;
+	int		height;
 	int		bpp;
 	int		size_line;
 	int		endian;
-} t_texture;
+}	t_texture;
 
 typedef struct s_cub
 {
@@ -155,7 +167,7 @@ typedef struct s_cub
 	int			pj_y;
 	int			pj_x;
 	float		start_direction;
-	t_texture		*textures[4];
+	t_texture	*textures[4];
 	t_game		*game;
 	t_player	*player;
 	t_loop		*loop;
@@ -186,7 +198,7 @@ void	get_raycast_steps(t_player *player, t_loop *loop);
 void	raycasting(t_cub *cubed, t_player *player, t_loop *loop);
 //----------------------------------------------GAME-draw
 void	put_pixel(int x, int y, int colour, t_cub *cubed);
-void 	clear_screen(t_cub *cubed);
+void	clear_screen(t_cub *cubed);
 void	draw_3dmap(t_cub *cubed, int draw_start, int draw_end, int x);
 //----------------------------------------------GAME-move_player
 int		can_move(t_cub *cubed, double next_x, double next_y);
@@ -198,10 +210,10 @@ void	strafe_player(t_player *player, t_cub *cubed);
 int		on_keypress(int keydata, t_player *player);
 int		on_keyrelease(int keydata, t_player *player);
 //----------------------------------------------GAME-minimap
-void 	draw_map(t_cub *cubed);
-void 	draw_full_square(t_cub *cubed, int x, int y, int colour);
-void 	draw_empty_square(int x, int y, int size, int color, t_cub *cubed);
-void	draw_rays(t_cub *cubed, int x0, int y0, int x1, int y1, int color);
+void	draw_map(t_cub *cubed);
+void	draw_full_square(t_cub *cubed, int x, int y, int colour);
+void	draw_empty_square(int x, int y, int size, t_cub *cubed);
+void	draw_rays(t_cub *cubed, int x0, int y0, t_loop *loop);
 //----------------------------------------------UTILS
 int		check_cub_args(int argc, char **argv);
 int		is_map_del(char **map, int y, int x);

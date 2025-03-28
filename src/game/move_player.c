@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 16:05:38 by jaimesan          #+#    #+#             */
-/*   Updated: 2025/03/28 11:19:16 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/03/28 13:04:19 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,15 @@
 
 int	can_move(t_cub *cubed, double next_x, double next_y)
 {
-	int	mapx;
-	int	mapy;
+	int	map_x;
+	int	map_y;
 
-	mapx = (int)(next_x / BLOCK);
-	mapy = (int)(next_y / BLOCK);
-	if (mapx < 0 || mapy < 0 || mapx >= (int)ft_strlen(cubed->map[0]) || mapy >= ft_arrlen(cubed->map))
+	map_x = (int)(next_x / BLOCK);
+	map_y = (int)(next_y / BLOCK);
+	if (map_x < 0 || map_y < 0 || map_x >= (int)ft_strlen(cubed->map[0])
+		|| map_y >= ft_arrlen(cubed->map))
 		return (0);
-	if (cubed->map[mapy][mapx] == '1')
+	if (cubed->map[map_y][map_x] == '1')
 		return (0);
 	return (1);
 }

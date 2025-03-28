@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 14:57:47 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/27 16:05:51 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/03/28 13:09:00 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int	on_keypress(int keydata, t_player *player)
 		player->key_left = true;
 	if (keydata == RIGHT)
 		player->key_right = true;
+	if (keydata == ESC)
+		exit(0);
 	return (0);
 }
 

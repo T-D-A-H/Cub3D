@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 15:29:12 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/28 12:40:13 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/03/28 13:05:43 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,22 @@ void	init_loop(t_loop *loop)
 {
 	loop->fov = PI / 3 / WIDTH;
 	loop->ray_angle = 0;
-	loop->rayDirX = 0;
-	loop->rayDirY = 0;
-	loop->sideDistX = 0;
-	loop->sideDistY = 0;
-	loop->mapX = 0;
-	loop->mapY = 0;
-	loop->deltaDistX = 0;
-	loop->deltaDistY = 0;
-	loop->stepX = 0;
-	loop->stepY = 0;
+	loop->raydir_x = 0;
+	loop->raydir_y = 0;
+	loop->sidedist_x = 0;
+	loop->sidedist_y = 0;
+	loop->map_x = 0;
+	loop->map_y = 0;
+	loop->deltadist_x = 0;
+	loop->deltadist_y = 0;
+	loop->step_x = 0;
+	loop->step_y = 0;
 	loop->hit = 0;
 	loop->side = 0;
-	loop->perpWallDist = 0;
-	loop->lineHeight = 0;
-	loop->drawStart = 0;
-	loop->drawEnd = 0;
+	loop->perpwalldist = 0;
+	loop->line_height = 0;
+	loop->drawstart = 0;
+	loop->drawend = 0;
 }
 
 void	init_player(t_player *player, int s_x, int s_y, t_cub *cubed)
@@ -61,7 +61,7 @@ int	game_loop(void *param)
 	raycasting(cubed, cubed->player, cubed->loop);
 /* 	draw_map(cubed);
 	draw_empty_square((int)cubed->player->x / 4, (int)cubed->player->y / 4,
-		8, YELLOW, cubed); */
+		8, cubed); */
 	mlx_put_image_to_window(cubed->game->mlx, cubed->game->win,
 		cubed->game->img, 0, 0);
 	return (0);

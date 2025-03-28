@@ -6,28 +6,28 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 15:04:20 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/28 12:31:22 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/03/28 13:05:04 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void	draw_empty_square(int x, int y, int size, int color, t_cub *cubed)
+void	draw_empty_square(int x, int y, int size, t_cub *cubed)
 {
 	int	i;
 
 	i = -1;
 	while (++i < size)
-		put_pixel(x + i, y, color, cubed);
+		put_pixel(x + i, y, YELLOW, cubed);
 	i = -1;
 	while (++i < size)
-		put_pixel(x, y + i, color, cubed);
+		put_pixel(x, y + i, YELLOW, cubed);
 	i = -1;
 	while (++i < size)
-		put_pixel(x + size, y + i, color, cubed);
+		put_pixel(x + size, y + i, YELLOW, cubed);
 	i = -1;
 	while (++i < size)
-		put_pixel(x + i, y + size, color, cubed);
+		put_pixel(x + i, y + size, YELLOW, cubed);
 }
 
 void	draw_full_square(t_cub *cubed, int x, int y, int colour)
@@ -57,42 +57,46 @@ void	draw_map(t_cub *cubed)
 		{
 			if (cubed->map[y][x] == '1')
 				draw_full_square(cubed, x, y, BLUE);
-			else if (cubed->map[y][x] == '0' || cubed->map[y][x] == 'N' )
+			else if (cubed->map[y][x] == '0' || cubed->map[y][x] == 'N'
+				|| cubed->map[y][x] == 'E'
+				|| cubed->map[y][x] == 'W'
+				|| cubed->map[y][x] == 'S' )
 				draw_full_square(cubed, x, y, GREY);
 		}
 	}
 }
 
-void draw_rays(t_cub *cubed, int x0, int y0, int x1, int y1, int color)
+void	init_mini(t_mini *mini, int x0, int y0, t_loop *loop)
 {
-	int dx;
-	int dy;
-	int sx;
-	int sy;
-	int err;
+	mini->dx = abs(loop->map_x * MAP - x0);
+	mini->dy = abs(loop->map_y * MAP - y0);
+	mini->sx = -1;
+	mini->sy = -1;
+	if (x0 < loop->map_x * MAP)
+		mini->sx = 1;
+	if (y0 < loop->map_y * MAP)
+		mini->sy = 1;
+	mini->err = mini->dx - mini->dy;
+}
 
-	dx = abs(x1 - x0);
-	dy = abs(y1 - y0);
-	sx = -1;
-	sy = -1;
-	err = dx - dy;
-	if (x0 < x1)
-		sx = 1;
-	if (y0 < y1)
-		sy = 1;
-	while (x0 != x1 || y0 != y1)
+void	draw_rays(t_cub *cubed, int x0, int y0, t_loop *loop)
+{
+	t_mini	mini;
+
+	init_mini(&mini, x0, y0, loop);
+	while (x0 != loop->map_x * MAP || y0 != loop->map_y * MAP)
 	{
-		put_pixel(x0, y0, color, cubed);
-		int e2 = 2 * err;
-		if (e2 > -dy)
+		put_pixel(x0, y0, GREEN, cubed);
+		mini.e2 = 2 * mini.err;
+		if (mini.e2 > -mini.dy)
 		{
-			err -= dy;
-			x0 += sx;
+			mini.err -= mini.dy;
+			x0 += mini.sx;
 		}
-		if (e2 < dx)
+		if (mini.e2 < mini.dx)
 		{
-			err += dx;
-			y0 += sy;
+			mini.err += mini.dx;
+			y0 += mini.sy;
 		}
 	}
 }

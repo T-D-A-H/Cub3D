@@ -37,11 +37,12 @@ all: $(NAME)
 
 $(NAME): $(OBJS_STANDARD)
 	@$(AR) $(NAME) $(OBJS_STANDARD)
+	@echo -n "\r                                                                              \r"
 	@echo "[$(GREEN)DONE$(RESET)] Linking complete: [$(MAGENTA)$(NAME)$(RESET)] - Complete!"
 
 %.o: %.c
-	@echo -n "\r                                                                 \r"
-	@echo -n " [$(GREEN)DONE$(RESET)] Compiling [$(YELLOW)$<$(RESET)] \r"
+	@echo -n "\r                                                                       \r"
+	@echo -n "[$(GREEN)DONE$(RESET)] Compiling: [$(YELLOW)$<$(RESET)]\r"
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:

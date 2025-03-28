@@ -6,7 +6,7 @@
 #    By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/12 13:05:04 by jaimesan          #+#    #+#              #
-#    Updated: 2025/03/27 16:30:51 by jaimesan         ###   ########.fr        #
+#    Updated: 2025/03/28 15:11:11 by jaimesan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,7 +53,7 @@ $(MLX):
 
 %.o: %.c
 	@echo -n "\r                                                                            \r"
-	@echo -n " [$(GREEN)DONE$(RESET)] Compiling [$(YELLOW)$<$(RESET)]\r"
+	@echo -n "[$(GREEN)DONE$(RESET)] Compiling: [$(YELLOW)$<$(RESET)]\r"
 	@$(CC) $(CFLAGS) $(HEADERS) -o $@ -c $< 
 
 $(NAME): $(LIBFT) $(MLX) $(OBJS)

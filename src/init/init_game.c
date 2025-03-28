@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 15:29:12 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/28 13:05:43 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/03/28 13:52:13 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	init_window(t_cub *cubed)
 {
 	init_player(cubed->player, cubed->pj_x, cubed->pj_y, cubed);
 	init_game(cubed->game, cubed);
-	mlx_hook(cubed->game->win, 2, 1L << 0, on_keypress, cubed->player);
+	mlx_hook(cubed->game->win, 2, 1L << 0, on_keypress, cubed);
 	mlx_hook(cubed->game->win, 3, 1L << 1, on_keyrelease, cubed->player);
 	mlx_loop_hook(cubed->game->mlx, game_loop, cubed);
 	mlx_loop(cubed->game->mlx);

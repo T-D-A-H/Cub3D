@@ -6,28 +6,28 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 14:57:47 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/28 13:09:00 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/03/28 13:45:59 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-int	on_keypress(int keydata, t_player *player)
+int	on_keypress(int keydata, t_cub *cub)
 {
 	if (keydata == W)
-		player->key_w = true;
+		cub->player->key_w = true;
 	if (keydata == S)
-		player->key_s = true;
+		cub->player->key_s = true;
 	if (keydata == A)
-		player->key_a = true;
+		cub->player->key_a = true;
 	if (keydata == D)
-		player->key_d = true;
+		cub->player->key_d = true;
 	if (keydata == LEFT)
-		player->key_left = true;
+		cub->player->key_left = true;
 	if (keydata == RIGHT)
-		player->key_right = true;
+		cub->player->key_right = true;
 	if (keydata == ESC)
-		exit(0);
+		return (error(cub, NO_ERROR), 1);
 	return (0);
 }
 

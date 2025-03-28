@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:31:47 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/28 13:09:11 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/03/28 13:51:29 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,8 @@ typedef struct s_mini
 	int	sx;
 	int	sy;
 	int	err;
-	int e2;
+	int	e2;
 }	t_mini;
-
 
 typedef struct s_loop
 {
@@ -207,7 +206,7 @@ int		move_player(t_player *player, t_cub *cub);
 void	key_player(t_player *player, double *next_x, double *next_y);
 void	strafe_player(t_player *player, t_cub *cubed);
 //----------------------------------------------GAME-keypress
-int		on_keypress(int keydata, t_player *player);
+int		on_keypress(int keydata, t_cub *cub);
 int		on_keyrelease(int keydata, t_player *player);
 //----------------------------------------------GAME-minimap
 void	draw_map(t_cub *cubed);

@@ -6,11 +6,28 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 19:01:38 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/27 17:11:13 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/03/28 13:51:52 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+
+void	free_textures(t_cub *cub)
+{
+	int	i;
+
+	i = 0;
+	while (i < 4)
+	{
+		if (cub->textures[i])
+		{
+			if (cub->textures[i]->img)
+				mlx_destroy_image(cub->game->mlx, cub->textures[i]->img);
+			free(cub->textures[i]);
+		}
+		i++;
+	}
+}
 
 void	error(t_cub *cubed, char *debug_msg)
 {
@@ -27,6 +44,11 @@ void	error(t_cub *cubed, char *debug_msg)
 		ft_freearr(cubed->map);
 	if (cubed->premap)
 		free(cubed->premap);
+	if (cubed->game->img)
+		mlx_destroy_image(cubed->game->mlx, cubed->game->img);
+	if (cubed->game->win)
+		mlx_destroy_window(cubed->game->mlx, cubed->game->win);
+	free_textures(cubed);
 	if (!debug_msg[0])
 		exit(0);
 	else

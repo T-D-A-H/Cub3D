@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 15:02:24 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/01 14:39:02 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/04/01 14:47:02 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void	get_raycast_hits(t_cub *cubed, t_loop *loop)
 		else if (cubed->map[loop->map_y][loop->map_x] == '1'
 			|| cubed->map[loop->map_y][loop->map_x] == ' ')
 			loop->hit = 1;
-		else if (cubed->map[loop->map_y][loop->map_x] == 'D')
+		else if (cubed->map[loop->map_y][loop->map_x] == 'D' && BONUS == 1)
 		{
 			loop->hit = 1;
 			loop->door = 1;

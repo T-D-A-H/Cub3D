@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 15:04:20 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/01 13:40:07 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/04/01 14:53:55 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,6 @@ void	draw_minimap(t_cub *cubed)
 	int	y;
 	int	x;
 
-	draw_empty_square(((int)cubed->player->x / 4) - 4,
-		((int)cubed->player->y / 4) - 4, 8, cubed);
 	y = -1;
 	while (cubed->map[++y])
 	{
@@ -94,6 +92,10 @@ void	draw_minimap(t_cub *cubed)
 		{
 			if (cubed->map[y][x] == '1')
 				draw_full_square(cubed, x, y, BLUE);
+			if (cubed->map[y][x] == 'D')
+				draw_full_square(cubed, x, y,RED);
+			if (cubed->map[y][x] == 'd')
+				draw_full_square(cubed, x, y, GREEN);
 			else if (cubed->map[y][x] == '0' || cubed->map[y][x] == 'N'
 				|| cubed->map[y][x] == 'E'
 				|| cubed->map[y][x] == 'W'
@@ -101,4 +103,6 @@ void	draw_minimap(t_cub *cubed)
 				draw_full_square(cubed, x, y, GREY);
 		}
 	}
+	draw_empty_square(((int)cubed->player->x / 4) - 4,
+		((int)cubed->player->y / 4) - 4, 8, cubed);
 }

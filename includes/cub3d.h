@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:31:47 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/01 14:24:41 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/04/01 14:56:30 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@
 # define NO_ERROR ""
 
 # define W_NAME "CUB3D"
-# define WIDTH 2048
-# define HEIGHT 1024
+# define WIDTH 2072
+# define HEIGHT 1048
 # define BLOCK 64
 # define MAP 16
 
@@ -61,9 +61,10 @@
 
 # define YELLOW 0xFFFF00
 # define GREEN 0x00FF00
-# define BLUE 0x0000FF
+# define BLUE 0x1414b8
 # define PURPLE 0xA400A4
 # define GREY 0x8a9597
+# define RED 0xFF0000
 
 # define W 119
 # define A 97
@@ -233,6 +234,7 @@ void	draw_walls(t_cub *cub, t_loop *loop, t_draw *draw, int x);
 void	draw_full_square(t_cub *cubed, int x, int y, int colour);
 void	draw_empty_square(int x, int y, int size, t_cub *cubed);
 void	draw_rays(t_cub *cubed, int x0, int y0, t_loop *loop);
+void	draw_minimap(t_cub *cubed);
 //-------------------------------------------------------------------------UTILS
 void	read_map_file(t_cub *cubed, char **argv);
 int		check_cub_args(int argc, char **argv);

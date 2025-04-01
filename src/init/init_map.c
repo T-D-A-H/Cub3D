@@ -6,13 +6,13 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:08:04 by jaimesan          #+#    #+#             */
-/*   Updated: 2025/03/20 11:53:14 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/04/01 12:22:05 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-static int	check_cero(char **map, int *y, int *x, int *max_x)
+int	check_cero(char **map, int *y, int *x, int *max_x)
 {
 	while (map[*y])
 	{
@@ -31,7 +31,7 @@ static int	check_cero(char **map, int *y, int *x, int *max_x)
 	return (0);
 }
 
-static int	check_invalid_chars(char **map, t_cub *cubed)
+int	check_invalid_chars(char **map, t_cub *cubed)
 {
 	int	i;
 	int	j;
@@ -60,7 +60,7 @@ static int	check_invalid_chars(char **map, t_cub *cubed)
 	return (0);
 }
 
-static int	check_void_lines(const char *premap)
+int	check_void_lines(const char *premap)
 {
 	char	*ptr;
 	int		i;

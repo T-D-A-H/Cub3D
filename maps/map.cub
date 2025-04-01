@@ -1,7 +1,7 @@
-NO ./assets/greystone.xpm
-SO ./assets/mossy.xpm
-WE ./assets/colorstone.xpm
-EA ./assets/wood.xpm
+NO ./assets/wall.xpm
+SO ./assets/floor.xpm
+WE ./assets/ceiling.xpm
+EA ./assets/wall.xpm
 
 F 130,130,130
 C 0,160,220

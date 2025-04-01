@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game_loop.c                                        :+:      :+:    :+:   */
+/*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 15:53:12 by jaimesan          #+#    #+#             */
-/*   Updated: 2025/03/27 15:56:00 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/04/01 13:21:00 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,41 @@ void	load_all_textures(t_cub *cub)
 	load_texture(cub, cub->so_path, 1);
 	load_texture(cub, cub->we_path, 2);
 	load_texture(cub, cub->ea_path, 3);
+}
+
+void	get_wall_textures(t_cub *cub, t_loop *loop, t_draw *draw)
+{
+	if (loop->side == 0)
+		draw->wallx = cub->player->y / BLOCK + loop->perpwalldist * loop->raydir_y;
+	else
+		draw->wallx = cub->player->x / BLOCK + loop->perpwalldist * loop->raydir_x;
+	draw->wallx -= floor(draw->wallx);
+	if (loop->side == 0)
+	{
+		if (loop->raydir_x > 0)
+			draw->texi = 3;
+		else
+			draw->texi = 2;
+	}
+	else
+	{
+		if (loop->raydir_y > 0)
+			draw->texi = 1;
+		else
+			draw->texi = 0;
+	}
+}
+
+void	get_coor_textures(t_cub *cub, t_loop *loop, t_draw *draw)
+{
+	loop->texx = (int)(draw->wallx
+			* (double)cub->textures[draw->texi]->width);
+	if (loop->side == 0 && loop->raydir_x > 0)
+		loop->texx = cub->textures[draw->texi]->width - loop->texx - 1;
+	if (loop->side == 1 && loop->raydir_y < 0)
+		loop->texx = cub->textures[draw->texi]->width - loop->texx - 1;
+	draw->step = 1.0 * cub->textures[draw->texi]->width
+		/ loop->line_height;
+	draw->texpos = (loop->drawstart - HEIGHT / 2 + loop->line_height / 2)
+		* draw->step;
 }

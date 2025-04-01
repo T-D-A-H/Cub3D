@@ -3,14 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+         #
+#    By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/12 13:05:04 by jaimesan          #+#    #+#              #
-#    Updated: 2025/03/28 15:11:11 by jaimesan         ###   ########.fr        #
+#    Updated: 2025/04/01 13:35:57 by ctommasi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3d
+NAME_BONUS = cub3d_b
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -I ./includes
@@ -34,11 +35,11 @@ BLUE := \033[34m
 
 # Archivos fuente
 SRCS =	./src/main/main.c ./src/main/error.c \
-		./src/init/init_struct.c ./src/init/init_variables.c ./src/init/init_map.c ./src/init/init_game.c \
-		./src/utils/check_args.c  ./src/utils/init_map_utils.c  ./src/utils/save_map.c \
+		./src/init/init_variables.c ./src/init/init_map.c ./src/init/init_game.c \
+		./src/utils/check_args.c  ./src/utils/init_map_utils.c  ./src/utils/save_map_utils.c \
 		./src/game/keypress.c ./src/game/draw.c ./src/game/raycasting.c ./src/game/minimap.c \
 		./src/utils/delete_after.c ./src/game/textures.c ./src/game/move_player.c \
-		./src/game/raycasting_calcs.c
+		./src/game/draw_map.c
 		
 # Archivos objeto
 OBJS = $(SRCS:.c=.o)
@@ -61,6 +62,14 @@ $(NAME): $(LIBFT) $(MLX) $(OBJS)
 	@echo -n "\r                                                                            \r"
 	@echo "[$(GREEN)DONE$(RESET)] Linking complete: [$(MAGENTA)$(NAME)$(RESET)] - Complete!"
 
+bonus: CFLAGS += -D BONUS=1
+bonus: $(NAME_BONUS)
+
+$(NAME_BONUS): fclean $(LIBFT) $(MLX) $(OBJS)
+	$(CC) $(OBJS) $(LIBFT) $(MLX) -o $(NAME_BONUS)
+	@echo -n "\r                                                                            \r"
+	@echo "[$(GREEN)DONE$(RESET)] Linking complete: [$(MAGENTA)$(NAME_BONUS)$(RESET)] - Complete!"
+
 clean:
 	@$(MAKE) -C $(MLX_DIR) clean
 	$(MAKE) clean -C $(LIBFT_DIR)
@@ -70,7 +79,7 @@ clean:
 fclean:
 	@$(MAKE) -C $(MLX_DIR) clean
 	$(MAKE) fclean -C $(LIBFT_DIR)
-	$(RM) $(OBJS) $(NAME)
+	$(RM) $(OBJS) $(NAME) $(NAME_BONUS)
 	@echo "[$(RED)DELETED$(RESET)] Cub3D file [$(RED)$(NAME)$(RESET)] - Cleaned!"
 
 re: fclean all

@@ -3,35 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   init_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 15:29:12 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/28 15:16:02 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/04/01 13:10:04 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void	init_loop(t_loop *loop)
+void	init_struct(t_cub *cubed)
 {
-	loop->fov = PI / 3 / WIDTH;
-	loop->ray_angle = 0;
-	loop->raydir_x = 0;
-	loop->raydir_y = 0;
-	loop->sidedist_x = 0;
-	loop->sidedist_y = 0;
-	loop->map_x = 0;
-	loop->map_y = 0;
-	loop->deltadist_x = 0;
-	loop->deltadist_y = 0;
-	loop->step_x = 0;
-	loop->step_y = 0;
-	loop->hit = 0;
-	loop->side = 0;
-	loop->perpwalldist = 0;
-	loop->line_height = 0;
-	loop->drawstart = 0;
-	loop->drawend = 0;
+	cubed->no_path = NULL;
+	cubed->so_path = NULL;
+	cubed->we_path = NULL;
+	cubed->ea_path = NULL;
+	cubed->pj_x = -1;
+	cubed->pj_y = -1;
+	cubed->map = NULL;
+	cubed->premap = NULL;
 }
 
 void	init_player(t_player *player, int s_x, int s_y, t_cub *cubed)
@@ -59,9 +49,6 @@ int	game_loop(void *param)
 	clear_screen(cubed);
 	move_player(cubed->player, cubed);
 	raycasting(cubed, cubed->player, cubed->loop);
-/* 	draw_map(cubed);
-	draw_empty_square((int)cubed->player->x / 4, (int)cubed->player->y / 4,
-		8, cubed); */
 	mlx_put_image_to_window(cubed->game->mlx, cubed->game->win,
 		cubed->game->img, 0, 0);
 	return (0);

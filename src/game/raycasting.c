@@ -3,99 +3,127 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 15:02:24 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/28 15:06:02 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/04/01 13:26:59 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void	pos_wall_text(t_cub *cub, t_loop *loop, t_draw *draw)
+void	init_ray(t_player *player, t_loop *loop, int x)
 {
-	if (loop->side == 0)
-		draw->wallx = cub->player->y / BLOCK + loop->perpwalldist
-			* loop->raydir_y;
-	else
-		draw->wallx = cub->player->x / BLOCK + loop->perpwalldist
-			* loop->raydir_x;
-	draw->wallx -= floor(draw->wallx);
-	if (loop->side == 0)
+	loop->ray_angle = player->angle - (PI / 6) + (x * loop->fov);
+	loop->raydir_x = cos(loop->ray_angle);
+	loop->raydir_y = sin(loop->ray_angle);
+	loop->deltadist_x = fabs(1 / loop->raydir_x);
+	loop->deltadist_y = fabs(1 / loop->raydir_y);
+	loop->map_x = player->mx;
+	loop->map_y = player->my;
+}
+
+void	init_loop(t_loop *loop)
+{
+	loop->fov = PI / 3 / WIDTH;
+	loop->ray_angle = 0;
+	loop->raydir_x = 0;
+	loop->raydir_y = 0;
+	loop->sidedist_x = 0;
+	loop->sidedist_y = 0;
+	loop->map_x = 0;
+	loop->map_y = 0;
+	loop->deltadist_x = 0;
+	loop->deltadist_y = 0;
+	loop->step_x = 0;
+	loop->step_y = 0;
+	loop->hit = 0;
+	loop->side = 0;
+	loop->perpwalldist = 0;
+	loop->line_height = 0;
+	loop->drawstart = 0;
+	loop->drawend = 0;
+	loop->x = -1;
+}
+
+void	get_raycast_steps(t_player *player, t_loop *loop)
+{
+	if (loop->raydir_x < 0)
 	{
-		if (loop->raydir_x > 0)
-			draw->texi = 3;
-		else
-			draw->texi = 2;
+		loop->step_x = -1;
+		loop->sidedist_x = ((player->x / BLOCK) - loop->map_x)
+			* loop->deltadist_x;
 	}
 	else
 	{
-		if (loop->raydir_y > 0)
-			draw->texi = 1;
-		else
-			draw->texi = 0;
+		loop->step_x = 1;
+		loop->sidedist_x = ((loop->map_x + 1.0) - (player->x / BLOCK))
+			* loop->deltadist_x;
 	}
-}
-
-void	coor_textures(t_cub *cub, t_loop *loop, t_draw *draw)
-{
-	draw->texture_x = (int)(draw->wallx
-			* (double)cub->textures[draw->texi]->width);
-	if (loop->side == 0 && loop->raydir_x > 0)
-		loop->texx = cub->textures[draw->texi]->width - loop->texx - 1;
-	if (loop->side == 1 && loop->raydir_y < 0)
-		loop->texx = cub->textures[draw->texi]->width - loop->texx - 1;
-	draw->step = 1.0 * cub->textures[draw->texi]->width
-		/ loop->line_height;
-	draw->texpos = (loop->drawstart - HEIGHT / 2 + loop->line_height / 2)
-		* draw->step;
-}
-
-void	print_walls(t_cub *cub, t_loop *loop, t_draw *draw, int x)
-{
-	int	y;
-
-	y = loop->drawstart - 1;
-	while (++y < loop->drawend)
+	if (loop->raydir_y < 0)
 	{
-		draw->texy = (int)draw->texpos
-			% (cub->textures[draw->texi]->height);
-		draw->texpos += draw->step;
-		draw->color = cub->textures[draw->texi]
-			->data[cub->textures[draw->texi]->height
-			* draw->texy + draw->texture_x];
-		if (y >= 0 && y < HEIGHT)
-			put_pixel(x, y, draw->color, cub);
+		loop->step_y = -1;
+		loop->sidedist_y = ((player->y / BLOCK) - loop->map_y)
+			* loop->deltadist_y;
+	}
+	else
+	{
+		loop->step_y = 1;
+		loop->sidedist_y = ((loop->map_y + 1.0) - (player->y / BLOCK))
+			* loop->deltadist_y;
 	}
 }
 
-void	draw_wall_with_texture(t_cub *cub, t_loop *loop, int x)
+void	get_raycast_hits(t_cub *cubed, t_loop *loop)
 {
-	t_draw	draw;
-
-	// Calcular la posición de la pared en la textura
-	// Para saber que textura coger segun la direccion
-	pos_wall_text(cub, loop, &draw);
-	// Calcular coordenadas de la textura
-	coor_textures(cub, loop, &draw);
-	// Printear la textura
-	print_walls(cub, loop, &draw, x);
+	loop->hit = 0;
+	while (loop->hit == 0)
+	{
+		if (loop->sidedist_x < loop->sidedist_y)
+		{
+			loop->sidedist_x += loop->deltadist_x;
+			loop->map_x += loop->step_x;
+			loop->side = 0;
+		}
+		else
+		{
+			loop->sidedist_y += loop->deltadist_y;
+			loop->map_y += loop->step_y;
+			loop->side = 1;
+		}
+		if (loop->map_y < 0 || loop->map_x < 0
+			|| loop->map_y >= HEIGHT / BLOCK || loop->map_x >= WIDTH / BLOCK)
+			break ;
+		else if (cubed->map[loop->map_y][loop->map_x] == '1' ||
+			cubed->map[loop->map_y][loop->map_x] == ' ')
+			loop->hit = 1;
+	}
 }
 
 void	raycasting(t_cub *cubed, t_player *player, t_loop *loop)
 {
-	int	x;
-
-	x = -1;
+	t_draw	draw;
+	
 	init_loop(loop);
-	while (++x < WIDTH)
+	while (++loop->x < WIDTH)
 	{
-		init_ray(player, loop, x);
+		init_ray(player, loop, loop->x);
 		get_raycast_steps(player, cubed->loop);
 		get_raycast_hits(cubed, loop);
 		init_start_end(loop);
-		draw_wall_with_texture(cubed, loop, x);
-		draw_3dmap(cubed, loop->drawstart, loop->drawend, x);
-/* 		draw_rays(cubed, player->x  / 4, player->y  / 4, loop); */
+		get_wall_textures(cubed, loop, &draw);
+		get_coor_textures(cubed, loop, &draw);
+		if (BONUS)
+		{
+			draw_walls(cubed, loop, &draw, loop->x);
+			draw_ceiling(cubed, loop, loop->x);
+			draw_floor(cubed, loop, loop->x);
+		}
+		else
+		{
+			draw_3dmap(cubed, loop->drawstart, loop->drawend, loop->x);
+			draw_walls(cubed, cubed->loop, &draw, loop->x);
+		}
+		loop->x += 1;
 	}
 }

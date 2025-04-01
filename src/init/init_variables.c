@@ -12,7 +12,7 @@
 
 #include "../../includes/cub3d.h"
 
-static void	init_variable_values(t_cub *cubed, char **map, int i)
+void	init_variable_values(t_cub *cubed, char **map, int i)
 {
 	while (++i < ft_arrlen(map))
 	{
@@ -39,7 +39,7 @@ static void	init_variable_values(t_cub *cubed, char **map, int i)
 	}
 }
 
-static int	contains_alpha(char *s1, char *s2, char *s3)
+int	contains_alpha(char *s1, char *s2, char *s3)
 {
 	int		i;
 
@@ -67,7 +67,7 @@ static int	contains_alpha(char *s1, char *s2, char *s3)
 	return (0);
 }
 
-static void	check_dupe_or_missing(t_cub *cubed, char *del, char **map, int mode)
+void	check_dupe_or_missing(t_cub *cubed, char *del, char **map, int mode)
 {
 	int		i;
 	int		n;

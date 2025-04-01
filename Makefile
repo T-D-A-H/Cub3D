@@ -6,7 +6,7 @@
 #    By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/12 13:05:04 by jaimesan          #+#    #+#              #
-#    Updated: 2025/04/01 13:35:57 by ctommasi         ###   ########.fr        #
+#    Updated: 2025/04/01 13:39:05 by ctommasi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,7 +65,7 @@ $(NAME): $(LIBFT) $(MLX) $(OBJS)
 bonus: CFLAGS += -D BONUS=1
 bonus: $(NAME_BONUS)
 
-$(NAME_BONUS): fclean $(LIBFT) $(MLX) $(OBJS)
+$(NAME_BONUS): $(LIBFT) $(MLX) $(OBJS)
 	$(CC) $(OBJS) $(LIBFT) $(MLX) -o $(NAME_BONUS)
 	@echo -n "\r                                                                            \r"
 	@echo "[$(GREEN)DONE$(RESET)] Linking complete: [$(MAGENTA)$(NAME_BONUS)$(RESET)] - Complete!"

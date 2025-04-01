@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 15:04:20 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/01 10:55:18 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/04/01 13:40:07 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	init_mini(t_mini *mini, int x0, int y0, t_loop *loop)
 		mini->sy = 1;
 	mini->err = mini->dx - mini->dy;
 }
+
 void	draw_rays(t_cub *cubed, int x0, int y0, t_loop *loop)
 {
 	t_mini	mini;
@@ -83,8 +84,8 @@ void	draw_minimap(t_cub *cubed)
 	int	y;
 	int	x;
 
-	draw_empty_square(((int)cubed->player->x / 4) - 4, ((int)cubed->player->y  / 4) - 4,
-		8, cubed);
+	draw_empty_square(((int)cubed->player->x / 4) - 4,
+		((int)cubed->player->y / 4) - 4, 8, cubed);
 	y = -1;
 	while (cubed->map[++y])
 	{

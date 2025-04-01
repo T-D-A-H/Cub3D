@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 15:02:24 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/01 13:26:59 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/04/01 13:40:37 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ void	get_raycast_hits(t_cub *cubed, t_loop *loop)
 void	raycasting(t_cub *cubed, t_player *player, t_loop *loop)
 {
 	t_draw	draw;
-	
+
 	init_loop(loop);
 	while (++loop->x < WIDTH)
 	{

@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 15:53:12 by jaimesan          #+#    #+#             */
-/*   Updated: 2025/04/01 13:21:00 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/04/01 13:41:06 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,11 @@ void	load_all_textures(t_cub *cub)
 void	get_wall_textures(t_cub *cub, t_loop *loop, t_draw *draw)
 {
 	if (loop->side == 0)
-		draw->wallx = cub->player->y / BLOCK + loop->perpwalldist * loop->raydir_y;
+		draw->wallx = cub->player->y / BLOCK + loop->perpwalldist
+			* loop->raydir_y;
 	else
-		draw->wallx = cub->player->x / BLOCK + loop->perpwalldist * loop->raydir_x;
+		draw->wallx = cub->player->x / BLOCK + loop->perpwalldist
+			* loop->raydir_x;
 	draw->wallx -= floor(draw->wallx);
 	if (loop->side == 0)
 	{

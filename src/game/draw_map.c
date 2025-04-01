@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 16:27:17 by jaimesan          #+#    #+#             */
-/*   Updated: 2025/04/01 13:43:30 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/04/01 14:14:48 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,14 @@ void	init_start_end(t_loop *loop)
 		loop->drawend = HEIGHT - 1;
 }
 
-void	draw_ceiling(t_cub *cub, t_loop *loop, int x)
+void	draw_ceiling(t_cub *cub, t_loop *loop, int x, int y)
 {
-	int		y;
 	double	row_distance;
 	double	floor_x;
 	double	floor_y;
 	int		tex_x;
 	int		tex_y;
 
-	y = 0;
 	while (y < loop->drawstart)
 	{
 		row_distance = HEIGHT / (2.0 * y - HEIGHT);
@@ -52,16 +50,14 @@ void	draw_ceiling(t_cub *cub, t_loop *loop, int x)
 	}
 }
 
-void	draw_floor(t_cub *cub, t_loop *loop, int x)
+void	draw_floor(t_cub *cub, t_loop *loop, int x, int y)
 {
-	int		y;
 	double	row_distance;
 	double	floor_x;
 	double	floor_y;
 	int		tex_x;
 	int		tex_y;
 
-	y = loop->drawend;
 	while (y < HEIGHT)
 	{
 		row_distance = HEIGHT / (2.0 * y - HEIGHT);

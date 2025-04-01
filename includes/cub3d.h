@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:31:47 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/01 13:45:23 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/04/01 14:15:26 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,8 +204,8 @@ void	get_raycast_steps(t_player *player, t_loop *loop);
 void	init_loop(t_loop *loop);
 void	init_ray(t_player *player, t_loop *loop, int x);
 //--------------------------------------------------GAME-draw_map
-void	draw_floor(t_cub *cub, t_loop *loop, int x);
-void	draw_ceiling(t_cub *cub, t_loop *loop, int x);
+void	draw_floor(t_cub *cub, t_loop *loop, int x, int y);
+void	draw_ceiling(t_cub *cub, t_loop *loop, int x, int y);
 void	get_wall_textures(t_cub *cub, t_loop *loop, t_draw *draw);
 void	init_start_end(t_loop *loop);
 void	get_coor_textures(t_cub *cub, t_loop *loop, t_draw *draw);

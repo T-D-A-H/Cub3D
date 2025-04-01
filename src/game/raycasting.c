@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 15:02:24 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/01 13:40:37 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/04/01 14:14:40 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,8 +116,8 @@ void	raycasting(t_cub *cubed, t_player *player, t_loop *loop)
 		if (BONUS)
 		{
 			draw_walls(cubed, loop, &draw, loop->x);
-			draw_ceiling(cubed, loop, loop->x);
-			draw_floor(cubed, loop, loop->x);
+			draw_ceiling(cubed, loop, loop->x, 0);
+			draw_floor(cubed, loop, loop->x, loop->drawend);
 		}
 		else
 		{

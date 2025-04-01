@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 15:53:12 by jaimesan          #+#    #+#             */
-/*   Updated: 2025/04/01 13:41:06 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/04/01 14:39:30 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,17 +57,20 @@ void	get_wall_textures(t_cub *cub, t_loop *loop, t_draw *draw)
 	if (loop->side == 0)
 	{
 		if (loop->raydir_x > 0)
-			draw->texi = 3;
+			draw->texi = 3; // 3
 		else
-			draw->texi = 2;
+			draw->texi = 2; // 2
 	}
 	else
 	{
 		if (loop->raydir_y > 0)
-			draw->texi = 1;
+			draw->texi = 1; // 1
 		else
-			draw->texi = 0;
+			draw->texi = 0; // 0
 	}
+	draw->texi = 3;
+	if (loop->door == 1)
+		draw->texi = 0;
 }
 
 void	get_coor_textures(t_cub *cub, t_loop *loop, t_draw *draw)

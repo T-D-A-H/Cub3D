@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:31:47 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/01 14:15:26 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/04/01 14:24:41 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@
 # define LEFT 65361
 # define RIGHT 65363
 # define ESC 65307
+# define KEY_F 102
 
 typedef struct s_mini
 {
@@ -105,6 +106,7 @@ typedef struct s_loop
 	int		drawend;
 	int		texx;
 	int		x;
+	int		door;
 }	t_loop;
 
 typedef struct s_draw
@@ -132,6 +134,7 @@ typedef struct s_player
 	bool	key_d;
 	bool	key_left;
 	bool	key_right;
+	bool	key_f;
 }	t_player;
 
 typedef struct s_game
@@ -197,6 +200,8 @@ void	init_struct(t_cub *cubed);
 //------------------------------------------------------------GAME-textures
 void	load_all_textures(t_cub *cub);
 void	load_texture(t_cub *cub, char *path, int index);
+//------------------------------------------------------------GAME-door
+void	handle_door_interaction(t_cub *cubed, t_player *player);
 //------------------------------------------------------GAME-raycasting
 void	raycasting(t_cub *cubed, t_player *player, t_loop *loop);
 void	get_raycast_hits(t_cub *cubed, t_loop *loop);

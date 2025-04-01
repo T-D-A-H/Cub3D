@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 15:02:24 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/01 14:14:40 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/04/01 14:39:02 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,9 +94,14 @@ void	get_raycast_hits(t_cub *cubed, t_loop *loop)
 		if (loop->map_y < 0 || loop->map_x < 0
 			|| loop->map_y >= HEIGHT / BLOCK || loop->map_x >= WIDTH / BLOCK)
 			break ;
-		else if (cubed->map[loop->map_y][loop->map_x] == '1' ||
-			cubed->map[loop->map_y][loop->map_x] == ' ')
+		else if (cubed->map[loop->map_y][loop->map_x] == '1'
+			|| cubed->map[loop->map_y][loop->map_x] == ' ')
 			loop->hit = 1;
+		else if (cubed->map[loop->map_y][loop->map_x] == 'D')
+		{
+			loop->hit = 1;
+			loop->door = 1;
+		}
 	}
 }
 
@@ -107,6 +112,7 @@ void	raycasting(t_cub *cubed, t_player *player, t_loop *loop)
 	init_loop(loop);
 	while (++loop->x < WIDTH)
 	{
+		loop->door = 0;
 		init_ray(player, loop, loop->x);
 		get_raycast_steps(player, cubed->loop);
 		get_raycast_hits(cubed, loop);
@@ -118,6 +124,11 @@ void	raycasting(t_cub *cubed, t_player *player, t_loop *loop)
 			draw_walls(cubed, loop, &draw, loop->x);
 			draw_ceiling(cubed, loop, loop->x, 0);
 			draw_floor(cubed, loop, loop->x, loop->drawend);
+			if (cubed->player->key_f)
+			{
+				handle_door_interaction(cubed, player);
+				cubed->player->key_f = false;
+			}
 		}
 		else
 		{

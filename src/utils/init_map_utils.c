@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_map_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 12:29:43 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/26 11:32:17 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/04/01 14:25:50 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	is_map_char(char c, int mode)
 	}
 	else
 	{
-		if (c != '1' && c != '0' && c != '\n' && c != ' ')
+		if (c != '1' && c != '0' && c != '\n' && c != ' ' && c != 'D')
 			return (1);
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 14:57:47 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/28 13:45:59 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/04/01 14:38:27 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int	on_keypress(int keydata, t_cub *cub)
 		cub->player->key_left = true;
 	if (keydata == RIGHT)
 		cub->player->key_right = true;
+	if (keydata == KEY_F)
+		cub->player->key_f = true;
 	if (keydata == ESC)
 		return (error(cub, NO_ERROR), 1);
 	return (0);
@@ -45,5 +47,7 @@ int	on_keyrelease(int keydata, t_player *player)
 		player->key_left = false;
 	if (keydata == RIGHT)
 		player->key_right = false;
+	if (keydata == KEY_F)
+		player->key_f = false;
 	return (0);
 }

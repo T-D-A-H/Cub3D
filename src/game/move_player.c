@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 16:05:38 by jaimesan          #+#    #+#             */
-/*   Updated: 2025/03/31 11:58:36 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/04/01 14:38:44 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ int	can_move(t_cub *cubed, double next_x, double next_y)
 	if (map_x < 0 || map_y < 0 || map_x >= (int)ft_strlen(cubed->map[0])
 		|| map_y >= ft_arrlen(cubed->map))
 		return (0);
-	if (cubed->map[map_y][map_x] == '1')
+	if (cubed->map[map_y][map_x] == '1'
+		|| cubed->map[map_y][map_x] == 'D')
 		return (0);
 	return (1);
 }

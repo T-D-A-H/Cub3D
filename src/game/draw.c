@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 15:03:36 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/01 13:40:14 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/04/02 16:32:26 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	clear_screen(t_cub *cubed)
 	{
 		x = -1;
 		while (++x < WIDTH)
-			put_pixel(x, y, 0, cubed);
+			put_pixel(x, y, 1, cubed);
 	}
 }
 

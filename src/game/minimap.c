@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 15:04:20 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/01 13:40:07 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/04/01 14:45:57 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,6 @@ void	draw_minimap(t_cub *cubed)
 	int	y;
 	int	x;
 
-	draw_empty_square(((int)cubed->player->x / 4) - 4,
-		((int)cubed->player->y / 4) - 4, 8, cubed);
 	y = -1;
 	while (cubed->map[++y])
 	{
@@ -101,4 +99,6 @@ void	draw_minimap(t_cub *cubed)
 				draw_full_square(cubed, x, y, GREY);
 		}
 	}
+	draw_empty_square(((int)cubed->player->x / 4) - 4,
+		((int)cubed->player->y / 4) - 4, 8, cubed);
 }

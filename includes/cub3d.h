@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:31:47 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/01 14:24:41 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/04/02 15:45:38 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@
 # define NO_ERROR ""
 
 # define W_NAME "CUB3D"
-# define WIDTH 2048
-# define HEIGHT 1024
+# define WIDTH 1920
+# define HEIGHT 1200
 # define BLOCK 64
 # define MAP 16
 
@@ -55,8 +55,8 @@
 # endif
 
 # define PLAYER_SIZE 32
-# define MOVE_AMOUNT 5
-# define MOVE_SPEED 0.03
+# define MOVE_AMOUNT 4
+# define MOVE_SPEED 0.02
 # define PI 3.1415926535
 
 # define YELLOW 0xFFFF00
@@ -107,6 +107,7 @@ typedef struct s_loop
 	int		texx;
 	int		x;
 	int		door;
+	int		door_wall;
 }	t_loop;
 
 typedef struct s_draw
@@ -157,6 +158,18 @@ typedef struct s_texture
 	int		bpp;
 	int		size_line;
 	int		endian;
+	double	sidedist_xy[2];
+	double	perpwalldist;
+	int		line_height;
+	int		drawstart;
+	int		drawend;
+	int		color;
+	int		tex_id;
+	double	wallx;
+	double	step;
+	double	texpos;
+	int		texx;
+	int		texy;
 }	t_texture;
 
 typedef struct s_cub
@@ -172,7 +185,7 @@ typedef struct s_cub
 	int			pj_y;
 	int			pj_x;
 	float		start_direction;
-	t_texture	*textures[4];
+	t_texture	*textures[5];
 	t_game		*game;
 	t_player	*player;
 	t_loop		*loop;
@@ -233,6 +246,7 @@ void	draw_walls(t_cub *cub, t_loop *loop, t_draw *draw, int x);
 void	draw_full_square(t_cub *cubed, int x, int y, int colour);
 void	draw_empty_square(int x, int y, int size, t_cub *cubed);
 void	draw_rays(t_cub *cubed, int x0, int y0, t_loop *loop);
+void	draw_minimap(t_cub *cubed);
 //-------------------------------------------------------------------------UTILS
 void	read_map_file(t_cub *cubed, char **argv);
 int		check_cub_args(int argc, char **argv);
@@ -244,5 +258,10 @@ int		save_map(t_cub *cubed, char **temp_map, size_t y, size_t x);
 float	get_player_direction(char c);
 //------------------------------------------------------DELETE_AFTER
 void	print_where_not_walled(char **map, int y, int x);
+
+void	render_objects(t_cub *cubed, int x);
+void	draw_wall_no_door(t_cub *cub, t_texture *tex, int x);
+void open_door(t_cub *cubed, t_player *player);
+int door_is_closed(t_cub *cubed, t_player *player);
 
 #endif

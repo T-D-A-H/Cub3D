@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 15:02:24 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/01 14:39:02 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/04/02 16:52:18 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ void	init_loop(t_loop *loop)
 	loop->drawstart = 0;
 	loop->drawend = 0;
 	loop->x = -1;
+	loop->door = 0;
+	loop->door_wall = 0;
 }
 
 void	get_raycast_steps(t_player *player, t_loop *loop)
@@ -102,6 +104,12 @@ void	get_raycast_hits(t_cub *cubed, t_loop *loop)
 			loop->hit = 1;
 			loop->door = 1;
 		}
+		else if (cubed->map[loop->map_y][loop->map_x] == 'd')
+		{
+			cubed->textures[4]->sidedist_xy[0] = loop->sidedist_x;
+			cubed->textures[4]->sidedist_xy[1] = loop->sidedist_y;
+			loop->door_wall = 1;
+		}
 	}
 }
 
@@ -110,6 +118,7 @@ void	raycasting(t_cub *cubed, t_player *player, t_loop *loop)
 	t_draw	draw;
 
 	init_loop(loop);
+	loop->door_wall = 0;
 	while (++loop->x < WIDTH)
 	{
 		loop->door = 0;
@@ -124,17 +133,16 @@ void	raycasting(t_cub *cubed, t_player *player, t_loop *loop)
 			draw_walls(cubed, loop, &draw, loop->x);
 			draw_ceiling(cubed, loop, loop->x, 0);
 			draw_floor(cubed, loop, loop->x, loop->drawend);
-			if (cubed->player->key_f)
-			{
-				handle_door_interaction(cubed, player);
-				cubed->player->key_f = false;
-			}
 		}
 		else
 		{
 			draw_3dmap(cubed, loop->drawstart, loop->drawend, loop->x);
 			draw_walls(cubed, cubed->loop, &draw, loop->x);
 		}
-		loop->x += 1;
+		// loop->x += 2;
+		if (door_is_closed(cubed, player) && cubed->player->key_f)
+			open_door(cubed, cubed->player);
+		if (loop->door_wall == 1)
+			render_objects(cubed, loop->x);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 15:29:12 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/01 14:45:44 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/04/02 13:22:03 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,15 @@ void	init_game(t_game *game, t_cub *cubed)
 	load_all_textures(cubed);
 	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
 }
+void init_objects(t_cub *cubed) {
+	cubed->p_capacity = 50;
+    cubed->p_positions = malloc(sizeof(t_position) * cubed->p_capacity);
+    cubed->p_count = 0;
+}
 
 void	init_window(t_cub *cubed)
 {
+	init_objects(cubed);
 	init_player(cubed->player, cubed->pj_x, cubed->pj_y, cubed);
 	init_game(cubed->game, cubed);
 	mlx_hook(cubed->game->win, 2, 1L << 0, on_keypress, cubed);

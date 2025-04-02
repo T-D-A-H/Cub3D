@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:31:47 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/01 14:56:30 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/04/02 16:29:34 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,6 +160,13 @@ typedef struct s_texture
 	int		endian;
 }	t_texture;
 
+typedef struct s_position
+{
+    double x;
+    double y;
+	double distance;
+}   t_position;
+
 typedef struct s_cub
 {
 	char		*no_path;
@@ -173,10 +180,14 @@ typedef struct s_cub
 	int			pj_y;
 	int			pj_x;
 	float		start_direction;
-	t_texture	*textures[4];
+	t_texture	*textures[5];
 	t_game		*game;
 	t_player	*player;
 	t_loop		*loop;
+
+	t_position  *p_positions; 
+    int			p_count;
+	int			p_capacity;
 }	t_cub;
 
 //------------------------------------------------------------MAIN
@@ -209,6 +220,9 @@ void	get_raycast_hits(t_cub *cubed, t_loop *loop);
 void	get_raycast_steps(t_player *player, t_loop *loop);
 void	init_loop(t_loop *loop);
 void	init_ray(t_player *player, t_loop *loop, int x);
+void	draw_object(t_cub *cub, t_player *player, int num_objects);
+void	draw_object(t_cub *cub, t_player *player, int num_objects);
+void	calcs_object(t_cub *cubed, t_loop *loop);
 //--------------------------------------------------GAME-draw_map
 void	draw_floor(t_cub *cub, t_loop *loop, int x, int y);
 void	draw_ceiling(t_cub *cub, t_loop *loop, int x, int y);

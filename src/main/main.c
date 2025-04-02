@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:08:04 by jaimesan          #+#    #+#             */
-/*   Updated: 2025/04/01 13:08:23 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/04/02 12:57:38 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,12 @@ int	main(int argc, char **argv)
 	t_game		game;
 	t_player	player;
 	t_loop		loop;
+/* 	t_position	pos; */
 
 	cubed.game = &game;
 	cubed.player = &player;
 	cubed.loop = &loop;
+/* 	cubed.p_positions = &pos; */
 	if (check_cub_args(argc, argv))
 		return (1);
 	init_struct(&cubed);

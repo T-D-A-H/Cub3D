@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 15:53:12 by jaimesan          #+#    #+#             */
-/*   Updated: 2025/04/01 14:39:30 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/04/02 11:41:07 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	load_all_textures(t_cub *cub)
 	int	i;
 
 	i = -1;
-	while (++i < 4)
+	while (++i < 5)
 	{
 		cub->textures[i] = malloc(sizeof(t_texture));
 		if (!cub->textures[i])
@@ -43,6 +43,7 @@ void	load_all_textures(t_cub *cub)
 	load_texture(cub, cub->so_path, 1);
 	load_texture(cub, cub->we_path, 2);
 	load_texture(cub, cub->ea_path, 3);
+	load_texture(cub, "./assets/key_small3.xpm", 4);
 }
 
 void	get_wall_textures(t_cub *cub, t_loop *loop, t_draw *draw)

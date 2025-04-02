@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:08:04 by jaimesan          #+#    #+#             */
-/*   Updated: 2025/04/01 12:22:05 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/04/02 12:57:28 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,10 @@ int	check_invalid_chars(char **map, t_cub *cubed)
 		{
 			if (is_map_char(map[i][j], 0))
 			{
-				count++;
 				cubed->pj_y = i - 6;
 				cubed->pj_x = j;
 				cubed->start_direction = get_player_direction(map[i][j]);
+				count++;
 			}
 			else if (is_map_char(map[i][j], 1))
 				return (1);

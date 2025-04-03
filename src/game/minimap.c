@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 15:04:20 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/03 14:04:32 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/04/03 16:35:14 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,11 +96,11 @@ void	draw_minimap(t_cub *cubed)
 				draw_full_square(cubed, x, y,RED);
 			if (cubed->map[y][x] == 'd')
 				draw_full_square(cubed, x, y, GREEN);
-			if (cubed->map[y][x] == 'O')
-				draw_full_square(cubed, x, y, YELLOW);
+
 			else if (cubed->map[y][x] == '0' || cubed->map[y][x] == 'N'
 				|| cubed->map[y][x] == 'E'
 				|| cubed->map[y][x] == 'W'
+				|| cubed->map[y][x] == 'O'
 				|| cubed->map[y][x] == 'S' )
 				draw_full_square(cubed, x, y, GREY);
 		}

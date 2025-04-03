@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:31:47 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/03 13:47:23 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/04/03 16:18:44 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,22 @@
 
 typedef struct s_position
 {
-    double x;
-    double y;
-	double distance;
-}   t_position;
+    double	x;
+    double	y;
+	double	distance;
+}	t_position;
 
+typedef struct s_object_porc
+{   
+	int		visible_samples;
+    int		total_samples;
+	double	block_y;
+	double 	block_x;
+	double	tx;
+	double	ty;
+	int		visible;
+
+}	t_object_porc;
 
 typedef struct s_object
 {

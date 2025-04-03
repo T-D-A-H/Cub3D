@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:31:47 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/02 16:29:34 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/04/03 13:47:23 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,39 @@
 # define RIGHT 65363
 # define ESC 65307
 # define KEY_F 102
+
+typedef struct s_position
+{
+    double x;
+    double y;
+	double distance;
+}   t_position;
+
+
+typedef struct s_object
+{
+	double		inv_det;
+	double		transform_x;
+	double		transform_y;
+	int			obj_screen_x;
+	int			obj_height;
+	int			obj_width;
+	int			draw_start_y;
+	int			draw_end_y;
+	int			draw_start_x;
+	int			draw_end_x;
+	int			tex_x;
+	int			tex_y;
+	int			stripe;
+	double		obj_x;
+	double		obj_y;
+	double		fov;
+	double		plane_x;
+	double		plane_y;
+	int			color;
+	int			d;
+	t_position	temp;
+}	t_object;
 
 typedef struct s_mini
 {
@@ -159,13 +192,6 @@ typedef struct s_texture
 	int		size_line;
 	int		endian;
 }	t_texture;
-
-typedef struct s_position
-{
-    double x;
-    double y;
-	double distance;
-}   t_position;
 
 typedef struct s_cub
 {

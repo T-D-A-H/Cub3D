@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 15:02:24 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/02 16:14:44 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/04/03 14:57:03 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,6 @@ void	raycasting(t_cub *cubed, t_player *player, t_loop *loop)
 				handle_door_interaction(cubed, player);
 				cubed->player->key_f = false;
 			}
-			
 		}
 		else
 		{

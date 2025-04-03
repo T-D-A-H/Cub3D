@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 15:53:12 by jaimesan          #+#    #+#             */
-/*   Updated: 2025/04/02 16:09:24 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/04/03 13:23:20 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,14 +66,12 @@ void	get_wall_textures(t_cub *cub, t_loop *loop, t_draw *draw)
 	else
 	{
 		if (loop->raydir_y > 0)
-			draw->texi = 3; // 1
+			draw->texi = 3;
 		else
-			draw->texi = 3; // 0
+			draw->texi = 3;
 	}
 	if (loop->door == 1)
 		draw->texi = 0;
-	// if (loop->door_wall == 1)
-	// 	draw->texi = 4;
 }
 
 void	get_coor_textures(t_cub *cub, t_loop *loop, t_draw *draw)

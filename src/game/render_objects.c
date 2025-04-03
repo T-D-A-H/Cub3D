@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 11:55:37 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/02 16:51:24 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/04/03 14:07:23 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	draw_wall_no_door(t_cub *cub, t_texture *tex, int x)
 	y = tex->drawstart - 1;
 	while (++y < tex->drawend)
 	{
-		tex->texy = (int)tex->texpos % (tex->height);
+		tex->texy = (int)tex->texpos % tex->height;
 		tex->texpos += tex->step;
 		tex->color = tex->data[tex->height * tex->texy + tex->texx];
 		if (y >= 0 && y < HEIGHT)
@@ -72,7 +72,35 @@ void	draw_wall_no_door(t_cub *cub, t_texture *tex, int x)
 
 void	get_texture_data(t_cub *cubed, t_loop *loop, t_texture *tex)
 {
-	if (loop->side == 0)
+	if (tex->side == 0)
+		tex->perpwalldist = (tex->sidedist_xy[1] - loop->deltadist_y);
+	else
+		tex->perpwalldist = (tex->sidedist_xy[0] - loop->deltadist_x);
+	tex->line_height = (int)(HEIGHT / tex->perpwalldist);
+	tex->drawstart = -tex->line_height / 2 + HEIGHT / 2;
+	if (tex->drawstart < 0)
+		tex->drawstart = 0;
+	tex->drawend = tex->line_height / 2 + HEIGHT / 2;
+	if (tex->drawend >= HEIGHT)
+		tex->drawend = HEIGHT - 1;
+	if (tex->side == 0)
+		tex->wallx = cubed->player->x / BLOCK + tex->perpwalldist * loop->raydir_x;
+	else
+		tex->wallx = cubed->player->y / BLOCK + tex->perpwalldist * loop->raydir_y;
+	tex->wallx -= floor(tex->wallx);
+	tex->texx = (int)(tex->wallx * (double)tex->width);
+	if (tex->side == 0 && loop->raydir_x > 0)
+		tex->texx = tex->width - tex->texx - 1;
+	if (tex->side == 1 && loop->raydir_y < 0)
+		tex->texx = tex->height - tex->texx - 1;
+	tex->step = 1.0 * tex->width / tex->line_height;
+	tex->texpos = (tex->drawstart - HEIGHT / 2 + tex->line_height / 2) * tex->step;
+	tex->tex_id = 4;
+}
+
+void	get_texture_data2(t_cub *cubed, t_loop *loop, t_texture *tex)
+{
+	if (tex->side == 0)
 		tex->perpwalldist = (tex->sidedist_xy[0] - loop->deltadist_x);
 	else
 		tex->perpwalldist = (tex->sidedist_xy[1] - loop->deltadist_y);
@@ -83,28 +111,27 @@ void	get_texture_data(t_cub *cubed, t_loop *loop, t_texture *tex)
 	tex->drawend = tex->line_height / 2 + HEIGHT / 2;
 	if (tex->drawend >= HEIGHT)
 		tex->drawend = HEIGHT - 1;
-	if (loop->side == 0)
+	if (tex->side == 0)
 		tex->wallx = cubed->player->y / BLOCK + tex->perpwalldist * loop->raydir_y;
 	else
 		tex->wallx = cubed->player->x / BLOCK + tex->perpwalldist * loop->raydir_x;
 	tex->wallx -= floor(tex->wallx);
-	tex->tex_id = 4;
 	tex->texx = (int)(tex->wallx * (double)tex->width);
-	tex->texx = tex->texx % tex->width; 
-	if (loop->side == 0 && loop->raydir_x > 0)
+	if (tex->side == 0 && loop->raydir_x > 0)
 		tex->texx = tex->width - tex->texx - 1;
-	if (loop->side == 1 && loop->raydir_y < 0)
-		tex->texx = tex->width - tex->texx - 1;
+	if (tex->side == 1 && loop->raydir_y < 0)
+		tex->texx = tex->height - tex->texx - 1;
 	tex->step = 1.0 * tex->width / tex->line_height;
 	tex->texpos = (tex->drawstart - HEIGHT / 2 + tex->line_height / 2) * tex->step;
+	tex->tex_id = 4;
 }
 
 void	render_objects(t_cub *cubed, int x)
 {
-	// printf("XXXXXXXX = %lf\n", cubed->textures[4]->sidedist_xy[0]);
-	// printf("YYYY = %lf\n", cubed->textures[4]->sidedist_xy[1]);
 	cubed->player->key_f = false;
 	get_texture_data(cubed, cubed->loop, cubed->textures[4]);
+	draw_wall_no_door(cubed, cubed->textures[4], x);
+	get_texture_data2(cubed, cubed->loop, cubed->textures[4]);
 	draw_wall_no_door(cubed, cubed->textures[4], x);
 		
 }

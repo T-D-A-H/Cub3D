@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 15:02:24 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/02 16:52:18 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/04/03 14:10:39 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,10 @@ void	get_raycast_hits(t_cub *cubed, t_loop *loop)
 		}
 		else if (cubed->map[loop->map_y][loop->map_x] == 'd')
 		{
+			if (loop->sidedist_x < loop->sidedist_y)
+				cubed->textures[4]->side = 0;
+			else
+				cubed->textures[4]->side = 1;
 			cubed->textures[4]->sidedist_xy[0] = loop->sidedist_x;
 			cubed->textures[4]->sidedist_xy[1] = loop->sidedist_y;
 			loop->door_wall = 1;
@@ -118,10 +122,10 @@ void	raycasting(t_cub *cubed, t_player *player, t_loop *loop)
 	t_draw	draw;
 
 	init_loop(loop);
-	loop->door_wall = 0;
 	while (++loop->x < WIDTH)
 	{
 		loop->door = 0;
+		loop->door_wall = 0;
 		init_ray(player, loop, loop->x);
 		get_raycast_steps(player, cubed->loop);
 		get_raycast_hits(cubed, loop);
@@ -133,16 +137,14 @@ void	raycasting(t_cub *cubed, t_player *player, t_loop *loop)
 			draw_walls(cubed, loop, &draw, loop->x);
 			draw_ceiling(cubed, loop, loop->x, 0);
 			draw_floor(cubed, loop, loop->x, loop->drawend);
+			if (loop->door_wall == 1)
+				render_objects(cubed, loop->x);
 		}
 		else
 		{
 			draw_3dmap(cubed, loop->drawstart, loop->drawend, loop->x);
 			draw_walls(cubed, cubed->loop, &draw, loop->x);
 		}
-		// loop->x += 2;
-		if (door_is_closed(cubed, player) && cubed->player->key_f)
-			open_door(cubed, cubed->player);
-		if (loop->door_wall == 1)
-			render_objects(cubed, loop->x);
+		loop->x += 2;
 	}
 }

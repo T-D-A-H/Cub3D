@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keypress.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 14:57:47 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/01 14:38:27 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/04/03 13:05:00 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,11 @@ int	on_keypress(int keydata, t_cub *cub)
 	if (keydata == RIGHT)
 		cub->player->key_right = true;
 	if (keydata == KEY_F)
+	{
 		cub->player->key_f = true;
+		if (door_is_closed(cub, cub->player))
+			open_door(cub, cub->player);
+	}
 	if (keydata == ESC)
 		return (error(cub, NO_ERROR), 1);
 	return (0);

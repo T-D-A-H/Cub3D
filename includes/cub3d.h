@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:31:47 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/02 15:45:38 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/04/03 13:53:20 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,6 +170,7 @@ typedef struct s_texture
 	double	texpos;
 	int		texx;
 	int		texy;
+	int		side;
 }	t_texture;
 
 typedef struct s_cub
@@ -263,5 +264,6 @@ void	render_objects(t_cub *cubed, int x);
 void	draw_wall_no_door(t_cub *cub, t_texture *tex, int x);
 void open_door(t_cub *cubed, t_player *player);
 int door_is_closed(t_cub *cubed, t_player *player);
+void	get_texture_data(t_cub *cubed, t_loop *loop, t_texture *tex);
 
 #endif

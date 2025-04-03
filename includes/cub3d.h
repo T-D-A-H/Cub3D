@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:31:47 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/03 13:53:20 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/04/03 17:29:55 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@
 # define BLUE 0x0000FF
 # define PURPLE 0xA400A4
 # define GREY 0x8a9597
+# define WHITE 0xFFFFFF
 
 # define W 119
 # define A 97
@@ -186,7 +187,7 @@ typedef struct s_cub
 	int			pj_y;
 	int			pj_x;
 	float		start_direction;
-	t_texture	*textures[5];
+	t_texture	*textures[6];
 	t_game		*game;
 	t_player	*player;
 	t_loop		*loop;

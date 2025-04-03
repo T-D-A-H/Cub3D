@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 11:55:37 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/03 14:07:23 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/04/03 16:59:23 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,6 @@ void	get_texture_data2(t_cub *cubed, t_loop *loop, t_texture *tex)
 
 void	render_objects(t_cub *cubed, int x)
 {
-	cubed->player->key_f = false;
 	get_texture_data(cubed, cubed->loop, cubed->textures[4]);
 	draw_wall_no_door(cubed, cubed->textures[4], x);
 	get_texture_data2(cubed, cubed->loop, cubed->textures[4]);

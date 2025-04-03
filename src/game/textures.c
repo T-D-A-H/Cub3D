@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 15:53:12 by jaimesan          #+#    #+#             */
-/*   Updated: 2025/04/03 13:23:20 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/04/03 17:11:08 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	load_all_textures(t_cub *cub)
 	int	i;
 
 	i = -1;
-	while (++i < 5)
+	while (++i < 6)
 	{
 		cub->textures[i] = malloc(sizeof(t_texture));
 		if (!cub->textures[i])
@@ -45,6 +45,7 @@ void	load_all_textures(t_cub *cub)
 	load_texture(cub, cub->ea_path, 3);
 	// TEST FOR NEW TEXTURE
 	load_texture(cub, "./assets/wall_no_door.xpm", 4);
+	load_texture(cub, "./assets/press_f_to_open.xpm", 5);
 }
 
 void	get_wall_textures(t_cub *cub, t_loop *loop, t_draw *draw)

@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:31:47 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/07 14:40:38 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/04/07 15:10:26 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ typedef struct s_position
     double	y;
 	double	distance;
 	int     is_taken;
-	int		id;
 }	t_position;
 
 typedef struct s_object_porc
@@ -229,8 +228,6 @@ typedef struct s_cub
 	t_position  *p_positions;
     int			p_count;
 	int			p_capacity;
-	int			blink_counter;
-	int			blink_state;
 }	t_cub;
 
 //------------------------------------------------------------MAIN

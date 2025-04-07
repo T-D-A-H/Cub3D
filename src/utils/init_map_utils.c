@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 12:29:43 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/01 14:25:50 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/04/02 12:15:29 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,12 @@ int	is_map_char(char c, int mode)
 	}
 	else
 	{
-		if (c != '1' && c != '0' && c != '\n' && c != ' ' && c != 'D')
+		if (BONUS)
+		{
+			if (c != '1' && c != '0' && c != '\n' && c != ' ' && c != 'D' && c != 'O')
+				return (1);
+		}
+		else if (c != '1' && c != '0' && c != '\n' && c != ' ')
 			return (1);
 	}
 	return (0);

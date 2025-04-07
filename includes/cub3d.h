@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:31:47 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/07 14:32:17 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/04/07 15:14:21 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,9 @@
 # define HEIGHT 1200
 # define BLOCK 64
 # define MAP 16
+# define DOT_RADIUS 37
+# define DOT_MARGIN 75
+# define MAX_OBJECTS 20
 
 # ifndef BONUS
 #  define BONUS 0
@@ -61,9 +64,10 @@
 
 # define YELLOW 0xFFFF00
 # define GREEN 0x00FF00
-# define BLUE 0x0000FF
+# define BLUE 0x1414b8
 # define PURPLE 0xA400A4
 # define GREY 0x8a9597
+# define RED 0xFF0000
 # define WHITE 0xFFFFFF
 
 # define W 119
@@ -74,6 +78,50 @@
 # define RIGHT 65363
 # define ESC 65307
 # define KEY_F 102
+
+typedef struct s_position
+{
+    double	x;
+    double	y;
+	double	distance;
+	int     is_taken;
+}	t_position;
+
+typedef struct s_object_porc
+{   
+	int		visible_samples;
+    int		total_samples;
+	double	block_y;
+	double 	block_x;
+	double	tx;
+	double	ty;
+	int		visible;
+}	t_object_porc;
+
+typedef struct s_object
+{
+	double		inv_det;
+	double		transform_x;
+	double		transform_y;
+	int			obj_screen_x;
+	int			obj_height;
+	int			obj_width;
+	int			draw_start_y;
+	int			draw_end_y;
+	int			draw_start_x;
+	int			draw_end_x;
+	int			tex_x;
+	int			tex_y;
+	int			stripe;
+	double		obj_x;
+	double		obj_y;
+	double		fov;
+	double		plane_x;
+	double		plane_y;
+	int			color;
+	int			d;
+	t_position	temp;
+}	t_object;
 
 typedef struct s_mini
 {
@@ -195,6 +243,9 @@ typedef struct s_cub
 	t_player	*player;
 	t_loop		*loop;
 
+	t_position  *p_positions;
+    int			p_count;
+	int			p_capacity;
 }	t_cub;
 
 //------------------------------------------------------------MAIN
@@ -233,6 +284,10 @@ void	get_raycast_hits(t_cub *cubed, t_loop *loop);
 void	get_raycast_steps(t_player *player, t_loop *loop);
 void	init_loop(t_loop *loop);
 void	init_ray(t_player *player, t_loop *loop, int x);
+void	draw_object(t_cub *cub, t_player *player, int num_objects, t_position *obj);
+void	check_object_pickup(t_cub *cub, t_player *player, t_position *obj);
+void	print_obj_calcs(t_cub *cub, t_object *object);
+void	calcs_object(t_cub *cubed, t_loop *loop);
 //--------------------------------------------------GAME-draw_map
 void	draw_floor(t_cub *cub, t_loop *loop, int x, int y);
 void	draw_ceiling(t_cub *cub, t_loop *loop, int x, int y);

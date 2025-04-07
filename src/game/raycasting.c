@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 15:02:24 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/07 14:18:11 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/04/07 15:17:19 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,11 @@ void	get_raycast_steps(t_player *player, t_loop *loop)
 	}
 }
 
-void	get_raycast_hits(t_cub *cubed, t_loop *loop)
+void get_raycast_hits(t_cub *cubed, t_loop *loop)
 {
 	loop->hit = 0;
-	while (loop->hit == 0)
+	
+	while (!loop->hit)
 	{
 		if (loop->sidedist_x < loop->sidedist_y)
 		{
@@ -93,13 +94,13 @@ void	get_raycast_hits(t_cub *cubed, t_loop *loop)
 			loop->map_y += loop->step_y;
 			loop->side = 1;
 		}
-		if (loop->map_y < 0 || loop->map_x < 0
-			|| loop->map_y >= HEIGHT / BLOCK || loop->map_x >= WIDTH / BLOCK)
-			break ;
-		else if (cubed->map[loop->map_y][loop->map_x] == '1'
+		if (loop->map_y < 0 || loop->map_x < 0 || loop->map_y >= HEIGHT / BLOCK || loop->map_x >= WIDTH / BLOCK)
+			break;
+		if (cubed->map[loop->map_y][loop->map_x] == '1'
 			|| cubed->map[loop->map_y][loop->map_x] == ' ')
 			loop->hit = 1;
-		else if (cubed->map[loop->map_y][loop->map_x] == 'D')
+		else if (cubed->map[loop->map_y][loop->map_x] == 'D'
+			&& BONUS)
 		{
 			loop->hit = 1;
 			loop->door = 1;
@@ -114,14 +115,21 @@ void	get_raycast_hits(t_cub *cubed, t_loop *loop)
 			cubed->textures[4]->sidedist_xy[1] = loop->sidedist_y;
 			loop->door_wall = 1;
 		}
+		else if (cubed->map[loop->map_y][loop->map_x] == 'O'
+			&& BONUS)
+			calcs_object(cubed, loop);
 	}
 }
+
 
 void	raycasting(t_cub *cubed, t_player *player, t_loop *loop)
 {
 	t_draw	draw;
+	t_position *obj;
 
 	init_loop(loop);
+	obj = NULL;
+	cubed->p_count = 0;
 	while (++loop->x < WIDTH)
 	{
 		loop->door = 0;
@@ -144,21 +152,9 @@ void	raycasting(t_cub *cubed, t_player *player, t_loop *loop)
 			draw_3dmap(cubed, loop->drawstart, loop->drawend, loop->x);
 			draw_walls(cubed, cubed->loop, &draw, loop->x);
 		}
-		loop->x += 2;
+		loop->x += 1;
+	}
+	if (cubed->p_count > 0 && BONUS) {
+		draw_object(cubed, player, cubed->p_count, obj);
 	}
 }
-
-	// if (door_is_closed(cubed, player))
-			// {
-			// 	int startx = (WIDTH - 341) / 2;
-			// 	int starty = (HEIGHT + 400) / 2;
-			// 	for (int x = 0; x < 341; x++)
-			// 	{
-  			// 		for (int y = 0; y < 39; y++)
-  			// 		{
-  			// 		    int color = cubed->textures[5]->data[y * 341 + x];
-  			// 		    if (color != 0x000000 && color != 0)
-			// 				put_pixel(startx + x, starty + y, color, cubed);
-  			// 		}
-			// 	}
-			// }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 15:04:20 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/01 14:45:57 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/04/07 15:15:57 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,9 +92,15 @@ void	draw_minimap(t_cub *cubed)
 		{
 			if (cubed->map[y][x] == '1')
 				draw_full_square(cubed, x, y, BLUE);
+			if (cubed->map[y][x] == 'D')
+				draw_full_square(cubed, x, y,RED);
+			if (cubed->map[y][x] == 'd')
+				draw_full_square(cubed, x, y, GREEN);
+
 			else if (cubed->map[y][x] == '0' || cubed->map[y][x] == 'N'
 				|| cubed->map[y][x] == 'E'
 				|| cubed->map[y][x] == 'W'
+				|| cubed->map[y][x] == 'O'
 				|| cubed->map[y][x] == 'S' )
 				draw_full_square(cubed, x, y, GREY);
 		}

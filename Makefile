@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+         #
+#    By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/12 13:05:04 by jaimesan          #+#    #+#              #
-#    Updated: 2025/04/07 12:43:21 by ctommasi         ###   ########.fr        #
+#    Updated: 2025/04/07 15:14:54 by jaimesan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,8 +39,9 @@ SRCS =	./src/main/main.c ./src/main/error.c \
 		./src/utils/check_args.c  ./src/utils/init_map_utils.c  ./src/utils/save_map_utils.c \
 		./src/game/keypress.c ./src/game/draw.c ./src/game/raycasting.c ./src/game/minimap.c \
 		./src/utils/delete_after.c ./src/game/textures.c ./src/game/move_player.c \
-		./src/game/draw_map.c ./src/utils/draw_utils.c ./src/game/draw_door.c
-		
+		./src/game/draw_map.c ./src/utils/draw_utils.c ./src/game/draw_door.c \
+		./src/object/draw_object.c ./src/object/object_utils.c ./src/object/pick_up_object.c
+
 # Archivos objeto
 OBJS = $(SRCS:.c=.o)
 

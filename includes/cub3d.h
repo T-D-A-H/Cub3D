@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:31:47 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/03 17:29:55 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/04/07 14:32:17 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,6 +148,9 @@ typedef struct s_game
 	int		bpp;
 	int		size_line;
 	int		endian;
+	int		sees_door;
+	int		door_xy[2];
+	int		level;
 }	t_game;
 
 typedef struct s_texture
@@ -187,10 +190,11 @@ typedef struct s_cub
 	int			pj_y;
 	int			pj_x;
 	float		start_direction;
-	t_texture	*textures[6];
+	t_texture	*textures[7];
 	t_game		*game;
 	t_player	*player;
 	t_loop		*loop;
+
 }	t_cub;
 
 //------------------------------------------------------------MAIN
@@ -215,8 +219,14 @@ void	init_struct(t_cub *cubed);
 //------------------------------------------------------------GAME-textures
 void	load_all_textures(t_cub *cub);
 void	load_texture(t_cub *cub, char *path, int index);
-//------------------------------------------------------------GAME-door
-void	handle_door_interaction(t_cub *cubed, t_player *player);
+//------------------------------------------------------------GAME-draw_door
+void 	open_door(t_cub *cubed, t_player *player);
+int 	door_is_closed(t_cub *cubed, t_player *player);
+void	draw_door(t_cub *cubed, int x);
+void	init_start_end_wall(t_loop *loop, t_texture *tex, int mode);
+void 	get_wall_text_coords(t_cub *cubed, t_texture *tex, int mode, int tex_id);
+void	draw_wall_no_door(t_cub *cub, t_texture *tex, int x);
+void	update_door(t_cub *cubed, t_player *player, t_game *game);
 //------------------------------------------------------GAME-raycasting
 void	raycasting(t_cub *cubed, t_player *player, t_loop *loop);
 void	get_raycast_hits(t_cub *cubed, t_loop *loop);
@@ -261,10 +271,7 @@ float	get_player_direction(char c);
 //------------------------------------------------------DELETE_AFTER
 void	print_where_not_walled(char **map, int y, int x);
 
-void	render_objects(t_cub *cubed, int x);
-void	draw_wall_no_door(t_cub *cub, t_texture *tex, int x);
-void open_door(t_cub *cubed, t_player *player);
-int door_is_closed(t_cub *cubed, t_player *player);
-void	get_texture_data(t_cub *cubed, t_loop *loop, t_texture *tex);
+
+
 
 #endif

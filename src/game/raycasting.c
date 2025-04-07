@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 15:02:24 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/03 17:25:13 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/04/07 14:18:11 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,24 +137,7 @@ void	raycasting(t_cub *cubed, t_player *player, t_loop *loop)
 			draw_walls(cubed, loop, &draw, loop->x);
 			draw_ceiling(cubed, loop, loop->x, 0);
 			draw_floor(cubed, loop, loop->x, loop->drawend);
-			if (door_is_closed(cubed, player))
-			{
-				int startx = (WIDTH - 341) / 2;
-				int starty = (HEIGHT + 400) / 2;
-				for (int x = 0; x < 341; x++)
-				{
-  					for (int y = 0; y < 39; y++)
-  					{
-  					    int color = cubed->textures[5]->data[y * 341 + x];
-  					    if (color != 0x000000 && color != 0)
-  					        put_pixel(startx + x, starty + y, color, cubed);
-  					}
-					
-				}
-
-			}
-			if (loop->door_wall == 1)
-				render_objects(cubed, loop->x);
+			draw_door(cubed, loop->x);
 		}
 		else
 		{
@@ -164,3 +147,18 @@ void	raycasting(t_cub *cubed, t_player *player, t_loop *loop)
 		loop->x += 2;
 	}
 }
+
+	// if (door_is_closed(cubed, player))
+			// {
+			// 	int startx = (WIDTH - 341) / 2;
+			// 	int starty = (HEIGHT + 400) / 2;
+			// 	for (int x = 0; x < 341; x++)
+			// 	{
+  			// 		for (int y = 0; y < 39; y++)
+  			// 		{
+  			// 		    int color = cubed->textures[5]->data[y * 341 + x];
+  			// 		    if (color != 0x000000 && color != 0)
+			// 				put_pixel(startx + x, starty + y, color, cubed);
+  			// 		}
+			// 	}
+			// }

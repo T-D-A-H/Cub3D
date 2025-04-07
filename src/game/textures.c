@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 15:53:12 by jaimesan          #+#    #+#             */
-/*   Updated: 2025/04/03 17:11:08 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/04/07 14:53:31 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	load_all_textures(t_cub *cub)
 	int	i;
 
 	i = -1;
-	while (++i < 6)
+	while (++i < 7)
 	{
 		cub->textures[i] = malloc(sizeof(t_texture));
 		if (!cub->textures[i])
@@ -43,9 +43,9 @@ void	load_all_textures(t_cub *cub)
 	load_texture(cub, cub->so_path, 1);
 	load_texture(cub, cub->we_path, 2);
 	load_texture(cub, cub->ea_path, 3);
-	// TEST FOR NEW TEXTURE
 	load_texture(cub, "./assets/wall_no_door.xpm", 4);
 	load_texture(cub, "./assets/press_f_to_open.xpm", 5);
+	load_texture(cub, "./assets/wall_bathroom.xpm", 6);
 }
 
 void	get_wall_textures(t_cub *cub, t_loop *loop, t_draw *draw)
@@ -60,9 +60,9 @@ void	get_wall_textures(t_cub *cub, t_loop *loop, t_draw *draw)
 	if (loop->side == 0)
 	{
 		if (loop->raydir_x > 0)
-			draw->texi = 3; // 3
+			draw->texi = 3;
 		else
-			draw->texi = 3; // 2
+			draw->texi = 3;
 	}
 	else
 	{
@@ -71,6 +71,8 @@ void	get_wall_textures(t_cub *cub, t_loop *loop, t_draw *draw)
 		else
 			draw->texi = 3;
 	}
+	if (cub->game->level == 1)
+		draw->texi = 6;
 	if (loop->door == 1)
 		draw->texi = 0;
 }

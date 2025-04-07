@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 15:29:12 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/01 15:38:00 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/04/07 14:56:04 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ int	game_loop(void *param)
 	clear_screen(cubed);
 	move_player(cubed->player, cubed);
 	raycasting(cubed, cubed->player, cubed->loop);
-	// if (BONUS)
-	// 	draw_minimap(cubed);
+	if (BONUS)
+		draw_minimap(cubed);
 	mlx_put_image_to_window(cubed->game->mlx, cubed->game->win,
 		cubed->game->img, 0, 0);
 	return (0);
@@ -65,6 +65,7 @@ void	init_game(t_game *game, t_cub *cubed)
 			&game->size_line, &game->endian);
 	load_all_textures(cubed);
 	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
+	cubed->game->sees_door = 0;
 }
 
 void	init_window(t_cub *cubed)

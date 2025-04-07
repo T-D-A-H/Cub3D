@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:31:47 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/07 15:14:21 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/04/07 15:21:42 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -238,7 +238,7 @@ typedef struct s_cub
 	int			pj_y;
 	int			pj_x;
 	float		start_direction;
-	t_texture	*textures[7];
+	t_texture	*textures[8];
 	t_game		*game;
 	t_player	*player;
 	t_loop		*loop;
@@ -246,6 +246,8 @@ typedef struct s_cub
 	t_position  *p_positions;
     int			p_count;
 	int			p_capacity;
+	int			blink_state;
+	int			blink_counter;
 }	t_cub;
 
 //------------------------------------------------------------MAIN

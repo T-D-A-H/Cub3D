@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 15:10:33 by jaimesan          #+#    #+#             */
-/*   Updated: 2025/04/07 15:09:37 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/04/07 15:26:38 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	draw_object(t_cub *cub, t_player *player,
 		obj = &cub->p_positions[i];
 		obj->distance = sqrt(pow(player->x - obj->x, 2)
 				+ pow(player->y - obj->y, 2));
-		if (cub->loop->door == 2)
+		if (cub->game->level == 1)
 			obj[i].is_taken = 0;
 		if (obj[i].is_taken == 0)
 		{

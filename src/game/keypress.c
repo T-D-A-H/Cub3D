@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keypress.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 14:57:47 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/03 17:27:43 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/04/07 15:29:16 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	on_keypress(int keydata, t_cub *cub)
 	if (keydata == KEY_F)
 	{
 		cub->player->key_f = true;
-		if (door_is_closed(cub, cub->player))
+		if (door_is_closed(cub, cub->player) && cub->p_positions->is_taken == 1)
 			open_door(cub, cub->player);
 	}
 	if (keydata == ESC)

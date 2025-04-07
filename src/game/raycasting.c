@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 15:02:24 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/07 15:17:19 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/04/07 15:28:11 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,9 +152,8 @@ void	raycasting(t_cub *cubed, t_player *player, t_loop *loop)
 			draw_3dmap(cubed, loop->drawstart, loop->drawend, loop->x);
 			draw_walls(cubed, cubed->loop, &draw, loop->x);
 		}
-		loop->x += 1;
+		loop->x += 2;
 	}
-	if (cubed->p_count > 0 && BONUS) {
+	if (cubed->p_count > 0 && BONUS)
 		draw_object(cubed, player, cubed->p_count, obj);
-	}
 }

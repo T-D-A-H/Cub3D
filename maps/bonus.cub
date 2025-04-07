@@ -1,13 +1,15 @@
 NO ./assets/wall_door.xpm
-SO ./assets/floor.xpm
-WE ./assets/ceiling_with_light.xpm
-EA ./assets/wall2.xpm
+SO ./assets/0_floor.xpm
+WE ./assets/0_ceiling.xpm
+EA ./assets/0_wall.xpm
 
 F 130,130,130
 C 0,160,220
-
-        1111111111111111111111111
-        100000S000000000000000001
+                11111
+                100O1
+                10S11
+        111111111D111111111111111
+        1000O00000000000000000001
         1000000000110000111111001
         101110O111110000001111111
         100110000000000000D000001

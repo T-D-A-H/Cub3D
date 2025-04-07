@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 15:02:24 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/03 14:57:03 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/04/07 14:58:28 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,8 +116,10 @@ void get_raycast_hits(t_cub *cubed, t_loop *loop)
 void	raycasting(t_cub *cubed, t_player *player, t_loop *loop)
 {
 	t_draw	draw;
+	t_position *obj;
 
 	init_loop(loop);
+	obj = NULL;
 	cubed->p_count = 0;
 	while (++loop->x < WIDTH)
 	{
@@ -147,6 +149,6 @@ void	raycasting(t_cub *cubed, t_player *player, t_loop *loop)
 		loop->x += 1;
 	}
 	if (cubed->p_count > 0 && BONUS) {
-		draw_object(cubed, player, cubed->p_count);
+		draw_object(cubed, player, cubed->p_count, obj);
 	}
 }

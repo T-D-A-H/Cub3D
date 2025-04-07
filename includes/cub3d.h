@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:31:47 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/03 16:18:44 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/04/07 14:40:38 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,9 @@
 # define HEIGHT 1048
 # define BLOCK 64
 # define MAP 16
+# define DOT_RADIUS 37
+# define DOT_MARGIN 75
+# define MAX_OBJECTS 20
 
 # ifndef BONUS
 #  define BONUS 0
@@ -80,6 +83,8 @@ typedef struct s_position
     double	x;
     double	y;
 	double	distance;
+	int     is_taken;
+	int		id;
 }	t_position;
 
 typedef struct s_object_porc
@@ -91,7 +96,6 @@ typedef struct s_object_porc
 	double	tx;
 	double	ty;
 	int		visible;
-
 }	t_object_porc;
 
 typedef struct s_object
@@ -222,9 +226,11 @@ typedef struct s_cub
 	t_player	*player;
 	t_loop		*loop;
 
-	t_position  *p_positions; 
+	t_position  *p_positions;
     int			p_count;
 	int			p_capacity;
+	int			blink_counter;
+	int			blink_state;
 }	t_cub;
 
 //------------------------------------------------------------MAIN
@@ -257,8 +263,9 @@ void	get_raycast_hits(t_cub *cubed, t_loop *loop);
 void	get_raycast_steps(t_player *player, t_loop *loop);
 void	init_loop(t_loop *loop);
 void	init_ray(t_player *player, t_loop *loop, int x);
-void	draw_object(t_cub *cub, t_player *player, int num_objects);
-void	draw_object(t_cub *cub, t_player *player, int num_objects);
+void	draw_object(t_cub *cub, t_player *player, int num_objects, t_position *obj);
+void	check_object_pickup(t_cub *cub, t_player *player, t_position *obj);
+void	print_obj_calcs(t_cub *cub, t_object *object);
 void	calcs_object(t_cub *cubed, t_loop *loop);
 //--------------------------------------------------GAME-draw_map
 void	draw_floor(t_cub *cub, t_loop *loop, int x, int y);

@@ -6,7 +6,7 @@
 #    By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/12 13:05:04 by jaimesan          #+#    #+#              #
-#    Updated: 2025/04/03 14:59:12 by jaimesan         ###   ########.fr        #
+#    Updated: 2025/04/07 14:40:59 by jaimesan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ SRCS =	./src/main/main.c ./src/main/error.c \
 		./src/game/keypress.c ./src/game/draw.c ./src/game/raycasting.c ./src/game/minimap.c \
 		./src/utils/delete_after.c ./src/game/textures.c ./src/game/move_player.c \
 		./src/game/draw_map.c ./src/game/door.c \
-		./src/object/draw_object.c ./src/object/object_utils.c
+		./src/object/draw_object.c ./src/object/object_utils.c ./src/object/pick_up_object.c
 
 # Archivos objeto
 OBJS = $(SRCS:.c=.o)

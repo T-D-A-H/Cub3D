@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 15:29:12 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/02 13:22:03 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/04/07 12:35:15 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,48 @@ void	init_player(t_player *player, int s_x, int s_y, t_cub *cubed)
 	player->key_right = false;
 }
 
+void draw_red_dot(t_cub *cubed)
+{
+	int center_x;
+	int center_y;
+	int y;
+	int x;
+
+	center_x = WIDTH - DOT_MARGIN - DOT_RADIUS;
+	center_y = DOT_MARGIN + DOT_RADIUS;
+	y = -DOT_RADIUS;
+	while (y <= DOT_RADIUS)
+	{
+		x = -DOT_RADIUS;
+		while (x <= DOT_RADIUS)
+		{
+			if (x * x + y * y <= DOT_RADIUS * DOT_RADIUS)
+				put_pixel(center_x + x, center_y + y, 0xFF0000, cubed);
+			x+=1;
+		}
+		y+=2;
+	}
+}
+
 int	game_loop(void *param)
 {
 	t_cub	*cubed;
 
 	cubed = (t_cub *)param;
+	cubed->blink_counter++;
+	if (cubed->blink_counter > 10)
+	{
+		cubed->blink_counter = 0;
+		cubed->blink_state = !cubed->blink_state;
+	}
 	clear_screen(cubed);
 	move_player(cubed->player, cubed);
 	raycasting(cubed, cubed->player, cubed->loop);
 	if (BONUS == 1)
-		draw_minimap(cubed);
+	{
+		if (cubed->blink_state == 1)
+			draw_red_dot(cubed);
+	}
 	mlx_put_image_to_window(cubed->game->mlx, cubed->game->win,
 		cubed->game->img, 0, 0);
 	return (0);
@@ -66,7 +98,8 @@ void	init_game(t_game *game, t_cub *cubed)
 	load_all_textures(cubed);
 	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
 }
-void init_objects(t_cub *cubed) {
+void init_objects(t_cub *cubed)
+{
 	cubed->p_capacity = 50;
     cubed->p_positions = malloc(sizeof(t_position) * cubed->p_capacity);
     cubed->p_count = 0;

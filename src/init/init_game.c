@@ -88,52 +88,33 @@ void apply_vhs_effect(t_cub *cubed)
     static int scan_line = 0;
     static int frame_counter = 0;
     int y, x, color;
-    char *data_copy;
-    int bytes_per_pixel;
 
     if (!cubed || !cubed->game)
         return;
-
-    // Crear una copia de los datos de la imagen original
-    bytes_per_pixel = cubed->game->bpp / 8;
-    data_copy = malloc(cubed->game->size_line * HEIGHT);
-
-	
     frame_counter++;
     scan_line = (scan_line + 1) % HEIGHT;
-
-    // Aplicar efectos cada 2 frames para mejor rendimiento
     if (frame_counter % 2 != 0)
         return;
-
-    // Efecto de ruido y líneas de escaneo
     for (y = 0; y < HEIGHT; y++)
     {
-        // Ruido aleatorio (25% de probabilidad por línea)
         if (rand() % 2 == 0)
         {
             int noise = rand() % 50 - 25;
-            for (x = 0; x < WIDTH; x += (rand() % 3 + 1)) // Saltos aleatorios
+            for (x = 0; x < WIDTH; x += (rand() % 3 + 1))
             {
                 color = get_pixel_color(x, y, cubed);
                 int r = (color >> 16) & 0xFF;
                 int g = (color >> 8) & 0xFF;
                 int b = color & 0xFF;
-
-                // Añadir ruido con límites seguros
                 r = (r + noise) % 256;
                 g = (g + noise) % 256;
-                b = (b + noise + 15) % 256; // Más azul para efecto VHS
-
+                b = (b + noise + 15) % 256;
                 if (r < 0) r = 0;
                 if (g < 0) g = 0;
                 if (b < 0) b = 0;
-
                 put_pixel(x, y, (r << 16) | (g << 8) | b, cubed);
             }
         }
-
-        // Línea de escaneo más visible
         if (y >= scan_line && y < scan_line + 5)
         {
             for (x = 0; x < WIDTH; x++)
@@ -145,8 +126,6 @@ void apply_vhs_effect(t_cub *cubed)
             }
         }
     }
-
-
 }
 
 
@@ -164,12 +143,12 @@ int	game_loop(void *param)
 	clear_screen(cubed);
 	move_player(cubed->player, cubed);
 	raycasting(cubed, cubed->player, cubed->loop);
-	apply_vhs_effect(cubed);
 	if (BONUS == 1)
 	{
 		if (cubed->blink_state == 1)
 			draw_red_dot(cubed);
-		draw_minimap(cubed);
+		apply_vhs_effect(cubed);
+/* 		draw_minimap(cubed); */
 	}
 	mlx_put_image_to_window(cubed->game->mlx, cubed->game->win,
 		cubed->game->img, 0, 0);
@@ -197,7 +176,8 @@ void init_objects(t_cub *cubed)
 
 void	init_window(t_cub *cubed)
 {
-	init_objects(cubed);
+	if (BONUS)
+		init_objects(cubed);
 	init_player(cubed->player, cubed->pj_x, cubed->pj_y, cubed);
 	init_game(cubed->game, cubed);
 	mlx_hook(cubed->game->win, 2, 1L << 0, on_keypress, cubed);

@@ -75,12 +75,26 @@ void	get_wall_textures(t_cub *cub, t_loop *loop, t_draw *draw)
 		else
 			draw->texi = 3;
 	}
-	if (cub->game->level == 1)
+	if (BONUS)
 	{
-		draw->texi = 6;
+		draw->texi = 3;
+		draw->texi_floor = 1;
+		draw->texi_ceiling = 2;
+		if (cub->game->level == 1)
+		{
+			draw->texi = 6;
+			draw->texi_floor = 8;
+			draw->texi_ceiling = 9;
+		}
+		else if (cub->game->level == 2)
+		{
+			draw->texi = 10;
+			draw->texi_floor = 8;
+			draw->texi_ceiling = 9;
+		}
+		if (loop->door == 1)
+			draw->texi = 0;
 	}
-	if (loop->door == 1)
-		draw->texi = 0;
 }
 
 void	get_coor_textures(t_cub *cub, t_loop *loop, t_draw *draw)

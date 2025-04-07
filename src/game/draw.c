@@ -40,10 +40,8 @@ void	clear_screen(t_cub *cubed)
 
 void	draw_3dmap(t_cub *cubed, int draw_start, int draw_end, int x)
 {
-	int	color;
 	int	y;
 
-	color = PURPLE;
 	y = -1;
 	while (++y <= draw_start)
 	{

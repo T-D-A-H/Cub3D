@@ -45,8 +45,8 @@
 # define NO_ERROR ""
 
 # define W_NAME "CUB3D"
-# define WIDTH 1920
-# define HEIGHT 1200
+# define WIDTH 1280
+# define HEIGHT 1024
 # define BLOCK 64
 # define MAP 16
 # define DOT_RADIUS 37
@@ -167,6 +167,8 @@ typedef struct s_draw
 	double	step;
 	double	texpos;
 	int		texy;
+	int		texi_floor;
+	int		texi_ceiling;
 }	t_draw;
 
 typedef struct s_player

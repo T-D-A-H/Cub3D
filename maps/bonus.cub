@@ -11,7 +11,8 @@ CE1 ./assets/ceiling_with_light.xpm
 WA1 ./assets/wall2.xpm
 
                 111111
-                10S0O11
+                100001
+                10S0O1
                 100001
                 101001
                 101001

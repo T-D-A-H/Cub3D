@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 12:42:33 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/08 16:53:58 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/04/08 17:01:21 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,41 @@
 
 int	door_is_closed(t_cub *cubed, t_player *player)
 {
-    int	map_x = (int)(player->x / BLOCK);
-    int	map_y = (int)(player->y / BLOCK);
-    
-    // Verificar si hay una puerta cerrada adyacente
-    return (cubed->map[map_y + 1][map_x] == 'D' ||
-            cubed->map[map_y - 1][map_x] == 'D' ||
-            cubed->map[map_y][map_x + 1] == 'D' ||
-            cubed->map[map_y][map_x - 1] == 'D');
+	int	map_x;
+	int	map_y;
+
+	map_x = (int)(player->x / BLOCK);
+	map_y = (int)(player->y / BLOCK);
+	if (cubed->map[map_y + 1][map_x] == 'D'
+		|| cubed->map[map_y][map_x + 1] == 'D'
+		|| cubed->map[map_y - 1][map_x] == 'D'
+		|| cubed->map[map_y][map_x - 1] == 'D')
+	{
+		return (1);
+	}
+	return (0);
 }
 
 void	update_door(t_cub *cubed, t_game *game)
 {
-    // Esta función ahora maneja el cierre automático de puertas
-    if (game->door_timer > 0)
-    {
-        game->door_timer--;
-        if (game->door_timer == 0 && game->active_door_x != -1)
-        {
-            // Cerrar la puerta después del tiempo
-            cubed->map[game->active_door_y][game->active_door_x] = 'D';
-            game->active_door_x = -1;
-            game->active_door_y = -1;
-        }
-    }
+	int	i;
+	int	j;
+
+	i = 0;
+	while (cubed->map[i])
+	{
+		j = 0;
+		while (cubed->map[i][j])
+		{
+			if (cubed->map[i][j] == 'd' && game->on_door && game->sees_door == 0)
+			{
+				cubed->map[i][j] = '1';
+				game->on_door = 0;
+			}
+			j++;
+		}
+		i++;
+	}
 }
 
 void	handle_door2(t_cub *cubed, t_player *player, t_game *game)
@@ -45,35 +56,47 @@ void	handle_door2(t_cub *cubed, t_player *player, t_game *game)
 	if (cubed->map[player->my][player->mx + 1] == 'd' && game->sees_door == 0)
 	{
 		cubed->game->level = 1;
-		game->door_xy[0] = player->mx + 1;
+		game->door_xy[0] = player->mx;
 		game->door_xy[1] = player->my;
 		game->sees_door = 1;
-		cubed->map[game->door_xy[1]][game->door_xy[0]] = '1';
+		if (cubed->map[game->door_xy[1]][game->door_xy[0] - 1] == '0')
+			cubed->map[game->door_xy[1]][game->door_xy[0] - 2] = '1';
 	}
 	else if (cubed->map[player->my][player->mx - 1] == 'd' && game->sees_door == 0)
 	{
 		cubed->game->level = 1;
-		game->door_xy[0] = player->mx - 1;
+		game->door_xy[0] = player->mx;
 		game->door_xy[1] = player->my;
 		game->sees_door = 1;
-		cubed->map[game->door_xy[1]][game->door_xy[0]] = '1';
+		if (cubed->map[game->door_xy[1]][game->door_xy[0] + 1] == '0')
+			cubed->map[game->door_xy[1]][game->door_xy[0] + 2] = '1';
 	}
 }
 
 void	handle_door(t_cub *cubed, t_player *player, t_game *game)
 {
-    // Manejar puertas abiertas ('d') que el jugador está atravesando
-    if (cubed->map[player->my][player->mx] == 'd')
-    {
-        game->active_door_x = player->mx;
-        game->active_door_y = player->my;
-        game->door_timer = 60; // 60 frames (2 segundos aprox) antes de cerrar
-    }
-    
-    // Si el jugador presiona F para abrir una puerta
-    if (player->key_f)
-    {
-        player->key_f = false;
-        open_door(cubed, player);
-    }
+	if (cubed->map[player->my + 1][player->mx] == 'd' && game->sees_door == 0)
+	{
+		cubed->game->level = 1;
+		game->door_xy[0] = player->mx;
+		game->door_xy[1] = player->my;
+		game->sees_door = 1;
+		if (cubed->map[game->door_xy[1] - 1][game->door_xy[0]] == '0')
+			cubed->map[game->door_xy[1] - 2][game->door_xy[0]] = '1';
+	}
+	else if (cubed->map[player->my - 1][player->mx] == 'd' && game->sees_door == 0)
+	{
+		game->door_xy[0] = player->mx;
+		game->door_xy[1] = player->my;
+		game->sees_door = 1;
+		if (cubed->map[game->door_xy[1] + 1][game->door_xy[0]] == '0')
+			cubed->map[game->door_xy[1] + 2][game->door_xy[0]] = '1';
+	}
+	handle_door2(cubed, player, game);
+	if (game->sees_door == 1
+		&& (player->my - 1 == game->door_xy[1] || player->mx - 1 == game->door_xy[0]
+			|| player->my + 1 == game->door_xy[1] || player->mx + 1 == game->door_xy[0]))
+		cubed->game->sees_door = 0;
+	if (cubed->map[player->my][player->mx] == 'd' )
+		cubed->game->on_door = 1;
 }

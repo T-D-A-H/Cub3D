@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 15:29:12 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/08 16:57:48 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/04/08 17:00:11 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,7 +157,6 @@ int	game_loop(void *param)
 
 void	init_game(t_game *game, t_cub *cubed)
 {
-
 	game->mlx = mlx_init();
 	game->win = mlx_new_window(game->mlx, WIDTH, HEIGHT, W_NAME);
 	game->img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
@@ -210,9 +209,11 @@ void	init_window(t_cub *cubed)
 	if (BONUS)
 	{
 		mlx_mouse_hide(cubed->game->mlx, cubed->game->win);
-		mlx_mouse_move(cubed->game->mlx, cubed->game->win, WIDTH / 2, HEIGHT / 2);	
-		mlx_mouse_show(cubed->game->mlx, cubed->game->win);
+		mlx_mouse_move(cubed->game->mlx, cubed->game->win, WIDTH / 2, HEIGHT / 2);
+		mlx_hook(cubed->game->win, 6, 1L<<6, mouse_move, cubed);
 	}
 	mlx_loop_hook(cubed->game->mlx, game_loop, cubed);
 	mlx_loop(cubed->game->mlx);
+	if (BONUS)
+		mlx_mouse_show(cubed->game->mlx, cubed->game->win);
 }

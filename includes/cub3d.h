@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:31:47 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/08 16:30:23 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/04/08 16:55:02 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,6 +206,9 @@ typedef struct s_game
 	int		door_xy[2];
 	int		level;
 	int		on_door;
+	int     door_timer;     // Contador para cierre automático
+    int     active_door_x;  // Posición X de la puerta activa
+    int     active_door_y;
 }	t_game;
 
 typedef struct s_texture

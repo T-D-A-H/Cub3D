@@ -79,8 +79,7 @@ void	init_bonus_textures(t_cub *cubed, char **map)
 		{
 			cubed->tex_paths[index] = ft_strdup(map[i + 1]);
 			if (!cubed->tex_paths[index])
-				error(cubed, "Memory allocation failed for texture path.");
-			printf("Loaded %s into tex_paths[%d]\n", cubed->tex_paths[index], index);
+				error(cubed, "Error\nMemory allocation failed for texture path.\n");
 			i++;
 		}
 		i++;

@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 11:55:37 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/08 16:30:54 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/04/08 16:56:34 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,20 @@
 
 void	open_door(t_cub *cubed, t_player *player)
 {
-	int	map_x;
-	int	map_y;
-
-	map_x = (int)(player->x / BLOCK);
-	map_y = (int)(player->y / BLOCK);
-	if (cubed->map[map_y + 1][map_x] == 'D'
-		|| cubed->map[map_y][map_x + 1] == 'D'
-		|| cubed->map[map_y - 1][map_x] == 'D'
-		|| cubed->map[map_y][map_x - 1] == 'D')
-	{
-		if (cubed->map[map_y - 1][map_x] == 'D')
-			cubed->map[map_y - 1][map_x] = 'd';
-		else if (cubed->map[map_y + 1][map_x] == 'D')
-			cubed->map[map_y + 1][map_x] = 'd';
-		else if (cubed->map[map_y][map_x + 1] == 'D')
-			cubed->map[map_y][map_x + 1] = 'd';
-		else if (cubed->map[map_y][map_x - 1] == 'D')
-			cubed->map[map_y][map_x - 1] = 'd';
-		cubed->loop->door_wall = 1;
-	}
+    int	map_x = (int)(player->x / BLOCK);
+    int	map_y = (int)(player->y / BLOCK);
+    
+    // Buscar puerta cerrada ('D') adyacente
+    if (cubed->map[map_y + 1][map_x] == 'D')
+        cubed->map[map_y + 1][map_x] = 'd';
+    else if (cubed->map[map_y - 1][map_x] == 'D')
+        cubed->map[map_y - 1][map_x] = 'd';
+    else if (cubed->map[map_y][map_x + 1] == 'D')
+        cubed->map[map_y][map_x + 1] = 'd';
+    else if (cubed->map[map_y][map_x - 1] == 'D')
+        cubed->map[map_y][map_x - 1] = 'd';
+    
+    cubed->loop->door_wall = 1;
 }
 
 void	draw_wall_no_door(t_cub *cub, t_texture *tex, int x)
@@ -111,5 +105,4 @@ void	draw_door(t_cub *cubed, int x, t_draw *draw)
 		draw_wall_no_door(cubed, cubed->textures[draw->texi_no_door], x);
 		handle_door(cubed, cubed->player, cubed->game);
 	}
-	update_door(cubed, cubed->game);
 }

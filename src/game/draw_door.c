@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 11:55:37 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/07 16:32:14 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/04/08 15:51:22 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,12 +103,12 @@ void	draw_door(t_cub *cubed, int x)
 {
 	if (cubed->loop->door_wall)
 	{
-		init_start_end_wall(cubed->loop, cubed->textures[4], 0);
-		get_wall_text_coords(cubed, cubed->textures[4], 0, 4);
-		draw_wall_no_door(cubed, cubed->textures[4], x);
-		init_start_end_wall(cubed->loop, cubed->textures[4], 1);
-		get_wall_text_coords(cubed, cubed->textures[4], 1, 4);
-		draw_wall_no_door(cubed, cubed->textures[4], x);
+		init_start_end_wall(cubed->loop, cubed->textures[1], 0);
+		get_wall_text_coords(cubed, cubed->textures[1], 0, 1);
+		draw_wall_no_door(cubed, cubed->textures[1], x);
+		init_start_end_wall(cubed->loop, cubed->textures[1], 1);
+		get_wall_text_coords(cubed, cubed->textures[1], 1, 1);
+		draw_wall_no_door(cubed, cubed->textures[1], x);
 	}
 	update_door(cubed, cubed->player, cubed->game);
 }

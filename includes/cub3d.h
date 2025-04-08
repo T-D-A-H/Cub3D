@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:31:47 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/07 16:46:55 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/04/08 15:38:12 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,15 @@
 # define NO_ERROR ""
 
 # define W_NAME "CUB3D"
-# define WIDTH 1280
-# define HEIGHT 1024
+# define WIDTH 1920
+# define HEIGHT 1080
 # define BLOCK 64
 # define MAP 16
 # define DOT_RADIUS 37
 # define DOT_MARGIN 75
 # define MAX_OBJECTS 20
+# define MAX_TEXTURES 11
+# define REST 11
 
 # ifndef BONUS
 #  define BONUS 0
@@ -169,6 +171,8 @@ typedef struct s_draw
 	int		texy;
 	int		texi_floor;
 	int		texi_ceiling;
+	int		texi_door;
+	int		texi_no_door;
 }	t_draw;
 
 typedef struct s_player
@@ -240,11 +244,12 @@ typedef struct s_cub
 	int			pj_y;
 	int			pj_x;
 	float		start_direction;
-	t_texture	*textures[11];
+	t_texture	*textures[21];
 	t_game		*game;
 	t_player	*player;
 	t_loop		*loop;
 	t_position  *p_positions;
+	char		*tex_paths[MAX_TEXTURES];
     int			p_count;
 	int			p_capacity;
 	int			blink_state;

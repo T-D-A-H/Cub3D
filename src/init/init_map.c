@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:08:04 by jaimesan          #+#    #+#             */
-/*   Updated: 2025/04/02 12:57:28 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/04/08 15:15:50 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	check_invalid_chars(char **map, t_cub *cubed)
 	int	j;
 	int	count;
 
-	i = 5;
+	i = REST - 1;
 	count = 0;
 	while (map[++i])
 	{
@@ -46,7 +46,7 @@ int	check_invalid_chars(char **map, t_cub *cubed)
 		{
 			if (is_map_char(map[i][j], 0))
 			{
-				cubed->pj_y = i - 6;
+				cubed->pj_y = i - REST;
 				cubed->pj_x = j;
 				cubed->start_direction = get_player_direction(map[i][j]);
 				count++;
@@ -104,7 +104,7 @@ void	init_map(t_cub *cubed)
 		return (ft_freearr(map), error(cubed, ERR_MAP_INVALID_CHARS));
 	if (!map)
 		error(cubed, ERR_MAP);
-	y = 6;
+	y = REST;
 	if (check_cero(map, &y, &x, &max_x) == 1)
 		return (error(cubed, ERR_MAP_NOT_WALLED));
 	if (save_map(cubed, map, y, max_x) == 1)

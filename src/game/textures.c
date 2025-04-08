@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 15:53:12 by jaimesan          #+#    #+#             */
-/*   Updated: 2025/04/07 16:41:59 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/04/08 15:52:20 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,23 +33,40 @@ void	load_all_textures(t_cub *cub)
 	int	i;
 
 	i = -1;
-	while (++i < 11)
+	if (BONUS)
 	{
-		cub->textures[i] = malloc(sizeof(t_texture));
-		if (!cub->textures[i])
-			return (printf(ERR_MALLOC), exit (1));
+		while (++i < MAX_TEXTURES)
+		{
+			cub->textures[i] = malloc(sizeof(t_texture));
+			if (!cub->textures[i])
+				return (printf(ERR_MALLOC), exit (1));
+		/* 	load_texture(cub, cub->tex_paths[i], i); */
+		}
+		load_texture(cub, cub->tex_paths[0], 0);
+		load_texture(cub, cub->tex_paths[1], 1);
+		load_texture(cub, cub->tex_paths[2], 2);
+		load_texture(cub, cub->tex_paths[3], 3);
+		load_texture(cub, cub->tex_paths[4], 4);
+		load_texture(cub, cub->tex_paths[5], 5);
+		load_texture(cub, cub->tex_paths[6], 6);
+		load_texture(cub, cub->tex_paths[7], 7);
+		load_texture(cub, cub->tex_paths[8], 8);
+		load_texture(cub, cub->tex_paths[9], 9);
+		load_texture(cub, cub->tex_paths[10], 10);
 	}
-	load_texture(cub, cub->no_path, 0);
-	load_texture(cub, cub->so_path, 1);
-	load_texture(cub, cub->we_path, 2);
-	load_texture(cub, cub->ea_path, 3);
-	load_texture(cub, "./assets/wall_no_door.xpm", 4);
-	load_texture(cub, "./assets/press_f_to_open.xpm", 5);
-	load_texture(cub, "./assets/wall2.xpm", 6);
-	load_texture(cub, "./assets/key_small3.xpm", 7);
-	load_texture(cub, "./assets/floor.xpm", 8);
-	load_texture(cub, "./assets/ceiling_with_light.xpm", 9);
-	load_texture(cub, "./assets/wall_bathroom.xpm", 10);
+	else
+	{
+		while (++i < 4)
+		{
+			cub->textures[i] = malloc(sizeof(t_texture));
+			if (!cub->textures[i])
+				return (printf(ERR_MALLOC), exit (1));
+		}
+		load_texture(cub, cub->no_path, 0);
+		load_texture(cub, cub->so_path, 1);
+		load_texture(cub, cub->we_path, 2);
+		load_texture(cub, cub->ea_path, 3);
+	}
 }
 
 void	get_wall_textures(t_cub *cub, t_loop *loop, t_draw *draw)
@@ -66,23 +83,25 @@ void	get_wall_textures(t_cub *cub, t_loop *loop, t_draw *draw)
 		if (loop->raydir_x > 0)
 			draw->texi = 3;
 		else
-			draw->texi = 3;
+			draw->texi = 4;
 	}
 	else
 	{
 		if (loop->raydir_y > 0)
-			draw->texi = 3;
+			draw->texi = 2;
 		else
-			draw->texi = 3;
+			draw->texi = 1;
 	}
 	if (BONUS)
 	{
-		draw->texi = 3;
-		draw->texi_floor = 1;
-		draw->texi_ceiling = 2;
+		draw->texi_no_door = 1;
+		draw->texi_door = 2;
+		draw->texi_floor = 3;
+		draw->texi_ceiling = 4;
+		draw->texi = 5;
 		if (cub->game->level == 1)
 		{
-			draw->texi = 6;
+			draw->texi = 10;
 			draw->texi_floor = 8;
 			draw->texi_ceiling = 9;
 		}
@@ -93,7 +112,7 @@ void	get_wall_textures(t_cub *cub, t_loop *loop, t_draw *draw)
 			draw->texi_ceiling = 9;
 		}
 		if (loop->door == 1)
-			draw->texi = 0;
+			draw->texi = 2;
 	}
 }
 

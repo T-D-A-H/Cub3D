@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 11:55:37 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/08 15:29:17 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/04/08 17:10:47 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,17 @@ void	draw_door(t_cub *cubed, int x)
 		init_start_end_wall(cubed->loop, cubed->textures[4], 1);
 		get_wall_text_coords(cubed, cubed->textures[4], 1, 4);
 		draw_wall_no_door(cubed, cubed->textures[4], x);
-		handle_door(cubed, cubed->player, cubed->game);
+		if (cubed->game->sees_door == 1 && cubed->map[cubed->player->my][cubed->player->mx] != 'd')
+		{
+			if (cubed->map[cubed->player->my - 1][cubed->player->mx] == '0')
+				cubed->map[cubed->player->my - 1][cubed->player->mx] = '1';
+			else if (cubed->map[cubed->player->my + 1][cubed->player->mx] == '0')
+				cubed->map[cubed->player->my + 1][cubed->player->mx] = '1';
+			if (cubed->map[cubed->player->my][cubed->player->mx - 1] == '0')
+				cubed->map[cubed->player->my][cubed->player->mx - 1] = '1';
+			else if (cubed->map[cubed->player->my][cubed->player->mx + 1] == '0')
+				cubed->map[cubed->player->my][cubed->player->mx + 1] = '1';
+		}
 	}
-	update_door(cubed, cubed->game);
+	handle_door(cubed, cubed->player, cubed->game);
 }

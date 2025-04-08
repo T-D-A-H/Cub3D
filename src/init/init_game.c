@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 15:29:12 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/08 13:10:14 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/04/08 16:00:33 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int	game_loop(void *param)
 	{
 		if (cubed->blink_state == 1)
 			draw_red_dot(cubed);
-		// draw_minimap(cubed);
+		draw_minimap(cubed);
 	}
 	mlx_put_image_to_window(cubed->game->mlx, cubed->game->win,
 		cubed->game->img, 0, 0);

@@ -1,16 +1,24 @@
-NO ./assets/wall_door.xpm
-SO ./assets/floor.xpm
-WE ./assets/ceiling_with_light.xpm
-EA ./assets/wall2.xpm
+KY ./assets/key_small3.xpm
+WDO ./assets/wall_no_door.xpm
+WD ./assets/wall_door.xpm
+FL ./assets/0_floor.xpm
+CE ./assets/0_ceiling.xpm
+WA ./assets/0_wall.xpm
+WDO1 ./assets/wall_no_door.xpm
+WD1 ./assets/wall_door.xpm
+FL1 ./assets/floor.xpm
+CE1 ./assets/ceiling_with_light.xpm
+WA1 ./assets/wall2.xpm
 
-F 130,130,130
-C 0,160,220
 
-        1111111111111111111111111
-        100000S000000000000000001
+                11111
+                100O1
+                10S11
+        111111111D111111111111111
+        1000O00000000000000000001
         1000000000110000111111001
-        101111O111110000001111111
-        100111010000000000D000001
+        1011100111110000001111111
+        100110000000000000D000001
 11111111101111D111100000001111111
 100000000011100111110111000001001
 111101111111110111000000100011111

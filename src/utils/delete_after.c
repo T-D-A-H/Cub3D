@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 19:01:38 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/27 16:12:27 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/04/08 13:07:34 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	print_where_not_walled(char **map, int y, int x)
 	int		i;
 	int		j;
 
-	i = 6;
+	i = REST;
 	while (map[i])
 	{
 		if (i != y)

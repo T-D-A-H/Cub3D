@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 14:40:07 by jaimesan          #+#    #+#             */
-/*   Updated: 2025/04/07 15:22:23 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/04/08 15:02:08 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ void	print_object(t_cub *cub, t_object *object)
 		y = object->draw_start_y;
 		while (y < object->draw_end_y)
 		{
-			object->d = (y - object->draw_start_y) * cub->textures[7]->height;
-			object->tex_y = ((object->d * cub->textures[7]->height)
-					/ object->obj_height) / cub->textures[7]->height;
-			object->color = cub->textures[7]->data[cub->textures[7]->width
+			object->d = (y - object->draw_start_y) * cub->textures[0]->height;
+			object->tex_y = ((object->d * cub->textures[0]->height)
+					/ object->obj_height) / cub->textures[0]->height;
+			object->color = cub->textures[0]->data[cub->textures[0]->width
 				* object->tex_y + object->tex_x];
-			if (object->color != cub->textures[7]->data[0])
+			if (object->color != cub->textures[0]->data[0])
 				put_pixel(object->stripe, y, object->color, cub);
 			y += 2;
 		}
@@ -60,11 +60,11 @@ void	print_obj_calcs(t_cub *cub, t_object *object)
 {
 	while (object->stripe < object->draw_end_x)
 	{
-		object->tex_x = (int)(cub->textures[7]->height
+		object->tex_x = (int)(cub->textures[0]->height
 				* (object->stripe - (-object->obj_width / 2
 						+ object->obj_screen_x))
-				* cub->textures[7]->width / object->obj_width)
-			/ cub->textures[7]->height;
+				* cub->textures[0]->width / object->obj_width)
+			/ cub->textures[0]->height;
 		print_object(cub, object);
 		object->stripe += 1;
 	}

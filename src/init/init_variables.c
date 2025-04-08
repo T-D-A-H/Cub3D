@@ -39,6 +39,54 @@ void	init_variable_values(t_cub *cubed, char **map, int i)
 	}
 }
 
+int	get_bonus_tex_index(char *key)
+{
+	if (!ft_strcmp(key, "KY"))
+		return (0);
+	if (!ft_strcmp(key, "WDO"))
+		return (1);
+	if (!ft_strcmp(key, "WD"))
+		return (2);
+	if (!ft_strcmp(key, "FL"))
+		return (3);
+	if (!ft_strcmp(key, "CE"))
+		return (4);
+	if (!ft_strcmp(key, "WA"))
+		return (5);
+	if (!ft_strcmp(key, "WDO1"))
+		return (6);
+	if (!ft_strcmp(key, "WD1"))
+		return (7);
+	if (!ft_strcmp(key, "FL1"))
+		return (8);
+	if (!ft_strcmp(key, "CE1"))
+		return (9);
+	if (!ft_strcmp(key, "WA1"))
+		return (10);
+	return (-1);
+}
+
+void	init_bonus_textures(t_cub *cubed, char **map)
+{
+	int	i;
+	int	index;
+
+	i = 0;
+	while (map[i] && map[i + 1])
+	{
+		index = get_bonus_tex_index(map[i]);
+		if (index != -1 && map[i + 1])
+		{
+			cubed->tex_paths[index] = ft_strdup(map[i + 1]);
+			if (!cubed->tex_paths[index])
+				error(cubed, "Memory allocation failed for texture path.");
+			printf("Loaded %s into tex_paths[%d]\n", cubed->tex_paths[index], index);
+			i++;
+		}
+		i++;
+	}
+}
+
 int	contains_alpha(char *s1, char *s2, char *s3)
 {
 	int		i;
@@ -101,12 +149,30 @@ void	init_variables(t_cub *cubed)
 	map = ft_strtok(cubed->premap, "\n ,");
 	if (!map)
 		error(cubed, ERR_MAP);
-	check_dupe_or_missing(cubed, "NO", map, 0);
-	check_dupe_or_missing(cubed, "SO", map, 0);
-	check_dupe_or_missing(cubed, "WE", map, 0);
-	check_dupe_or_missing(cubed, "EA", map, 0);
-	check_dupe_or_missing(cubed, "F", map, 1);
-	check_dupe_or_missing(cubed, "C", map, 1);
-	init_variable_values(cubed, map, -1);
+	if (BONUS)
+	{
+		check_dupe_or_missing(cubed, "KY", map, 0);
+		check_dupe_or_missing(cubed, "WDO", map, 0);
+		check_dupe_or_missing(cubed, "WD", map, 0);
+		check_dupe_or_missing(cubed, "FL", map, 0);
+		check_dupe_or_missing(cubed, "CE", map, 0);
+		check_dupe_or_missing(cubed, "WA", map, 0);
+		check_dupe_or_missing(cubed, "WDO1", map, 0);
+		check_dupe_or_missing(cubed, "WD1", map, 0);
+		check_dupe_or_missing(cubed, "FL1", map, 0);
+		check_dupe_or_missing(cubed, "CE1", map, 0);
+		check_dupe_or_missing(cubed, "WA1", map, 0);
+		init_bonus_textures(cubed, map);
+	}
+	else
+	{
+		check_dupe_or_missing(cubed, "NO", map, 0);
+		check_dupe_or_missing(cubed, "SO", map, 0);
+		check_dupe_or_missing(cubed, "WE", map, 0);
+		check_dupe_or_missing(cubed, "EA", map, 0);
+		check_dupe_or_missing(cubed, "F", map, 1);
+		check_dupe_or_missing(cubed, "C", map, 1);
+		init_variable_values(cubed, map, -1);
+	}
 	ft_freearr(map);
 }

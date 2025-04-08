@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:31:47 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/08 15:33:11 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/04/08 15:55:36 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,14 @@
 
 # define W_NAME "CUB3D"
 # define WIDTH 1920
-# define HEIGHT 1200
+# define HEIGHT 1080
 # define BLOCK 64
 # define MAP 16
 # define DOT_RADIUS 37
 # define DOT_MARGIN 75
 # define MAX_OBJECTS 20
+# define MAX_TEXTURES 11
+# define REST 11
 
 # ifndef BONUS
 #  define BONUS 0
@@ -167,6 +169,10 @@ typedef struct s_draw
 	double	step;
 	double	texpos;
 	int		texy;
+	int		texi_floor;
+	int		texi_ceiling;
+	int		texi_door;
+	int		texi_no_door;
 }	t_draw;
 
 typedef struct s_player
@@ -239,12 +245,12 @@ typedef struct s_cub
 	int			pj_y;
 	int			pj_x;
 	float		start_direction;
-	t_texture	*textures[8];
+	t_texture	*textures[21];
 	t_game		*game;
 	t_player	*player;
 	t_loop		*loop;
-
 	t_position  *p_positions;
+	char		*tex_paths[MAX_TEXTURES];
     int			p_count;
 	int			p_capacity;
 	int			blink_state;
@@ -294,8 +300,8 @@ void	check_object_pickup(t_cub *cub, t_player *player, t_position *obj);
 void	print_obj_calcs(t_cub *cub, t_object *object);
 void	calcs_object(t_cub *cubed, t_loop *loop);
 //--------------------------------------------------GAME-draw_map
-void	draw_floor(t_cub *cub, t_loop *loop, int x, int y);
-void	draw_ceiling(t_cub *cub, t_loop *loop, int x, int y);
+void	draw_floor(t_cub *cub, t_loop *loop, int x, int y, t_draw *draw);
+void	draw_ceiling(t_cub *cub, t_loop *loop, int x, int y, t_draw *draw);
 void	get_wall_textures(t_cub *cub, t_loop *loop, t_draw *draw);
 void	init_start_end(t_loop *loop);
 void	get_coor_textures(t_cub *cub, t_loop *loop, t_draw *draw);

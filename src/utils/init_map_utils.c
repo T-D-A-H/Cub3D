@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 12:29:43 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/02 12:15:29 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/04/08 15:24:23 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	is_map_del(char **map, int y, int x)
 {
-	if (y == 6)
+	if (y == REST)
 		return (1);
 	if (y == 0 || !map[y + 1] || x == 0 || !map[y][x + 1])
 		return (1);

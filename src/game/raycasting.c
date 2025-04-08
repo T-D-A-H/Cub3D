@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 15:02:24 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/07 15:28:11 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/04/08 13:08:08 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,6 @@ void get_raycast_hits(t_cub *cubed, t_loop *loop)
 			calcs_object(cubed, loop);
 	}
 }
-
 
 void	raycasting(t_cub *cubed, t_player *player, t_loop *loop)
 {

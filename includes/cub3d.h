@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:31:47 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/07 15:21:42 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/04/08 15:33:11 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,6 +199,7 @@ typedef struct s_game
 	int		sees_door;
 	int		door_xy[2];
 	int		level;
+	int		on_door;
 }	t_game;
 
 typedef struct s_texture
@@ -279,7 +280,9 @@ void	draw_door(t_cub *cubed, int x);
 void	init_start_end_wall(t_loop *loop, t_texture *tex, int mode);
 void 	get_wall_text_coords(t_cub *cubed, t_texture *tex, int mode, int tex_id);
 void	draw_wall_no_door(t_cub *cub, t_texture *tex, int x);
-void	update_door(t_cub *cubed, t_player *player, t_game *game);
+void	handle_door(t_cub *cubed, t_player *player, t_game *game);
+void	handle_door2(t_cub *cubed, t_player *player, t_game *game);
+void	update_door(t_cub *cubed, t_game *game);
 //------------------------------------------------------GAME-raycasting
 void	raycasting(t_cub *cubed, t_player *player, t_loop *loop);
 void	get_raycast_hits(t_cub *cubed, t_loop *loop);

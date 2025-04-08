@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_door.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 11:55:37 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/07 15:36:22 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/04/08 15:29:17 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ void	draw_door(t_cub *cubed, int x)
 		init_start_end_wall(cubed->loop, cubed->textures[4], 1);
 		get_wall_text_coords(cubed, cubed->textures[4], 1, 4);
 		draw_wall_no_door(cubed, cubed->textures[4], x);
+		handle_door(cubed, cubed->player, cubed->game);
 	}
-	update_door(cubed, cubed->player, cubed->game);
+	update_door(cubed, cubed->game);
 }

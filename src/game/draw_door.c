@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 11:55:37 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/08 17:17:18 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/04/08 17:22:51 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,12 +103,12 @@ void	draw_door(t_cub *cubed, int x, t_draw *draw)
 {
 	if (cubed->loop->door_wall)
 	{
-		init_start_end_wall(cubed->loop, cubed->textures[4], 0);
-		get_wall_text_coords(cubed, cubed->textures[4], 0, 4);
-		draw_wall_no_door(cubed, cubed->textures[4], x);
-		init_start_end_wall(cubed->loop, cubed->textures[4], 1);
-		get_wall_text_coords(cubed, cubed->textures[4], 1, 4);
-		draw_wall_no_door(cubed, cubed->textures[4], x);
+		init_start_end_wall(cubed->loop, cubed->textures[draw->texi_no_door], 0);
+		get_wall_text_coords(cubed, cubed->textures[draw->texi_no_door], 0, draw->texi_no_door);
+		draw_wall_no_door(cubed, cubed->textures[draw->texi_no_door], x);
+		init_start_end_wall(cubed->loop, cubed->textures[draw->texi_no_door], 1);
+		get_wall_text_coords(cubed, cubed->textures[draw->texi_no_door], 1, draw->texi_no_door);
+		draw_wall_no_door(cubed, cubed->textures[draw->texi_no_door], x);
 		if (cubed->game->sees_door == 1 && cubed->map[cubed->player->my][cubed->player->mx] != 'd')
 		{
 			if (cubed->map[cubed->player->my - 1][cubed->player->mx] == '0')

@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 15:02:24 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/08 16:29:34 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/04/08 17:29:14 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void get_raycast_hits(t_cub *cubed, t_loop *loop)
 			loop->map_y += loop->step_y;
 			loop->side = 1;
 		}
-		if (loop->map_y < 0 || loop->map_x < 0 || loop->map_y >= HEIGHT / BLOCK || loop->map_x >= WIDTH / BLOCK)
+		if (loop->map_y < 0 || loop->map_x < 0 || loop->map_y >= HEIGHT * 2 / BLOCK || loop->map_x >= WIDTH * 2 / BLOCK)
 			break;
 		if (cubed->map[loop->map_y][loop->map_x] == '1'
 			|| cubed->map[loop->map_y][loop->map_x] == ' ')

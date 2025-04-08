@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:31:47 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/08 15:55:36 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/04/08 16:30:23 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ typedef struct s_position
 	int     is_taken;
 }	t_position;
 
-typedef struct s_object_porc
+typedef struct draw
 {   
 	int		visible_samples;
     int		total_samples;
@@ -282,7 +282,7 @@ void	load_texture(t_cub *cub, char *path, int index);
 //------------------------------------------------------------GAME-draw_door
 void 	open_door(t_cub *cubed, t_player *player);
 int 	door_is_closed(t_cub *cubed, t_player *player);
-void	draw_door(t_cub *cubed, int x);
+void	draw_door(t_cub *cubed, int x, t_draw *draw);
 void	init_start_end_wall(t_loop *loop, t_texture *tex, int mode);
 void 	get_wall_text_coords(t_cub *cubed, t_texture *tex, int mode, int tex_id);
 void	draw_wall_no_door(t_cub *cub, t_texture *tex, int x);

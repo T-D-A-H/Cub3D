@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 11:55:37 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/08 16:01:04 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/04/08 16:30:54 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,16 +99,16 @@ void	init_start_end_wall(t_loop *loop, t_texture *tex, int mode)
 		tex->drawend = HEIGHT - 1;
 }
 
-void	draw_door(t_cub *cubed, int x)
+void	draw_door(t_cub *cubed, int x, t_draw *draw)
 {
 	if (cubed->loop->door_wall)
 	{
-		init_start_end_wall(cubed->loop, cubed->textures[1], 0);
-		get_wall_text_coords(cubed, cubed->textures[1], 0, 1);
-		draw_wall_no_door(cubed, cubed->textures[1], x);
-		init_start_end_wall(cubed->loop, cubed->textures[1], 1);
-		get_wall_text_coords(cubed, cubed->textures[1], 1, 1);
-		draw_wall_no_door(cubed, cubed->textures[1], x);
+		init_start_end_wall(cubed->loop, cubed->textures[draw->texi_no_door], 0);
+		get_wall_text_coords(cubed, cubed->textures[draw->texi_no_door], 0, draw->texi_no_door);
+		draw_wall_no_door(cubed, cubed->textures[draw->texi_no_door], x);
+		init_start_end_wall(cubed->loop, cubed->textures[draw->texi_no_door], 1);
+		get_wall_text_coords(cubed, cubed->textures[draw->texi_no_door], 1, draw->texi_no_door);
+		draw_wall_no_door(cubed, cubed->textures[draw->texi_no_door], x);
 		handle_door(cubed, cubed->player, cubed->game);
 	}
 	update_door(cubed, cubed->game);

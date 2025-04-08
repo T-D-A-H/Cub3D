@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 15:02:24 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/08 15:56:10 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/04/08 16:29:34 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,11 +108,11 @@ void get_raycast_hits(t_cub *cubed, t_loop *loop)
 		else if (cubed->map[loop->map_y][loop->map_x] == 'd')
 		{
 			if (loop->sidedist_x < loop->sidedist_y)
-				cubed->textures[4]->side = 0;
+				cubed->textures[1]->side = 0;
 			else
-				cubed->textures[4]->side = 1;
-			cubed->textures[4]->sidedist_xy[0] = loop->sidedist_x;
-			cubed->textures[4]->sidedist_xy[1] = loop->sidedist_y;
+				cubed->textures[1]->side = 1;
+			cubed->textures[1]->sidedist_xy[0] = loop->sidedist_x;
+			cubed->textures[1]->sidedist_xy[1] = loop->sidedist_y;
 			loop->door_wall = 1;
 		}
 		else if (cubed->map[loop->map_y][loop->map_x] == 'O'
@@ -144,7 +144,7 @@ void	raycasting(t_cub *cubed, t_player *player, t_loop *loop)
 			draw_walls(cubed, loop, &draw, loop->x);
 			draw_ceiling(cubed, loop, loop->x, 0, &draw);
 			draw_floor(cubed, loop, loop->x, loop->drawend, &draw);
-			draw_door(cubed, loop->x);
+			draw_door(cubed, loop->x, &draw);
 		}
 		else
 		{

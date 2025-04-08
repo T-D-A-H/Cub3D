@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 15:53:12 by jaimesan          #+#    #+#             */
-/*   Updated: 2025/04/08 15:52:20 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/04/08 16:31:57 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ void	get_wall_textures(t_cub *cub, t_loop *loop, t_draw *draw)
 			draw->texi_ceiling = 9;
 		}
 		if (loop->door == 1)
-			draw->texi = 2;
+			draw->texi = draw->texi_door;
 	}
 }
 

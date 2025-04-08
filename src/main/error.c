@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 19:01:38 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/28 14:54:14 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/04/08 16:08:36 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	free_textures(t_cub *cub)
 	int	i;
 
 	i = 0;
-	while (i < 4)
+	while (i < MAX_TEXTURES)
 	{
 		if (cub->textures[i])
 		{

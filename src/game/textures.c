@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 15:53:12 by jaimesan          #+#    #+#             */
-/*   Updated: 2025/04/08 17:24:34 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/04/09 15:02:38 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	load_all_textures(t_cub *cub)
 			cub->textures[i] = malloc(sizeof(t_texture));
 			if (!cub->textures[i])
 				return (printf(ERR_MALLOC), exit (1));
-		/* 	load_texture(cub, cub->tex_paths[i], i); */
 		}
 		load_texture(cub, cub->tex_paths[0], 0);
 		load_texture(cub, cub->tex_paths[1], 1);
@@ -53,6 +52,16 @@ void	load_all_textures(t_cub *cub)
 		load_texture(cub, cub->tex_paths[8], 8);
 		load_texture(cub, cub->tex_paths[9], 9);
 		load_texture(cub, cub->tex_paths[10], 10);
+		load_texture(cub, cub->tex_paths[11], 11);
+		load_texture(cub, cub->tex_paths[12], 12);
+		load_texture(cub, cub->tex_paths[13], 13);
+		load_texture(cub, cub->tex_paths[14], 14);
+		load_texture(cub, cub->tex_paths[15], 15);
+		load_texture(cub, cub->tex_paths[16], 16);
+		load_texture(cub, cub->tex_paths[17], 17);
+		load_texture(cub, cub->tex_paths[18], 18);
+		load_texture(cub, cub->tex_paths[19], 19);
+		load_texture(cub, cub->tex_paths[20], 20);
 	}
 	else
 	{
@@ -104,12 +113,24 @@ void	get_wall_textures(t_cub *cub, t_loop *loop, t_draw *draw)
 			draw->texi = 10;
 			draw->texi_floor = 8;
 			draw->texi_ceiling = 9;
+			draw->texi_door = 7;
+			draw->texi_no_door = 6;
 		}
 		else if (cub->game->level == 2)
 		{
-			draw->texi = 10;
-			draw->texi_floor = 8;
-			draw->texi_ceiling = 9;
+			draw->texi = 15;
+			draw->texi_floor = 13;
+			draw->texi_ceiling = 15;
+			draw->texi_door = 12;
+			draw->texi_no_door = 11;
+		}
+		else if (cub->game->level == 3)
+		{
+			draw->texi = 20;
+			draw->texi_floor = 18;
+			draw->texi_ceiling = 19;
+			draw->texi_door = 17;
+			draw->texi_no_door = 16;
 		}
 		if (loop->door == 1)
 			draw->texi = draw->texi_door;

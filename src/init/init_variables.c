@@ -63,6 +63,26 @@ int	get_bonus_tex_index(char *key)
 		return (9);
 	if (!ft_strcmp(key, "WA1"))
 		return (10);
+	if (!ft_strcmp(key, "WDO2"))
+		return (11);
+	if (!ft_strcmp(key, "WD2"))
+		return (12);
+	if (!ft_strcmp(key, "FL2"))
+		return (13);
+	if (!ft_strcmp(key, "CE2"))
+		return (14);
+	if (!ft_strcmp(key, "WA2"))
+		return (15);
+	if (!ft_strcmp(key, "WDO3"))
+		return (16);
+	if (!ft_strcmp(key, "WD3"))
+		return (17);
+	if (!ft_strcmp(key, "FL3"))
+		return (18);
+	if (!ft_strcmp(key, "CE3"))
+		return (19);
+	if (!ft_strcmp(key, "WA3"))
+		return (20);
 	return (-1);
 }
 
@@ -161,6 +181,16 @@ void	init_variables(t_cub *cubed)
 		check_dupe_or_missing(cubed, "FL1", map, 0);
 		check_dupe_or_missing(cubed, "CE1", map, 0);
 		check_dupe_or_missing(cubed, "WA1", map, 0);
+		check_dupe_or_missing(cubed, "WDO2", map, 0);
+		check_dupe_or_missing(cubed, "WD2", map, 0);
+		check_dupe_or_missing(cubed, "FL2", map, 0);
+		check_dupe_or_missing(cubed, "CE2", map, 0);
+		check_dupe_or_missing(cubed, "WA2", map, 0);
+		check_dupe_or_missing(cubed, "WDO3", map, 0);
+		check_dupe_or_missing(cubed, "WD3", map, 0);
+		check_dupe_or_missing(cubed, "FL3", map, 0);
+		check_dupe_or_missing(cubed, "CE3", map, 0);
+		check_dupe_or_missing(cubed, "WA3", map, 0);
 		init_bonus_textures(cubed, map);
 	}
 	else

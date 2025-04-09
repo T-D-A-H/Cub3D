@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:31:47 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/08 17:28:52 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/04/09 14:58:14 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@
 # define DOT_RADIUS 37
 # define DOT_MARGIN 75
 # define MAX_OBJECTS 20
-# define MAX_TEXTURES 11
-# define REST 11
+# define MAX_TEXTURES 21
+# define REST 21
 
 # ifndef BONUS
 #  define BONUS 0
@@ -291,7 +291,7 @@ void	handle_door2(t_cub *cubed, t_player *player, t_game *game);
 void	update_door(t_cub *cubed, t_game *game);
 //------------------------------------------------------GAME-raycasting
 void	raycasting(t_cub *cubed, t_player *player, t_loop *loop);
-void	get_raycast_hits(t_cub *cubed, t_loop *loop);
+void	get_raycast_hits(t_cub *cubed, t_loop *loop, t_draw *draw);
 void	get_raycast_steps(t_player *player, t_loop *loop);
 void	init_loop(t_loop *loop);
 void	init_ray(t_player *player, t_loop *loop, int x);

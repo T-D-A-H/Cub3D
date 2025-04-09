@@ -1,34 +1,47 @@
 KY ./assets/key_small3.xpm
 WDO ./assets/wall_no_door.xpm
-WD ./assets/wall_door.xpm
+WD ./assets/0_wall_door.xpm
 FL ./assets/0_floor.xpm
 CE ./assets/0_ceiling.xpm
 WA ./assets/0_wall.xpm
 WDO1 ./assets/wall_no_door.xpm
-WD1 ./assets/wall_door.xpm
+WD1 ./assets/1_wall_door.xpm
 FL1 ./assets/floor.xpm
 CE1 ./assets/ceiling_with_light.xpm
 WA1 ./assets/wall2.xpm
+WDO2 ./assets/2_no_door.xpm
+WD2 ./assets/2_door.xpm
+FL2 ./assets/2_floor_water.xpm
+CE2 ./assets/wall_bathroom.xpm
+WA2 ./assets/wall_bathroom.xpm
+WDO3 ./assets/3_no_door.xpm
+WD3 ./assets/3_door.xpm
+FL3 ./assets/3_floor.xpm
+CE3 ./assets/3_ceiling.xpm
+WA3 ./assets/3_wall.xpm
 
                 111111
-                100001
+                10N001
                 1000O1
                 100001
-                101001
+                111111
                 101001
         111111111D111111111111111
         1000000010100000111111001
-        1000S0O000010000111111001
+        100000O000010000111111001
         1000000000000000000000001
         1011110101010000001111111
         100111010010000000D000001
 11111111101111D111100000001111111
 100000000011100111110111000001001
 111101111111110111000000100011111
-11110111111111O11101010010001
+111101111111O0011101010010001
 11000111110100001100000010001
 10000000000001D11100000010001
-1001111111D101011101010010001
-110000011101010111110110D000111
+1001111111D101000101010010001
+1001111111D101000101010010001
+1001111111D101000101010010001
+1001111111D101000101010010001
+11000001110101D111110110D000111
 11110111 1110101 101111010001
 11111111 1111111 111111111111

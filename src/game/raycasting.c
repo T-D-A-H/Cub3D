@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 15:02:24 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/08 17:29:14 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/04/09 15:16:41 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	get_raycast_steps(t_player *player, t_loop *loop)
 	}
 }
 
-void get_raycast_hits(t_cub *cubed, t_loop *loop)
+void get_raycast_hits(t_cub *cubed, t_loop *loop, t_draw *draw)
 {
 	loop->hit = 0;
 	
@@ -107,12 +107,19 @@ void get_raycast_hits(t_cub *cubed, t_loop *loop)
 		}
 		else if (cubed->map[loop->map_y][loop->map_x] == 'd')
 		{
+			draw->texi_no_door = 1;
+			if (cubed->game->level == 1)
+				draw->texi_no_door = 6;
+			else if (cubed->game->level == 2)
+				draw->texi_no_door = 11;
+			else if (cubed->game->level == 3)
+				draw->texi_no_door = 16;
 			if (loop->sidedist_x < loop->sidedist_y)
-				cubed->textures[1]->side = 0;
+				cubed->textures[draw->texi_no_door]->side = 0;
 			else
-				cubed->textures[1]->side = 1;
-			cubed->textures[1]->sidedist_xy[0] = loop->sidedist_x;
-			cubed->textures[1]->sidedist_xy[1] = loop->sidedist_y;
+				cubed->textures[draw->texi_no_door]->side = 1;
+			cubed->textures[draw->texi_no_door]->sidedist_xy[0] = loop->sidedist_x;
+			cubed->textures[draw->texi_no_door]->sidedist_xy[1] = loop->sidedist_y;
 			loop->door_wall = 1;
 		}
 		else if (cubed->map[loop->map_y][loop->map_x] == 'O'
@@ -135,10 +142,11 @@ void	raycasting(t_cub *cubed, t_player *player, t_loop *loop)
 		loop->door_wall = 0;
 		init_ray(player, loop, loop->x);
 		get_raycast_steps(player, cubed->loop);
-		get_raycast_hits(cubed, loop);
+		get_raycast_hits(cubed, loop, &draw);
 		init_start_end(loop);
 		get_wall_textures(cubed, loop, &draw);
 		get_coor_textures(cubed, loop, &draw);
+		printf("Player position: x=%d, y=%d\n", cubed->player->mx, cubed->player->my);
 		if (BONUS)
 		{
 			draw_walls(cubed, loop, &draw, loop->x);

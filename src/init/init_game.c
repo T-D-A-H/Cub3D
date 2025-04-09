@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 15:29:12 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/09 15:13:48 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/04/09 15:39:43 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ void	init_struct(t_cub *cubed)
 
 void	init_player(t_player *player, int s_x, int s_y, t_cub *cubed)
 {
-	player->x = (double)((s_x * BLOCK));
-	player->y = (double)((s_y * BLOCK));
+	player->x = (double)((s_x * BLOCK)) + 32;
+	player->y = (double)((s_y * BLOCK)) + 32;
 	player->mx = (int)(player->x / BLOCK);
 	player->my = (int)(player->y / BLOCK);
 	player->angle = cubed->start_direction;
@@ -97,7 +97,7 @@ void apply_vhs_effect(t_cub *cubed)
 		return;
 	for (y = 0; y < HEIGHT; y++)
 	{
-		if (rand() % 2 == 0)
+		if (rand() % 5 == 0)
 		{
 			int noise = rand() % 50 - 25;
 			for (x = 0; x < WIDTH; x += (rand() % 3 + 1))
@@ -134,21 +134,24 @@ int	game_loop(void *param)
 	t_cub	*cubed;
 
 	cubed = (t_cub *)param;
-	cubed->blink_counter++;
-	if (cubed->blink_counter > 10)
+	if (BONUS)
 	{
-		cubed->blink_counter = 0;
-		cubed->blink_state = !cubed->blink_state;
+		cubed->blink_counter++;
+		if (cubed->blink_counter > 10)
+		{
+			cubed->blink_counter = 0;
+			cubed->blink_state = !cubed->blink_state;
+		}	
 	}
 	clear_screen(cubed);
 	move_player(cubed->player, cubed);
 	raycasting(cubed, cubed->player, cubed->loop);
-	if (BONUS == 1)
+	if (BONUS)
 	{
 		if (cubed->blink_state == 1)
 			draw_red_dot(cubed);
 		apply_vhs_effect(cubed);
-		draw_minimap(cubed);
+		// draw_minimap(cubed);
 	}
 	mlx_put_image_to_window(cubed->game->mlx, cubed->game->win,
 		cubed->game->img, 0, 0);

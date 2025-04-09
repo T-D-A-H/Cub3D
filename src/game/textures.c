@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 15:53:12 by jaimesan          #+#    #+#             */
-/*   Updated: 2025/04/09 15:02:38 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/04/09 15:32:17 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,16 +90,16 @@ void	get_wall_textures(t_cub *cub, t_loop *loop, t_draw *draw)
 	if (loop->side == 0)
 	{
 		if (loop->raydir_x > 0)
-			draw->texi = 3;
+			draw->texi = 2;
 		else
-			draw->texi = 4;
+			draw->texi = 3;
 	}
 	else
 	{
 		if (loop->raydir_y > 0)
-			draw->texi = 2;
-		else
 			draw->texi = 1;
+		else
+			draw->texi = 0;
 	}
 	if (BONUS)
 	{

@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 15:02:24 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/09 15:16:41 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/04/09 15:27:56 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,7 +146,7 @@ void	raycasting(t_cub *cubed, t_player *player, t_loop *loop)
 		init_start_end(loop);
 		get_wall_textures(cubed, loop, &draw);
 		get_coor_textures(cubed, loop, &draw);
-		printf("Player position: x=%d, y=%d\n", cubed->player->mx, cubed->player->my);
+		/* printf("Player position: x=%d, y=%d\n", cubed->player->mx, cubed->player->my); */
 		if (BONUS)
 		{
 			draw_walls(cubed, loop, &draw, loop->x);

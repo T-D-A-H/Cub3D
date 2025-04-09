@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 15:29:12 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/09 15:39:43 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/04/09 16:23:44 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void apply_vhs_effect(t_cub *cubed)
 		return;
 	for (y = 0; y < HEIGHT; y++)
 	{
-		if (rand() % 5 == 0)
+		if (rand() % 8 == 0)
 		{
 			int noise = rand() % 50 - 25;
 			for (x = 0; x < WIDTH; x += (rand() % 3 + 1))
@@ -115,7 +115,7 @@ void apply_vhs_effect(t_cub *cubed)
 				put_pixel(x, y, (r << 16) | (g << 8) | b, cubed);
 			}
 		}
-		if (y >= scan_line && y < scan_line + 5)
+		if (y >= scan_line && y < scan_line + 2)
 		{
 			for (x = 0; x < WIDTH; x++)
 			{

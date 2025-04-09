@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:31:47 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/09 15:46:09 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/04/09 16:01:21 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@
 # endif
 
 # define PLAYER_SIZE 32
-# define MOVE_AMOUNT 2.5
+# define MOVE_AMOUNT 3
 # define MOVE_SPEED 0.02
 # define PI 3.1415926535
 

@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 16:05:38 by jaimesan          #+#    #+#             */
-/*   Updated: 2025/04/08 10:59:19 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/04/09 13:05:20 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,9 +89,11 @@ void	strafe_player(t_player *player, t_cub *cubed)
 
 int	move_player(t_player *player, t_cub *cub)
 {
+
 	rotate_player(player);
 	strafe_player(player, cub);
 	player->mx = (int)(player->x / BLOCK);
 	player->my = (int)(player->y / BLOCK);
 	return (0);
 }
+

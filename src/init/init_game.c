@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 15:29:12 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/08 16:00:33 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/04/09 15:46:28 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,31 +39,8 @@ void	init_player(t_player *player, int s_x, int s_y, t_cub *cubed)
 	player->key_d = false;
 	player->key_left = false;
 	player->key_right = false;
+	player->is_moving = false;
 }
-
-void draw_red_dot(t_cub *cubed)
-{
-	int center_x;
-	int center_y;
-	int y;
-	int x;
-
-	center_x = WIDTH - DOT_MARGIN - DOT_RADIUS;
-	center_y = DOT_MARGIN + DOT_RADIUS;
-	y = -DOT_RADIUS;
-	while (y <= DOT_RADIUS)
-	{
-		x = -DOT_RADIUS;
-		while (x <= DOT_RADIUS)
-		{
-			if (x * x + y * y <= DOT_RADIUS * DOT_RADIUS)
-				put_pixel(center_x + x, center_y + y, 0xFF0000, cubed);
-			x+=1;
-		}
-		y+=2;
-	}
-}
-
 
 int	game_loop(void *param)
 {
@@ -112,6 +89,7 @@ void	init_window(t_cub *cubed)
 {
 	init_objects(cubed);
 	init_player(cubed->player, cubed->pj_x, cubed->pj_y, cubed);
+	init_sounds(cubed);
 	init_game(cubed->game, cubed);
 	mlx_hook(cubed->game->win, 2, 1L << 0, on_keypress, cubed);
 	mlx_hook(cubed->game->win, 3, 1L << 1, on_keyrelease, cubed->player);

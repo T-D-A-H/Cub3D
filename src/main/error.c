@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 19:01:38 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/03/28 14:54:14 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/04/09 15:39:24 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	error(t_cub *cubed, char *debug_msg)
 	if (cubed->game->win)
 		mlx_destroy_window(cubed->game->mlx, cubed->game->win);
 	free_textures(cubed);
+
 	if (!debug_msg[0])
 		exit(0);
 	else

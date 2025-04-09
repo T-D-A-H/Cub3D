@@ -6,7 +6,7 @@
 #    By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/12 13:05:04 by jaimesan          #+#    #+#              #
-#    Updated: 2025/04/08 15:58:22 by ctommasi         ###   ########.fr        #
+#    Updated: 2025/04/09 12:17:11 by ctommasi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,10 +14,12 @@ NAME = cub3d
 NAME_BONUS = cub3d_b
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -I ./includes
+CFLAGS = -Wall -Wextra -Werror -I ./includes `pkg-config --cflags sdl2`
 HEADERS = -I ./MLX42/include
 RM	= rm -rf
 MAKEFLAGS = --no-print-directory
+SDL = `pkg-config --cflags --libs sdl2`
+
 
 LIBFT_DIR = ./libft
 LIBFT = $(LIBFT_DIR)/libft.a
@@ -40,7 +42,8 @@ SRCS =	./src/main/main.c ./src/main/error.c \
 		./src/game/keypress.c ./src/game/draw.c ./src/game/raycasting.c ./src/game/minimap.c \
 		./src/utils/delete_after.c ./src/game/textures.c ./src/game/move_player.c \
 		./src/game/draw_map.c ./src/utils/draw_utils.c ./src/game/draw_door.c \
-		./src/object/draw_object.c ./src/object/object_utils.c ./src/object/pick_up_object.c
+		./src/object/draw_object.c ./src/object/object_utils.c ./src/object/pick_up_object.c \
+		./src/game/sounds.c
 
 # Archivos objeto
 OBJS = $(SRCS:.c=.o)
@@ -67,7 +70,7 @@ bonus: CFLAGS += -D BONUS=1
 bonus: $(NAME_BONUS)
 
 $(NAME_BONUS): $(LIBFT) $(MLX) $(OBJS)
-	$(CC) $(OBJS) $(LIBFT) $(MLX) -o $(NAME_BONUS)
+	$(CC) $(OBJS) $(LIBFT) $(MLX) $(SDL) -lSDL2 -lpthread -o $(NAME_BONUS)
 	@echo -n "\r                                                                            \r"
 	@echo "[$(GREEN)DONE$(RESET)] Linking complete: [$(MAGENTA)$(NAME_BONUS)$(RESET)] - Complete!"
 

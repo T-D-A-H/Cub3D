@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 15:53:12 by jaimesan          #+#    #+#             */
-/*   Updated: 2025/04/10 13:57:46 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/04/10 14:43:54 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	load_texture(t_cub *cub, char *path, int index)
 			&cub->textures[index]->height);
 	if (cub->textures[index]->img == NULL)
 	{
-		return (printf(ERR_LOAD_TEXTUE), exit (1));
+		return (printf(ERR_LOAD_TEXTUE), exit(1));
 	}
 	cub->textures[index]->data = (int *)mlx_get_data_addr(
 			cub->textures[index]->img,

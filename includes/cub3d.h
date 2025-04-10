@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:31:47 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/10 13:27:27 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/04/10 14:43:26 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -266,7 +266,7 @@ typedef struct s_cub
 	int			pj_y;
 	int			pj_x;
 	float		start_direction;
-	t_texture	*textures[21];
+	t_texture	*textures[MAX_TEXTURES];
 	t_game		*game;
 	t_player	*player;
 	t_loop		*loop;
@@ -282,7 +282,7 @@ typedef struct s_cub
 
 //------------------------------------------------------------MAIN
 int		main(int argc, char **argv);
-void	error(t_cub *cubed, char *debug_msg);
+void	error(t_cub *cubed, char *debug_msg, int signal);
 //--------------------------------------------------------INIT-variables
 void	init_variables(t_cub *cubed);
 void	check_dupe_or_missing(t_cub *cubed, const char *del, char **map, int mode);

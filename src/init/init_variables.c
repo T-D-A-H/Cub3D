@@ -81,18 +81,18 @@ void	check_dupe_or_missing(t_cub *cubed, const char *del,
 		{
 			n++;
 			if (!mode && n == 1 && !map[i + 1])
-				return (ft_freearr(map), error(cubed, ERR_MISSING_VALUES));
+				return (ft_freearr(map), error(cubed, ERR_MISSING_VALUES, 0));
 			if (mode && n == 1 && (!map[i + 1] || !map[i + 2] || !map[i + 3]))
-				return (ft_freearr(map), error(cubed, ERR_MISSING_VALUES));
+				return (ft_freearr(map), error(cubed, ERR_MISSING_VALUES, 0));
 			if (mode && contains_alpha(map[i + 1], map[i + 2], map[i + 3]))
-				return (ft_freearr(map), error(cubed, ERR_COLOURS));
+				return (ft_freearr(map), error(cubed, ERR_COLOURS, 0));
 			if (n > 1)
-				return (ft_freearr(map), error(cubed, ERR_DUPLICATES));
+				return (ft_freearr(map), error(cubed, ERR_DUPLICATES, 0));
 		}
 		i++;
 	}
 	if (!n)
-		return (ft_freearr(map), error(cubed, ERR_MISSING_VARIABLES));
+		return (ft_freearr(map), error(cubed, ERR_MISSING_VARIABLES, 0));
 }
 
 void	init_variables(t_cub *cubed)
@@ -100,8 +100,9 @@ void	init_variables(t_cub *cubed)
 	char	**map;
 
 	map = ft_strtok(cubed->premap, "\n ,");
+	cubed->tex_paths[0] = NULL;
 	if (!map)
-		error(cubed, ERR_MAP);
+		error(cubed, ERR_MAP, 0);
 	if (BONUS)
 	{
 		check_bonus_keys(cubed, map);

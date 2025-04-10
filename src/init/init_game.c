@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/04/10 12:33:32 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/04/10 13:26:24 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,6 @@ void apply_vhs_effect(t_cub *cubed)
 	}
 }
 
-
 int	game_loop(void *param)
 {
 	t_cub	*cubed;
@@ -152,6 +151,8 @@ void	init_game(t_game *game, t_cub *cubed)
 }
 void init_objects(t_cub *cubed)
 {
+	cubed->animation_counter = 0;
+	cubed->game->action_done = 0; 
 	cubed->p_capacity = 50;
 	cubed->p_positions = malloc(sizeof(t_position) * cubed->p_capacity);
 	cubed->p_count = 0;
@@ -183,8 +184,6 @@ int mouse_move(int x, int y,  t_cub *cub)
 
 void	init_window(t_cub *cubed)
 {
-	cubed->animation_counter = 0;
-	cubed->game->action_done = 0; 
 	if (BONUS)
 		init_objects(cubed);
 	init_player(cubed->player, cubed->pj_x, cubed->pj_y, cubed);

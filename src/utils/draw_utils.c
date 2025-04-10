@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 12:42:33 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/10 13:27:20 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/04/10 14:44:07 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ void	handle_door(t_cub *cubed, t_player *player, t_game *game)
 	{
 		cubed->map[game->door_xy[1]][game->door_xy[0]] = '1';
 		cubed->game->sees_door = 0;
+		cubed->game->action_done = 0;
 		cubed->game->action_done = 0;
 	}
 }

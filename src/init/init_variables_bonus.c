@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 11:10:28 by jaimesan          #+#    #+#             */
-/*   Updated: 2025/04/10 11:18:48 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/04/10 13:16:36 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	init_bonus_textures(t_cub *cubed, char **map)
 		{
 			cubed->tex_paths[index] = ft_strdup(map[i + 1]);
 			if (!cubed->tex_paths[index])
-				error(cubed, ERR_MEMORY_TEXTUE);
+				error(cubed, ERR_MEMORY_TEXTUE, 0);
 			i++;
 		}
 		i++;

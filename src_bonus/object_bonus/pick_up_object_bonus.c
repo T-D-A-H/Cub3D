@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pick_up_object.c                                   :+:      :+:    :+:   */
+/*   pick_up_object_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 14:40:07 by jaimesan          #+#    #+#             */
-/*   Updated: 2025/04/08 15:02:08 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/04/10 15:41:00 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
+#include "../../includes/cub3d_bonus.h"
 
 void	print_object(t_cub *cub, t_object *object)
 {
@@ -48,7 +48,7 @@ void	check_object_pickup(t_cub *cub, t_player *player, t_position *obj)
 		map_y = (int)(obj->y / BLOCK);
 		if (map_x >= 0 && map_x < WIDTH
 			&& map_y >= 0 && map_y < HEIGHT
-			&& cub->map[map_y][map_x] == 'O')
+			&& cub->map[map_y][map_x] == 'K')
 		{
 			cub->map[map_y][map_x] = '0';
 			obj->is_taken = 1;

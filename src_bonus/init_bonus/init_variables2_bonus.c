@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_variables_bonus.c                             :+:      :+:    :+:   */
+/*   init_variables2_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 11:10:28 by jaimesan          #+#    #+#             */
-/*   Updated: 2025/04/10 13:16:36 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/04/10 15:31:10 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
+#include "../../includes/cub3d_bonus.h"
 
 void	check_bonus_keys(t_cub *cubed, char **map)
 {

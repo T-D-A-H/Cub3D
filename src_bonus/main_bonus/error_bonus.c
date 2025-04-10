@@ -6,11 +6,11 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 19:01:38 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/10 15:06:34 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/04/10 15:31:16 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
+#include "../../includes/cub3d_bonus.h"
 
 void	free_textures(t_cub *cub)
 {
@@ -47,6 +47,8 @@ void	free_tex_paths(t_cub *cubed)
 
 void	error(t_cub *cubed, char *debug_msg, int signal)
 {
+	(void)cubed;
+	(void)signal;
 	printf("%s", debug_msg);
 	if (cubed->no_path)
 		free(cubed->no_path);
@@ -68,6 +70,8 @@ void	error(t_cub *cubed, char *debug_msg, int signal)
 			mlx_destroy_image(cubed->game->mlx, cubed->game->img);
 		if (cubed->game->win)
 			mlx_destroy_window(cubed->game->mlx, cubed->game->win);
+		if (cubed->p_positions)
+			free(cubed->p_positions);
 		free_textures(cubed);
 	}
 	if (!debug_msg[0])

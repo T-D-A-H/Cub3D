@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_map_utils.c                                   :+:      :+:    :+:   */
+/*   init_map_utils_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 12:29:43 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/10 15:07:17 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/04/10 15:41:06 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
+#include "../../includes/cub3d_bonus.h"
 
 int	is_map_del(char **map, int y, int x)
 {
@@ -38,7 +38,8 @@ int	is_map_char(char c, int mode)
 	}
 	else
 	{
-		if (c != '1' && c != '0' && c != '\n' && c != ' ')
+		if (c != '1' && c != '0' && c != '\n'
+			&& c != ' ' && c != 'D' && c != 'K')
 			return (1);
 	}
 	return (0);

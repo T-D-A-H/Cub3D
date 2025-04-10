@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   textures.c                                         :+:      :+:    :+:   */
+/*   textures_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 15:53:12 by jaimesan          #+#    #+#             */
-/*   Updated: 2025/04/10 15:23:13 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/04/10 15:37:49 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
+#include "../../includes/cub3d_bonus.h"
 
 void	load_texture(t_cub *cub, char *path, int index)
 {
@@ -37,12 +37,9 @@ void	load_all_textures(t_cub *cub)
 	{
 		cub->textures[i] = malloc(sizeof(t_texture));
 		if (!cub->textures[i])
-			return (printf(ERR_MALLOC), exit(1));
+			return (printf(ERR_MALLOC), exit (1));
+		load_texture(cub, cub->tex_paths[i], i);
 	}
-	load_texture(cub, cub->no_path, 0);
-	load_texture(cub, cub->so_path, 1);
-	load_texture(cub, cub->we_path, 2);
-	load_texture(cub, cub->ea_path, 3);
 }
 
 void	get_wall_textures(t_cub *cub, t_loop *loop, t_draw *draw)
@@ -54,20 +51,37 @@ void	get_wall_textures(t_cub *cub, t_loop *loop, t_draw *draw)
 		draw->wallx = cub->player->x / BLOCK + loop->perpwalldist
 			* loop->raydir_x;
 	draw->wallx -= floor(draw->wallx);
-	if (loop->side == 0)
+	draw->texi_no_door = 1;
+	draw->texi_door = 2;
+	draw->texi_floor = 3;
+	draw->texi_ceiling = 4;
+	draw->texi = 5;
+	if (cub->game->level == 1)
 	{
-		if (loop->raydir_x > 0)
-			draw->texi = 2;
-		else
-			draw->texi = 3;
+		draw->texi_no_door = 6;
+		draw->texi_door = 7;
+		draw->texi_floor = 8;
+		draw->texi_ceiling = 9;
+		draw->texi = 10;
 	}
-	else
+	else if (cub->game->level == 2)
 	{
-		if (loop->raydir_y > 0)
-			draw->texi = 1;
-		else
-			draw->texi = 0;
+		draw->texi_no_door = 11;
+		draw->texi_door = 12;
+		draw->texi_floor = 13;
+		draw->texi_ceiling = 15;
+		draw->texi = 15;
 	}
+	else if (cub->game->level == 3)
+	{
+		draw->texi_no_door = 16;
+		draw->texi_door = 17;
+		draw->texi_floor = 18;
+		draw->texi_ceiling = 19;
+		draw->texi = 20;
+	}
+	if (loop->door == 1)
+		draw->texi = draw->texi_door;
 }
 
 void	get_coor_textures(t_cub *cub, t_loop *loop, t_draw *draw)

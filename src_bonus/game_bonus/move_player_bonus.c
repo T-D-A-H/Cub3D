@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   move_player.c                                      :+:      :+:    :+:   */
+/*   move_player_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 16:05:38 by jaimesan          #+#    #+#             */
-/*   Updated: 2025/04/10 15:03:31 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/04/10 15:30:45 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
+#include "../../includes/cub3d_bonus.h"
 
 int	can_move(t_cub *cubed, double next_x, double next_y)
 {
@@ -22,7 +22,8 @@ int	can_move(t_cub *cubed, double next_x, double next_y)
 	if (map_x < 0 || map_y < 0 || map_x >= (int)ft_strlen(cubed->map[0])
 		|| map_y >= ft_arrlen(cubed->map))
 		return (0);
-	if (cubed->map[map_y][map_x] == '1')
+	if (cubed->map[map_y][map_x] == '1'
+		|| cubed->map[map_y][map_x] == 'D' || cubed->map[map_y][map_x] == 'x')
 		return (0);
 	return (1);
 }
@@ -83,10 +84,12 @@ void	strafe_player(t_player *player, t_cub *cubed)
 		player->x = next_x;
 	if (can_move(cubed, player->x, next_y))
 		player->y = next_y;
+	(void)cubed;
 }
 
 int	move_player(t_player *player, t_cub *cub)
 {
+
 	rotate_player(player);
 	strafe_player(player, cub);
 	player->mx = (int)(player->x / BLOCK);

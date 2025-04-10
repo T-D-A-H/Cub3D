@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minimap.c                                          :+:      :+:    :+:   */
+/*   minimap_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 15:04:20 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/07 15:15:57 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/04/10 15:40:51 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
+#include "../../includes/cub3d_bonus.h"
 
 void	init_mini(t_mini *mini, int x0, int y0, t_loop *loop)
 {
@@ -100,7 +100,7 @@ void	draw_minimap(t_cub *cubed)
 			else if (cubed->map[y][x] == '0' || cubed->map[y][x] == 'N'
 				|| cubed->map[y][x] == 'E'
 				|| cubed->map[y][x] == 'W'
-				|| cubed->map[y][x] == 'O'
+				|| cubed->map[y][x] == 'K'
 				|| cubed->map[y][x] == 'S' )
 				draw_full_square(cubed, x, y, GREY);
 		}

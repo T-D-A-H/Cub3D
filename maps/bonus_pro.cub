@@ -1,6 +1,6 @@
 KY ./assets/key_small3.xpm
 WDO ./assets/wall_no_door.xpm
-WD ./assets/wall_bonus.xpm
+WD ./assets/0_wall_door.xpm
 FL ./assets/0_floor.xpm
 CE ./assets/0_ceiling.xpm
 WA ./assets/0_wall.xpm
@@ -23,22 +23,22 @@ WA3 ./assets/3_wall.xpm
 1111111
 1000S01
 1000001
-1O00001
+1K00001
 111D111
 1000001
 1000001
 1000001
-1O00001
+1K00001
 111D111
 1000001
 1000001
 1000001
-1O00001
+1K00001
 111D111
 1000001
 1000001
 1000001
-1O00001
+1K00001
 111D111
 1000001
 1000001

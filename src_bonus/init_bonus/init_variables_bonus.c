@@ -10,34 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
+#include "../../includes/cub3d_bonus.h"
 
-void	init_variable_values(t_cub *cubed, char **map, int i)
-{
-	while (++i < ft_arrlen(map))
-	{
-		if (!ft_strcmp(map[i], "F"))
-		{
-			cubed->f_color += ft_atoi(map[i + 1]) << 16;
-			cubed->f_color += ft_atoi(map[i + 2]) << 8;
-			cubed->f_color += ft_atoi(map[i + 3]);
-		}
-		else if (!ft_strcmp(map[i], "C"))
-		{
-			cubed->c_color += ft_atoi(map[i + 1]) << 16;
-			cubed->c_color += ft_atoi(map[i + 2]) << 8;
-			cubed->c_color += ft_atoi(map[i + 3]);
-		}
-		else if (!ft_strcmp(map[i], "NO"))
-			cubed->no_path = ft_strdup(map[i + 1]);
-		else if (!ft_strcmp(map[i], "SO"))
-			cubed->so_path = ft_strdup(map[i + 1]);
-		else if (!ft_strcmp(map[i], "WE"))
-			cubed->we_path = ft_strdup(map[i + 1]);
-		else if (!ft_strcmp(map[i], "EA"))
-			cubed->ea_path = ft_strdup(map[i + 1]);
-	}
-}
 
 int	contains_alpha(char *s1, char *s2, char *s3)
 {
@@ -103,12 +77,7 @@ void	init_variables(t_cub *cubed)
 	cubed->tex_paths[0] = NULL;
 	if (!map)
 		error(cubed, ERR_MAP, 0);
-	check_dupe_or_missing(cubed, "NO", map, 0);
-	check_dupe_or_missing(cubed, "SO", map, 0);
-	check_dupe_or_missing(cubed, "WE", map, 0);
-	check_dupe_or_missing(cubed, "EA", map, 0);
-	check_dupe_or_missing(cubed, "F", map, 1);
-	check_dupe_or_missing(cubed, "C", map, 1);
-	init_variable_values(cubed, map, -1);
+	check_bonus_keys(cubed, map);
+	init_bonus_textures(cubed, map);
 	ft_freearr(map);
 }

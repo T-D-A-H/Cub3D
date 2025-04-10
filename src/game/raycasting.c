@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 15:02:24 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/10 12:35:29 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/04/10 13:59:30 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	init_loop(t_loop *loop)
 	loop->line_height = 0;
 	loop->drawstart = 0;
 	loop->drawend = 0;
-	loop->x = -1;
+	loop->x = 0;
 	loop->door = 0;
 	loop->door_wall = 0;
 }
@@ -79,7 +79,6 @@ void	get_raycast_steps(t_player *player, t_loop *loop)
 void get_raycast_hits(t_cub *cubed, t_loop *loop, t_draw *draw)
 {
 	loop->hit = 0;
-	
 	while (!loop->hit)
 	{
 		if (loop->sidedist_x < loop->sidedist_y)
@@ -99,13 +98,16 @@ void get_raycast_hits(t_cub *cubed, t_loop *loop, t_draw *draw)
 		if (cubed->map[loop->map_y][loop->map_x] == '1'
 			|| cubed->map[loop->map_y][loop->map_x] == ' ')
 			loop->hit = 1;
-		else if (cubed->map[loop->map_y][loop->map_x] == 'D'
-			&& BONUS)
+		else if (BONUS && cubed->map[loop->map_y][loop->map_x] == 'D')
 		{
 			loop->hit = 1;
 			loop->door = 1;
 		}
-		else if (cubed->map[loop->map_y][loop->map_x] == 'd')
+		else if (BONUS && !BONUS_PRO && cubed->map[loop->map_y][loop->map_x] == 'd')
+		{
+			loop->door = 0;
+		}
+		else if (BONUS_PRO && cubed->map[loop->map_y][loop->map_x] == 'd')
 		{
 			draw->texi_no_door = 1;
 			if (cubed->game->level == 1)
@@ -136,10 +138,8 @@ void	raycasting(t_cub *cubed, t_player *player, t_loop *loop)
 	init_loop(loop);
 	obj = NULL;
 	cubed->p_count = 0;
-	while (++loop->x < WIDTH)
+	while (loop->x < WIDTH)
 	{
-		loop->door = 0;
-		loop->door_wall = 0;
 		init_ray(player, loop, loop->x);
 		get_raycast_steps(player, cubed->loop);
 		get_raycast_hits(cubed, loop, &draw);
@@ -151,14 +151,15 @@ void	raycasting(t_cub *cubed, t_player *player, t_loop *loop)
 			draw_walls(cubed, loop, &draw, loop->x);
 			draw_ceiling(cubed, loop, loop->x, 0, &draw);
 			draw_floor(cubed, loop, loop->x, loop->drawend, &draw);
-			draw_door(cubed, loop->x, &draw);
+			if (BONUS_PRO)
+				draw_door(cubed, loop->x, &draw);
 		}
 		else
 		{
 			draw_3dmap(cubed, loop->drawstart, loop->drawend, loop->x);
 			draw_walls(cubed, cubed->loop, &draw, loop->x);
 		}
-		loop->x += 3;
+		loop->x += 1 + BONUS;
 	}
 	if (cubed->p_count > 0 && BONUS)
 		draw_object(cubed, player, cubed->p_count, obj);

@@ -1,6 +1,6 @@
 KY ./assets/key_small3.xpm
 WDO ./assets/wall_no_door.xpm
-WD ./assets/0_wall_door.xpm
+WD ./assets/wall_bonus.xpm
 FL ./assets/0_floor.xpm
 CE ./assets/0_ceiling.xpm
 WA ./assets/0_wall.xpm

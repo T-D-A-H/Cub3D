@@ -3,14 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   draw_door.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 11:55:37 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/10 12:45:54 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/04/10 13:42:48 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+
+
+void	close_door(t_cub *cubed, t_player *player)
+{
+	int	map_x;
+	int	map_y;
+
+	map_x = (int)(player->x / BLOCK);
+	map_y = (int)(player->y / BLOCK);
+	if (cubed->map[map_y + 1][map_x] == 'd'
+		|| cubed->map[map_y][map_x + 1] == 'd'
+		|| cubed->map[map_y - 1][map_x] == 'd'
+		|| cubed->map[map_y][map_x - 1] == 'd')
+	{
+		if (cubed->map[map_y - 1][map_x] == 'd')
+			cubed->map[map_y - 1][map_x] = 'D';
+		else if (cubed->map[map_y + 1][map_x] == 'd')
+			cubed->map[map_y + 1][map_x] = 'D';
+		else if (cubed->map[map_y][map_x + 1] == 'd')
+			cubed->map[map_y][map_x + 1] = 'D';
+		else if (cubed->map[map_y][map_x - 1] == 'd')
+			cubed->map[map_y][map_x - 1] = 'D';
+		cubed->loop->door_wall = 1;
+	}
+}
 
 void	open_door(t_cub *cubed, t_player *player)
 {

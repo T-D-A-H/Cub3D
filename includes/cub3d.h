@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:31:47 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/10 12:33:23 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/04/10 13:27:27 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,10 @@
 
 # ifndef BONUS
 #  define BONUS 0
+# endif
+
+# ifndef BONUS_PRO
+#  define BONUS_PRO 0
 # endif
 
 # define PLAYER_SIZE 32
@@ -362,6 +366,8 @@ void	print_where_not_walled(char **map, int y, int x);
 
 void    *play_music(void *arg);
 int init_sounds(t_cub *cubed);
+void	close_door(t_cub *cubed, t_player *player);
+int	door_is_open(t_cub *cubed, t_player *player);
 
 
 #endif

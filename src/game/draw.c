@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 15:03:36 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/07 15:15:48 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/04/09 15:46:44 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,28 @@ void	draw_3dmap(t_cub *cubed, int draw_start, int draw_end, int x)
 	while (++y <= WIDTH)
 	{
 		put_pixel(x, y, cubed->f_color, cubed);
+	}
+}
+
+void draw_red_dot(t_cub *cubed)
+{
+	int center_x;
+	int center_y;
+	int y;
+	int x;
+
+	center_x = WIDTH - DOT_MARGIN - DOT_RADIUS;
+	center_y = DOT_MARGIN + DOT_RADIUS;
+	y = -DOT_RADIUS;
+	while (y <= DOT_RADIUS)
+	{
+		x = -DOT_RADIUS;
+		while (x <= DOT_RADIUS)
+		{
+			if (x * x + y * y <= DOT_RADIUS * DOT_RADIUS)
+				put_pixel(center_x + x, center_y + y, 0xFF0000, cubed);
+			x+=1;
+		}
+		y+=2;
 	}
 }

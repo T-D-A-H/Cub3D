@@ -5,10 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/17 15:29:12 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/10 11:12:20 by jaimesan         ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2025/04/10 12:22:13 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+
 
 #include "../../includes/cub3d.h"
 
@@ -39,29 +41,7 @@ void	init_player(t_player *player, int s_x, int s_y, t_cub *cubed)
 	player->key_d = false;
 	player->key_left = false;
 	player->key_right = false;
-}
-
-void draw_red_dot(t_cub *cubed)
-{
-	int center_x;
-	int center_y;
-	int y;
-	int x;
-
-	center_x = WIDTH - DOT_MARGIN - DOT_RADIUS;
-	center_y = DOT_MARGIN + DOT_RADIUS;
-	y = -DOT_RADIUS;
-	while (y <= DOT_RADIUS)
-	{
-		x = -DOT_RADIUS;
-		while (x <= DOT_RADIUS)
-		{
-			if (x * x + y * y <= DOT_RADIUS * DOT_RADIUS)
-				put_pixel(center_x + x, center_y + y, 0xFF0000, cubed);
-			x+=1;
-		}
-		y+=2;
-	}
+	player->is_moving = false;
 }
 
 int get_pixel_color(int x, int y, t_cub *cubed)
@@ -97,7 +77,7 @@ void apply_vhs_effect(t_cub *cubed)
 		return;
 	for (y = 0; y < HEIGHT; y++)
 	{
-		if (rand() % 8 == 0)
+		if (rand() % 5 == 0)
 		{
 			int noise = rand() % 50 - 25;
 			for (x = 0; x < WIDTH; x += (rand() % 3 + 1))
@@ -115,7 +95,7 @@ void apply_vhs_effect(t_cub *cubed)
 				put_pixel(x, y, (r << 16) | (g << 8) | b, cubed);
 			}
 		}
-		if (y >= scan_line && y < scan_line + 2)
+		if (y >= scan_line && y < scan_line + 5)
 		{
 			for (x = 0; x < WIDTH; x++)
 			{
@@ -127,6 +107,7 @@ void apply_vhs_effect(t_cub *cubed)
 		}
 	}
 }
+
 
 int	game_loop(void *param)
 {
@@ -206,7 +187,10 @@ void	init_window(t_cub *cubed)
 	cubed->animation_counter = 0;
 	if (BONUS)
 		init_objects(cubed);
+	if (BONUS)
+		init_objects(cubed);
 	init_player(cubed->player, cubed->pj_x, cubed->pj_y, cubed);
+	init_sounds(cubed);
 	init_game(cubed->game, cubed);
 	mlx_hook(cubed->game->win, 2, 1L << 0, on_keypress, cubed);
 	mlx_hook(cubed->game->win, 3, 1L << 1, on_keyrelease, cubed->player);
@@ -216,8 +200,16 @@ void	init_window(t_cub *cubed)
 		mlx_mouse_move(cubed->game->mlx, cubed->game->win, WIDTH / 2, HEIGHT / 2);
 		mlx_hook(cubed->game->win, 6, 1L<<6, mouse_move, cubed);
 	}
+	if (BONUS)
+	{
+		mlx_mouse_hide(cubed->game->mlx, cubed->game->win);
+		mlx_mouse_move(cubed->game->mlx, cubed->game->win, WIDTH / 2, HEIGHT / 2);
+		mlx_hook(cubed->game->win, 6, 1L<<6, mouse_move, cubed);
+	}
 	mlx_loop_hook(cubed->game->mlx, game_loop, cubed);
 	mlx_loop(cubed->game->mlx);
+	if (BONUS)
+		mlx_mouse_show(cubed->game->mlx, cubed->game->win);
 	if (BONUS)
 		mlx_mouse_show(cubed->game->mlx, cubed->game->win);
 }

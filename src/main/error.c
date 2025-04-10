@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 19:01:38 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/08 16:08:36 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/04/10 12:20:53 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	error(t_cub *cubed, char *debug_msg)
 	if (cubed->game->win)
 		mlx_destroy_window(cubed->game->mlx, cubed->game->win);
 	free_textures(cubed);
+
 	if (!debug_msg[0])
 		exit(0);
 	else

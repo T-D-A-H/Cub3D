@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:31:47 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/10 11:57:11 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/04/10 12:24:21 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@
 # include <sys/time.h>
 # include <stdbool.h>
 # include <math.h>
+# include <pthread.h>
+# include <SDL2/SDL.h>
+
 
 # include "../libft/includes/libft.h"
 # include "../minilibx-linux/mlx.h"
@@ -73,14 +76,14 @@
 # define RED 0xFF0000
 # define WHITE 0xFFFFFF
 
-# define W 119
-# define A 97
-# define S 115
-# define D 100
-# define LEFT 65361
-# define RIGHT 65363
-# define ESC 65307
-# define KEY_F 102
+# define W_KEY 119
+# define A_KEY 97
+# define S_KEY 115
+# define D_KEY 100
+# define LEFT_KEY 65361
+# define RIGHT_KEY 65363
+# define ESC_KEY 65307
+# define KEY_F_KEY 102
 
 typedef struct s_position
 {
@@ -195,6 +198,7 @@ typedef struct s_player
 	bool	key_left;
 	bool	key_right;
 	bool	key_f;
+	bool	is_moving;
 }	t_player;
 
 typedef struct s_game
@@ -236,6 +240,14 @@ typedef struct s_texture
 	int		side;
 }	t_texture;
 
+typedef struct s_sounds
+{
+	Uint32 wav_length;
+    Uint8 *wav_buffer;
+	SDL_AudioSpec wav_spec;
+	pthread_t music_thread;
+}	t_sounds;
+
 typedef struct s_cub
 {
 	char		*no_path;
@@ -259,7 +271,8 @@ typedef struct s_cub
 	int			p_capacity;
 	int			blink_state;
 	int			blink_counter;
-	int			animation_counter; 
+	int			animation_counter;
+	t_sounds	*sounds;
 }	t_cub;
 
 //------------------------------------------------------------MAIN
@@ -288,6 +301,7 @@ void	init_bonus_textures(t_cub *cubed, char **map);
 void	load_all_textures(t_cub *cub);
 void	load_texture(t_cub *cub, char *path, int index);
 //------------------------------------------------------------GAME-draw_door
+void	draw_red_dot(t_cub *cubed);
 void 	open_door(t_cub *cubed, t_player *player);
 int 	door_is_closed(t_cub *cubed, t_player *player);
 void	draw_door(t_cub *cubed, int x, t_draw *draw);
@@ -345,7 +359,8 @@ float	get_player_direction(char c);
 //------------------------------------------------------DELETE_AFTER
 void	print_where_not_walled(char **map, int y, int x);
 
-
+void    *play_music(void *arg);
+int init_sounds(t_cub *cubed);
 
 
 #endif

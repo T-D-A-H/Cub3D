@@ -1,9 +1,4 @@
-// get_player_direction, visualmente enseña donde
-// es el N, S, W, E pero no son valores correctos
-
-// N = PI / 2
-// S = 3 * PI / 2
-// W = PI
-// S = 0 || 2 * PI
-
-// Crear los rayos saliendo del jugador
+// CAMBIAR MENSAJES DE ERROR EN SOUNDS
+// PONER CONDICION PARA QUE SOLO PONGA PAREDES ANTES DE PUERTA UNA VEZ
+// LEAKS?
+// 

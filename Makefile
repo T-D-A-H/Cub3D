@@ -5,19 +5,22 @@
 #                                                     +:+ +:+         +:+      #
 #    By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/03/12 13:05:04 by jaimesan          #+#    #+#              #
-#    Updated: 2025/04/10 11:19:08 by jaimesan         ###   ########.fr        #
+#    Created: Invalid date        by                   #+#    #+#              #
+#    Updated: 2025/04/10 12:18:19 by jaimesan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
 
 NAME = cub3d
 NAME_BONUS = cub3d_b
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -I ./includes
+CFLAGS = -Wall -Wextra -Werror -I ./includes `pkg-config --cflags sdl2`
 HEADERS = -I ./MLX42/include
 RM	= rm -rf
 MAKEFLAGS = --no-print-directory
+SDL = `pkg-config --cflags --libs sdl2`
+
 
 LIBFT_DIR = ./libft
 LIBFT = $(LIBFT_DIR)/libft.a
@@ -41,7 +44,7 @@ SRCS =	./src/main/main.c ./src/main/error.c \
 		./src/utils/delete_after.c ./src/game/textures.c ./src/game/move_player.c \
 		./src/game/draw_map.c ./src/utils/draw_utils.c ./src/game/draw_door.c \
 		./src/object/draw_object.c ./src/object/object_utils.c ./src/object/pick_up_object.c \
-		./src/init/init_variables_bonus.c
+		./src/init/init_variables_bonus.c ./src/game/sounds.c
 
 # Archivos objeto
 OBJS = $(SRCS:.c=.o)
@@ -68,7 +71,7 @@ bonus: CFLAGS += -D BONUS=1
 bonus: $(NAME_BONUS)
 
 $(NAME_BONUS): $(LIBFT) $(MLX) $(OBJS)
-	$(CC) $(OBJS) $(LIBFT) $(MLX) -o $(NAME_BONUS)
+	$(CC) $(OBJS) $(LIBFT) $(MLX) $(SDL) -lSDL2 -lpthread -o $(NAME_BONUS)
 	@echo -n "\r                                                                            \r"
 	@echo "[$(GREEN)DONE$(RESET)] Linking complete: [$(MAGENTA)$(NAME_BONUS)$(RESET)] - Complete!"
 

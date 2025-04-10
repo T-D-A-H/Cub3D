@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:08:04 by jaimesan          #+#    #+#             */
-/*   Updated: 2025/04/09 15:26:26 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/04/10 13:56:17 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,18 +98,18 @@ void	init_map(t_cub *cubed)
 
 	max_x = 0;
 	if (check_void_lines(cubed->premap))
-		return (error(cubed, ERR_MAP_NOT_WALLED));
+		return (error(cubed, ERR_MAP_NOT_WALLED, 0));
 	map = ft_strtok(cubed->premap, "\n");
 	if (check_invalid_chars(map, cubed))
-		return (ft_freearr(map), error(cubed, ERR_MAP_INVALID_CHARS));
+		return (ft_freearr(map), error(cubed, ERR_MAP_INVALID_CHARS, 0));
 	if (!map)
-		error(cubed, ERR_MAP);
+		error(cubed, ERR_MAP, 0);
 	y = REST;
 	if (check_cero(map, &y, &x, &max_x) == 1)
-		return (error(cubed, ERR_MAP_NOT_WALLED));
+		return (error(cubed, ERR_MAP_NOT_WALLED, 0));
 	if (save_map(cubed, map, y, max_x) == 1)
-		return (ft_freearr(map), error(cubed, ERR_MALLOC));
+		return (ft_freearr(map), error(cubed, ERR_MALLOC, 0));
 	if (cubed->pj_x == 0 && cubed->pj_y == 0)
-		return (ft_freearr(map), error(cubed, ERR_PJ_NOT_EXIST));
+		return (ft_freearr(map), error(cubed, ERR_PJ_NOT_EXIST, 0));
 	return (ft_freearr(map));
 }

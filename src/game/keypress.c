@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 14:57:47 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/10 12:42:48 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/04/10 13:17:20 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	on_keypress(int keydata, t_cub *cub)
 		}
 	}
 	if (keydata == ESC_KEY)
-		return (error(cub, NO_ERROR), 1);
+		return (error(cub, NO_ERROR, 1), 1);
 	return (0);
 }
 

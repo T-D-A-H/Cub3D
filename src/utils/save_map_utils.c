@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 10:31:18 by jaimesan          #+#    #+#             */
-/*   Updated: 2025/04/10 10:58:47 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/04/10 13:18:09 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static char	*replace_tabs_with_spaces(t_cub *cubed)
 	tab_count = ft_strcountchr(cubed->premap, '\t');
 	premap_replaced = malloc(ft_strlen(cubed->premap) + (tab_count * 3) + 1);
 	if (!premap_replaced)
-		error(cubed, ERR_MALLOC);
+		error(cubed, ERR_MALLOC, 0);
 	i = -1;
 	j = 0;
 	while (++i < ft_strlen(cubed->premap))
@@ -100,7 +100,7 @@ void	read_map_file(t_cub *cubed, char **argv)
 
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
-		error(cubed, ERR_FILE_OPEN);
+		error(cubed, ERR_FILE_OPEN, 0);
 	cubed->premap = ft_strdup("");
 	while (1)
 	{

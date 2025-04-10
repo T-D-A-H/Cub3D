@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:31:47 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/10 12:33:23 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/04/10 13:16:02 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -262,7 +262,7 @@ typedef struct s_cub
 	int			pj_y;
 	int			pj_x;
 	float		start_direction;
-	t_texture	*textures[21];
+	t_texture	*textures[MAX_TEXTURES];
 	t_game		*game;
 	t_player	*player;
 	t_loop		*loop;
@@ -278,7 +278,7 @@ typedef struct s_cub
 
 //------------------------------------------------------------MAIN
 int		main(int argc, char **argv);
-void	error(t_cub *cubed, char *debug_msg);
+void	error(t_cub *cubed, char *debug_msg, int signal);
 //--------------------------------------------------------INIT-variables
 void	init_variables(t_cub *cubed);
 void	check_dupe_or_missing(t_cub *cubed, const char *del, char **map, int mode);
@@ -361,7 +361,7 @@ float	get_player_direction(char c);
 void	print_where_not_walled(char **map, int y, int x);
 
 void    *play_music(void *arg);
-int init_sounds(t_cub *cubed);
+int		init_sounds(t_cub *cubed);
 
 
 #endif

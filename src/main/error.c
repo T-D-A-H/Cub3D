@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 19:01:38 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/10 13:47:13 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/04/10 13:58:28 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	error(t_cub *cubed, char *debug_msg, int signal)
 		free(cubed->premap);
 	if (cubed->tex_paths[0] != NULL)
 		free_tex_paths(cubed);
-/* 	if (signal == 1)
+	if (signal == 1)
 	{
 		if (cubed->game->img)
 			mlx_destroy_image(cubed->game->mlx, cubed->game->img);
@@ -73,7 +73,7 @@ void	error(t_cub *cubed, char *debug_msg, int signal)
 		if (cubed->p_positions)
 			free(cubed->p_positions);
 		free_textures(cubed);
-	} */
+	}
 	if (!debug_msg[0])
 		exit(0);
 	else

@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:31:47 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/10 12:24:21 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/04/10 12:33:23 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,6 +214,7 @@ typedef struct s_game
 	int		door_xy[2];
 	int		level;
 	int		on_door;
+	int		action_done;
 }	t_game;
 
 typedef struct s_texture

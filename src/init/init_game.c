@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/04/10 12:22:13 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/04/10 12:33:32 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ int	game_loop(void *param)
 		if (cubed->blink_state == 1)
 			draw_red_dot(cubed);
 		apply_vhs_effect(cubed);
-		// draw_minimap(cubed);
+		draw_minimap(cubed);
 	}
 	mlx_put_image_to_window(cubed->game->mlx, cubed->game->win,
 		cubed->game->img, 0, 0);
@@ -175,7 +175,6 @@ int mouse_move(int x, int y,  t_cub *cub)
 		cub->player->angle += 2 * PI;
 	if (cub->player->angle > 2 * PI)
 		cub->player->angle -= 2 * PI;
-
 	cub->player->dx = cos(cub->player->angle) * 5;
 	cub->player->dy = sin(cub->player->angle) * 5;
 	mlx_mouse_move(cub->game->mlx, cub->game->win, center_x, HEIGHT / 2);
@@ -185,8 +184,7 @@ int mouse_move(int x, int y,  t_cub *cub)
 void	init_window(t_cub *cubed)
 {
 	cubed->animation_counter = 0;
-	if (BONUS)
-		init_objects(cubed);
+	cubed->game->action_done = 0; 
 	if (BONUS)
 		init_objects(cubed);
 	init_player(cubed->player, cubed->pj_x, cubed->pj_y, cubed);
@@ -200,16 +198,8 @@ void	init_window(t_cub *cubed)
 		mlx_mouse_move(cubed->game->mlx, cubed->game->win, WIDTH / 2, HEIGHT / 2);
 		mlx_hook(cubed->game->win, 6, 1L<<6, mouse_move, cubed);
 	}
-	if (BONUS)
-	{
-		mlx_mouse_hide(cubed->game->mlx, cubed->game->win);
-		mlx_mouse_move(cubed->game->mlx, cubed->game->win, WIDTH / 2, HEIGHT / 2);
-		mlx_hook(cubed->game->win, 6, 1L<<6, mouse_move, cubed);
-	}
 	mlx_loop_hook(cubed->game->mlx, game_loop, cubed);
 	mlx_loop(cubed->game->mlx);
-	if (BONUS)
-		mlx_mouse_show(cubed->game->mlx, cubed->game->win);
 	if (BONUS)
 		mlx_mouse_show(cubed->game->mlx, cubed->game->win);
 }

@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:31:47 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/10 11:18:41 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/04/10 11:57:11 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -259,7 +259,7 @@ typedef struct s_cub
 	int			p_capacity;
 	int			blink_state;
 	int			blink_counter;
-	int animation_counter; 
+	int			animation_counter; 
 }	t_cub;
 
 //------------------------------------------------------------MAIN

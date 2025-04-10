@@ -1,0 +1,48 @@
+KY ./assets/key_small3.xpm
+WDO ./assets/wall_no_door.xpm
+WD ./assets/0_wall_door.xpm
+FL ./assets/0_floor.xpm
+CE ./assets/0_ceiling.xpm
+WA ./assets/0_wall.xpm
+WDO1 ./assets/wall_no_door.xpm
+WD1 ./assets/1_wall_door.xpm
+FL1 ./assets/floor.xpm
+CE1 ./assets/ceiling_with_light.xpm
+WA1 ./assets/wall2.xpm
+WDO2 ./assets/2_no_door.xpm
+WD2 ./assets/2_door.xpm
+FL2 ./assets/2_floor_water.xpm
+CE2 ./assets/wall_bathroom.xpm
+WA2 ./assets/wall_bathroom.xpm
+WDO3 ./assets/3_no_door.xpm
+WD3 ./assets/3_door.xpm
+FL3 ./assets/3_floor.xpm
+CE3 ./assets/3_ceiling.xpm
+WA3 ./assets/3_wall.xpm
+
+1111111
+1000S01
+1000001
+1O10101
+111D111
+1000001
+1000001
+1000001
+1O00001
+111D111
+1000001
+1000001
+1000001
+1O00001
+111D111
+1000001
+1000001
+1000001
+1O00001
+111D111
+1000001
+1000001
+1000001
+1000001
+1111111
+

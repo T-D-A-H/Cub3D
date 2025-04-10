@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 10:31:18 by jaimesan          #+#    #+#             */
-/*   Updated: 2025/04/08 13:07:24 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/04/10 10:58:47 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int	allocate_row(t_cub *cubed, char **temp_map, size_t i, size_t x)
 	while (j < x)
 	{
 		if (j < temp_len)
-			cubed->map[i - REST ][j] = temp_map[i][j];
+			cubed->map[i - REST][j] = temp_map[i][j];
 		else
 			cubed->map[i - REST][j] = ' ';
 		j++;

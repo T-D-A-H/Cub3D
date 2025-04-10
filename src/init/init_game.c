@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 15:29:12 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/09 16:23:44 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/04/10 11:12:20 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,6 @@ void apply_vhs_effect(t_cub *cubed)
 	}
 }
 
-
 int	game_loop(void *param)
 {
 	t_cub	*cubed;
@@ -148,6 +147,7 @@ int	game_loop(void *param)
 	raycasting(cubed, cubed->player, cubed->loop);
 	if (BONUS)
 	{
+		cubed->animation_counter++;
 		if (cubed->blink_state == 1)
 			draw_red_dot(cubed);
 		apply_vhs_effect(cubed);
@@ -203,6 +203,7 @@ int mouse_move(int x, int y,  t_cub *cub)
 
 void	init_window(t_cub *cubed)
 {
+	cubed->animation_counter = 0;
 	if (BONUS)
 		init_objects(cubed);
 	init_player(cubed->player, cubed->pj_x, cubed->pj_y, cubed);

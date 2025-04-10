@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 12:42:33 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/08 17:17:40 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/04/10 10:58:21 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,38 +29,31 @@ int	door_is_closed(t_cub *cubed, t_player *player)
 	return (0);
 }
 
+static void	set_door(t_cub *cub, int x, int y, int inc_level)
+{
+	if (cub->game->sees_door)
+		return ;
+	if (cub->map[y][x] == 'd')
+	{
+		cub->game->door_xy[0] = x;
+		cub->game->door_xy[1] = y;
+		cub->game->sees_door = 1;
+		if (inc_level)
+			cub->game->level++;
+	}
+}
+
 void	handle_door(t_cub *cubed, t_player *player, t_game *game)
 {
-	if (cubed->map[player->my + 1][player->mx] == 'd' && game->sees_door == 0)
-	{
-		cubed->game->level++;
-		game->door_xy[0] = player->mx;
-		game->door_xy[1] = player->my + 1;
-		game->sees_door = 1;
-	}
-	else if (cubed->map[player->my - 1][player->mx] == 'd' && game->sees_door == 0)
-	{
-		game->door_xy[0] = player->mx;
-		game->door_xy[1] = player->my - 1;
-		game->sees_door = 1;
-	}
-	else if (cubed->map[player->my][player->mx + 1] == 'd' && game->sees_door == 0)
-	{
-		cubed->game->level++;
-		game->door_xy[0] = player->mx + 1;
-		game->door_xy[1] = player->my;
-		game->sees_door = 1;
-	}
-	else if (cubed->map[player->my][player->mx - 1] == 'd' && game->sees_door == 0)
-	{
-		cubed->game->level++;
-		game->door_xy[0] = player->mx - 1;
-		game->door_xy[1] = player->my;
-		game->sees_door = 1;
-	}
-	if (game->sees_door == 1
-		&& (player->my - 2 == game->door_xy[1] || player->mx - 2 == game->door_xy[0]
-			|| player->my + 2 == game->door_xy[1] || player->mx + 2 == game->door_xy[0]))
+	set_door(cubed, player->mx, player->my + 1, 1);
+	set_door(cubed, player->mx, player->my - 1, 0);
+	set_door(cubed, player->mx + 1, player->my, 1);
+	set_door(cubed, player->mx - 1, player->my, 1);
+	if (game->sees_door
+		&& (player->my - 2 == game->door_xy[1]
+			|| player->mx - 2 == game->door_xy[0]
+			|| player->my + 2 == game->door_xy[1]
+			|| player->mx + 2 == game->door_xy[0]))
 	{
 		cubed->map[game->door_xy[1]][game->door_xy[0]] = '1';
 		cubed->game->sees_door = 0;

@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:31:47 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/09 16:01:21 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/04/10 11:18:41 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@
 # define ERR_MLX_INIT "Error\nInitialising MLX\n"
 # define ERR_PJ_NOT_EXIST "Error\nPlayer does not exist\n"
 # define ERR_LOAD_TEXTUE "Error\nLoading texture\n"
+# define ERR_MEMORY_TEXTUE "Error\nMemory allocation failed for texture path.\n"
 # define NO_ERROR ""
 
 # define W_NAME "CUB3D"
@@ -120,6 +121,9 @@ typedef struct s_object
 	double		fov;
 	double		plane_x;
 	double		plane_y;
+	double		animation_speed;
+	double		animation_range;
+	double		screen_vertical_offset;
 	int			color;
 	int			d;
 	t_position	temp;
@@ -255,6 +259,7 @@ typedef struct s_cub
 	int			p_capacity;
 	int			blink_state;
 	int			blink_counter;
+	int animation_counter; 
 }	t_cub;
 
 //------------------------------------------------------------MAIN
@@ -262,7 +267,7 @@ int		main(int argc, char **argv);
 void	error(t_cub *cubed, char *debug_msg);
 //--------------------------------------------------------INIT-variables
 void	init_variables(t_cub *cubed);
-void	check_dupe_or_missing(t_cub *cubed, char *del, char **map, int mode);
+void	check_dupe_or_missing(t_cub *cubed, const char *del, char **map, int mode);
 int		contains_alpha(char *s1, char *s2, char *s3);
 void	init_variable_values(t_cub *cubed, char **map, int i);
 //--------------------------------------------------------INIT-map
@@ -276,6 +281,9 @@ void	init_game(t_game *game, t_cub *cubed);
 int		game_loop(void *param);
 void	init_player(t_player *player, int s_x, int s_y, t_cub *cubed);
 void	init_struct(t_cub *cubed);
+int		get_bonus_tex_index(char *key);
+void	check_bonus_keys(t_cub *cubed, char **map);
+void	init_bonus_textures(t_cub *cubed, char **map);
 //------------------------------------------------------------GAME-textures
 void	load_all_textures(t_cub *cub);
 void	load_texture(t_cub *cub, char *path, int index);

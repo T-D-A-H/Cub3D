@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 15:10:33 by jaimesan          #+#    #+#             */
-/*   Updated: 2025/04/09 15:01:17 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/04/10 10:53:29 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,13 @@ void	sort_objects_by_distance(t_position *objects, int num_objects)
 	}
 }
 
-void	objects_calcs(t_player *player, t_object *object, t_position *obj)
+void	objects_calcs(t_player *player, t_object *object,
+	t_position *obj, int counter)
 {
+	object->animation_speed = 0.07;
+	object->animation_range = 0.02;
+	object->screen_vertical_offset = sinf(counter * object->animation_speed)
+		* object->animation_range * HEIGHT;
 	object->obj_x = obj->x - player->x;
 	object->obj_y = obj->y - player->y;
 	object->inv_det = 1.0 / (object->plane_x
@@ -74,6 +79,8 @@ void	objects_calcs(t_player *player, t_object *object, t_position *obj)
 	object->draw_start_y = (HEIGHT / 2) + (int)(0.05 * HEIGHT)
 		+ (int)(HEIGHT / object->transform_y);
 	object->draw_end_y = object->draw_start_y + object->obj_height;
+	object->draw_start_y += (int)object->screen_vertical_offset;
+	object->draw_end_y += (int)object->screen_vertical_offset;
 	object->obj_width = abs((int)(HEIGHT / (object->transform_y / 5)));
 	object->draw_start_x = -object->obj_width / 2 + object->obj_screen_x;
 	object->draw_end_x = object->draw_start_x + object->obj_width;
@@ -93,15 +100,13 @@ void	draw_object(t_cub *cub, t_player *player,
 		obj = &cub->p_positions[i];
 		obj->distance = sqrt(pow(player->x - obj->x, 2)
 				+ pow(player->y - obj->y, 2));
-		if (cub->game->level == 1 || cub->game->level == 2
-			|| cub->game->level == 3)
-			obj[i].is_taken = 0;
+		obj[i].is_taken = 0;
 		if (obj[i].is_taken == 0)
 		{
 			check_object_pickup(cub, player, &obj[i]);
 			if (obj[i].is_taken == 0)
 			{
-				objects_calcs(player, &object, &obj[i]);
+				objects_calcs(player, &object, &obj[i], cub->animation_counter);
 				print_obj_calcs(cub, &object);
 			}
 		}

@@ -6,7 +6,7 @@
 /*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 11:55:37 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/09 13:30:31 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/04/10 11:06:01 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,9 @@ void	init_start_end_wall(t_loop *loop, t_texture *tex, int mode)
 
 void	draw_door(t_cub *cubed, int x, t_draw *draw)
 {
+	t_game	*game;
+
+	game = cubed->game;
 	if (cubed->loop->door_wall)
 	{
 		init_start_end_wall(cubed->loop, cubed->textures[draw->texi_no_door], 0);
@@ -109,16 +112,17 @@ void	draw_door(t_cub *cubed, int x, t_draw *draw)
 		init_start_end_wall(cubed->loop, cubed->textures[draw->texi_no_door], 1);
 		get_wall_text_coords(cubed, cubed->textures[draw->texi_no_door], 1, draw->texi_no_door);
 		draw_wall_no_door(cubed, cubed->textures[draw->texi_no_door], x);
-		if (cubed->game->sees_door == 1 && cubed->map[cubed->player->my][cubed->player->mx] != 'd')
+		if (cubed->game->sees_door == 1)
 		{
-			if (cubed->map[cubed->player->my - 1][cubed->player->mx] == '0')
-				cubed->map[cubed->player->my - 1][cubed->player->mx] = '1';
-			else if (cubed->map[cubed->player->my + 1][cubed->player->mx] == '0')
-				cubed->map[cubed->player->my + 1][cubed->player->mx] = '1';
-			if (cubed->map[cubed->player->my][cubed->player->mx - 1] == '0')
-				cubed->map[cubed->player->my][cubed->player->mx - 1] = '1';
-			else if (cubed->map[cubed->player->my][cubed->player->mx + 1] == '0')
-				cubed->map[cubed->player->my][cubed->player->mx + 1] = '1';
+			if ((cubed->player->mx == cubed->game->door_xy[0]
+			&& abs(cubed->player->my - cubed->game->door_xy[1]) == 2)
+			|| (cubed->player->my == cubed->game->door_xy[1]
+			&& abs(cubed->player->mx - cubed->game->door_xy[0]) == 2))
+			{
+				if (cubed->map[game ->door_xy[1]][game ->door_xy[0]] == 'd')
+					cubed->map[game ->door_xy[1]][game->door_xy[0]] = '1';
+				game ->sees_door = 0;
+			}
 		}
 	}
 	handle_door(cubed, cubed->player, cubed->game);

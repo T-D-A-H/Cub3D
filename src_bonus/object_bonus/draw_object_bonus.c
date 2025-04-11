@@ -6,35 +6,11 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 15:10:33 by jaimesan          #+#    #+#             */
-/*   Updated: 2025/04/10 15:31:22 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/04/11 17:03:25 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d_bonus.h"
-
-void	init_object(t_object *object, t_player *player)
-{
-	object->inv_det = 0;
-	object->transform_x = 0;
-	object->transform_y = 0;
-	object->obj_screen_x = 0;
-	object->obj_height = 0;
-	object->obj_width = 0;
-	object->draw_start_y = 0;
-	object->draw_end_y = 0;
-	object->draw_start_x = 0;
-	object->draw_end_x = 0;
-	object->tex_x = 0;
-	object->tex_y = 0;
-	object->stripe = 0;
-	object->obj_x = 0;
-	object->obj_y = 0;
-	object->fov = 0.66;
-	object->plane_x = -player->dy * object->fov;
-	object->plane_y = player->dx * object->fov;
-	object->color = 0;
-	object->d = 0;
-}
 
 void	sort_objects_by_distance(t_position *objects, int num_objects)
 {
@@ -97,7 +73,7 @@ void	draw_object(t_cub *cub, t_player *player,
 	i = -1;
 	while (++i < num_objects)
 	{
-		obj = &cub->p_positions[i];
+		obj = &cub->p_pos[i];
 		obj->distance = sqrt(pow(player->x - obj->x, 2)
 				+ pow(player->y - obj->y, 2));
 		obj[i].is_taken = 0;

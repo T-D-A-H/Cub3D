@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 15:53:12 by jaimesan          #+#    #+#             */
-/*   Updated: 2025/04/10 15:37:49 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/04/11 18:04:48 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,41 +51,13 @@ void	get_wall_textures(t_cub *cub, t_loop *loop, t_draw *draw)
 		draw->wallx = cub->player->x / BLOCK + loop->perpwalldist
 			* loop->raydir_x;
 	draw->wallx -= floor(draw->wallx);
-	draw->texi_no_door = 1;
-	draw->texi_door = 2;
-	draw->texi_floor = 3;
-	draw->texi_ceiling = 4;
-	draw->texi = 5;
-	if (cub->game->level == 1)
-	{
-		draw->texi_no_door = 6;
-		draw->texi_door = 7;
-		draw->texi_floor = 8;
-		draw->texi_ceiling = 9;
-		draw->texi = 10;
-	}
-	else if (cub->game->level == 2)
-	{
-		draw->texi_no_door = 11;
-		draw->texi_door = 12;
-		draw->texi_floor = 13;
-		draw->texi_ceiling = 15;
-		draw->texi = 15;
-	}
-	else if (cub->game->level == 3)
-	{
-		draw->texi_no_door = 16;
-		draw->texi_door = 17;
-		draw->texi_floor = 18;
-		draw->texi_ceiling = 19;
-		draw->texi = 20;
-	}
+	draw->texi_no_door = (1 + (cub->game->level % 4 * 5));
+	draw->texi_door = (2 + (cub->game->level % 4 * 5));
+	draw->texi_floor = (3 + (cub->game->level % 4 * 5));
+	draw->texi_ceiling = (4 + (cub->game->level % 4 * 5));
+	draw->texi = (5 + (cub->game->level % 4 * 5));
 	if (loop->door == 1)
 		draw->texi = draw->texi_door;
-}
-
-void	get_coor_textures(t_cub *cub, t_loop *loop, t_draw *draw)
-{
 	loop->texx = (int)(draw->wallx
 			* (double)cub->textures[draw->texi]->width);
 	if (loop->side == 0 && loop->raydir_x > 0)

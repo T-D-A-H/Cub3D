@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 19:01:38 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/10 15:06:34 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/04/11 17:44:54 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,18 @@ void	free_textures(t_cub *cub)
 
 void	free_tex_paths(t_cub *cubed)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while (i < MAX_TEXTURES)
-    {
-        if (cubed->tex_paths[i])
-        {
-            free(cubed->tex_paths[i]);
-            cubed->tex_paths[i] = NULL;
-        }
-        i++;
-    }
+	i = 0;
+	while (i < MAX_TEXTURES)
+	{
+		if (cubed->tex_paths[i])
+		{
+			free(cubed->tex_paths[i]);
+			cubed->tex_paths[i] = NULL;
+		}
+		i++;
+	}
 }
 
 void	error(t_cub *cubed, char *debug_msg, int signal)
@@ -62,16 +62,14 @@ void	error(t_cub *cubed, char *debug_msg, int signal)
 		free(cubed->premap);
 	if (cubed->tex_paths[0] != NULL)
 		free_tex_paths(cubed);
+	if (signal == 1 && cubed->game->img)
+		mlx_destroy_image(cubed->game->mlx, cubed->game->img);
+	if (signal == 1 && cubed->game->win)
+		mlx_destroy_window(cubed->game->mlx, cubed->game->win);
 	if (signal == 1)
-	{
-		if (cubed->game->img)
-			mlx_destroy_image(cubed->game->mlx, cubed->game->img);
-		if (cubed->game->win)
-			mlx_destroy_window(cubed->game->mlx, cubed->game->win);
 		free_textures(cubed);
-	}
 	if (!debug_msg[0])
 		exit(0);
 	else
-		exit(1);
+		exit(signal);
 }

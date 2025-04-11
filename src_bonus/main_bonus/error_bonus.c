@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   error_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 19:01:38 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/10 15:31:16 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/04/11 17:03:25 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,24 +31,22 @@ void	free_textures(t_cub *cub)
 
 void	free_tex_paths(t_cub *cubed)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while (i < MAX_TEXTURES)
-    {
-        if (cubed->tex_paths[i])
-        {
-            free(cubed->tex_paths[i]);
-            cubed->tex_paths[i] = NULL;
-        }
-        i++;
-    }
+	i = 0;
+	while (i < MAX_TEXTURES)
+	{
+		if (cubed->tex_paths[i])
+		{
+			free(cubed->tex_paths[i]);
+			cubed->tex_paths[i] = NULL;
+		}
+		i++;
+	}
 }
 
 void	error(t_cub *cubed, char *debug_msg, int signal)
 {
-	(void)cubed;
-	(void)signal;
 	printf("%s", debug_msg);
 	if (cubed->no_path)
 		free(cubed->no_path);
@@ -64,18 +62,13 @@ void	error(t_cub *cubed, char *debug_msg, int signal)
 		free(cubed->premap);
 	if (cubed->tex_paths[0] != NULL)
 		free_tex_paths(cubed);
+	if (signal == 1 && cubed->game->img)
+		mlx_destroy_image(cubed->game->mlx, cubed->game->img);
+	if (signal == 1 && cubed->game->win)
+		mlx_destroy_window(cubed->game->mlx, cubed->game->win);
+	if (signal == 1 && cubed->p_pos)
+		free(cubed->p_pos);
 	if (signal == 1)
-	{
-		if (cubed->game->img)
-			mlx_destroy_image(cubed->game->mlx, cubed->game->img);
-		if (cubed->game->win)
-			mlx_destroy_window(cubed->game->mlx, cubed->game->win);
-		if (cubed->p_positions)
-			free(cubed->p_positions);
 		free_textures(cubed);
-	}
-	if (!debug_msg[0])
-		exit(0);
-	else
-		exit(1);
+	exit(signal);
 }

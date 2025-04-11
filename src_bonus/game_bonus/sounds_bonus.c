@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 12:04:02 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/10 15:30:51 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/04/11 17:18:42 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,51 +14,35 @@
 
 void	*play_music(void *arg)
 {
-	t_cub *cubed;
-	
-	cubed = (t_cub *)arg;
+	t_cub				*cub;
+	SDL_AudioDeviceID	dev;
+
+	cub = (t_cub *)arg;
 	if (SDL_Init(SDL_INIT_AUDIO) < 0)
-	{
-		printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
-		return (NULL);
-	}
-	if (!SDL_LoadWAV("./assets/level1.wav", &cubed->sounds->wav_spec,
-					&cubed->sounds->wav_buffer, &cubed->sounds->wav_length))
-	{
-		printf("Failed to load WAV: %s\n", SDL_GetError());
-		return (NULL);
-	}
-	SDL_AudioDeviceID dev = SDL_OpenAudioDevice(NULL, 0,
-			&cubed->sounds->wav_spec, NULL, 0);
+		return (printf(ERR_SDL_INIT), NULL);
+	if (!SDL_LoadWAV("./assets/level1.wav", &cub->sounds->wav_spec,
+			&cub->sounds->buffer, &cub->sounds->wav_length))
+		return (printf(ERR_SDL_OPEN_WAV), NULL);
+	dev = SDL_OpenAudioDevice(NULL, 0, &cub->sounds->wav_spec, NULL, 0);
 	if (dev == 0)
 	{
-		printf("Failed to open audio device: %s\n", SDL_GetError());
-		SDL_FreeWAV(cubed->sounds->wav_buffer);
-		SDL_Quit();
-		return (NULL);
+		printf(ERR_SDL_OPEN);
+		return (SDL_FreeWAV(cub->sounds->buffer), SDL_Quit(), NULL);
 	}
- 	SDL_PauseAudioDevice(dev, 0);
+	SDL_PauseAudioDevice(dev, 0);
 	while (1)
 	{
-
 		if (SDL_GetQueuedAudioSize(dev) == 0)
-		{
-			SDL_QueueAudio(dev, cubed->sounds->wav_buffer, cubed->sounds->wav_length);
-		}
-		
+			SDL_QueueAudio(dev, cub->sounds->buffer,
+				cub->sounds->wav_length);
 	}
-	SDL_FreeWAV(cubed->sounds->wav_buffer);
-	SDL_CloseAudioDevice(dev);
-	SDL_CloseAudio();
-	SDL_Quit();
-	return (NULL);
+	return (SDL_FreeWAV(cub->sounds->buffer), SDL_CloseAudioDevice(dev), NULL);
 }
 
-
-
-int init_sounds(t_cub *cubed)
+int	init_sounds(t_cub *cubed)
 {
-	if (pthread_create(&cubed->sounds->music_thread, NULL, play_music, (void *)cubed) == -1)
+	if (pthread_create(&cubed->sounds->music_thread, NULL,
+			play_music, (void *)cubed) == -1)
 	{
 		printf("Error: Failed to create Music Thread\n");
 		return (1);

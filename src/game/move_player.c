@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 16:05:38 by jaimesan          #+#    #+#             */
-/*   Updated: 2025/04/10 15:03:31 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/04/11 17:46:08 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,4 +93,3 @@ int	move_player(t_player *player, t_cub *cub)
 	player->my = (int)(player->y / BLOCK);
 	return (0);
 }
-

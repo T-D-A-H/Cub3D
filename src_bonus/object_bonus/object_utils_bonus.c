@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 14:57:57 by jaimesan          #+#    #+#             */
-/*   Updated: 2025/04/10 15:31:28 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/04/11 17:03:25 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,9 @@ void	check_is_added(t_cub *cubed, t_loop *loop, int *already_added, int *k)
 {
 	while ((*k)++ < cubed->p_count)
 	{
-		if ((int)cubed->p_positions[*k].x
+		if ((int)cubed->p_pos[*k].x
 			== (int)(loop->map_x * BLOCK + (BLOCK / 2))
-		&& (int)cubed->p_positions[*k].y
+		&& (int)cubed->p_pos[*k].y
 			== (int)(loop->map_y * BLOCK + (BLOCK / 2)))
 		{
 			*already_added = 1;
@@ -83,7 +83,7 @@ void	calcs_object(t_cub *cubed, t_loop *loop)
 		check_is_added(cubed, loop, &already_added, &k);
 		if (!already_added && cubed->p_count < cubed->p_capacity)
 		{
-			pos = &cubed->p_positions[cubed->p_count];
+			pos = &cubed->p_pos[cubed->p_count];
 			pos->x = loop->map_x * BLOCK + (BLOCK / 2);
 			pos->y = loop->map_y * BLOCK + (BLOCK / 2);
 			pos->distance = sqrt(pow(pos->x - cubed->player->x, 2)

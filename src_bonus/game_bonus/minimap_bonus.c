@@ -6,46 +6,11 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 15:04:20 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/10 15:40:51 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/04/11 17:21:59 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d_bonus.h"
-
-void	init_mini(t_mini *mini, int x0, int y0, t_loop *loop)
-{
-	mini->dx = abs(loop->map_x * MAP - x0);
-	mini->dy = abs(loop->map_y * MAP - y0);
-	mini->sx = -1;
-	mini->sy = -1;
-	if (x0 < loop->map_x * MAP)
-		mini->sx = 1;
-	if (y0 < loop->map_y * MAP)
-		mini->sy = 1;
-	mini->err = mini->dx - mini->dy;
-}
-
-void	draw_rays(t_cub *cubed, int x0, int y0, t_loop *loop)
-{
-	t_mini	mini;
-
-	init_mini(&mini, x0, y0, loop);
-	while (x0 != loop->map_x * MAP || y0 != loop->map_y * MAP)
-	{
-		put_pixel(x0, y0, GREEN, cubed);
-		mini.e2 = 2 * mini.err;
-		if (mini.e2 > -mini.dy)
-		{
-			mini.err -= mini.dy;
-			x0 += mini.sx;
-		}
-		if (mini.e2 < mini.dx)
-		{
-			mini.err += mini.dx;
-			y0 += mini.sy;
-		}
-	}
-}
 
 void	draw_empty_square(int x, int y, int size, t_cub *cubed)
 {
@@ -93,10 +58,9 @@ void	draw_minimap(t_cub *cubed)
 			if (cubed->map[y][x] == '1')
 				draw_full_square(cubed, x, y, BLUE);
 			if (cubed->map[y][x] == 'D')
-				draw_full_square(cubed, x, y,RED);
+				draw_full_square(cubed, x, y, RED);
 			if (cubed->map[y][x] == 'd')
 				draw_full_square(cubed, x, y, GREEN);
-
 			else if (cubed->map[y][x] == '0' || cubed->map[y][x] == 'N'
 				|| cubed->map[y][x] == 'E'
 				|| cubed->map[y][x] == 'W'

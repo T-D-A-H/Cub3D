@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:31:47 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/10 15:19:56 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/04/11 17:43:14 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,16 +76,15 @@
 # define ESC_KEY 65307
 
 typedef struct draw
-{   
+{
 	int		visible_samples;
-    int		total_samples;
+	int		total_samples;
 	double	block_y;
-	double 	block_x;
+	double	block_x;
 	double	tx;
 	double	ty;
 	int		visible;
 }	t_object_porc;
-
 
 typedef struct s_loop
 {
@@ -198,7 +197,8 @@ int		main(int argc, char **argv);
 void	error(t_cub *cubed, char *debug_msg, int signal);
 //--------------------------------------------------------INIT-variables
 void	init_variables(t_cub *cubed);
-void	check_dupe_or_missing(t_cub *cubed, const char *del, char **map, int mode);
+void	check_dupe_or_missing(t_cub *cubed, const char *del, char **map,
+			int mode);
 int		contains_alpha(char *s1, char *s2, char *s3);
 void	init_variable_values(t_cub *cubed, char **map, int i);
 //--------------------------------------------------------INIT-map

@@ -6,7 +6,7 @@
 #    By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2025/04/10 16:03:48 by ctommasi         ###   ########.fr        #
+#    Updated: 2025/04/11 17:04:03 by ctommasi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,12 +46,12 @@ SRCS =	./src/main/main.c ./src/main/error.c \
 
 SRCS_BONUS = ./src_bonus/main_bonus/main_bonus.c ./src_bonus/main_bonus/error_bonus.c \
 		./src_bonus/init_bonus/init_variables_bonus.c ./src_bonus/init_bonus/init_map_bonus.c ./src_bonus/init_bonus/init_game_bonus.c \
-		./src_bonus/utils_bonus/check_args_bonus.c  ./src_bonus/utils_bonus/init_map_utils_bonus.c  ./src_bonus/utils_bonus/save_map_utils_bonus.c \
+		./src_bonus/utils_bonus/general_utils_bonus.c  ./src_bonus/utils_bonus/init_map_utils_bonus.c  ./src_bonus/utils_bonus/save_map_utils_bonus.c \
 		./src_bonus/game_bonus/keypress_bonus.c ./src_bonus/game_bonus/draw_bonus.c ./src_bonus/game_bonus/raycasting_bonus.c ./src_bonus/game_bonus/minimap_bonus.c \
 		./src_bonus/game_bonus/textures_bonus.c ./src_bonus/game_bonus/move_player_bonus.c \
 		./src_bonus/game_bonus/draw_map_bonus.c ./src_bonus/utils_bonus/draw_utils_bonus.c ./src_bonus/game_bonus/draw_door_bonus.c \
 		./src_bonus/object_bonus/draw_object_bonus.c ./src_bonus/object_bonus/object_utils_bonus.c ./src_bonus/object_bonus/pick_up_object_bonus.c \
-		./src_bonus/init_bonus/init_variables2_bonus.c ./src_bonus/game_bonus/sounds_bonus.c
+		./src_bonus/game_bonus/sounds_bonus.c ./src_bonus/init_bonus/init_structs_bonus.c
 
 # Archivos objeto
 OBJS = $(SRCS:.c=.o)
@@ -75,7 +75,7 @@ $(NAME): $(LIBFT) $(MLX) $(OBJS)
 	@echo -n "\r                                                                            \r"
 	@echo "[$(GREEN)DONE$(RESET)] Linking complete: [$(MAGENTA)$(NAME)$(RESET)] - Complete!"
 
-bonus_pro: CFLAGS += -D MANDATORY=0
+bonus_pro: CFLAGS += -D PRO=0
 bonus_pro: $(NAME_BONUS)
 
 bonus: $(NAME_BONUS)

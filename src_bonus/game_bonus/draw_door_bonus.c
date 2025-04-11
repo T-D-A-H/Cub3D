@@ -6,59 +6,11 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 11:55:37 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/10 15:30:26 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/04/11 17:29:19 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d_bonus.h"
-
-void	close_door(t_cub *cubed, t_player *player)
-{
-	int	map_x;
-	int	map_y;
-
-	map_x = (int)(player->x / BLOCK);
-	map_y = (int)(player->y / BLOCK);
-	if (cubed->map[map_y + 1][map_x] == 'd'
-		|| cubed->map[map_y][map_x + 1] == 'd'
-		|| cubed->map[map_y - 1][map_x] == 'd'
-		|| cubed->map[map_y][map_x - 1] == 'd')
-	{
-		if (cubed->map[map_y - 1][map_x] == 'd')
-			cubed->map[map_y - 1][map_x] = 'D';
-		else if (cubed->map[map_y + 1][map_x] == 'd')
-			cubed->map[map_y + 1][map_x] = 'D';
-		else if (cubed->map[map_y][map_x + 1] == 'd')
-			cubed->map[map_y][map_x + 1] = 'D';
-		else if (cubed->map[map_y][map_x - 1] == 'd')
-			cubed->map[map_y][map_x - 1] = 'D';
-		cubed->loop->door_wall = 1;
-	}
-}
-
-void	open_door(t_cub *cubed, t_player *player)
-{
-	int	map_x;
-	int	map_y;
-
-	map_x = (int)(player->x / BLOCK);
-	map_y = (int)(player->y / BLOCK);
-	if (cubed->map[map_y + 1][map_x] == 'D'
-		|| cubed->map[map_y][map_x + 1] == 'D'
-		|| cubed->map[map_y - 1][map_x] == 'D'
-		|| cubed->map[map_y][map_x - 1] == 'D')
-	{
-		if (cubed->map[map_y - 1][map_x] == 'D')
-			cubed->map[map_y - 1][map_x] = 'd';
-		else if (cubed->map[map_y + 1][map_x] == 'D')
-			cubed->map[map_y + 1][map_x] = 'd';
-		else if (cubed->map[map_y][map_x + 1] == 'D')
-			cubed->map[map_y][map_x + 1] = 'd';
-		else if (cubed->map[map_y][map_x - 1] == 'D')
-			cubed->map[map_y][map_x - 1] = 'd';
-		cubed->loop->door_wall = 1;
-	}
-}
 
 void	draw_wall_no_door(t_cub *cub, t_texture *tex, int x)
 {
@@ -78,7 +30,7 @@ void	draw_wall_no_door(t_cub *cub, t_texture *tex, int x)
 	}
 }
 
-void	get_wall_text_coords(t_cub *cubed, t_texture *tex, int mode, int tex_id)
+void	wall_coords(t_cub *cubed, t_texture *tex, int mode, int tex_id)
 {
 	if (tex->side == 0 && mode == 0)
 		tex->wallx = cubed->player->x / BLOCK + tex->perpwalldist
@@ -123,31 +75,31 @@ void	init_start_end_wall(t_loop *loop, t_texture *tex, int mode)
 		tex->drawend = HEIGHT - 1;
 }
 
-void	draw_door(t_cub *cubed, int x, t_draw *draw)
+void	draw_door(t_cub *cub, t_loop *loop, int x, t_draw *draw)
 {
-	t_game	*game;
-
-	game = cubed->game;
-	if (cubed->loop->door_wall)
+	if (loop->door_wall)
 	{
-		init_start_end_wall(cubed->loop, cubed->textures[draw->texi_no_door], 0);
-		get_wall_text_coords(cubed, cubed->textures[draw->texi_no_door], 0, draw->texi_no_door);
-		draw_wall_no_door(cubed, cubed->textures[draw->texi_no_door], x);
-		init_start_end_wall(cubed->loop, cubed->textures[draw->texi_no_door], 1);
-		get_wall_text_coords(cubed, cubed->textures[draw->texi_no_door], 1, draw->texi_no_door);
-		draw_wall_no_door(cubed, cubed->textures[draw->texi_no_door], x);
-		if (cubed->game->sees_door == 1 && cubed->map[cubed->player->my][cubed->player->mx] != 'd' && cubed->game->action_done == 0)
+		init_start_end_wall(loop, cub->textures[draw->texi_no_door], 0);
+		wall_coords(cub, cub->textures[draw->texi_no_door],
+			0, draw->texi_no_door);
+		draw_wall_no_door(cub, cub->textures[draw->texi_no_door], x);
+		init_start_end_wall(loop, cub->textures[draw->texi_no_door], 1);
+		wall_coords(cub, cub->textures[draw->texi_no_door],
+			1, draw->texi_no_door);
+		draw_wall_no_door(cub, cub->textures[draw->texi_no_door], x);
+		if (cub->game->sees_door == 1 && !cub->game->action_done
+			&& cub->map[cub->player->my][cub->player->mx] != 'd')
 		{
-			if (cubed->map[cubed->player->my - 1][cubed->player->mx] == '0')
-				cubed->map[cubed->player->my - 1][cubed->player->mx] = '1';
-			if (cubed->map[cubed->player->my + 1][cubed->player->mx] == '0')
-				cubed->map[cubed->player->my + 1][cubed->player->mx] = '1';
-			if (cubed->map[cubed->player->my][cubed->player->mx - 1] == '0')
-				cubed->map[cubed->player->my][cubed->player->mx - 1] = '1';
-			if (cubed->map[cubed->player->my][cubed->player->mx + 1] == '0')
-				cubed->map[cubed->player->my][cubed->player->mx + 1] = '1';
-			cubed->game->action_done = 1;
+			if (cub->map[cub->player->my - 1][cub->player->mx] == '0')
+				cub->map[cub->player->my - 1][cub->player->mx] = '1';
+			if (cub->map[cub->player->my + 1][cub->player->mx] == '0')
+				cub->map[cub->player->my + 1][cub->player->mx] = '1';
+			if (cub->map[cub->player->my][cub->player->mx - 1] == '0')
+				cub->map[cub->player->my][cub->player->mx - 1] = '1';
+			if (cub->map[cub->player->my][cub->player->mx + 1] == '0')
+				cub->map[cub->player->my][cub->player->mx + 1] = '1';
+			cub->game->action_done = 1;
 		}
 	}
-	handle_door(cubed, cubed->player, cubed->game);
+	handle_door(cub, cub->player, cub->game);
 }

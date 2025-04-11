@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 16:27:17 by jaimesan          #+#    #+#             */
-/*   Updated: 2025/04/10 15:30:33 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/04/11 17:36:17 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	init_start_end(t_loop *loop)
 		loop->drawend = HEIGHT - 1;
 }
 
-void	draw_ceiling(t_cub *cub, t_loop *loop, int x, int y, t_draw *draw)
+void	draw_ceiling(t_cub *cub, int x, int y, t_draw *draw)
 {
 	double	row_distance;
 	double	floor_x;
@@ -35,34 +35,34 @@ void	draw_ceiling(t_cub *cub, t_loop *loop, int x, int y, t_draw *draw)
 	int		tex_x;
 	int		tex_y;
 
-	while (y < loop->drawstart)
+	while (y < cub->loop->drawstart)
 	{
 		row_distance = HEIGHT / (2.0 * y - HEIGHT);
-		floor_x = cub->player->x / BLOCK - row_distance * loop->raydir_x;
-		floor_y = cub->player->y / BLOCK - row_distance * loop->raydir_y;
+		floor_x = cub->player->x / BLOCK - row_distance * cub->loop->raydir_x;
+		floor_y = cub->player->y / BLOCK - row_distance * cub->loop->raydir_y;
 		tex_x = (int)(floor_x * cub->textures[draw->texi_ceiling]->width)
-		% cub->textures[draw->texi_ceiling]->width;
+			% cub->textures[draw->texi_ceiling]->width;
 		tex_y = (int)(floor_y * cub->textures[draw->texi_ceiling]->height)
-		% cub->textures[draw->texi_ceiling]->height;
+			% cub->textures[draw->texi_ceiling]->height;
 		put_pixel(x, y, cub->textures[draw->texi_ceiling]->data[tex_y
 			* cub->textures[draw->texi_ceiling]->width + tex_x], cub);
 		y++;
 	}
 }
 
-void	draw_floor(t_cub *cub, t_loop *loop, int x, int y, t_draw *draw)
+void	draw_floor(t_cub *cub, int x, int y, t_draw *draw)
 {
 	double	row_distance;
 	double	floor_x;
 	double	floor_y;
 	int		tex_x;
 	int		tex_y;
-	
+
 	while (y < HEIGHT)
 	{
 		row_distance = HEIGHT / (2.0 * y - HEIGHT);
-		floor_x = cub->player->x / BLOCK + row_distance * loop->raydir_x;
-		floor_y = cub->player->y / BLOCK + row_distance * loop->raydir_y;
+		floor_x = cub->player->x / BLOCK + row_distance * cub->loop->raydir_x;
+		floor_y = cub->player->y / BLOCK + row_distance * cub->loop->raydir_y;
 		tex_x = (int)(floor_x * cub->textures[draw->texi_floor]->width)
 			% cub->textures[draw->texi_floor]->width;
 		tex_y = (int)(floor_y * cub->textures[draw->texi_floor]->height)

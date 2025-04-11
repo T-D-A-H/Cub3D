@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 14:52:49 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/10 16:09:51 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/04/11 17:48:39 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,9 @@
 # define ERR_PJ_NOT_EXIST "Error\nPlayer does not exist\n"
 # define ERR_LOAD_TEXTUE "Error\nLoading texture\n"
 # define ERR_MEMORY_TEXTUE "Error\nMemory allocation failed for texture path.\n"
+# define ERR_SDL_INIT "Error\nSDL could not initialize!\n"
+# define ERR_SDL_OPEN_WAV "Error\nFailed to load WAV\n"
+# define ERR_SDL_OPEN "Error\nFailed to open audio device\n"
 # define NO_ERROR ""
 
 # define W_NAME "CUB3D_BONUS"
@@ -52,15 +55,16 @@
 # define HEIGHT 1080
 # define BLOCK 64
 # define MAP 16
-# define DOT_RADIUS 37
-# define DOT_MARGIN 75
 # define MAX_OBJECTS 20
 # define MAX_TEXTURES 21
-# define REST 21
 
-# ifndef MANDATORY
-#  define MANDATORY 1
+# ifndef PRO
+#  define PRO 1
 # endif
+
+# define DOT_RADIUS 37
+# define DOT_MARGIN 75
+# define REST 21
 
 # define PLAYER_SIZE 32
 # define MOVE_AMOUNT 3
@@ -86,18 +90,18 @@
 
 typedef struct s_position
 {
-    double	x;
-    double	y;
+	double	x;
+	double	y;
 	double	distance;
-	int     is_taken;
+	int		is_taken;
 }	t_position;
 
 typedef struct draw
-{   
+{
 	int		visible_samples;
-    int		total_samples;
+	int		total_samples;
 	double	block_y;
-	double 	block_x;
+	double	block_x;
 	double	tx;
 	double	ty;
 	int		visible;
@@ -130,16 +134,6 @@ typedef struct s_object
 	int			d;
 	t_position	temp;
 }	t_object;
-
-typedef struct s_mini
-{
-	int	dx;
-	int	dy;
-	int	sx;
-	int	sy;
-	int	err;
-	int	e2;
-}	t_mini;
 
 typedef struct s_loop
 {
@@ -242,10 +236,10 @@ typedef struct s_texture
 
 typedef struct s_sounds
 {
-	Uint32 wav_length;
-    Uint8 *wav_buffer;
-	SDL_AudioSpec wav_spec;
-	pthread_t music_thread;
+	Uint32			wav_length;
+	Uint8			*buffer;
+	SDL_AudioSpec	wav_spec;
+	pthread_t		music_thread;
 }	t_sounds;
 
 typedef struct s_cub
@@ -265,9 +259,9 @@ typedef struct s_cub
 	t_game		*game;
 	t_player	*player;
 	t_loop		*loop;
-	t_position  *p_positions;
+	t_position	*p_pos;
 	char		*tex_paths[MAX_TEXTURES];
-    int			p_count;
+	int			p_count;
 	int			p_capacity;
 	int			blink_state;
 	int			blink_counter;
@@ -280,7 +274,8 @@ int		main(int argc, char **argv);
 void	error(t_cub *cubed, char *debug_msg, int signal);
 //--------------------------------------------------------INIT-variables
 void	init_variables(t_cub *cubed);
-void	check_dupe_or_missing(t_cub *cubed, const char *del, char **map, int mode);
+void	check_dupe_or_missing(t_cub *cubed, const char *del, char **map,
+			int mode);
 int		contains_alpha(char *s1, char *s2, char *s3);
 //--------------------------------------------------------INIT-map
 int		check_cero(char **map, int *y, int *x, int *max_x);
@@ -288,55 +283,56 @@ int		check_invalid_chars(char **map, t_cub *cubed);
 int		check_void_lines(const char *premap);
 void	init_map(t_cub *cubed);
 //-----------------------------------------------------------INIT-game
-void	init_window(t_cub *cubed);
-void	init_game(t_game *game, t_cub *cubed);
+void	init_game(t_cub *cubed);
+void	init_window(t_game *game, t_cub *cubed);
 int		game_loop(void *param);
 void	init_player(t_player *player, int s_x, int s_y, t_cub *cubed);
 void	init_struct(t_cub *cubed);
 int		get_bonus_tex_index(char *key);
 void	check_bonus_keys(t_cub *cubed, char **map);
-void	init_bonus_textures(t_cub *cubed, char **map);
+void	init_object(t_object *object, t_player *player);
 //------------------------------------------------------------GAME-textures
 void	load_all_textures(t_cub *cub);
 void	load_texture(t_cub *cub, char *path, int index);
 //------------------------------------------------------------GAME-draw_door
 void	draw_red_dot(t_cub *cubed);
-void 	open_door(t_cub *cubed, t_player *player);
-int 	door_is_closed(t_cub *cubed, t_player *player);
-void	draw_door(t_cub *cubed, int x, t_draw *draw);
+void	open_door(t_cub *cubed, t_player *player);
+int		door_is_closed(t_cub *cubed, t_player *player);
 void	init_start_end_wall(t_loop *loop, t_texture *tex, int mode);
-void 	get_wall_text_coords(t_cub *cubed, t_texture *tex, int mode, int tex_id);
+void	wall_coords(t_cub *cubed, t_texture *tex, int mode, int tex_id);
 void	draw_wall_no_door(t_cub *cub, t_texture *tex, int x);
 void	handle_door(t_cub *cubed, t_player *player, t_game *game);
-void	handle_door2(t_cub *cubed, t_player *player, t_game *game);
-void	update_door(t_cub *cubed, t_game *game);
+void	close_door(t_cub *cubed, t_player *player);
+int		door_is_open(t_cub *cubed, t_player *player);
+void	draw_door(t_cub *cub, t_loop *loop, int x, t_draw *draw);
 //------------------------------------------------------GAME-raycasting
 void	raycasting(t_cub *cubed, t_player *player, t_loop *loop);
 void	get_raycast_hits(t_cub *cubed, t_loop *loop, t_draw *draw);
+void	raycast_hits_doors_objects(t_cub *cubed, t_loop *loop, t_draw *draw);
 void	get_raycast_steps(t_player *player, t_loop *loop);
 void	init_loop(t_loop *loop);
 void	init_ray(t_player *player, t_loop *loop, int x);
-void	draw_object(t_cub *cub, t_player *player, int num_objects, t_position *obj);
+void	draw_object(t_cub *cub, t_player *player, int num_objects,
+			t_position *obj);
 void	check_object_pickup(t_cub *cub, t_player *player, t_position *obj);
 void	print_obj_calcs(t_cub *cub, t_object *object);
 void	calcs_object(t_cub *cubed, t_loop *loop);
 //--------------------------------------------------GAME-draw_map
-void	draw_floor(t_cub *cub, t_loop *loop, int x, int y, t_draw *draw);
-void	draw_ceiling(t_cub *cub, t_loop *loop, int x, int y, t_draw *draw);
+void	draw_floor(t_cub *cub, int x, int y, t_draw *draw);
+void	draw_ceiling(t_cub *cub, int x, int y, t_draw *draw);
 void	get_wall_textures(t_cub *cub, t_loop *loop, t_draw *draw);
 void	init_start_end(t_loop *loop);
-void	get_coor_textures(t_cub *cub, t_loop *loop, t_draw *draw);
 //-----------------------------------------------------------GAME-draw
 void	put_pixel(int x, int y, int colour, t_cub *cubed);
 void	clear_screen(t_cub *cubed);
-void	draw_3dmap(t_cub *cubed, int draw_start, int draw_end, int x);
 void	draw_walls(t_cub *cub, t_loop *loop, t_draw *draw, int x);
+void	apply_vhs_effect(t_cub *cubed);
 //--------------------------------------------------------GAME-move_player
 int		can_move(t_cub *cubed, double next_x, double next_y);
 void	rotate_player(t_player *player);
-int		move_player(t_player *player, t_cub *cub);
-void	key_player(t_player *player, double *next_x, double *next_y);
-void	strafe_player(t_player *player, t_cub *cubed);
+int		move_player(t_player *player, t_cub *cubed);
+void	strafe_player(t_player *player, double *next_x, double *next_y);
+int		mouse_move(int x, int y, t_cub *cub);
 //-----------------------------------------------------------GAME-keypress
 int		on_keypress(int keydata, t_cub *cub);
 int		on_keyrelease(int keydata, t_player *player);
@@ -344,7 +340,6 @@ int		on_keyrelease(int keydata, t_player *player);
 void	draw_walls(t_cub *cub, t_loop *loop, t_draw *draw, int x);
 void	draw_full_square(t_cub *cubed, int x, int y, int colour);
 void	draw_empty_square(int x, int y, int size, t_cub *cubed);
-void	draw_rays(t_cub *cubed, int x0, int y0, t_loop *loop);
 void	draw_minimap(t_cub *cubed);
 //-------------------------------------------------------------------------UTILS
 void	read_map_file(t_cub *cubed, char **argv);
@@ -355,13 +350,8 @@ int		only_one(char *linea);
 int		check_void(const char *premap, int i);
 int		save_map(t_cub *cubed, char **temp_map, size_t y, size_t x);
 float	get_player_direction(char c);
-//------------------------------------------------------DELETE_AFTER
-void	print_where_not_walled(char **map, int y, int x);
-
-void    *play_music(void *arg);
-int init_sounds(t_cub *cubed);
-void	close_door(t_cub *cubed, t_player *player);
-int	door_is_open(t_cub *cubed, t_player *player);
-
+//------------------------------------------------------GAME-sounds
+void	*play_music(void *arg);
+int		init_sounds(t_cub *cubed);
 
 #endif

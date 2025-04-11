@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/25 14:57:47 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/10 16:02:02 by ctommasi         ###   ########.fr       */
+/*   Created: 2025/04/11 13:46:41 by ctommasi          #+#    #+#             */
+/*   Updated: 2025/04/11 17:04:19 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,12 @@ int	on_keypress(int keydata, t_cub *cub)
 	if (keydata == KEY_F_KEY)
 	{
 		cub->player->key_f = true;
-		if (MANDATORY && door_is_closed(cub, cub->player) && cub->p_positions->is_taken == 1)
+		if (PRO && door_is_closed(cub, cub->player) && cub->p_pos->is_taken)
 			open_door(cub, cub->player);
-		else if (MANDATORY && door_is_open(cub, cub->player) && cub->p_positions->is_taken == 1)
+		else if (PRO && door_is_open(cub, cub->player) && cub->p_pos->is_taken)
 			close_door(cub, cub->player);
-		if (!MANDATORY && door_is_closed(cub, cub->player) && cub->p_positions->is_taken == 1)
-		{
+		if (!PRO && door_is_closed(cub, cub->player) && cub->p_pos->is_taken)
 			open_door(cub, cub->player);
-		}
 	}
 	if (keydata == ESC_KEY)
 		return (error(cub, NO_ERROR, 1), 1);

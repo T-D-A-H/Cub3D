@@ -6,27 +6,11 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 16:05:38 by jaimesan          #+#    #+#             */
-/*   Updated: 2025/04/10 15:30:45 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/04/11 17:21:07 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d_bonus.h"
-
-int	can_move(t_cub *cubed, double next_x, double next_y)
-{
-	int	map_x;
-	int	map_y;
-
-	map_x = (int)(next_x / BLOCK);
-	map_y = (int)(next_y / BLOCK);
-	if (map_x < 0 || map_y < 0 || map_x >= (int)ft_strlen(cubed->map[0])
-		|| map_y >= ft_arrlen(cubed->map))
-		return (0);
-	if (cubed->map[map_y][map_x] == '1'
-		|| cubed->map[map_y][map_x] == 'D' || cubed->map[map_y][map_x] == 'x')
-		return (0);
-	return (1);
-}
 
 void	rotate_player(t_player *player)
 {
@@ -48,7 +32,7 @@ void	rotate_player(t_player *player)
 	}
 }
 
-void	key_player(t_player *player, double *next_x, double *next_y)
+void	strafe_player(t_player *player, double *next_x, double *next_y)
 {
 	if (player->key_w)
 	{
@@ -72,28 +56,46 @@ void	key_player(t_player *player, double *next_x, double *next_y)
 	}
 }
 
-void	strafe_player(t_player *player, t_cub *cubed)
+int	move_player(t_player *player, t_cub *cubed)
 {
 	double	next_x;
 	double	next_y;
 
 	next_x = player->x ;
 	next_y = player->y ;
-	key_player(player, &next_x, &next_y);
+	strafe_player(player, &next_x, &next_y);
 	if (can_move(cubed, next_x, player->y))
 		player->x = next_x;
 	if (can_move(cubed, player->x, next_y))
 		player->y = next_y;
-	(void)cubed;
-}
-
-int	move_player(t_player *player, t_cub *cub)
-{
-
 	rotate_player(player);
-	strafe_player(player, cub);
 	player->mx = (int)(player->x / BLOCK);
 	player->my = (int)(player->y / BLOCK);
 	return (0);
 }
 
+int	mouse_move(int x, int y, t_cub *cub)
+{
+	double	sensitivity;
+	int		delta_x;
+	int		center_x;
+
+	(void)y;
+	sensitivity = 0.0002;
+	center_x = WIDTH / 2;
+	if (!cub || !cub->player || !cub->game)
+		return (0);
+	delta_x = x - center_x;
+	if (delta_x == 0)
+		return (0);
+	cub->player->angle += delta_x * sensitivity;
+	cub->player->angle = fmod(cub->player->angle, 2 * PI);
+	if (cub->player->angle < 0)
+		cub->player->angle += 2 * PI;
+	if (cub->player->angle > 2 * PI)
+		cub->player->angle -= 2 * PI;
+	cub->player->dx = cos(cub->player->angle) * 5;
+	cub->player->dy = sin(cub->player->angle) * 5;
+	mlx_mouse_move(cub->game->mlx, cub->game->win, center_x, HEIGHT / 2);
+	return (0);
+}

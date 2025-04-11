@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 15:03:36 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/10 15:09:17 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/04/11 17:46:00 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	put_pixel(int x, int y, int colour, t_cub *cubed)
 	int	index;
 
 	if (y >= HEIGHT || x >= WIDTH || x < 0 || y < 0)
-		return;
+		return ;
 	index = y * cubed->game->size_line + x * cubed->game->bpp / 8;
 	cubed->game->data[index] = colour & 0xFF;
 	cubed->game->data[index + 1] = ((colour >> 8) & 0xFF);

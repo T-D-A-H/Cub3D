@@ -5,12 +5,10 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/04/10 15:19:24 by ctommasi         ###   ########.fr       */
+/*   Created: 2025/04/11 17:46:19 by ctommasi          #+#    #+#             */
+/*   Updated: 2025/04/11 17:46:22 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-
 
 #include "../../includes/cub3d.h"
 

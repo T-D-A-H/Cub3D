@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 14:52:49 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/14 13:19:15 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/04/14 13:24:28 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -308,13 +308,13 @@ void	load_texture(t_cub *cub, char *path, int index);
 //------------------------------------------------------------GAME-draw_door
 void	draw_red_dot(t_cub *cubed);
 void	open_door(t_cub *cubed, t_player *player);
-int		door_is_closed(t_cub *cubed, t_player *player);
+int		door_is_closed(t_cub *cub, t_player *player);
 void	init_start_end_wall(t_loop *loop, t_texture *tex, int mode);
 void	wall_coords(t_cub *cubed, t_texture *tex, int mode, int tex_id);
 void	draw_wall_no_door(t_cub *cub, t_texture *tex, int x);
 void	handle_door(t_cub *cubed, t_player *player, t_game *game);
 void	close_door(t_cub *cubed, t_player *player);
-int		door_is_open(t_cub *cubed, t_player *player);
+int		door_is_open(t_cub *cub, t_player *player);
 void	draw_door(t_cub *cub, t_loop *loop, int x, t_draw *draw);
 //------------------------------------------------------GAME-raycasting
 void	raycasting(t_cub *cubed, t_player *player, t_loop *loop);

@@ -6,40 +6,40 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 12:47:09 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/14 12:47:12 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/04/14 13:24:15 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d_bonus.h"
 
-int	door_is_open(t_cub *cubed, t_player *player)
+int	door_is_open(t_cub *cub, t_player *player)
 {
 	int	map_x;
 	int	map_y;
 
 	map_x = (int)(player->x / BLOCK);
 	map_y = (int)(player->y / BLOCK);
-	if (cubed->map[map_y + 1][map_x] == 'd'
-		|| cubed->map[map_y][map_x + 1] == 'd'
-		|| cubed->map[map_y - 1][map_x] == 'd'
-		|| cubed->map[map_y][map_x - 1] == 'd')
+	if ((cub->map[map_y + 1][map_x] && cub->map[map_y + 1][map_x] == 'd')
+		|| (cub->map[map_y][map_x + 1] && cub->map[map_y][map_x + 1] == 'd')
+		|| (cub->map[map_y - 1][map_x] && cub->map[map_y - 1][map_x] == 'd')
+		|| (cub->map[map_y][map_x - 1] && cub->map[map_y][map_x - 1] == 'd'))
 	{
 		return (1);
 	}
 	return (0);
 }
 
-int	door_is_closed(t_cub *cubed, t_player *player)
+int	door_is_closed(t_cub *cub, t_player *player)
 {
 	int	map_x;
 	int	map_y;
 
 	map_x = (int)(player->x / BLOCK);
 	map_y = (int)(player->y / BLOCK);
-	if (cubed->map[map_y + 1][map_x] == 'D'
-		|| cubed->map[map_y][map_x + 1] == 'D'
-		|| cubed->map[map_y - 1][map_x] == 'D'
-		|| cubed->map[map_y][map_x - 1] == 'D')
+	if ((cub->map[map_y + 1][map_x] && cub->map[map_y + 1][map_x] == 'D')
+		|| (cub->map[map_y][map_x + 1] && cub->map[map_y][map_x + 1] == 'D')
+		|| (cub->map[map_y - 1][map_x] && cub->map[map_y - 1][map_x] == 'D')
+		|| (cub->map[map_y][map_x - 1] && cub->map[map_y][map_x - 1] == 'D'))
 	{
 		return (1);
 	}
@@ -50,7 +50,7 @@ static void	set_door(t_cub *cub, int x, int y, int inc_level)
 {
 	if (cub->game->sees_door)
 		return ;
-	if (cub->map[y][x] == 'd')
+	if (cub->map[y][x] && cub->map[y][x] == 'd')
 	{
 		cub->game->door_xy[0] = x;
 		cub->game->door_xy[1] = y;

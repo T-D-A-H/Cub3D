@@ -6,13 +6,16 @@
 #    By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2025/04/11 17:04:03 by ctommasi         ###   ########.fr        #
+#    Updated: 2025/04/14 13:08:33 by ctommasi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+#---------------------------------------------------------------------------NAME
 
 NAME = cub3D
 NAME_BONUS = cub3D_bonus
+
+#---------------------------------------------------------------------------FLAGS
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -I ./includes
@@ -22,12 +25,17 @@ RM	= rm -rf
 MAKEFLAGS = --no-print-directory
 SDL = `pkg-config --cflags --libs sdl2`
 
+#---------------------------------------------------------------------------LIBFT
 
 LIBFT_DIR = ./libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
+#---------------------------------------------------------------------------MINILIBX
+
 MLX_DIR = minilibx-linux/
 MLX = $(MLX_DIR)/libmlx.a -lXext -lX11 -lm -lz
+
+#---------------------------------------------------------------------------COLOURS
 
 GREEN := \033[1;32m
 RED := \033[1;31m
@@ -37,25 +45,35 @@ CYAN := \033[36m
 MAGENTA := \033[35m
 BLUE := \033[34m
 
-# Archivos fuente
+#---------------------------------------------------------------------------SRC FILES
+
 SRCS =	./src/main/main.c ./src/main/error.c \
 		./src/init/init_variables.c ./src/init/init_map.c ./src/init/init_game.c \
 		./src/utils/check_args.c  ./src/utils/init_map_utils.c  ./src/utils/save_map_utils.c \
 		./src/game/keypress.c ./src/game/draw.c ./src/game/raycasting.c \
 		./src/game/textures.c ./src/game/move_player.c \
 
-SRCS_BONUS = ./src_bonus/main_bonus/main_bonus.c ./src_bonus/main_bonus/error_bonus.c \
-		./src_bonus/init_bonus/init_variables_bonus.c ./src_bonus/init_bonus/init_map_bonus.c ./src_bonus/init_bonus/init_game_bonus.c \
-		./src_bonus/utils_bonus/general_utils_bonus.c  ./src_bonus/utils_bonus/init_map_utils_bonus.c  ./src_bonus/utils_bonus/save_map_utils_bonus.c \
-		./src_bonus/game_bonus/keypress_bonus.c ./src_bonus/game_bonus/draw_bonus.c ./src_bonus/game_bonus/raycasting_bonus.c ./src_bonus/game_bonus/minimap_bonus.c \
-		./src_bonus/game_bonus/textures_bonus.c ./src_bonus/game_bonus/move_player_bonus.c \
-		./src_bonus/game_bonus/draw_map_bonus.c ./src_bonus/utils_bonus/draw_utils_bonus.c ./src_bonus/game_bonus/draw_door_bonus.c \
-		./src_bonus/object_bonus/draw_object_bonus.c ./src_bonus/object_bonus/object_utils_bonus.c ./src_bonus/object_bonus/pick_up_object_bonus.c \
-		./src_bonus/game_bonus/sounds_bonus.c ./src_bonus/init_bonus/init_structs_bonus.c
-
-# Archivos objeto
 OBJS = $(SRCS:.c=.o)
+
+#---------------------------------------------------------------------------BONUS FILES
+
+SRCS_BONUS = ./src_bonus/main_bonus/main_bonus.c ./src_bonus/main_bonus/error_bonus.c \
+		./src_bonus/init_bonus/init_variables_bonus.c ./src_bonus/init_bonus/init_map_bonus.c \
+		./src_bonus/init_bonus/init_structs_bonus.c  ./src_bonus/init_bonus/init_game_bonus.c \
+		./src_bonus/game_bonus/keypress_bonus.c ./src_bonus/game_bonus/raycasting_bonus.c \
+		./src_bonus/game_bonus/textures_bonus.c ./src_bonus/game_bonus/move_player_bonus.c \
+		./src_bonus/game_bonus/sounds_bonus.c \
+		./src_bonus/draw_bonus/minimap_bonus.c ./src_bonus/draw_bonus/draw_map_bonus.c \
+		./src_bonus/draw_bonus/draw_door_bonus.c ./src_bonus/draw_bonus/draw_effects_bonus.c \
+		./src_bonus/draw_bonus/draw_bonus.c \
+		./src_bonus/object_bonus/draw_object_bonus.c ./src_bonus/object_bonus/object_utils_bonus.c \
+		./src_bonus/object_bonus/pick_up_object_bonus.c \
+		./src_bonus/utils_bonus/general_utils_bonus.c  ./src_bonus/utils_bonus/init_map_utils_bonus.c \
+		./src_bonus/utils_bonus/save_map_utils_bonus.c ./src_bonus/utils_bonus/door_utils_bonus.c
+
 OBJS_BONUS = $(SRCS_BONUS:.c=.o)
+
+#---------------------------------------------------------------------------MAKE
 
 all: $(NAME) $(LIBFT)
 

@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 14:52:49 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/11 17:48:39 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/04/14 13:19:15 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,17 @@
 # define RIGHT_KEY 65363
 # define ESC_KEY 65307
 # define KEY_F_KEY 102
+
+typedef struct s_vhs
+{
+	int			color;
+	int			noise;
+	int			x;
+	int			y;
+	int			r;
+	int			g;
+	int			b;
+}	t_vhs;
 
 typedef struct s_position
 {
@@ -255,17 +266,17 @@ typedef struct s_cub
 	int			pj_y;
 	int			pj_x;
 	float		start_direction;
+	int			p_count;
+	int			p_capacity;
+	int			blink_state;
+	int			blink_counter;
+	int			animation_counter;
 	t_texture	*textures[MAX_TEXTURES];
 	t_game		*game;
 	t_player	*player;
 	t_loop		*loop;
 	t_position	*p_pos;
 	char		*tex_paths[MAX_TEXTURES];
-	int			p_count;
-	int			p_capacity;
-	int			blink_state;
-	int			blink_counter;
-	int			animation_counter;
 	t_sounds	*sounds;
 }	t_cub;
 
@@ -327,6 +338,9 @@ void	put_pixel(int x, int y, int colour, t_cub *cubed);
 void	clear_screen(t_cub *cubed);
 void	draw_walls(t_cub *cub, t_loop *loop, t_draw *draw, int x);
 void	apply_vhs_effect(t_cub *cubed);
+void	vhs_util2(t_cub *cubed, t_vhs *vhs);
+void	vhs_util1(t_cub *cubed, t_vhs *vhs);
+int		get_pixel_color(int x, int y, t_cub *cubed);
 //--------------------------------------------------------GAME-move_player
 int		can_move(t_cub *cubed, double next_x, double next_y);
 void	rotate_player(t_player *player);

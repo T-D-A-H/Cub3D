@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 16:05:38 by jaimesan          #+#    #+#             */
-/*   Updated: 2025/04/11 17:21:07 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/04/14 16:07:29 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,10 @@ int	move_player(t_player *player, t_cub *cubed)
 		player->x = next_x;
 	if (can_move(cubed, player->x, next_y))
 		player->y = next_y;
+	// if (door_is_closed(cubed, player) && !cubed->p_pos->is_taken)
+	// 	draw_text(cubed, 22);
+	// else if (door_is_closed(cubed, player) && cubed->p_pos->is_taken)
+	// 	draw_text(cubed, 21);
 	rotate_player(player);
 	player->mx = (int)(player->x / BLOCK);
 	player->my = (int)(player->y / BLOCK);
@@ -81,7 +85,7 @@ int	mouse_move(int x, int y, t_cub *cub)
 	int		center_x;
 
 	(void)y;
-	sensitivity = 0.0002;
+	sensitivity = 0.00009;
 	center_x = WIDTH / 2;
 	if (!cub || !cub->player || !cub->game)
 		return (0);

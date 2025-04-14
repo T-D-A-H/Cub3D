@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 15:03:36 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/14 12:16:13 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/04/14 15:09:52 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,30 @@ void	draw_red_dot(t_cub *cubed)
 			x += 1;
 		}
 		y += 2;
+	}
+}
+
+void	draw_text(t_cub *cub, int texture_index)
+{
+	int		start_x;
+	int		start_y;
+	int		x;
+	int		y;
+	int		color;
+
+	start_x = (WIDTH - cub->textures[texture_index]->width) / 2;
+	start_y = (HEIGHT - cub->textures[texture_index]->height) / 2 + 300;
+	y = 0;
+	while (y < cub->textures[texture_index]->height)
+	{
+		x = 0;
+		while (x < cub->textures[texture_index]->width)
+		{
+			color = cub->textures[texture_index]->data[
+				y * cub->textures[texture_index]->width + x];
+			put_pixel(start_x + x, start_y + y, color, cub);
+			x++;
+		}
+		y++;
 	}
 }

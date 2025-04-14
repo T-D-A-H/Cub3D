@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 14:52:49 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/14 13:24:28 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/04/14 16:05:01 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -307,13 +307,13 @@ void	load_all_textures(t_cub *cub);
 void	load_texture(t_cub *cub, char *path, int index);
 //------------------------------------------------------------GAME-draw_door
 void	draw_red_dot(t_cub *cubed);
-void	open_door(t_cub *cubed, t_player *player);
+void	open_door(t_cub *cub, t_player *player);
 int		door_is_closed(t_cub *cub, t_player *player);
 void	init_start_end_wall(t_loop *loop, t_texture *tex, int mode);
 void	wall_coords(t_cub *cubed, t_texture *tex, int mode, int tex_id);
 void	draw_wall_no_door(t_cub *cub, t_texture *tex, int x);
 void	handle_door(t_cub *cubed, t_player *player, t_game *game);
-void	close_door(t_cub *cubed, t_player *player);
+void	close_door(t_cub *cub, t_player *player);
 int		door_is_open(t_cub *cub, t_player *player);
 void	draw_door(t_cub *cub, t_loop *loop, int x, t_draw *draw);
 //------------------------------------------------------GAME-raycasting
@@ -341,6 +341,7 @@ void	apply_vhs_effect(t_cub *cubed);
 void	vhs_util2(t_cub *cubed, t_vhs *vhs);
 void	vhs_util1(t_cub *cubed, t_vhs *vhs);
 int		get_pixel_color(int x, int y, t_cub *cubed);
+void	draw_text(t_cub *cub, int texture_index);
 //--------------------------------------------------------GAME-move_player
 int		can_move(t_cub *cubed, double next_x, double next_y);
 void	rotate_player(t_player *player);

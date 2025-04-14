@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:18:22 by jaimesan          #+#    #+#             */
-/*   Updated: 2025/04/11 17:22:42 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/04/14 14:39:58 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,50 +47,50 @@ int	can_move(t_cub *cubed, double next_x, double next_y)
 	return (1);
 }
 
-void	close_door(t_cub *cubed, t_player *player)
+void	close_door(t_cub *cub, t_player *player)
 {
 	int	map_x;
 	int	map_y;
 
 	map_x = (int)(player->x / BLOCK);
 	map_y = (int)(player->y / BLOCK);
-	if (cubed->map[map_y + 1][map_x] == 'd'
-		|| cubed->map[map_y][map_x + 1] == 'd'
-		|| cubed->map[map_y - 1][map_x] == 'd'
-		|| cubed->map[map_y][map_x - 1] == 'd')
+	if ((cub->map[map_y + 1][map_x] && cub->map[map_y + 1][map_x] == 'd')
+		|| (cub->map[map_y][map_x + 1] && cub->map[map_y][map_x + 1] == 'd')
+		|| (cub->map[map_y - 1][map_x] && cub->map[map_y - 1][map_x] == 'd')
+		|| (cub->map[map_y][map_x - 1] && cub->map[map_y][map_x - 1] == 'd'))
 	{
-		if (cubed->map[map_y - 1][map_x] == 'd')
-			cubed->map[map_y - 1][map_x] = 'D';
-		else if (cubed->map[map_y + 1][map_x] == 'd')
-			cubed->map[map_y + 1][map_x] = 'D';
-		else if (cubed->map[map_y][map_x + 1] == 'd')
-			cubed->map[map_y][map_x + 1] = 'D';
-		else if (cubed->map[map_y][map_x - 1] == 'd')
-			cubed->map[map_y][map_x - 1] = 'D';
-		cubed->loop->door_wall = 1;
+		if (cub->map[map_y - 1][map_x] == 'd')
+			cub->map[map_y - 1][map_x] = 'D';
+		else if (cub->map[map_y + 1][map_x] == 'd')
+			cub->map[map_y + 1][map_x] = 'D';
+		else if (cub->map[map_y][map_x + 1] == 'd')
+			cub->map[map_y][map_x + 1] = 'D';
+		else if (cub->map[map_y][map_x - 1] == 'd')
+			cub->map[map_y][map_x - 1] = 'D';
+		cub->loop->door_wall = 1;
 	}
 }
 
-void	open_door(t_cub *cubed, t_player *player)
+void	open_door(t_cub *cub, t_player *player)
 {
 	int	map_x;
 	int	map_y;
 
 	map_x = (int)(player->x / BLOCK);
 	map_y = (int)(player->y / BLOCK);
-	if (cubed->map[map_y + 1][map_x] == 'D'
-		|| cubed->map[map_y][map_x + 1] == 'D'
-		|| cubed->map[map_y - 1][map_x] == 'D'
-		|| cubed->map[map_y][map_x - 1] == 'D')
+	if ((cub->map[map_y + 1][map_x] && cub->map[map_y + 1][map_x] == 'D')
+		|| (cub->map[map_y][map_x + 1] && cub->map[map_y][map_x + 1] == 'D')
+		|| (cub->map[map_y - 1][map_x] && cub->map[map_y - 1][map_x] == 'D')
+		|| (cub->map[map_y][map_x - 1] && cub->map[map_y][map_x - 1] == 'D'))
 	{
-		if (cubed->map[map_y - 1][map_x] == 'D')
-			cubed->map[map_y - 1][map_x] = 'd';
-		else if (cubed->map[map_y + 1][map_x] == 'D')
-			cubed->map[map_y + 1][map_x] = 'd';
-		else if (cubed->map[map_y][map_x + 1] == 'D')
-			cubed->map[map_y][map_x + 1] = 'd';
-		else if (cubed->map[map_y][map_x - 1] == 'D')
-			cubed->map[map_y][map_x - 1] = 'd';
-		cubed->loop->door_wall = 1;
+		if (cub->map[map_y - 1][map_x] == 'D')
+			cub->map[map_y - 1][map_x] = 'd';
+		else if (cub->map[map_y + 1][map_x] == 'D')
+			cub->map[map_y + 1][map_x] = 'd';
+		else if (cub->map[map_y][map_x + 1] == 'D')
+			cub->map[map_y][map_x + 1] = 'd';
+		else if (cub->map[map_y][map_x - 1] == 'D')
+			cub->map[map_y][map_x - 1] = 'd';
+		cub->loop->door_wall = 1;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 14:52:49 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/14 16:05:01 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/04/15 11:48:31 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -341,7 +341,6 @@ void	apply_vhs_effect(t_cub *cubed);
 void	vhs_util2(t_cub *cubed, t_vhs *vhs);
 void	vhs_util1(t_cub *cubed, t_vhs *vhs);
 int		get_pixel_color(int x, int y, t_cub *cubed);
-void	draw_text(t_cub *cub, int texture_index);
 //--------------------------------------------------------GAME-move_player
 int		can_move(t_cub *cubed, double next_x, double next_y);
 void	rotate_player(t_player *player);

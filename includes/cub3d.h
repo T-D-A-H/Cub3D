@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:31:47 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/11 17:43:14 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/04/15 12:48:13 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -248,5 +248,6 @@ int		only_one(char *linea);
 int		check_void(const char *premap, int i);
 int		save_map(t_cub *cubed, char **temp_map, size_t y, size_t x);
 float	get_player_direction(char c);
+int		close_window(t_cub *cubed);
 
 #endif

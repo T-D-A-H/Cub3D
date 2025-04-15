@@ -3,14 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 19:01:38 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/11 17:44:54 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/04/15 12:47:56 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+
+int	close_window(t_cub *cubed)
+{
+	error(cubed, NO_ERROR, 1);
+	return (0);
+}
 
 void	free_textures(t_cub *cub)
 {

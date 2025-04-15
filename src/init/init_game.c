@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 17:46:19 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/11 17:46:22 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/04/15 12:47:33 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void	init_window(t_cub *cubed)
 	init_game(cubed->game, cubed);
 	mlx_hook(cubed->game->win, 2, 1L << 0, on_keypress, cubed);
 	mlx_hook(cubed->game->win, 3, 1L << 1, on_keyrelease, cubed->player);
+	mlx_hook(cubed->game->win, 17, 0, close_window, cubed);
 	mlx_loop_hook(cubed->game->mlx, game_loop, cubed);
 	mlx_loop(cubed->game->mlx);
 }

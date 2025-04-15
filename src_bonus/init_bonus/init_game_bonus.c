@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_game_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 17:00:05 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/11 17:04:03 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/04/15 12:51:57 by jaimesan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,12 @@ void	init_objects(t_cub *cubed)
 	cubed->p_count = 0;
 }
 
+int	close_window(t_cub *cubed)
+{
+	error(cubed, NO_ERROR, 1);
+	return (0);
+}
+
 void	init_game(t_cub *cubed)
 {
 	init_objects(cubed);
@@ -69,6 +75,7 @@ void	init_game(t_cub *cubed)
 	mlx_mouse_hide(cubed->game->mlx, cubed->game->win);
 	mlx_mouse_move(cubed->game->mlx, cubed->game->win, WIDTH / 2, HEIGHT / 2);
 	mlx_hook(cubed->game->win, 6, 1L << 6, mouse_move, cubed);
+	mlx_hook(cubed->game->win, 17, 0, close_window, cubed);
 	mlx_loop_hook(cubed->game->mlx, game_loop, cubed);
 	mlx_loop(cubed->game->mlx);
 	mlx_mouse_show(cubed->game->mlx, cubed->game->win);

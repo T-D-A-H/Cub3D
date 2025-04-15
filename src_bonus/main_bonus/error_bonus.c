@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 19:01:38 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/11 17:03:25 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/04/15 13:38:26 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,11 @@ void	free_textures(t_cub *cub)
 		if (cub->textures[i])
 		{
 			if (cub->textures[i]->img)
+			{
 				mlx_destroy_image(cub->game->mlx, cub->textures[i]->img);
-			free(cub->textures[i]);
+			}
+			if (cub->textures[i])
+				free(cub->textures[i]);
 		}
 		i++;
 	}

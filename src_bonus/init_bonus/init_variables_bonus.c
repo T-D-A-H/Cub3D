@@ -124,7 +124,7 @@ void	init_variables(t_cub *cubed)
 		{
 			cubed->tex_paths[index] = ft_strdup(map[i + 1]);
 			if (!cubed->tex_paths[index])
-				error(cubed, ERR_MEMORY_TEXTUE, 0);
+				error(cubed, ERR_MEMORY_TEXTURE, 0);
 			i++;
 		}
 		i++;

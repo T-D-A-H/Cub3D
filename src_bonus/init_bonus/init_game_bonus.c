@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 17:00:05 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/11 17:04:03 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/04/15 13:06:35 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,14 @@ void	init_objects(t_cub *cubed)
 	cubed->game->action_done = 0;
 	cubed->p_capacity = 50;
 	cubed->p_pos = malloc(sizeof(t_position) * cubed->p_capacity);
+	if (!cubed->p_pos)
+		error(cubed, ERR_MALLOC, 1);
 	cubed->p_count = 0;
 }
 
 void	init_game(t_cub *cubed)
 {
+	cubed->game->level = 0;
 	init_objects(cubed);
 	init_player(cubed->player, cubed->pj_x, cubed->pj_y, cubed);
 	init_sounds(cubed);

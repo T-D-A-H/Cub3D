@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 14:52:49 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/15 11:48:31 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/04/15 14:56:02 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@
 # define ERR_MAP_INVALID_CHARS "Error\nInvalid chars\n"
 # define ERR_MLX_INIT "Error\nInitialising MLX\n"
 # define ERR_PJ_NOT_EXIST "Error\nPlayer does not exist\n"
-# define ERR_LOAD_TEXTUE "Error\nLoading texture\n"
-# define ERR_MEMORY_TEXTUE "Error\nMemory allocation failed for texture path.\n"
+# define ERR_LOAD_TEXTURE "Error\nLoading texture\n"
+# define ERR_MEMORY_TEXTURE "Error\nMalloc failed for texture path.\n"
 # define ERR_SDL_INIT "Error\nSDL could not initialize!\n"
 # define ERR_SDL_OPEN_WAV "Error\nFailed to load WAV\n"
 # define ERR_SDL_OPEN "Error\nFailed to open audio device\n"

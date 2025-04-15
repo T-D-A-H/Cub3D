@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 13:48:56 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/11 16:42:50 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/04/15 12:50:37 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,16 @@ void	init_struct(t_cub *cubed)
 	cubed->so_path = NULL;
 	cubed->we_path = NULL;
 	cubed->ea_path = NULL;
+	cubed->premap = NULL;
+	cubed->map = NULL;
 	cubed->pj_x = -1;
 	cubed->pj_y = -1;
-	cubed->map = NULL;
-	cubed->premap = NULL;
+	cubed->start_direction = -1.0;
+	cubed->p_count = -1;
+	cubed->p_capacity = -1;
+	cubed->blink_state = -1;
+	cubed->blink_counter = -1;
+	cubed->animation_counter = -1;
 }
 
 void	init_player(t_player *player, int s_x, int s_y, t_cub *cubed)
@@ -30,15 +36,16 @@ void	init_player(t_player *player, int s_x, int s_y, t_cub *cubed)
 	player->y = (double)((s_y * BLOCK)) + 32;
 	player->mx = (int)(player->x / BLOCK);
 	player->my = (int)(player->y / BLOCK);
-	player->angle = cubed->start_direction;
 	player->dx = cos(player->angle) * 5;
 	player->dy = sin(player->angle) * 5;
+	player->angle = cubed->start_direction;
 	player->key_w = false;
 	player->key_s = false;
 	player->key_a = false;
 	player->key_d = false;
 	player->key_left = false;
 	player->key_right = false;
+	player->key_f = false;
 	player->is_moving = false;
 }
 

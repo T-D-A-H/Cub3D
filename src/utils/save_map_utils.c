@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   save_map_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaimesan <jaimesan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 10:31:18 by jaimesan          #+#    #+#             */
-/*   Updated: 2025/04/10 13:18:09 by jaimesan         ###   ########.fr       */
+/*   Updated: 2025/04/15 15:25:36 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ void	read_map_file(t_cub *cubed, char **argv)
 	int		fd;
 
 	fd = open(argv[1], O_RDONLY);
+	cubed->tex_paths[0] = NULL;
 	if (fd < 0)
 		error(cubed, ERR_FILE_OPEN, 0);
 	cubed->premap = ft_strdup("");

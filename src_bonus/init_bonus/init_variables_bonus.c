@@ -112,7 +112,6 @@ void	init_variables(t_cub *cubed)
 	int		index;
 
 	map = ft_strtok(cubed->premap, "\n ,");
-	cubed->tex_paths[0] = NULL;
 	if (!map)
 		error(cubed, ERR_MAP, 0);
 	check_bonus_keys(cubed, map);

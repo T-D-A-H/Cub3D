@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 14:52:49 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/15 14:56:02 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/05/02 17:08:20 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -278,6 +278,7 @@ typedef struct s_cub
 	t_position	*p_pos;
 	char		*tex_paths[MAX_TEXTURES];
 	t_sounds	*sounds;
+	int			is_running;
 }	t_cub;
 
 //------------------------------------------------------------MAIN

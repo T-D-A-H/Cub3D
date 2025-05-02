@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 17:00:05 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/15 15:01:06 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/05/02 17:09:10 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ int	close_window(t_cub *cubed)
 void	init_game(t_cub *cubed)
 {
 	cubed->game->level = 0;
+	cubed->is_running = 1;
 	init_objects(cubed);
 	init_player(cubed->player, cubed->pj_x, cubed->pj_y, cubed);
 	init_sounds(cubed);

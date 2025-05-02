@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 19:01:38 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/15 13:38:26 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/05/02 17:08:49 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	free_tex_paths(t_cub *cubed)
 
 void	error(t_cub *cubed, char *debug_msg, int signal)
 {
+	cubed->is_running = 0;
 	printf("%s", debug_msg);
 	if (cubed->no_path)
 		free(cubed->no_path);

@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 12:04:02 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/11 17:18:42 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/05/02 17:34:06 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,15 @@ void	*play_music(void *arg)
 		printf(ERR_SDL_OPEN);
 		return (SDL_FreeWAV(cub->sounds->buffer), SDL_Quit(), NULL);
 	}
-	SDL_PauseAudioDevice(dev, 0);
-	while (1)
-	{
-		if (SDL_GetQueuedAudioSize(dev) == 0)
-			SDL_QueueAudio(dev, cub->sounds->buffer,
-				cub->sounds->wav_length);
+	while (cub->is_running) {
+		SDL_ClearQueuedAudio(dev);
+		SDL_QueueAudio(dev, cub->sounds->buffer, cub->sounds->wav_length);
+		SDL_PauseAudioDevice(dev, 0);
+		while (SDL_GetQueuedAudioSize(dev) > 0 && cub->is_running)
+			SDL_Delay(100);
 	}
-	return (SDL_FreeWAV(cub->sounds->buffer), SDL_CloseAudioDevice(dev), NULL);
+	SDL_CloseAudioDevice(dev);
+	return (SDL_FreeWAV(cub->sounds->buffer), SDL_Quit(), NULL);
 }
 
 int	init_sounds(t_cub *cubed)

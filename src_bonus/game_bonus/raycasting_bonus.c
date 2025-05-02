@@ -6,7 +6,7 @@
 /*   By: ctommasi <ctommasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 15:02:24 by ctommasi          #+#    #+#             */
-/*   Updated: 2025/04/11 18:00:07 by ctommasi         ###   ########.fr       */
+/*   Updated: 2025/05/02 17:45:30 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ void	raycasting(t_cub *cubed, t_player *player, t_loop *loop)
 		draw_floor(cubed, loop->x, loop->drawend, &draw);
 		if (!PRO)
 			draw_door(cubed, loop, loop->x, &draw);
-		loop->x += 2;
+		loop->x += 1;
 	}
 	if (cubed->p_count > 0)
 		draw_object(cubed, player, cubed->p_count, obj);

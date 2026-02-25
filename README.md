@@ -1,5 +1,3 @@
-*This project has been created as part of the 42 curriculum by ctommasi, jaimesan.*
-
 <div align="center">
 
 # cub3D

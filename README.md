@@ -31,7 +31,7 @@
 
 cub3D is a raycasting engine written in C, inspired by Wolfenstein 3D — the game Id Software released in 1992 and widely considered the first true FPS. The goal is to render a first-person view inside a maze defined by a `.cub` scene file, with different wall textures per cardinal direction and configurable floor and ceiling colors.
 
-The project was completed with all five bonuses: wall collisions, minimap, doors, animated sprites, and mouse rotation.
+The theme chosen for this implementation is the Backrooms — an endless labyrinth of empty rooms, which fits the raycaster aesthetic well. The project was completed with all five bonuses: wall collisions, minimap, doors, animated sprites, and mouse rotation.
 
 ---
 
@@ -71,16 +71,15 @@ The project was completed with all five bonuses: wall collisions, minimap, doors
 **Requirements**
 
 - Linux
-- miniLibX (system version) — usually available via `sudo apt install libmlx-dev`
-- `libXext` and `libX11`
+- miniLibX — bundled in `minilibx-linux/`, no separate install needed
+- `libXext` and `libX11` — `sudo apt install libxext-dev libx11-dev`
 - `gcc`, `make`
 
 **Compilation**
 
 ```bash
-# Clone the repository
-git clone git@github.com:Ja1m3st/cub3D.git
-cd cub3D
+git clone git@github.com:T-D-A-H/Cub3D.git
+cd Cub3D
 
 # Mandatory
 make

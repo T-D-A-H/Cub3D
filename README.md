@@ -174,19 +174,6 @@ The map must be fully enclosed by walls. Any misconfiguration exits with `Error\
 - [Ray-Plane intersection](https://en.wikipedia.org/wiki/Line%E2%80%93plane_intersection)
 - [DDA algorithm](https://en.wikipedia.org/wiki/Digital_differential_analyzer_(graphics_algorithm))
 
-**AI usage**
-
-AI was used during this project for the following tasks:
-
-- Generating boilerplate and repetitive C structures (getter/setter patterns, error message formatting)
-- Explaining DDA algorithm edge cases and helping debug texture offset calculations
-- Reviewing and suggesting improvements to the map parser logic
-- Writing this README
-
-All AI-generated code was reviewed, tested, and understood before being integrated. Nothing was copy-pasted without verification.
-
----
-
 ## Team
 
 | Login | GitHub |

@@ -178,7 +178,7 @@ The map must be fully enclosed by walls. Any misconfiguration exits with `Error\
 
 | Login | GitHub |
 |---|---|
-| ctommasi | [@vikingokvist](https://github.com/vikingokvist) |
+| ctommasi | [@cristommasi](https://github.com/cristommasi) |
 | jaimesan | [@Ja1m3st](https://github.com/Ja1m3st) |
 
 ---
